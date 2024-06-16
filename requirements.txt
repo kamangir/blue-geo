@@ -1,0 +1,14 @@
+blueness
+abcli
+boto3
+geojson
+geopandas
+matplotlib
+numpy
+opencv-python
+pymysql==0.10.1
+pyyaml
+pylint
+pytest
+python-dotenv[cli]
+tqdm

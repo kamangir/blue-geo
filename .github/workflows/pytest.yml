@@ -39,3 +39,5 @@ jobs:
           echo "ABCLI_AWS_RDS_PASSWORD: $ABCLI_AWS_RDS_PASSWORD"
           echo "BLUE_PLUGIN_SECRET: $BLUE_PLUGIN_SECRET"
           pytest
+
+

@@ -1,8 +1,8 @@
 import argparse
-from blue_plugin import VERSION
-from blue_plugin.node import NAME
-from blue_plugin.node.functions import func
-from blue_plugin.logger import logger
+from blue_geo import VERSION
+from blue_geo.node import NAME
+from blue_geo.node.functions import func
+from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
 parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
@@ -26,3 +26,5 @@ else:
     success = None
 
 sys_exit(logger, NAME, args.task, success)
+
+

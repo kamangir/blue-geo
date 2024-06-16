@@ -1,13 +1,13 @@
 #! /usr/bin/env bash
 
-function blue_plugin_node_leaf() {
+function blue_geo_node_leaf() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options="~download,dryrun,~upload"
         local args="[--<keyword-1> <value>]$ABCUL[--<keyword-2> <value>]"
-        abcli_show_usage "blue_plugin node leaf$ABCUL[$options]$ABCUL[.|<object-name-1>]$ABCUL[-|<object-name-2>]$ABCUL$args" \
-            "<object-name-1> -[blue-plugin node leaf]-> <object-name-2>."
+        abcli_show_usage "blue_geo node leaf$ABCUL[$options]$ABCUL[.|<object-name-1>]$ABCUL[-|<object-name-2>]$ABCUL$args" \
+            "<object-name-1> -[blue-geo node leaf]-> <object-name-2>."
         return
     fi
 
@@ -23,7 +23,7 @@ function blue_plugin_node_leaf() {
     local object_name_2=$(abcli_clarify_object $4 $(abcli_string_timestamp))
 
     abcli_eval dryrun=$do_dryrun \
-        python3 -m blue_plugin.node \
+        python3 -m blue_geo.node \
         leaf \
         --object_name_1 $object_name_1 \
         --object_name_2 $object_name_2 \
@@ -32,3 +32,5 @@ function blue_plugin_node_leaf() {
     [[ "$do_dryrun" == 1 ]] &&
         abcli_upload - $object_name_2
 }
+
+

@@ -8,6 +8,9 @@ list:
     callable: vancouver_watching
 associations:
   bellingcat:
-    url: https://www.bellingcat.com/
+    urls:
+      - https://www.bellingcat.com/
+      - https://github.com/bellingcat
   informnapalm:
-    url: https://informnapalm.org/en/
+    urls:
+      - https://informnapalm.org/en/

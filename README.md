@@ -1,1 +1,3 @@
-# blue_geo
+# 🌐 Blue-GEO
+
+🌐 `blue-geo` is wip 🔥

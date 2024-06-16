@@ -1,5 +1,11 @@
 # 🌐 Blue-GEO
 
+🌐 `blue_geo` yields an AI for precise geospatial data analysis and visualization.
+
+```bash
+pip install blue_geo
+```
+
 🔷 [ukraine-timemap](#ukraine-timemap-) 🇺🇦 🔷
 
 ---

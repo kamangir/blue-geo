@@ -4,6 +4,7 @@ function blue_geo() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ $task == "help" ]; then
+        ukraine_timemap "$@"
         return
     fi
 

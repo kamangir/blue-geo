@@ -6,7 +6,7 @@ AI for precise geospatial data analysis and visualization.
 pip install blue-geo
 ```
 
-🔷 [QGIS](#QGIS) 🔷 [ukraine-timemap](#ukraine-timemap-) 🇺🇦 🔷
+🔷 [QGIS](#QGIS) 🔷 [ukraine-timemap](#ukraine-timemap-) 🇺🇦 🔷 [sources](./sources.yaml) 🔷
 
 ---
 

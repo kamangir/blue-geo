@@ -1,4 +1,13 @@
-bellingcat:
-  ukraine_timemap: https://github.com/kamangir/blue-geo?tab=readme-ov-file#ukraine-timemap-
-other:
-  vancouver_watching: https://github.com/kamangir/Vancouver-Watching
+list:
+  ukraine_timemap:
+    url: https://github.com/kamangir/blue-geo?ukraine-timemap-
+    callable: ukraine_timemap
+    association: bellingcat
+  vancouver_watching:
+    url: https://github.com/kamangir/Vancouver-Watching
+    callable: vancouver_watching
+associations:
+  bellingcat:
+    url: https://www.bellingcat.com/
+  informnapalm:
+    url: https://informnapalm.org/en/

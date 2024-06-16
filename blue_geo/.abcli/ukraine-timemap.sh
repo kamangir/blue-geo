@@ -10,7 +10,7 @@ function ukraine_timemap() {
     fi
 
     if [[ "$task" == "init" ]]; then
-        notebooks_and_scripts "$@"
+        blue_geo "$@"
         return
     fi
 

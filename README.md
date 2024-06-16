@@ -26,7 +26,7 @@ and paste it in the Python Console in QGIS.
 
 ## ukraine-timemap 🇺🇦
 
-[`ukraine-timemap`](./notebooks_and_scripts/.abcli/ukraine-timemap/) ingests the [Civilian Harm in Ukraine TimeMap](https://github.com/bellingcat/ukraine-timemap) dataset, available through [this UI](https://ukraine.bellingcat.com/) and [this API](https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json), and generates a `geojson`, a QGIS project, and more.
+[`ukraine-timemap`](./blue_geo/.abcli/ukraine-timemap/) ingests the [Civilian Harm in Ukraine TimeMap](https://github.com/bellingcat/ukraine-timemap) dataset, available through [this UI](https://ukraine.bellingcat.com/) and [this API](https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json), and generates a `geojson`, a QGIS project, and more.
 
 ```bash
  > ukraine_timemap help

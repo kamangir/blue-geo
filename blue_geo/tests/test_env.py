@@ -7,4 +7,4 @@ def test_abcli_env():
 
 
 def test_blue_geo_env():
-    assert env.BLUE_GEO_CONFIG
+    assert env.UKRAINE_TIMEMAP_TEMPLATE

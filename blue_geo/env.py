@@ -5,4 +5,4 @@ load_env(__name__)
 load_config(__name__)
 
 
-BLUE_GEO_CONFIG = os.getenv("BLUE_GEO_CONFIG", "")
+UKRAINE_TIMEMAP_TEMPLATE = os.getenv("UKRAINE_TIMEMAP_TEMPLATE", "")

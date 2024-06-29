@@ -6,7 +6,7 @@ AI for precise geospatial data analysis and visualization.
 pip install blue-geo
 ```
 
-🔷 [QGIS](#QGIS) 🔷 [ukraine-timemap](#ukraine-timemap-) 🇺🇦 🔷 [sources](./sources.yaml) 🔷
+🔷 [QGIS](#QGIS) 🔷 [ukraine-timemap](#ukraine-timemap-) 🇺🇦 🔷 [vancouver-watching](#vancouver-watching-) 🌈 🔹 [sources](./sources.yaml) 🔷
 
 ---
 
@@ -74,6 +74,16 @@ last build [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/ukraine_
 ![image](https://github.com/kamangir/assets/blob/main/nbs/ukraine-timemap/QGIS.png?raw=true)
 
 more: https://arash-kamangir.medium.com/%EF%B8%8F-openai-experiments-93-bf0cee062693
+
+---
+
+## vancouver-watching 🌈
+
+last build [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/test_vancouver_watching_ingest/animation.gif) - [github/kamangir/vancouver-watching](https://github.com/kamangir/vancouver-watching).
+
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/test_vancouver_watching_ingest/animation.gif?raw=true) 
+
+![image](https://github.com/kamangir/assets/blob/main/vanwatch/2024-01-06-20-39-46-73614-QGIS.gif?raw=true?raw=1)
 
 ---
 

@@ -12,14 +12,14 @@ function test_blue_geo_ukraine_timemap() {
         upload=$do_upload,$2 \
         $object_name \
         "${@:3}"
+    [[ $? -ne 0 ]] && return 1
 
     abcli_publish \
         as=ukraine_timemap,tar \
         $object_name
+    [[ $? -ne 0 ]] && return 1
 
     abcli_publish \
         as=ukraine_timemap,suffix=.png \
         $object_name
-
-    return 0
 }

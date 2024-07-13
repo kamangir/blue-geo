@@ -51,11 +51,11 @@ class ABCLI_QGIS(object):
         )
 
     def clear(self):
-        # https://gis.stackexchange.com/a/216444/210095
+        # https://gis.stackexchange.com/a/480025/250728
         from qgis.PyQt.QtWidgets import QDockWidget
 
         consoleWidget = iface.mainWindow().findChild(QDockWidget, "PythonConsole")
-        consoleWidget.console.shellOut.clearConsole()
+        consoleWidget.widget().console.clearButton.trigger()
 
         self.intro()
 

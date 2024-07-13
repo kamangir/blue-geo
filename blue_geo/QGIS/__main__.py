@@ -19,9 +19,8 @@ args = parser.parse_args()
 
 success = False
 if args.task == "generate_seed":
-    success = seed = generate_seed()
-    if success:
-        print(seed)
+    success = True
+    print(generate_seed())
 else:
     success = None
 

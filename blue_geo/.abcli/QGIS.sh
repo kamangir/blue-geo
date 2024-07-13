@@ -14,7 +14,7 @@ function QGIS() {
 }
 
 # internal function to abcli_seed.
-function QGIS_seed() {
+function abcli_seed_QGIS() {
     # seed is NOT local
     seed=$(python3 -m blue_geo.QGIS generate_seed)
 }

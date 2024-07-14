@@ -14,8 +14,7 @@ setup(
         NAME: [
             "config.env",
             ".abcli/**/*.sh",
+            "**/README.md",
         ],
     },
 )
-
-

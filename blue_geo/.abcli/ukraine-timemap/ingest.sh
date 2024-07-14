@@ -42,8 +42,8 @@ function ukraine_timemap_ingest() {
     local open_options=$3
     local do_open=$(abcli_option_int "$open_options" open 0)
     [[ "$do_open" == 1 ]] &&
-        abcli_open $object_name \
-            QGIS,$open_options
+        abcli_open QGIS,$open_options \
+            $object_name
 
     return 0
 }

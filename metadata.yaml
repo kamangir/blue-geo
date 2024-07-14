@@ -1,16 +1,21 @@
-list:
+applications:
   ukraine_timemap:
-    url: https://github.com/kamangir/blue-geo?ukraine-timemap-
+    url: https://github.com/kamangir/blue-geo/tree/main/blue_geo/.abcli/ukraine-timemap
     callable: ukraine_timemap
+    QGIS-application: ukraine_timemap
     association: bellingcat
   vancouver_watching:
     url: https://github.com/kamangir/Vancouver-Watching
     callable: vancouver_watching
+    QGIS-application: vancouver_watching
   vis_tj_kg_map_2022:
     url: https://github.com/bellingcat/vis-tj-kg-map-2022
-    callable: not_available
+    callable:
     comments: before/after non-geo-tagged high-res images of conflict zones.
     association: bellingcat
+datacube-sources:
+  firms:
+    url: https://firms.modaps.eosdis.nasa.gov/map/
 associations:
   bellingcat:
     urls:

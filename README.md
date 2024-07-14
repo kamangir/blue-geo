@@ -6,8 +6,6 @@ AI for precise geospatial data analysis and visualization.
 pip install blue-geo
 ```
 
-🔷 [QGIS](#QGIS) 🔷 [ukraine-timemap](#ukraine-timemap-) 🇺🇦 🔷 [vancouver-watching](#vancouver-watching-) 🌈 🔹 [sources](./sources.yaml) 🔷
-
 ---
 
 ## QGIS
@@ -37,6 +35,10 @@ and paste it in the Python Console in QGIS.
 ![image](https://github.com/kamangir/assets/blob/main/blue-geo/QGIS-python-console.png?raw=true)
 
 ---
+
+| | | |
+|-|-|-|
+| [QGIS](#QGIS)  [ukraine-timemap](#ukraine-timemap-) 🇺🇦 🔷 [vancouver-watching](#vancouver-watching-) 🌈 | [sources](./metadata.yaml) |
 
 ## ukraine-timemap 🇺🇦
 

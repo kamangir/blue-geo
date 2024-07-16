@@ -8,8 +8,8 @@ from blue_geo.firms.api.area.classes import APIRequest
     ["area", "source"],
     [
         [
-            enums.Area.default,
-            enums.Source.default,
+            enums.Area.default(),
+            enums.Source.default(),
         ],
     ],
 )

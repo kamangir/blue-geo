@@ -8,12 +8,12 @@ class Area(Enum):
     WEST = auto()
     WORLD = auto()
 
-    @property
-    def default():
+    @classmethod
+    def default(cls):
         return Area.WORLD
 
-    @property
-    def values():
+    @classmethod
+    def values(cls):
         return [area.name.lower() for area in Area]
 
 
@@ -50,10 +50,10 @@ class Source(Enum):
     def __init__(self, _, description):
         self.description = description
 
-    @property
-    def default():
+    @classmethod
+    def default(cls):
         return Source.MODIS_NRT
 
-    @property
-    def values():
+    @classmethod
+    def values(cls):
         return [source.name for source in Source]

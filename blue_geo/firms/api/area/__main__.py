@@ -20,14 +20,14 @@ parser.add_argument(
 parser.add_argument(
     "--source",
     type=str,
-    default=Source.default.name,
-    help="|".join(Source.default.values),
+    default=Source.default().name,
+    help="|".join(Source.values()),
 )
 parser.add_argument(
     "--area",
     type=str,
-    default=Area.default.name,
-    help="|".join(Area.default.values),
+    default=Area.default().name,
+    help="|".join(Area.values()),
 )
 parser.add_argument(
     "--date",

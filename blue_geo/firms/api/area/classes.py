@@ -8,8 +8,8 @@ from blue_geo.logger import logger
 class APIRequest:
     def __init__(
         self,
-        source: Source = Source.default,
-        area: Area = Area.default,
+        source: Source = Source.default(),
+        area: Area = Area.default(),
         date: str = "",
         day_range: int = 1,
         log: bool = True,
@@ -38,8 +38,16 @@ class APIRequest:
             self.source.description,
         )
 
-    def ingest(object_name: str) -> bool:
-        logger.info(f"🪄 -> {object_name}")
+    def ingest(self, object_name: str) -> bool:
+        logger.info(
+            "{}.{} -> {}".format(
+                NAME,
+                self.__class__.__name__,
+                object_name,
+            )
+        )
+
+        logger.info("🪄")
 
         return True
 

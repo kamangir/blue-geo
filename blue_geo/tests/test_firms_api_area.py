@@ -19,3 +19,7 @@ def test_blue_geo_firms_api_area(
     api_request = APIRequest(area=area, source=source)
 
     assert api_request.as_str()
+
+    assert api_request.url()
+
+    assert api_request.url(html=True)

@@ -8,8 +8,8 @@ from blue_geo.logger import logger
 class APIRequest:
     def __init__(
         self,
-        source: Source = Source.MODIS_NRT,
-        area: Area = Area.WORLD,
+        source: Source = Source.default,
+        area: Area = Area.default,
         date: str = "",
         day_range: int = 1,
         log: bool = True,
@@ -20,8 +20,6 @@ class APIRequest:
         self.area: Area = area
         self.source: Source = source
 
-        assert day_range >= 1
-        assert day_range <= 10
         self.day_range: int = day_range
 
         self.date: str = (
@@ -39,6 +37,11 @@ class APIRequest:
             self.source.name,
             self.source.description,
         )
+
+    def ingest(object_name: str) -> bool:
+        logger.info(f"🪄 -> {object_name}")
+
+        return True
 
     def url(self, html: bool = False) -> str:
         return "{}/api/area/{}/{}/{}/{}/{}/{}".format(

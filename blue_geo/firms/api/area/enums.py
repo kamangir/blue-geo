@@ -8,6 +8,14 @@ class Area(Enum):
     WEST = auto()
     WORLD = auto()
 
+    @property
+    def default():
+        return Area.WORLD
+
+    @property
+    def values():
+        return [area.name.lower() for area in Area]
+
 
 class Source(Enum):
     LANDSAT_NRT = (
@@ -41,3 +49,11 @@ class Source(Enum):
 
     def __init__(self, _, description):
         self.description = description
+
+    @property
+    def default():
+        return Source.MODIS_NRT
+
+    @property
+    def values():
+        return [source.name for source in Source]

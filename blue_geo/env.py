@@ -6,3 +6,5 @@ load_config(__name__)
 
 
 UKRAINE_TIMEMAP_TEMPLATE = os.getenv("UKRAINE_TIMEMAP_TEMPLATE", "")
+
+FIRMS_MAP_KEY = os.getenv("FIRMS_MAP_KEY", "")

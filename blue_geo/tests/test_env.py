@@ -8,3 +8,4 @@ def test_abcli_env():
 
 def test_blue_geo_env():
     assert env.UKRAINE_TIMEMAP_TEMPLATE
+    assert env.FIRMS_MAP_KEY

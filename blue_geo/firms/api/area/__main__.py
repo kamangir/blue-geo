@@ -76,7 +76,7 @@ elif args.task == "ingest":
         date=args.date,
     )
 
-    success = api_request.ingest(object_name=args.object_name)
+    success, _ = api_request.ingest(object_name=args.object_name)
 else:
     success = None
 

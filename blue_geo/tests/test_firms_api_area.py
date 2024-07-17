@@ -2,6 +2,7 @@ import pytest
 from blue_geo.firms.api.area import enums
 from abcli.modules.objects import unique_object
 from blue_geo.firms.api.area.classes import APIRequest
+import geopandas as gpd
 
 
 @pytest.mark.parametrize(
@@ -27,6 +28,8 @@ def test_blue_geo_firms_api_area(
 
     assert api_request.url(html=True)
 
-    assert api_request.ingest(object_name)
+    success, gdf = api_request.ingest(object_name)
+    assert success
+    assert isinstance(gdf, gpd.GeoDataFrame)
 
     assert api_request.datacube_id

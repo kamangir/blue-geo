@@ -1,4 +1,8 @@
+from typing import Tuple
 from datetime import datetime, timedelta
+import pandas as pd
+import geopandas as gpd
+from shapely.geometry import Point
 from . import NAME
 from .enums import Area, Source
 from abcli import file
@@ -47,7 +51,10 @@ class APIRequest:
             self.source.name,
         )
 
-    def ingest(self, object_name: str) -> bool:
+    def ingest(self, object_name: str) -> Tuple[
+        bool,
+        gpd.GeoDataFrame,
+    ]:
         logger.info(
             "{}.{} -> {}".format(
                 NAME,
@@ -56,19 +63,42 @@ class APIRequest:
             )
         )
 
+        csv_filename = objects.path_of(
+            f"{object_name}.csv",
+            object_name,
+            create=True,
+        )
         if not file.download(
             self.url(),
-            objects.path_of(
-                f"{object_name}.csv",
-                object_name,
-                create=True,
-            ),
+            csv_filename,
         ):
-            return False
+            return False, gpd.GeoDataFrame()
 
-        logger.info("🪄")
+        data = pd.read_csv(csv_filename)
+        logger.info(f"loaded {len(data):,} point(s).")
 
-        return True
+        gdf = gpd.GeoDataFrame(
+            data,
+            geometry=[
+                Point(xy)
+                for xy in zip(
+                    data.longitude,
+                    data.latitude,
+                )
+            ],
+            crs="EPSG:4326",  # WGS84
+        )
+
+        return (
+            file.save_geojson(
+                objects.path_of(
+                    f"{object_name}.geojson",
+                    object_name,
+                ),
+                gdf,
+            ),
+            gdf,
+        )
 
     def url(self, html: bool = False) -> str:
         return "{}/api/area/{}/{}/{}/{}/{}/{}".format(

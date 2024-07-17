@@ -1,6 +1,7 @@
 blueness
 abcli
 boto3
+folium
 geojson
 geopandas
 matplotlib
@@ -11,4 +12,5 @@ pyyaml
 pylint
 pytest
 python-dotenv[cli]
+shapely
 tqdm

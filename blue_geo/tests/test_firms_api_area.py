@@ -28,3 +28,5 @@ def test_blue_geo_firms_api_area(
     assert api_request.url(html=True)
 
     assert api_request.ingest(object_name)
+
+    assert api_request.datacube_id

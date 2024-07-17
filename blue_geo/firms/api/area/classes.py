@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from . import NAME
 from .enums import Area, Source
+from abcli import file
+from abcli.modules import objects
 from blue_geo import env
 from blue_geo.logger import logger
 
@@ -38,6 +40,13 @@ class APIRequest:
             self.source.description,
         )
 
+    @property
+    def datacube_id(self) -> str:
+        return "blue-geo-firms-{}-{}".format(
+            self.area.name.lower(),
+            self.source.name,
+        )
+
     def ingest(self, object_name: str) -> bool:
         logger.info(
             "{}.{} -> {}".format(
@@ -46,6 +55,16 @@ class APIRequest:
                 object_name,
             )
         )
+
+        if not file.download(
+            self.url(),
+            objects.path_of(
+                f"{object_name}.csv",
+                object_name,
+                create=True,
+            ),
+        ):
+            return False
 
         logger.info("🪄")
 

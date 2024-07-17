@@ -34,7 +34,7 @@ function blue_geo_ingest_firms() {
         --object_name $object_name \
         "${@:4}"
 
-    [[ "$do_dryrun" == 1 ]] &&
+    [[ "$do_upload" == 1 ]] &&
         abcli_upload - $object_name
 
     return 0

@@ -11,7 +11,7 @@ class APIRequest:
         source: Source = Source.default(),
         area: Area = Area.default(),
         date: str = "",
-        day_range: int = 1,
+        depth: int = 1,
         log: bool = True,
     ):
         self.prefix = "https://firms.modaps.eosdis.nasa.gov"
@@ -20,7 +20,7 @@ class APIRequest:
         self.area: Area = area
         self.source: Source = source
 
-        self.day_range: int = day_range
+        self.depth: int = depth
 
         self.date: str = (
             date if date else (datetime.now() - timedelta(days=5)).strftime("%Y-%m-%d")
@@ -58,6 +58,6 @@ class APIRequest:
             self.map_key,
             self.source.name,
             self.area.name.lower(),
-            self.day_range,
+            self.depth,  # day_range
             self.date,
         )

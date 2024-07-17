@@ -5,6 +5,8 @@ function blue_geo() {
 
     if [ $task == "help" ]; then
         ukraine_timemap "$@"
+        blue_geo_QGIS "$@"
+        blue_geo_ingest "$@"
         return
     fi
 

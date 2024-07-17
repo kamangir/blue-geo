@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
 parser.add_argument(
     "task",
     type=str,
-    help="ingest",
+    help="get|ingest",
 )
 parser.add_argument(
     "--object_name",
@@ -36,20 +36,43 @@ parser.add_argument(
     help="yyyy-mm-dd",
 )
 parser.add_argument(
-    "--day_range",
+    "--depth",
     type=int,
     default=1,
     help="1..10",
 )
-
+parser.add_argument(
+    "--what",
+    type=str,
+    default="area",
+    help="area|source",
+)
+parser.add_argument(
+    "--values",
+    type=int,
+    default=1,
+    help="0|1",
+)
+parser.add_argument(
+    "--delim",
+    type=str,
+    default="|",
+)
 args = parser.parse_args()
 
+delim = " " if args.delim == "space" else args.delim
+
 success = False
-if args.task == "ingest":
+if args.task == "get":
+    what = Area if args.what == "area" else Source if args.what == "source" else None
+    what = what.default() if what else None
+    print((delim.join(what.values()) if args.values else what.name) if what else None)
+    success = True
+elif args.task == "ingest":
     api_request = APIRequest(
         area=Area[args.area],
         source=Source[args.source],
-        day_range=args.day_range,
+        depth=args.depth,
         date=args.date,
     )
 

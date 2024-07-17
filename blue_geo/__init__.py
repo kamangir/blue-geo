@@ -4,7 +4,7 @@ ICON = "🌐"
 
 DESCRIPTION = f"{ICON} AI for precise geospatial data analysis and visualization."
 
-VERSION = "4.48.1"
+VERSION = "4.49.1"
 
 REPO_NAME = "blue-geo"
 

@@ -21,3 +21,15 @@ pip install blue-geo
 	[--log 1]
  . firms -ingest-> <object-name>.
 ```
+
+```bash
+@select firms-$(@@timestamp)
+blue_geo ingest firms - .
+@publish tar .
+```
+
+🔥 log
+
+![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/firms.jpg)
+
+🔥 public link

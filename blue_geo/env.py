@@ -5,6 +5,13 @@ load_env(__name__)
 load_config(__name__)
 
 
-UKRAINE_TIMEMAP_TEMPLATE = os.getenv("UKRAINE_TIMEMAP_TEMPLATE", "")
+BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE = os.getenv(
+    "BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE", ""
+)
+
+BLUE_GEO_FIRMS_QGIS_TEMPLATE = os.getenv(
+    "BLUE_GEO_FIRMS_QGIS_TEMPLATE",
+    "",
+)
 
 FIRMS_MAP_KEY = os.getenv("FIRMS_MAP_KEY", "")

@@ -4,7 +4,7 @@ function blue_geo_ingest_firms() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options="dryrun,~upload"
+        options="$EOP~copy_template,dryrun,~upload$EOPE"
         local date=$(abcli_string_timestamp_short \
             --include_time 0 \
             --unique 0)
@@ -24,9 +24,19 @@ function blue_geo_ingest_firms() {
     fi
 
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
+    local do_copy_template=$(abcli_option_int "$options" copy_template 1)
     local do_upload=$(abcli_option_int "$options" upload $(abcli_not $do_dryrun))
 
     local object_name=$(abcli_clarify_object $2 .)
+
+    if [[ "$do_copy_template" == 1 ]]; then
+        abcli_clone \
+            $BLUE_GEO_FIRMS_QGIS_TEMPLATE \
+            $object_name \
+            ~meta
+        rm -v \
+            $abcli_object_root/$object_name/firms.*
+    fi
 
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.firms.api.area \

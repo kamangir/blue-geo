@@ -64,11 +64,7 @@ class APIRequest:
             )
         )
 
-        csv_filename = objects.path_of(
-            f"{object_name}.csv",
-            object_name,
-            create=True,
-        )
+        csv_filename = objects.path_of(f"firms.csv", object_name, create=True)
         if not file.download(
             self.url(),
             csv_filename,
@@ -91,10 +87,7 @@ class APIRequest:
         )
 
         if not file.save_geojson(
-            objects.path_of(
-                f"{object_name}.geojson",
-                object_name,
-            ),
+            objects.path_of("firms.geojson", object_name),
             gdf,
         ):
             return False, gdf

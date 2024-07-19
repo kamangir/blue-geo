@@ -7,6 +7,7 @@ from . import NAME
 from .enums import Area, Source
 from abcli import file
 from abcli.modules import objects
+from abcli.plugins import metadata
 from blue_geo import env
 from blue_geo.logger import logger
 
@@ -89,16 +90,30 @@ class APIRequest:
             crs="EPSG:4326",  # WGS84
         )
 
-        return (
-            file.save_geojson(
-                objects.path_of(
-                    f"{object_name}.geojson",
-                    object_name,
-                ),
-                gdf,
+        if not file.save_geojson(
+            objects.path_of(
+                f"{object_name}.geojson",
+                object_name,
             ),
             gdf,
-        )
+        ):
+            return False, gdf
+
+        if not metadata.post_to_object(
+            object_name,
+            "datacube",
+            {
+                "id": self.datacube_id,
+                "source": self.source.name,
+                "area": self.area.name,
+                "date": self.date,
+                "depth": self.depth,
+                "len": len(gdf),
+            },
+        ):
+            return False, gdf
+
+        return True, gdf
 
     def url(self, html: bool = False) -> str:
         return "{}/api/area/{}/{}/{}/{}/{}/{}".format(

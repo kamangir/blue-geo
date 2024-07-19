@@ -6,6 +6,8 @@ AI for precise geospatial data analysis and visualization.
 pip install blue-geo
 ```
 
+🧊 [datacube](#datacube)
+
 | | | |
 |-|-|-|
 | 🌐 [QGIS](https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/QGIS/README.md) | 🇺🇦 [ukraine-timemap](https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/ukraine-timemap/README.md) | 🌈 [vancouver-watching](https://github.com/kamangir/Vancouver-Watching) |
@@ -15,6 +17,30 @@ pip install blue-geo
 | 🌐 [firms](https://github.com/kamangir/blue-geo/blob/main/blue_geo/firms/README.md) | | |
 | [![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/firms.jpg)](https://github.com/kamangir/blue-geo/blob/main/blue_geo/firms/README.md) | | |
 | `ingest` for [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire Information for Resource Management System. | | |
+
+# 🧊 datacube
+
+`blue-geo` extends `@select`, `@ls`, and `@download`,
+
+```bash
+@select datacube ukraine_timemap
+
+@select datacube firms area=<area>,source=<source> \
+  --date <date> 
+  --depth <depth>
+
+@select datacube <datacube-id>
+@select datacube <ukraine-timemap-...>
+@select datacube <firms-...>
+
+@ls datacube <datacube-id>
+
+@download datacube . all,suffix=all|<suffix>
+
+@cp <datacube-id> <id> upload download,⬆️
+```
+
+`datacube`s are persisted under `/datacube/`.
 
 ---
 

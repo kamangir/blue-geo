@@ -64,7 +64,7 @@ class APIRequest:
             )
         )
 
-        csv_filename = objects.path_of(f"firms.csv", object_name, create=True)
+        csv_filename = objects.path_of("firms.csv", object_name, create=True)
         if not file.download(
             self.url(),
             csv_filename,

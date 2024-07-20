@@ -6,7 +6,7 @@ AI for precise geospatial data analysis and visualization.
 pip install blue-geo
 ```
 
-🔹 🧊 [datacube]() 🔹
+🔹 🧊 [datacube](https://github.com/kamangir/blue-geo/tree/2024-07-18-datacubes-a/blue_geo/.abcli/datacube) 🔹
 
 | | | |
 |-|-|-|
@@ -17,7 +17,6 @@ pip install blue-geo
 | 🌐 [firms](https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/datacube/firms/README.md) | | |
 | [![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/firms.jpg)](https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/datacube/firms/README.md) | | |
 | `ingest` for [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire Information for Resource Management System. | | |
-
 
 ---
 

@@ -1,6 +1,6 @@
 # 🧊
 
-`datacube`s can be queried, selected, and ingested, and then they become ordinary objects.
+`datacube`s are regular objects that can be queried and ingested.
 
 ```bash
 @datacube query firms_area <object-name> \
@@ -13,15 +13,15 @@
 @datacube query len
 
 @datacube query select \
-  <object-name> \
-  - \
-  --index <index> \
-  --prefix <prefix> \
-  --suffix <suffix> \
-  --contains <contains> \
-  --not-contains <not-contains>
+    <object-name> \
+    - \
+    --index <index> \
+    --prefix <prefix> \
+    --suffix <suffix> \
+    --contains <contains> \
+    --not-contains <not-contains>
 
 @datacube ingest \
-  all,items=<item-1+item-2>,suffix=<suffix> \
-  <object-name>
+    all,items=<item-1+item-2>,suffix=<suffix> \
+    <object-name>
 ```

@@ -1,4 +1,4 @@
-from typing import Any, Tuple
+from typing import Any, Tuple, Dict
 from . import NAME
 from blue_geo.logger import logger
 
@@ -15,10 +15,11 @@ class GenericDatacube:
 
     @property
     def description(self) -> str:
-        return "{}.{}: {}".format(
+        return "{}.{}@{}[{}]:".format(
             NAME,
             self.__class__.__name__,
             self.catalog,
+            self.datacube_id,
         )
 
     def ingest(self, object_name: str) -> Tuple[bool, Any]:
@@ -30,3 +31,19 @@ class GenericDatacube:
             )
         )
         return True, None
+
+    @classmethod
+    def parse_datacube_id(cls, datacube_id: str) -> Tuple[
+        bool,
+        Dict[str, Any],
+    ]:
+        # datacube-<catalog>-<args>
+        pieces = datacube_id.split("-") + ["", ""]
+
+        return (
+            all(
+                pieces[0] == "datacube",
+                pieces[1] == cls.catalog,
+            ),
+            {},
+        )

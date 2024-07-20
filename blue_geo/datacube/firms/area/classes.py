@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, Dict, Any
 from datetime import datetime, timedelta
 import pandas as pd
 import geopandas as gpd
@@ -21,12 +21,22 @@ class FirmsAreaDatacube(GenericDatacube):
         area: Area = Area.default(),
         date: str = "",
         depth: int = 1,
+        datacube_id: str = "",
         log: bool = True,
     ):
         super().__init__()
 
         self.url_prefix = "https://firms.modaps.eosdis.nasa.gov/api/area"
         self.map_key = env.FIRMS_MAP_KEY
+
+        if datacube_id:
+            success, args = FirmsAreaDatacube.parse_datacube_id(datacube_id)
+            assert success
+
+            area = args["area"]
+            source = args["source"]
+            depth = args["depth"]
+            date = args["date"]
 
         self.area: Area = area
         self.source: Source = source
@@ -51,10 +61,50 @@ class FirmsAreaDatacube(GenericDatacube):
 
     @property
     def datacube_id(self) -> str:
-        return "{}-{}-{}".format(
+        return "{}-{}-{}-{}-{}".format(
             super().datacube_id,
             self.area.name.lower(),
             self.source.name,
+            self.date,
+            self.depth,
+        )
+
+    @classmethod
+    def parse_datacube_id(cls, datacube_id: str) -> Tuple[
+        bool,
+        Dict[str, Any],
+    ]:
+        success, _ = super().parse_datacube_id(datacube_id)
+        if not success:
+            return False, {}
+
+        # datacube-firm_area-<area>-<source>
+        pieces = datacube_id.split("-")
+        if len(pieces) < 6:
+            return False, {}
+
+        area_str = pieces[2].upper
+        if area_str not in Area.values:
+            return False, {}
+
+        source_str = pieces[3]
+        if source_str not in Source.values:
+            return False, {}
+
+        date = pieces[4]
+
+        depth_str = pieces[5]
+        if not depth_str.isdigit():
+            return False, {}
+
+        return (
+            True,
+            {
+                "area": Area[area_str],
+                "source": Source[source_str],
+                "date": date,
+                "depth": int(depth_str),
+            },
         )
 
     def ingest(self, object_name: str) -> Tuple[

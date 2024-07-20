@@ -8,11 +8,12 @@ from .enums import Area, Source
 from abcli import file
 from abcli.modules import objects
 from abcli.plugins import metadata
+from blue_geo.datacube.types import GenericDatacube
 from blue_geo import env
 from blue_geo.logger import logger
 
 
-class APIRequest:
+class FirmsDatacube(GenericDatacube):
     def __init__(
         self,
         source: Source = Source.default(),
@@ -21,7 +22,7 @@ class APIRequest:
         depth: int = 1,
         log: bool = True,
     ):
-        self.prefix = "https://firms.modaps.eosdis.nasa.gov"
+        self.url_prefix = "https://firms.modaps.eosdis.nasa.gov"
         self.map_key = env.FIRMS_MAP_KEY
 
         self.area: Area = area
@@ -34,12 +35,12 @@ class APIRequest:
         )
 
         if log:
-            logger.info(self.as_str())
+            logger.info(self.description)
 
-    def as_str(self) -> str:
-        return "{}.{}, area:{}, source: {} ({})".format(
-            NAME,
-            self.__class__.__name__,
+    @property
+    def description(self) -> str:
+        return "{}, area:{}, source: {} ({})".format(
+            super().description,
             self.area.name.lower(),
             self.source.name,
             self.source.description,
@@ -66,7 +67,7 @@ class APIRequest:
 
         csv_filename = objects.path_of("firms.csv", object_name, create=True)
         if not file.download(
-            self.url(),
+            self.ingest_url(),
             csv_filename,
         ):
             return False, gpd.GeoDataFrame()
@@ -108,9 +109,9 @@ class APIRequest:
 
         return True, gdf
 
-    def url(self, html: bool = False) -> str:
+    def ingest_url(self, html: bool = False) -> str:
         return "{}/api/area/{}/{}/{}/{}/{}/{}".format(
-            self.prefix,
+            self.url_prefix,
             "html" if html else "csv",
             self.map_key,
             self.source.name,

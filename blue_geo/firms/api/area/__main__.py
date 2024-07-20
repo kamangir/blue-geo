@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from blue_geo import VERSION
 from blue_geo.firms.api.area import NAME
 from blue_geo.firms.api.area.enums import Area, Source
-from blue_geo.firms.api.area.classes import APIRequest
+from blue_geo.firms.api.area.classes import FirmsDatacube
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
@@ -69,14 +69,14 @@ if args.task == "get":
     print((delim.join(what.values()) if args.values else what.name) if what else None)
     success = True
 elif args.task == "ingest":
-    api_request = APIRequest(
+    datacube = FirmsDatacube(
         area=Area[args.area],
         source=Source[args.source],
         depth=args.depth,
         date=args.date,
     )
 
-    success, _ = api_request.ingest(object_name=args.object_name)
+    success, _ = datacube.ingest(object_name=args.object_name)
 else:
     success = None
 

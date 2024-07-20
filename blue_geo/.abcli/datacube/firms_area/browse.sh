@@ -1,12 +1,12 @@
 #! /usr/bin/env bash
 
-function firms_browse() {
+function blue_geo_datacube_firms_area_browse() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options="home$EOP|map_key|area-api$EOPE"
-        abcli_show_usage "firms browse$ABCUL$options" \
-            "browse firms."
+        abcli_show_usage "@datacube browse firms_area$ABCUL$options" \
+            "browse firms_area datacubes."
         return
     fi
 

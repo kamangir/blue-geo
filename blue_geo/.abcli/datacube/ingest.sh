@@ -1,11 +1,21 @@
 #! /usr/bin/env bash
 
 function blue_geo_datacube_ingest() {
-    local options=$1
+    local task=$(abcli_unpack_keyword $1 help)
 
-    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        :
+    if [ "$task" == "help" ]; then
+        blue_geo_ingest_firms "$@"
         return
     fi
 
+    # refactor
+
+    local function_name=blue_geo_ingest_$task
+    if [[ $(type -t $function_name) == "function" ]]; then
+        $function_name "${@:2}"
+        return
+    fi
+
+    abcli_log_error "-@datacube: ingest: $task: command not found."
+    return 1
 }

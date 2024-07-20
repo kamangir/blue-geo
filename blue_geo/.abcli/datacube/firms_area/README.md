@@ -11,6 +11,40 @@ pip install blue-geo
 ```
 
 ```bash
+@datacube query firms_area <object-name> \
+	select \
+	--source <source> \
+	--area <area> \
+	--date <date> \
+	--depth <depth>
+
+# runs @datacube select query - rm
+
+@datacube query len
+
+@datacube query select \
+  <object-name> \
+  - \
+  --index <index> \
+  --prefix <prefix> \
+  --suffix <suffix> \
+  --contains <contains> \
+  --not-contains <not-contains>
+
+@datacube ingest \
+  all,items=<item-1+item-2>,suffix=<suffix> \
+  <object-name>
+
+blue_geo ingest firms - .
+@open QGIS .
+@publish tar .
+```
+
+
+
+🔥
+
+```bash
  > blue_geo ingest firms \
 	[dryrun,~upload] \
 	[.|<object-name>] \

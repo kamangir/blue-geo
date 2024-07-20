@@ -13,7 +13,7 @@ from blue_geo.logger import logger
 
 
 class FirmsAreaDatacube(GenericDatacube):
-    type = "firms-area"
+    catalog = "firms-area"
 
     def __init__(
         self,

@@ -4,21 +4,21 @@ from blue_geo.logger import logger
 
 
 class GenericDatacube:
-    type = "generic"
+    catalog = "generic"
 
     def __init__(self):
         pass
 
     @property
     def datacube_id(self) -> str:
-        return f"blue-geo-{self.type}"
+        return f"datacube-{self.catalog}"
 
     @property
     def description(self) -> str:
         return "{}.{}: {}".format(
             NAME,
             self.__class__.__name__,
-            self.type,
+            self.catalog,
         )
 
     def ingest(self, object_name: str) -> Tuple[bool, Any]:

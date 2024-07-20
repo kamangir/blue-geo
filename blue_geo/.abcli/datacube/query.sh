@@ -17,6 +17,12 @@ function blue_geo_datacube_query() {
         return
     fi
 
+    local function_name=blue_geo_datacube_query_$catalog
+    if [[ $(type -t $function_name) == "function" ]]; then
+        $function_name "${@:2}"
+        return
+    fi
+
     local do_download=$(abcli_option_int "$options" download 0)
     local do_ingest=$(abcli_option_int "$options" ingest 0)
     local do_select=$(abcli_option_int "$options" select 0)

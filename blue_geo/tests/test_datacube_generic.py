@@ -1,5 +1,5 @@
 from abcli.modules.objects import unique_object
-from blue_geo.datacube.types import GenericDatacube
+from blue_geo.datacube.generic import GenericDatacube
 
 
 def test_datacube_generic():

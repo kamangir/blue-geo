@@ -22,6 +22,9 @@ class FirmsDatacube(GenericDatacube):
         depth: int = 1,
         log: bool = True,
     ):
+        super.__init__()
+        self.type = "firms"
+
         self.url_prefix = "https://firms.modaps.eosdis.nasa.gov"
         self.map_key = env.FIRMS_MAP_KEY
 
@@ -48,7 +51,8 @@ class FirmsDatacube(GenericDatacube):
 
     @property
     def datacube_id(self) -> str:
-        return "blue-geo-firms-{}-{}".format(
+        return "-{}-{}".format(
+            super().datacube_id,
             self.area.name.lower(),
             self.source.name,
         )
@@ -57,13 +61,7 @@ class FirmsDatacube(GenericDatacube):
         bool,
         gpd.GeoDataFrame,
     ]:
-        logger.info(
-            "{}.{} -> {}".format(
-                NAME,
-                self.__class__.__name__,
-                object_name,
-            )
-        )
+        super().ingest(object_name)
 
         csv_filename = objects.path_of("firms.csv", object_name, create=True)
         if not file.download(

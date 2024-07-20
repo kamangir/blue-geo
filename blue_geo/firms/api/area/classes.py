@@ -22,7 +22,7 @@ class FirmsDatacube(GenericDatacube):
         depth: int = 1,
         log: bool = True,
     ):
-        super.__init__()
+        super().__init__()
         self.type = "firms"
 
         self.url_prefix = "https://firms.modaps.eosdis.nasa.gov"

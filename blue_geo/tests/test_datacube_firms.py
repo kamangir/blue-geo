@@ -14,7 +14,7 @@ import geopandas as gpd
         ],
     ],
 )
-def test_blue_geo_firms_api_area(
+def test_datacube_firms(
     area: enums.Area,
     source: enums.Source,
 ):
@@ -24,9 +24,9 @@ def test_blue_geo_firms_api_area(
 
     assert datacube.description
 
-    assert datacube.url()
+    assert datacube.ingest_url()
 
-    assert datacube.url(html=True)
+    assert datacube.ingest_url(html=True)
 
     success, gdf = datacube.ingest(object_name)
     assert success

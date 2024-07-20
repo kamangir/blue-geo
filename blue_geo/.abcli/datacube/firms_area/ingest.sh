@@ -4,20 +4,8 @@ function blue_geo_datacube_ingest_firms_area() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options="$EOP~copy_template,dryrun,~upload$EOPE"
-        local date=$(abcli_string_timestamp_short \
-            --include_time 0 \
-            --unique 0)
-        local area=$(python3 -m blue_geo.datacube.firms.area \
-            get \
-            --what area \
-            --delim \|)
-        local source=$(python3 -m blue_geo.datacube.firms.area \
-            get \
-            --what source \
-            --values 1 \
-            --delim \|)
-        local args="[--date $date]$ABCUL[--depth 1]$ABCUL[--area $area]$ABCUL[--source $source]$ABCUL[--log 1]"
+        options="$EOP~copy_template,dryrun,upload$EOPE"
+        local args=$(blue_geo_datacube_firms_area_query_args)
         abcli_show_usage "blue_geo ingest firms$ABCUL[$options]$ABCUL[.|<object-name>]$ABCUL$args" \
             "firms -ingest-> <object-name>."
         return

@@ -16,7 +16,7 @@ function blue_geo_datacube_firms_area_query() {
     local object_name=$(abcli_clarify_object $2 -)
 
     abcli_eval dryrun=$do_dryrun \
-        python3 -m blue_geo.datacube.firms_area \
+        python3 -m blue_geo.datacube.firms.area \
         query \
         --object_name $object_name \
         "${@:3}"

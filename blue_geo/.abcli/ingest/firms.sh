@@ -8,11 +8,11 @@ function blue_geo_ingest_firms() {
         local date=$(abcli_string_timestamp_short \
             --include_time 0 \
             --unique 0)
-        local area=$(python3 -m blue_geo.firms.api.area \
+        local area=$(python3 -m blue_geo.datacube.firms.area \
             get \
             --what area \
             --delim \|)
-        local source=$(python3 -m blue_geo.firms.api.area \
+        local source=$(python3 -m blue_geo.datacube.firms.area \
             get \
             --what source \
             --values 1 \
@@ -39,7 +39,7 @@ function blue_geo_ingest_firms() {
     fi
 
     abcli_eval dryrun=$do_dryrun \
-        python3 -m blue_geo.firms.api.area \
+        python3 -m blue_geo.datacube.firms.area \
         ingest \
         --object_name $object_name \
         "${@:4}"

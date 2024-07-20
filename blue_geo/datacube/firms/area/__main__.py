@@ -1,9 +1,9 @@
 import argparse
 from datetime import datetime, timedelta
 from blue_geo import VERSION
-from blue_geo.firms.api.area import NAME
-from blue_geo.firms.api.area.enums import Area, Source
-from blue_geo.firms.api.area.classes import FirmsDatacube
+from blue_geo.datacube.firms.area import NAME
+from blue_geo.datacube.firms.area.enums import Area, Source
+from blue_geo.datacube.firms.area.classes import FirmsAreaDatacube
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
@@ -69,7 +69,7 @@ if args.task == "get":
     print((delim.join(what.values()) if args.values else what.name) if what else None)
     success = True
 elif args.task == "ingest":
-    datacube = FirmsDatacube(
+    datacube = FirmsAreaDatacube(
         area=Area[args.area],
         source=Source[args.source],
         depth=args.depth,

@@ -3,7 +3,6 @@ from datetime import datetime, timedelta
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point
-from . import NAME
 from .enums import Area, Source
 from abcli import file
 from abcli.modules import objects
@@ -13,7 +12,7 @@ from blue_geo import env
 from blue_geo.logger import logger
 
 
-class FirmsDatacube(GenericDatacube):
+class FirmsAreaDatacube(GenericDatacube):
     def __init__(
         self,
         source: Source = Source.default(),
@@ -23,9 +22,9 @@ class FirmsDatacube(GenericDatacube):
         log: bool = True,
     ):
         super().__init__()
-        self.type = "firms"
+        self.type = "firms-area"
 
-        self.url_prefix = "https://firms.modaps.eosdis.nasa.gov"
+        self.url_prefix = "https://firms.modaps.eosdis.nasa.gov/api/area"
         self.map_key = env.FIRMS_MAP_KEY
 
         self.area: Area = area
@@ -108,7 +107,7 @@ class FirmsDatacube(GenericDatacube):
         return True, gdf
 
     def ingest_url(self, html: bool = False) -> str:
-        return "{}/api/area/{}/{}/{}/{}/{}/{}".format(
+        return "{}/{}/{}/{}/{}/{}/{}".format(
             self.url_prefix,
             "html" if html else "csv",
             self.map_key,

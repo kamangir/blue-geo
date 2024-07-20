@@ -1,7 +1,7 @@
 import pytest
-from blue_geo.firms.api.area import enums
+from blue_geo.datacube.firms.area import enums
 from abcli.modules.objects import unique_object
-from blue_geo.firms.api.area.classes import FirmsDatacube
+from blue_geo.datacube.firms.area import FirmsAreaDatacube
 import geopandas as gpd
 
 
@@ -14,13 +14,13 @@ import geopandas as gpd
         ],
     ],
 )
-def test_datacube_firms(
+def test_datacube_firms_area(
     area: enums.Area,
     source: enums.Source,
 ):
     object_name = unique_object()
 
-    datacube = FirmsDatacube(area=area, source=source)
+    datacube = FirmsAreaDatacube(area=area, source=source)
 
     assert datacube.description
 

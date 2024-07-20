@@ -23,7 +23,6 @@ abcli_object_root = os.path.join(
 class ABCLI_QGIS(object):
     def __init__(self):
         self.app_list = []
-        self.object_name = self.timestamp()
 
     def add_application(self, app):
         self.app_list += [app]
@@ -65,7 +64,7 @@ class ABCLI_QGIS(object):
                 "abcli",
                 "create_video",
                 f"png,fps=2,filename={filename},gif",
-                object_name if object_name else self.object_name,
+                object_name if object_name else project.name,
             ]
         )
 
@@ -88,7 +87,6 @@ class ABCLI_QGIS(object):
         if clear:
             self.clear()
 
-        log("object", self.object_name, icon="📂")
         log("Q.clear()", "clear Python Console.")
         log("Q.create_video()", "create a video.")
         layer.help()
@@ -101,7 +99,6 @@ class ABCLI_QGIS(object):
         if verbose:
             log("Q.refresh()", "refresh.")
             log("Q.reload()", "reload all layers.")
-        log('Q.select("<object-name>")', "select <object-name>.")
         if verbose:
             log("Q.unload(layer_name)", "unload layer_name.")
         log('Q.upload("|<object-name>|layer|project|qgz")', "upload.")
@@ -179,7 +176,7 @@ class ABCLI_QGIS(object):
     def object_path(self, object_name=""):
         output = os.path.join(
             abcli_object_root,
-            object_name if object_name else self.object_name,
+            object_name if object_name else project.name,
         )
         os.makedirs(output, exist_ok=True)
         return output
@@ -212,13 +209,6 @@ class ABCLI_QGIS(object):
         for layer_ in tqdm(QgsProject.instance().mapLayers().values()):
             layer_.dataProvider().reloadData()
 
-    def select(self, object_name=""):
-        self.object_name = object_name if object_name else self.timestamp()
-        log(f"object_name: {self.object_name}", icon="📂")
-        log(f"object_path: {self.object_path()}", icon="📂")
-
-        os.makedirs(self.object_path(), exist_ok=True)
-
     def timestamp(self):
         return time.strftime(
             f"%Y-%m-%d-%H-%M-%S-{random.randrange(100000):05d}",
@@ -246,7 +236,7 @@ class ABCLI_QGIS(object):
                     else (
                         layer.object_name
                         if object_name in ["layer", layer]
-                        else object_name if object_name else self.object_name
+                        else object_name if object_name else project.name
                     )
                 ),
             ]

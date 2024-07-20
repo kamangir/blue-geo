@@ -15,7 +15,7 @@ pip install blue-geo
 	[dryrun,~upload] \
 	[.|<object-name>] \
 	[--date 2024-07-16] \
-	[depth 1] \
+	[--depth 1] \
 	[--area east|north|south|west|world] \
 	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP] \
 	[--log 1]
@@ -25,11 +25,22 @@ pip install blue-geo
 ```bash
 @select firms-$(@@timestamp)
 blue_geo ingest firms - .
+@open QGIS .
 @publish tar .
 ```
 
-🔥 log
+```yaml
+datacube:
+  area: WORLD
+  date: '2024-07-14'
+  depth: 1
+  id: blue-geo-firms-world-MODIS_NRT
+  len: 17105
+  source: MODIS_NRT
+```
+
+![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/firms-ingest.png)
+
+[firms-2024-07-19-26884.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/firms-2024-07-19-26884.tar.gz)
 
 ![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/firms.jpg)
-
-🔥 public link

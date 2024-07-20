@@ -17,7 +17,7 @@ function blue_geo_ingest_firms() {
             --what source \
             --values 1 \
             --delim \|)
-        local args="[--date $date]$ABCUL[depth 1]$ABCUL[--area $area]$ABCUL[--source $source]$ABCUL[--log 1]"
+        local args="[--date $date]$ABCUL[--depth 1]$ABCUL[--area $area]$ABCUL[--source $source]$ABCUL[--log 1]"
         abcli_show_usage "blue_geo ingest firms$ABCUL[$options]$ABCUL[.|<object-name>]$ABCUL$args" \
             "firms -ingest-> <object-name>."
         return

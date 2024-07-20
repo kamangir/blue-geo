@@ -1,5 +1,6 @@
 import argparse
 from blue_geo import VERSION
+from blue_geo.datacube.types import list_of
 from blue_geo.ukraine_timemap import NAME
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
@@ -8,17 +9,7 @@ parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
 parser.add_argument(
     "task",
     type=str,
-    help="list",
-)
-parser.add_argument(
-    "--count",
-    type=int,
-    default=-1,
-)
-parser.add_argument(
-    "--offset",
-    type=int,
-    default=0,
+    help="list_of_types",
 )
 parser.add_argument(
     "--delim",
@@ -36,8 +27,8 @@ args = parser.parse_args()
 delim = " " if args.delim == "space" else args.delim
 
 success = False
-if args.task == "list_type":
-    output = []  # list_of_types(object_name=args.object_name)
+if args.task == "list_of_types":
+    output = list_of
 
     if args.log:
         logger.info(f"{len(output):,} datacube type(s): {delim.join(output)}")

@@ -13,6 +13,8 @@ from blue_geo.logger import logger
 
 
 class FirmsAreaDatacube(GenericDatacube):
+    type = "firms-area"
+
     def __init__(
         self,
         source: Source = Source.default(),
@@ -22,7 +24,6 @@ class FirmsAreaDatacube(GenericDatacube):
         log: bool = True,
     ):
         super().__init__()
-        self.type = "firms-area"
 
         self.url_prefix = "https://firms.modaps.eosdis.nasa.gov/api/area"
         self.map_key = env.FIRMS_MAP_KEY

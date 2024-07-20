@@ -4,8 +4,10 @@ from blue_geo.logger import logger
 
 
 class GenericDatacube:
+    type = "generic"
+
     def __init__(self):
-        self.type = "generic"
+        pass
 
     @property
     def datacube_id(self) -> str:

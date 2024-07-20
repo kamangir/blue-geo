@@ -22,7 +22,7 @@ def test_blue_geo_firms_api_area(
 
     datacube = FirmsDatacube(area=area, source=source)
 
-    assert datacube.as_str()
+    assert datacube.description
 
     assert datacube.url()
 

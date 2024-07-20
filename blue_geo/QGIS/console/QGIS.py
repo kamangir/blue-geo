@@ -58,6 +58,8 @@ class ABCLI_QGIS(object):
 
         self.intro()
 
+        seed("clear")
+
     def create_video(self, filename="QGIS", object_name=""):
         seed(
             [
@@ -244,5 +246,14 @@ class ABCLI_QGIS(object):
 
 
 QGIS = ABCLI_QGIS()
+
+
+def clear():
+    QGIS.clear()
+
+
+def upload(self, object_name=""):
+    QGIS.upload(object_name)
+
 
 Q = QGIS

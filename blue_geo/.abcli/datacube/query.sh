@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+export blue_geo_datacube_query_read_args="[--index <index>]$ABCUL[--prefix <prefix>]$ABCUL[--suffix <suffix>]$ABCUL[--contains <contains>]$ABCUL[--notcontains <not-contains>]"
+
 function blue_geo_datacube_query() {
     local catalog=${1:firms_area}
 

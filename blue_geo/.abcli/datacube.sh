@@ -7,6 +7,7 @@ function blue_geo_datacube() {
         blue_geo_datacube_browse "$@"
         blue_geo_datacube_ingest "$@"
         blue_geo_datacube_list "$@"
+        blue_geo_datacube_query "$@"
         return
     fi
 

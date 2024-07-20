@@ -51,7 +51,7 @@ class FirmsDatacube(GenericDatacube):
 
     @property
     def datacube_id(self) -> str:
-        return "-{}-{}".format(
+        return "{}-{}-{}".format(
             super().datacube_id,
             self.area.name.lower(),
             self.source.name,

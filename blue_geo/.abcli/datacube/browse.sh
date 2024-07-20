@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 function blue_geo_datacube_browse() {
-    local catalog=$1
+    local catalog=${1:firms_area}
 
     if [ $(abcli_option_int "$catalog" help 0) == 1 ]; then
         abcli_show_usage "@datacube browse$ABCUL<catalog>$ABCUL<args>" \

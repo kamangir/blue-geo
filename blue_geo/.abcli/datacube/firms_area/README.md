@@ -17,8 +17,6 @@ pip install blue-geo
 @publish tar .
 ```
 
-
-
 TODO: consume and refactor 🔥
 
 ```bash

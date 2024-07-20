@@ -3,8 +3,9 @@
 `datacube`s are regular objects that can be queried and ingested.
 
 ```bash
-@datacube query firms_area <object-name> \
+@datacube query <catalog> \
 	select \
+    <object-name> \
 	--source <source> \
 	--area <area> \
 	--date <date> \
@@ -12,9 +13,9 @@
 
 @datacube query len
 
-@datacube query select \
-    <object-name> \
+@datacube query read \
     - \
+    <object-name> \
     --index <index> \
     --prefix <prefix> \
     --suffix <suffix> \

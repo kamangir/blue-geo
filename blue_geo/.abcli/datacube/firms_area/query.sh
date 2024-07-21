@@ -5,7 +5,22 @@ function blue_geo_datacube_firms_area_query() {
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options="dryrun"
-        local args=$(blue_geo_datacube_firms_area_query_args)
+
+        local date=$(abcli_string_timestamp_short \
+            --include_time 0 \
+            --unique 0)
+        local area=$(python3 -m blue_geo.datacube.firms.area \
+            get \
+            --what area \
+            --delim \|)
+        local source=$(python3 -m blue_geo.datacube.firms.area \
+            get \
+            --what source \
+            --values 1 \
+            --delim \|)
+
+        local args="[--date $date]$ABCUL[--depth 1]$ABCUL[--area $area]$ABCUL[--source $source]$ABCUL[--log 1]"
+
         abcli_show_usage "@datacube query firms_area$ABCUL[$blue_geo_datacube_query_options]$ABCUL[-|<object-name>]$ABCUL[$options]$ABCUL$args" \
             "firms_area -query-> <object-name>."
         return
@@ -22,21 +37,4 @@ function blue_geo_datacube_firms_area_query() {
         "${@:3}"
 
     return 0
-}
-
-function blue_geo_datacube_firms_area_query_args() {
-    local date=$(abcli_string_timestamp_short \
-        --include_time 0 \
-        --unique 0)
-    local area=$(python3 -m blue_geo.datacube.firms.area \
-        get \
-        --what area \
-        --delim \|)
-    local source=$(python3 -m blue_geo.datacube.firms.area \
-        get \
-        --what source \
-        --values 1 \
-        --delim \|)
-
-    echo "[--date $date]$ABCUL[--depth 1]$ABCUL[--area $area]$ABCUL[--source $source]$ABCUL[--log 1]"
 }

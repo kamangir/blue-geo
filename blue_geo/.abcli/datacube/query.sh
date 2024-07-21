@@ -60,7 +60,7 @@ function blue_geo_datacube_query() {
         blue_geo_datacube_ingest - $datacube_id
 
     [[ "$do_select" == 1 ]] &&
-        abcli_select - $datacube_id
+        abcli_select $datacube_id
 
     return 0
 

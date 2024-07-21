@@ -28,12 +28,17 @@ function blue_geo_datacube_query() {
     local do_select=$(abcli_option_int "$options" select 0)
     local do_upload=$(abcli_option_int "$options" upload 0)
 
-    local object_name=$(abcli_clarify_object $3 query-$catalog-$(abcli_string_timestamp))
-
     if [[ ",$blue_geo_datacube_list_of_catalogs," != *",$catalog,"* ]]; then
         abcli_log_error "-@datacube: query: $catalog: catalog not found."
         return 1
     fi
+
+    if [[ $(abcli_option_int "$options" help 0) == 1 ]]; then
+        blue_geo_datacube_${catalog}_query "${@:2}"
+        return
+    fi
+
+    local object_name=$(abcli_clarify_object $3 query-$catalog-$(abcli_string_timestamp))
 
     [[ "$do_download" == 1 ]] &&
         abcli_download - $object_name

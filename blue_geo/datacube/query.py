@@ -15,7 +15,7 @@ parser.add_argument(
 parser.add_argument(
     "--count",
     type=int,
-    default=1,
+    default=-1,
 )
 parser.add_argument(
     "--delim",

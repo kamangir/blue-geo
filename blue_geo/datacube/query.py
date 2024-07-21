@@ -1,7 +1,6 @@
 import argparse
 from blue_geo import VERSION
 from abcli.plugins.metadata import get_from_object
-from blue_geo.datacube.catalogs import list_of
 from blue_geo.ukraine_timemap import NAME
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit

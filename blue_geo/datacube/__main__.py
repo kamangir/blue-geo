@@ -1,6 +1,6 @@
 import argparse
 from blue_geo import VERSION
-from blue_geo.datacube.catalogs import list_of
+from blue_geo.datacube.catalogs import list_of_datacube_classes
 from blue_geo import env
 from blue_geo.datacube.catalogs import catalog_of
 from blue_geo.datacube import NAME
@@ -56,7 +56,9 @@ if args.task == "get":
     print(output)
 elif args.task == "list_of_catalogs":
     success = True
-    output = list_of
+    output = list(
+        {datacube_class.catalog for datacube_class in list_of_datacube_classes}
+    )
 
     if args.log:
         logger.info(f"{len(output):,} catalog(s): {delim.join(output)}")

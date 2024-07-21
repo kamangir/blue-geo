@@ -7,10 +7,6 @@ list_of_datacube_classes: List[GenericDatacube] = [
     FirmsAreaDatacube,
 ]
 
-list_of = list(
-    set([datacube_class.catalog for datacube_class in list_of_datacube_classes])
-)
-
 
 def catalog_of(datacube_id: str) -> Tuple[bool, str]:
     for datacube_class in list_of_datacube_classes:

@@ -1,6 +1,5 @@
 #! /usr/bin/env bash
 
-export blue_geo_datacube_query_read_args="[--count <count>]$ABCUL[--delim <delim>]$ABCUL[--index <index>]$ABCUL[--prefix <prefix>]$ABCUL[--suffix <suffix>]$ABCUL[--contains <contains>]$ABCUL[--notcontains <not-contains>]"
 export blue_geo_datacube_query_options="download,ingest,select,upload"
 
 function blue_geo_datacube_query() {

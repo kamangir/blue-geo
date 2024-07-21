@@ -80,6 +80,8 @@ elif args.task == "query":
         date=args.date,
     )
 
+    logger.info(f"🧊 {datacube.datacube_id}")
+
     success = post_to_object(
         args.object_name,
         "datacube_id",

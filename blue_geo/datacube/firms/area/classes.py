@@ -52,7 +52,7 @@ class FirmsAreaDatacube(GenericDatacube):
 
     @property
     def description(self) -> str:
-        return "{}, area:{}, source: {} ({})".format(
+        return "{}, area:{}, source:{} ({})".format(
             super().description,
             self.area.name.lower(),
             self.source.name,

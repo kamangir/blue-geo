@@ -1,49 +1,53 @@
-# 🌐 firms
+# 🌐 firms-area
 
-[FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire Information for Resource Management System.
+the `firms-area` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire Information for Resource Management System. see [datacube](../README.md) for usage instructions.
 
-map-key: https://firms.modaps.eosdis.nasa.gov/api/map_key/
-
-area api: https://firms.modaps.eosdis.nasa.gov/api/area/
+## query
 
 ```bash
-pip install blue-geo
-```
-
-```bash
-@select firms-query-$(@@timestamp)
-@datacube query firms_area . ingest,select
-@open QGIS .
-@publish tar .
-```
-
-TODO: consume and refactor 🔥
-
-```bash
- > blue_geo ingest firms \
-	[dryrun,~upload] \
-	[.|<object-name>] \
-	[--date 2024-07-16] \
+ > @datacube query firms_area help
+@datacube query firms_area \
+	[download,ingest,select,upload] \
+	[-|<object-name>] \
+	[dryrun] \
+	[--date 2024-07-21] \
 	[--depth 1] \
 	[--area east|north|south|west|world] \
 	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP] \
 	[--log 1]
- . firms -ingest-> <object-name>.
+ . firms_area -query-> <object-name>.
 ```
 
+## example use
+
+```bash
+@datacube query firms_area \
+  ingest,select - - \
+  --date 2024-07-18
+
+@open QGIS .
+@publish tar .
+```
 
 ```yaml
 datacube:
   area: WORLD
-  date: '2024-07-14'
+  date: '2024-07-18'
   depth: 1
-  id: blue-geo-firms-world-MODIS_NRT
-  len: 17105
+  id: datacube-firms_area-world-MODIS_NRT-2024-07-18-1
+  len: 23627
   source: MODIS_NRT
 ```
 
-![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/firms-ingest.png)
 
-[firms-2024-07-19-26884.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/firms-2024-07-19-26884.tar.gz)
+![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/datacube-firms_area-ingest.png)
 
-![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/firms.jpg)
+[datacube-firms_area-world-MODIS_NRT-2024-07-18-1.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/datacube-firms_area-world-MODIS_NRT-2024-07-18-1.tar.gz)
+
+![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/datacube-firms_area.jpg)
+
+---
+
+map-key: https://firms.modaps.eosdis.nasa.gov/api/map_key/
+
+area api: https://firms.modaps.eosdis.nasa.gov/api/area/

@@ -42,10 +42,11 @@ function blue_geo_datacube_query() {
     [[ "$do_download" == 1 ]] &&
         abcli_download - $object_name
 
+    local query_options=$4
     blue_geo_datacube_${catalog}_query \
-        ,$options \
+        ,$query_options \
         $object_name \
-        "${@:4}"
+        "${@:5}"
 
     [[ "$do_upload" == 1 ]] &&
         abcli_upload - $object_name

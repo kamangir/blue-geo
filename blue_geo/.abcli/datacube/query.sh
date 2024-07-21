@@ -44,6 +44,7 @@ function blue_geo_datacube_query() {
         abcli_download - $object_name
 
     blue_geo_datacube_${catalog}_query \
+        ,$options \
         $object_name \
         "${@:4}"
 

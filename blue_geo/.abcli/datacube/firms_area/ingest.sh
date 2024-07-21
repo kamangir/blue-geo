@@ -20,6 +20,4 @@ function blue_geo_datacube_ingest_firms_area() {
         ingest \
         --object_name $object_name \
         "${@:3}"
-
-    return 0
 }

@@ -24,7 +24,7 @@ function blue_geo_datacube_ingest() {
 
     abcli_log "🧊 catalog: $catalog"
 
-    local template_object_name=$(blue_geo_datacube get template --catalog $catalog)
+    local template_object_name=$(blue_geo_datacube get template $catalog)
     local do_copy_template=1
     [[ "$template_object_name" == "unknown-template" ]] &&
         do_copy_template=0

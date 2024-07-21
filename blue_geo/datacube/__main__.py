@@ -1,7 +1,9 @@
 import argparse
 from blue_geo import VERSION
 from blue_geo.datacube.catalogs import list_of
-from blue_geo.ukraine_timemap import NAME
+from blue_geo import env
+from blue_geo.datacube.catalogs import catalog_of
+from blue_geo.datacube import NAME
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
@@ -9,7 +11,7 @@ parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
 parser.add_argument(
     "task",
     type=str,
-    help="list_of_catalogs",
+    help="get|list_of_catalogs",
 )
 parser.add_argument(
     "--delim",
@@ -22,12 +24,37 @@ parser.add_argument(
     type=int,
     help="0|1",
 )
+parser.add_argument(
+    "--what",
+    default="",
+    type=str,
+    help="catalog|template",
+)
+parser.add_argument(
+    "--object_name",
+    type=str,
+    default="",
+)
+parser.add_argument(
+    "--catalog",
+    type=str,
+    default="",
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
 
 success = False
-if args.task == "list_of_catalogs":
+if args.task == "get":
+    success = True
+    output = f"unknown-{args.what}"
+    if args.what == "template":
+        output = env.QGIS_TEMPLATES.get(args.catalog, output)
+    elif args.what == "catalog":
+        _, output = catalog_of(datacube_id=args.object_name)
+
+    print(output)
+elif args.task == "list_of_catalogs":
     success = True
     output = list_of
 

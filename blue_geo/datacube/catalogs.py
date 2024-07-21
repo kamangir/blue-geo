@@ -1,3 +1,21 @@
+from typing import Tuple, List
+from blue_geo.datacube.generic import GenericDatacube
 from blue_geo.datacube.firms.area import FirmsAreaDatacube
 
-list_of = [FirmsAreaDatacube.catalog]
+
+list_of_datacube_classes: List[GenericDatacube] = [
+    FirmsAreaDatacube,
+]
+
+list_of = list(
+    set([datacube_class.catalog for datacube_class in list_of_datacube_classes])
+)
+
+
+def catalog_of(datacube_id: str) -> Tuple[bool, str]:
+    for datacube_class in list_of_datacube_classes:
+        success, _ = datacube_class.parse_datacube_id(datacube_id)
+        if success:
+            return True, datacube_class.catalog
+
+    return False, "unknown-catalog"

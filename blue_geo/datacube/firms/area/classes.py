@@ -80,27 +80,27 @@ class FirmsAreaDatacube(GenericDatacube):
 
         # datacube-firm_area-<area>-<source>
         pieces = datacube_id.split("-")
-        if len(pieces) < 6:
+        if len(pieces) < 8:
             return False, {}
 
-        area_str = pieces[2].upper
-        if area_str not in Area.values:
+        area_str = pieces[2]
+        if area_str not in Area.values():
             return False, {}
 
         source_str = pieces[3]
-        if source_str not in Source.values:
+        if source_str not in Source.values():
             return False, {}
 
-        date = pieces[4]
+        date = "{}-{}-{}".format(pieces[4], pieces[5], pieces[6])
 
-        depth_str = pieces[5]
+        depth_str = pieces[7]
         if not depth_str.isdigit():
             return False, {}
 
         return (
             True,
             {
-                "area": Area[area_str],
+                "area": Area[area_str.upper()],
                 "source": Source[source_str],
                 "date": date,
                 "depth": int(depth_str),

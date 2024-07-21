@@ -41,9 +41,6 @@ class GenericDatacube:
         pieces = datacube_id.split("-") + ["", ""]
 
         return (
-            all(
-                pieces[0] == "datacube",
-                pieces[1] == cls.catalog,
-            ),
+            pieces[0] == "datacube" and pieces[1] == cls.catalog,
             {},
         )

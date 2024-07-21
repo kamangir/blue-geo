@@ -32,7 +32,7 @@ function blue_geo_datacube_ingest() {
 
     [[ "$do_copy_template" == 1 ]] &&
         abcli_clone \
-            $BLUE_GEO_FIRMS_QGIS_TEMPLATE \
+            $template_object_name \
             $object_name \
             ~meta
 

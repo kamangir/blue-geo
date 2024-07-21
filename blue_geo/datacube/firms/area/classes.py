@@ -113,7 +113,7 @@ class FirmsAreaDatacube(GenericDatacube):
     ]:
         super().ingest(object_name)
 
-        csv_filename = objects.path_of("firms.csv", object_name, create=True)
+        csv_filename = objects.path_of("firms_area.csv", object_name, create=True)
         if not file.download(
             self.ingest_url(),
             csv_filename,
@@ -136,7 +136,7 @@ class FirmsAreaDatacube(GenericDatacube):
         )
 
         if not file.save_geojson(
-            objects.path_of("firms.geojson", object_name),
+            objects.path_of("firms_area.geojson", object_name),
             gdf,
         ):
             return False, gdf

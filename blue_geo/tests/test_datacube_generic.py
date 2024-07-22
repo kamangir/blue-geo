@@ -32,10 +32,8 @@ def test_datacube_from_datacube_id(datacube_id: str):
 
 @pytest.mark.parametrize(
     ["datacube_id", "expected_success"],
-    [
-        assets.datacube_generic_parse_datacube_id
-        + assets.datacube_firms_area_parse_datacube_id,
-    ],
+    assets.datacube_generic_parse_datacube_id
+    + assets.datacube_firms_area_parse_datacube_id,
 )
 def test_parse_datacube_id(
     datacube_id: str,

@@ -44,5 +44,5 @@ def test_parse_datacube_id(
     datacube_id: str,
     expected_success: bool,
 ):
-    success, segments = GenericDatacube.parse_datacube_id(datacube_id)
+    success, _ = GenericDatacube.parse_datacube_id(datacube_id)
     assert success == expected_success

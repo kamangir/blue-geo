@@ -124,6 +124,9 @@ class FirmsAreaDatacube(GenericDatacube):
             return False, gpd.GeoDataFrame()
 
         data = pd.read_csv(csv_filename)
+        if data.empty:
+            return False, gpd.GeoDataFrame()
+
         logger.info(f"loaded {len(data):,} point(s).")
 
         gdf = gpd.GeoDataFrame(

@@ -4,6 +4,7 @@ from blue_geo.datacube.firms.area import FirmsAreaDatacube
 
 
 list_of_datacube_classes: List[GenericDatacube] = [
+    GenericDatacube,
     FirmsAreaDatacube,
 ]
 

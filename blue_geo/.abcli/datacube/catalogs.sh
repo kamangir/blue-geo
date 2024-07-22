@@ -29,8 +29,10 @@ function blue_geo_datacube_load_catalogs() {
     local catalog
     for catalog in $(echo $blue_geo_datacube_list_of_catalogs | tr , " "); do
         abcli_log "🧊 $catalog"
-        abcli_source_path - caller,suffix=/$catalog
+        abcli_source_path - caller,civilized,suffix=/$catalog
     done
+
+    return 0
 }
 
 export blue_geo_datacube_list_of_catalogs=$(blue_geo_datacube_list catalogs --log 0)

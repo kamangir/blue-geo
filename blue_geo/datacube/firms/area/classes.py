@@ -24,7 +24,10 @@ class FirmsAreaDatacube(GenericDatacube):
         datacube_id: str = "",
         log: bool = True,
     ):
-        super().__init__()
+        super().__init__(
+            datacube_id=datacube_id,
+            log=log,
+        )
 
         self.url_prefix = "https://firms.modaps.eosdis.nasa.gov/api/area"
         self.map_key = env.FIRMS_MAP_KEY
@@ -79,21 +82,21 @@ class FirmsAreaDatacube(GenericDatacube):
             return False, {}
 
         # datacube-firm_area-<area>-<source>
-        pieces = datacube_id.split("-")
-        if len(pieces) < 8:
+        segments = datacube_id.split("-")
+        if len(segments) < 8:
             return False, {}
 
-        area_str = pieces[2]
+        area_str = segments[2]
         if area_str not in Area.values():
             return False, {}
 
-        source_str = pieces[3]
+        source_str = segments[3]
         if source_str not in Source.values():
             return False, {}
 
-        date = "{}-{}-{}".format(pieces[4], pieces[5], pieces[6])
+        date = "{}-{}-{}".format(segments[4], segments[5], segments[6])
 
-        depth_str = pieces[7]
+        depth_str = segments[7]
         if not depth_str.isdigit():
             return False, {}
 

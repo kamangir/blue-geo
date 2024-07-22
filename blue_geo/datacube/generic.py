@@ -6,7 +6,11 @@ from blue_geo.logger import logger
 class GenericDatacube:
     catalog = "generic"
 
-    def __init__(self):
+    def __init__(
+        self,
+        datacube_id: str = "",
+        log: bool = True,
+    ):
         pass
 
     @property
@@ -38,9 +42,9 @@ class GenericDatacube:
         Dict[str, Any],
     ]:
         # datacube-<catalog>-<args>
-        pieces = datacube_id.split("-") + ["", ""]
+        segments = datacube_id.split("-") + ["", ""]
 
         return (
-            pieces[0] == "datacube" and pieces[1] == cls.catalog,
+            segments[0] == "datacube" and segments[1] == cls.catalog,
             {},
         )

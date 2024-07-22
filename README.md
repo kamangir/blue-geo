@@ -6,7 +6,7 @@ AI for precise geospatial data analysis and visualization.
 pip install blue-geo
 ```
 
-🔹 🧊 [datacube](https://github.com/kamangir/blue-geo/tree/2024-07-18-datacubes-a/blue_geo/.abcli/datacube) 🔹
+🔹 🧊 [datacube](https://github.com/kamangir/blue-geo/tree/main/blue_geo/.abcli/datacube) 🔹
 
 | | | |
 |-|-|-|

@@ -38,9 +38,7 @@ def test_datacube_from_query(
 @pytest.mark.parametrize(
     ["datacube_id"],
     [
-        [
-            "datacube-firms_area-world-MODIS_NRT-2024-07-20-1",
-        ],
+        ["datacube-firms_area-world-MODIS_NRT-2024-07-20-1"],
     ],
 )
 def test_datacube_from_datacube_id(
@@ -65,8 +63,7 @@ def test_datacube_from_datacube_id(
 
 @pytest.mark.parametrize(
     ["datacube_id", "expected_success"],
-    assets.datacube_generic_parse_datacube_id
-    + assets.datacube_firms_area_parse_datacube_id,
+    assets.datacube_firms_area_parse_datacube_id,
 )
 def test_parse_datacube_id(
     datacube_id: str,

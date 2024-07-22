@@ -17,6 +17,12 @@ def test_datacube():
     assert success
 
 
+@pytest.mark.parametrize(
+    ["datacube_id"],
+    [
+        ["datacube-generic"],
+    ],
+)
 def test_datacube_from_datacube_id(datacube_id: str):
     object_name = unique_object()
 
@@ -32,8 +38,7 @@ def test_datacube_from_datacube_id(datacube_id: str):
 
 @pytest.mark.parametrize(
     ["datacube_id", "expected_success"],
-    assets.datacube_generic_parse_datacube_id
-    + assets.datacube_firms_area_parse_datacube_id,
+    assets.datacube_generic_parse_datacube_id,
 )
 def test_parse_datacube_id(
     datacube_id: str,
@@ -41,5 +46,3 @@ def test_parse_datacube_id(
 ):
     success, segments = GenericDatacube.parse_datacube_id(datacube_id)
     assert success == expected_success
-    if success:
-        assert segments

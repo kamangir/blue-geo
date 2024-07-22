@@ -22,4 +22,4 @@ pip install blue-geo
 To use on [AWS SageMaker](https://aws.amazon.com/sagemaker/) replace `<plugin-name>` with the name of the plugin and follow [these instructions](https://github.com/kamangir/notebooks-and-scripts/blob/main/SageMaker.md).
 
 ---
-built by [`abcli-9.182.1-markdown-2024-07-21-a`](https://github.com/kamangir/awesome-bash-cli), based on [`blue_geo-4.123.1`](https://github.com/kamangir/blue_plugin).
+built by [`abcli-9.182.1-markdown-2024-07-21-a`](https://github.com/kamangir/awesome-bash-cli), based on [`blue_geo-4.124.1`](https://github.com/kamangir/blue_plugin).

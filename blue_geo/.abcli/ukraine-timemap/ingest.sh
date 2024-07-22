@@ -4,7 +4,7 @@ function ukraine_timemap_ingest() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options="${EOP}~copy_template,dryrun,~upload$EOPE"
+        options="$EOP~copy_template,dryrun,~upload$EOPE"
         local open_options="open$EOP,~QGIS$EOPE"
         abcli_show_usage "ukraine_timemap ingest$ABCUL$options$ABCUL-$EOP|<object-name>$EOPE$ABCUL$open_options" \
             "ingest the latest dataset from https://github.com/bellingcat/ukraine-timemap."
@@ -19,7 +19,7 @@ function ukraine_timemap_ingest() {
 
     if [[ "$do_copy_template" == 1 ]]; then
         abcli_clone \
-            $UKRAINE_TIMEMAP_TEMPLATE \
+            $BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE \
             $object_name \
             ~meta
         rm -v \

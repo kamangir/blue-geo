@@ -67,7 +67,7 @@ def build(filename: str = ""):
         if feature != "template"
     ]
 
-    table = markdown.generate_table(items)
+    table = markdown.generate_table(items, cols=2)
 
     signature = [
         "---",

@@ -8,7 +8,14 @@ setup(
     name=NAME,
     version=VERSION,
     description=DESCRIPTION,
-    packages=[NAME],
+    packages=[
+        NAME,
+        "f{NAME}.datacube",
+        "f{NAME}.datacube.firms",
+        "f{NAME}.datacube.firms.area",
+        "f{NAME}.QGIS",
+        "f{NAME}.ukraine_timemap",
+    ],
     include_package_data=True,
     package_data={
         NAME: [

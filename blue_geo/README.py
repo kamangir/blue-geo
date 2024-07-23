@@ -6,6 +6,8 @@ from abcli.plugins import markdown
 from blue_geo import NAME, VERSION, ICON
 from blue_geo.logger import logger
 
+NAME = f"{NAME}.README"
+
 features = {
     "QGIS": {
         "description": "an AI terraform for [QGIS](https://www.qgis.org/).",

@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function blue_geo_datacube_firms_area_query() {
+function blue_geo_catalog_query_firms() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
@@ -22,7 +22,7 @@ function blue_geo_datacube_firms_area_query() {
         local args="[--date $date]$ABCUL[--depth 1]$ABCUL[--area $area]$ABCUL[--source $source]$ABCUL[--log 1]"
 
         abcli_show_usage "@datacube query firms_area$ABCUL[$blue_geo_catalog_query_options]$ABCUL[-|<object-name>]$ABCUL[$options]$ABCUL$args" \
-            "firms_area -query-> <object-name>."
+            "firms -query-> <object-name>."
         return
     fi
 
@@ -31,7 +31,7 @@ function blue_geo_datacube_firms_area_query() {
     local object_name=$(abcli_clarify_object $2 -)
 
     abcli_eval dryrun=$do_dryrun \
-        python3 -m blue_geo.datacube.firms.area \
+        python3 -m blue_geo.datacube.firms \
         query \
         --object_name $object_name \
         "${@:3}"

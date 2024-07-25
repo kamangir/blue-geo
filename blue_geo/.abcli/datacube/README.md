@@ -4,18 +4,18 @@
 
 ## query
 
-run an `@datacube query`, then `@datacube query read` the `datacube-id`(s) as object names and use them with commands.
+run an `@catalog query`, then `@catalog query read` the `datacube-id`(s) as object names and use them with commands.
 
 ```bash
- > @datacube query help
-@datacube query \
+ > @catalog query help
+@catalog query \
 	<catalog> \
 	download,ingest,select,upload \
 	-|<object-name> \
 	<query-options> \
 	<args>
  . <catalog> -query-> <object-name>.
-@datacube query read \
+@catalog query read \
 	[all,download,len] \
 	[.|<object-name>] \
 	[--count <count>] \

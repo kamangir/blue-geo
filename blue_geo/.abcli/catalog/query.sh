@@ -43,7 +43,7 @@ function blue_geo_catalog_query() {
         abcli_download - $object_name
 
     local query_options=$4
-    blue_geo_catalog_${catalog}_query \
+    blue_geo_catalog_query_${catalog} \
         ,$query_options \
         $object_name \
         "${@:5}"
@@ -67,4 +67,5 @@ function blue_geo_catalog_query() {
 
 }
 
+abcli_source_path - caller,suffix=/ingest
 abcli_source_path - caller,suffix=/query

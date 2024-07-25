@@ -1,6 +1,6 @@
 from typing import Any, Tuple, Dict
 from . import NAME
-from blue_geo.catalog.generic import GenericCatalog, VoidCatalog
+from .classes import GenericCatalog, VoidCatalog
 from blue_geo.logger import logger
 
 

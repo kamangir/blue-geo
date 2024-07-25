@@ -7,7 +7,7 @@ from .enums import Area, Source
 from abcli import file
 from abcli.modules import objects
 from abcli.plugins import metadata
-from blue_geo.catalog.firms import FirmsCatalog
+from blue_geo.catalog.firms.classes import FirmsCatalog
 from blue_geo.datacube.generic import GenericDatacube
 from blue_geo import env
 from blue_geo.logger import logger

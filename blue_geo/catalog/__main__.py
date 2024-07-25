@@ -1,7 +1,7 @@
 import argparse
 from blue_geo import VERSION
-from blue_geo.datacube.catalogs import list_of_datacube_classes
-from blue_geo.datacube import NAME
+from .classes import list_of_catalog_classes
+from . import NAME
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
@@ -29,9 +29,7 @@ delim = " " if args.delim == "space" else args.delim
 success = False
 if args.task == "list":
     success = True
-    output = list(
-        {datacube_class.catalog for datacube_class in list_of_datacube_classes}
-    )
+    output = list({catalog_class.name for catalog_class in list_of_catalog_classes})
 
     if args.log:
         logger.info(f"{len(output):,} catalog(s): {delim.join(output)}")

@@ -1,4 +1,4 @@
-from blue_geo.datacube.firms import NAME
+from blue_geo.catalog.firms import NAME
 
 NAME = f"{NAME}.area"
 

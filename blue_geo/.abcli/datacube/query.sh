@@ -27,7 +27,7 @@ function blue_geo_datacube_query() {
     local do_select=$(abcli_option_int "$options" select 0)
     local do_upload=$(abcli_option_int "$options" upload 0)
 
-    if [[ ",$blue_geo_datacube_list_of_catalogs," != *",$catalog,"* ]]; then
+    if [[ ",$blue_geo_catalog_list," != *",$catalog,"* ]]; then
         abcli_log_error "-@datacube: query: $catalog: catalog not found."
         return 1
     fi

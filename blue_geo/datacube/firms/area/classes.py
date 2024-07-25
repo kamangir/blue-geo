@@ -7,13 +7,15 @@ from .enums import Area, Source
 from abcli import file
 from abcli.modules import objects
 from abcli.plugins import metadata
+from blue_geo.catalog.firms import FirmsCatalog
 from blue_geo.datacube.generic import GenericDatacube
 from blue_geo import env
 from blue_geo.logger import logger
 
 
 class FirmsAreaDatacube(GenericDatacube):
-    catalog = "firms_area"
+    catalog = FirmsCatalog()
+    QGIS_template = env.BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE
 
     def __init__(
         self,
@@ -22,12 +24,8 @@ class FirmsAreaDatacube(GenericDatacube):
         date: str = "",
         depth: int = 1,
         datacube_id: str = "",
-        log: bool = True,
     ):
-        super().__init__(
-            datacube_id=datacube_id,
-            log=log,
-        )
+        super().__init__(datacube_id)
 
         self.url_prefix = "https://firms.modaps.eosdis.nasa.gov/api/area"
         self.map_key = env.FIRMS_MAP_KEY
@@ -50,8 +48,7 @@ class FirmsAreaDatacube(GenericDatacube):
             date if date else (datetime.now() - timedelta(days=5)).strftime("%Y-%m-%d")
         )
 
-        if log:
-            logger.info(self.description)
+        logger.info(self.description)
 
     @property
     def description(self) -> str:
@@ -64,8 +61,9 @@ class FirmsAreaDatacube(GenericDatacube):
 
     @property
     def datacube_id(self) -> str:
-        return "{}-{}-{}-{}-{}".format(
+        return "{}-{}-{}-{}-{}-{}".format(
             super().datacube_id,
+            "area",
             self.area.name.lower(),
             self.source.name,
             self.date,

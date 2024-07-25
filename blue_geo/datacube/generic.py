@@ -1,28 +1,26 @@
 from typing import Any, Tuple, Dict
 from . import NAME
+from blue_geo.catalog.generic import GenericCatalog, VoidCatalog
 from blue_geo.logger import logger
 
 
 class GenericDatacube:
-    catalog = "generic"
+    catalog = GenericCatalog()
+    QGIS_template = "unknown-template"
 
-    def __init__(
-        self,
-        datacube_id: str = "",
-        log: bool = True,
-    ):
+    def __init__(self, datacube_id: str = ""):
         pass
 
     @property
     def datacube_id(self) -> str:
-        return f"datacube-{self.catalog}"
+        return f"datacube-{self.catalog.name}"
 
     @property
     def description(self) -> str:
         return "{}.{}@{}[{}]:".format(
             NAME,
             self.__class__.__name__,
-            self.catalog,
+            self.catalog.name,
             self.datacube_id,
         )
 
@@ -41,10 +39,14 @@ class GenericDatacube:
         bool,
         Dict[str, Any],
     ]:
-        # datacube-<catalog>-<args>
+        # datacube-<catalog-name>-<args>
         segments = datacube_id.split("-") + ["", ""]
 
         return (
-            segments[0] == "datacube" and segments[1] == cls.catalog,
+            segments[0] == "datacube" and segments[1] == cls.catalog.name,
             {},
         )
+
+
+class VoidDatacube(GenericDatacube):
+    catalog = VoidCatalog()

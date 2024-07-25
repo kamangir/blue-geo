@@ -1,13 +1,13 @@
 #! /usr/bin/env bash
 
-export blue_geo_datacube_ingest_options="assets=all|<item-1+item-2>,dryrun,suffix=<suffix>,upload"
+export blue_geo_catalog_ingest_options="assets=all|<item-1+item-2>,dryrun,suffix=<suffix>,upload"
 
-function blue_geo_datacube_ingest() {
+function blue_geo_catalog_ingest() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options=$blue_geo_datacube_ingest_options
-        abcli_show_usage "@datacube ingest$ABCUL[$options]$ABCUL[.|<object-name>]$ABCUL<args>" \
+        options=$blue_geo_catalog_ingest_options
+        abcli_show_usage "@catalog ingest$ABCUL[$options]$ABCUL[.|<object-name>]$ABCUL<args>" \
             "ingest <object-name>."
         return
     fi
@@ -17,14 +17,14 @@ function blue_geo_datacube_ingest() {
     local object_name=$(abcli_clarify_object $2 .)
 
     local catalog=$(blue_geo_datacube get catalog $object_name)
-    if [[ ",$blue_geo_datacube_list_of_catalogs," != *",$catalog,"* ]]; then
-        abcli_log_error "-@datacube: ingest: $catalog: catalog not found."
+    if [[ ",$blue_geo_catalog_list," != *",$catalog,"* ]]; then
+        abcli_log_error "-@catalog: ingest: $catalog: catalog not found."
         return 1
     fi
 
     abcli_log "🧊 catalog: $catalog"
 
-    local template_object_name=$(blue_geo_datacube get template $catalog)
+    local template_object_name=$(blue_geo_datacube get template $object_name)
     local do_copy_template=1
     [[ "$template_object_name" == "unknown-template" ]] &&
         do_copy_template=0
@@ -36,7 +36,7 @@ function blue_geo_datacube_ingest() {
             $object_name \
             ~meta
 
-    blue_geo_datacube_ingest_${catalog} "$@"
+    blue_geo_catalog_${catalog}_ingest "$@"
 
     [[ "$do_upload" == 1 ]] &&
         abcli_upload - $object_name

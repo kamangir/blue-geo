@@ -10,6 +10,7 @@ setup(
     description=DESCRIPTION,
     packages=[
         NAME,
+        f"{NAME}.catalog",
         f"{NAME}.datacube",
         f"{NAME}.datacube.firms",
         f"{NAME}.datacube.firms.area",

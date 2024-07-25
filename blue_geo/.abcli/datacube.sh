@@ -4,11 +4,8 @@ function blue_geo_datacube() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ "$task" == "help" ]; then
-        blue_geo_datacube_browse "$@"
         blue_geo_datacube_get "$@"
-        blue_geo_datacube_ingest "$@"
         blue_geo_datacube_list "$@"
-        blue_geo_datacube_query "$@"
         return
     fi
 
@@ -18,7 +15,7 @@ function blue_geo_datacube() {
         return
     fi
 
-    abcli_log_error "-blue_geo: datacube: $task: command not found."
+    abcli_log_error "-@datacube: $task: command not found."
     return 1
 }
 

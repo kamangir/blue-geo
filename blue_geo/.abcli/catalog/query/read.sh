@@ -1,12 +1,12 @@
 #! /usr/bin/env bash
 
-function blue_geo_datacube_query_read() {
+function blue_geo_catalog_query_read() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options="all,download,len"
         local args="[--count <count>]$ABCUL[--delim <delim>]$ABCUL[--index <index>]$ABCUL[--prefix <prefix>]$ABCUL[--suffix <suffix>]$ABCUL[--contains <contains>]$ABCUL[--notcontains <not-contains>]"
-        abcli_show_usage "@datacube query read$ABCUL[$options]$ABCUL[.|<object-name>]$ABCUL$args" \
+        abcli_show_usage "@catalog query read$ABCUL[$options]$ABCUL[.|<object-name>]$ABCUL$args" \
             "read query results in <object-name>."
         return
     fi
@@ -24,7 +24,7 @@ function blue_geo_datacube_query_read() {
     [[ "$do_all" == 1 ]] &&
         extra_args="--count -1"
 
-    python3 -m blue_geo.datacube.query \
+    python3 -m blue_geo.catalog.query \
         read \
         --object_name $object_name \
         --show_len $show_len \

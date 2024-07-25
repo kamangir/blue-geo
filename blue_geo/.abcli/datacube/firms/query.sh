@@ -21,7 +21,7 @@ function blue_geo_datacube_firms_area_query() {
 
         local args="[--date $date]$ABCUL[--depth 1]$ABCUL[--area $area]$ABCUL[--source $source]$ABCUL[--log 1]"
 
-        abcli_show_usage "@datacube query firms_area$ABCUL[$blue_geo_datacube_query_options]$ABCUL[-|<object-name>]$ABCUL[$options]$ABCUL$args" \
+        abcli_show_usage "@datacube query firms_area$ABCUL[$blue_geo_catalog_query_options]$ABCUL[-|<object-name>]$ABCUL[$options]$ABCUL$args" \
             "firms_area -query-> <object-name>."
         return
     fi

@@ -33,13 +33,12 @@ args = parser.parse_args()
 success = False
 if args.task == "get":
     success = True
-    _, datacube = get_datacube(datacube_id=args.object_name)
+    datacube = get_datacube(datacube_id=args.object_name)
 
     output = f"unknown-{args.what}"
     if args.what == "template":
         output = datacube.QGIS_template
     elif args.what == "catalog":
-        _, datacube = get_datacube(datacube_id=args.object_name)
         output = datacube.catalog.name
 
     print(output)

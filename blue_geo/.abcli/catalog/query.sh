@@ -1,22 +1,22 @@
 #! /usr/bin/env bash
 
-export blue_geo_datacube_query_options="download,ingest,select,upload"
+export blue_geo_catalog_query_options="download,ingest,select,upload"
 
-function blue_geo_datacube_query() {
-    local catalog=${1:firms_area}
+function blue_geo_catalog_query() {
+    local catalog=${1:firms}
 
     local options=$2
 
     if [ $(abcli_option_int "$catalog" help 0) == 1 ]; then
-        options=$blue_geo_datacube_query_options
-        abcli_show_usage "@datacube query$ABCUL<catalog>$ABCUL$options$ABCUL-|<object-name>$ABCUL<query-options>$ABCUL<args>" \
+        options=$blue_geo_catalog_query_options
+        abcli_show_usage "@catalog query$ABCUL<catalog>$ABCUL$options$ABCUL-|<object-name>$ABCUL<query-options>$ABCUL<args>" \
             "<catalog> -query-> <object-name>."
 
-        blue_geo_datacube_query_read "$@"
+        blue_geo_catalog_query_read "$@"
         return
     fi
 
-    local function_name=blue_geo_datacube_query_$catalog
+    local function_name=blue_geo_catalog_query_$catalog
     if [[ $(type -t $function_name) == "function" ]]; then
         $function_name "${@:2}"
         return
@@ -28,12 +28,12 @@ function blue_geo_datacube_query() {
     local do_upload=$(abcli_option_int "$options" upload 0)
 
     if [[ ",$blue_geo_catalog_list," != *",$catalog,"* ]]; then
-        abcli_log_error "-@datacube: query: $catalog: catalog not found."
+        abcli_log_error "-@catalog: query: $catalog: catalog not found."
         return 1
     fi
 
     if [[ $(abcli_option_int "$options" help 0) == 1 ]]; then
-        blue_geo_datacube_${catalog}_query "${@:2}"
+        blue_geo_catalog_${catalog}_query "${@:2}"
         return
     fi
 
@@ -43,7 +43,7 @@ function blue_geo_datacube_query() {
         abcli_download - $object_name
 
     local query_options=$4
-    blue_geo_datacube_${catalog}_query \
+    blue_geo_catalog_${catalog}_query \
         ,$query_options \
         $object_name \
         "${@:5}"
@@ -58,7 +58,7 @@ function blue_geo_datacube_query() {
     abcli_log "🧊 $datacube_id"
 
     [[ "$do_ingest" == 1 ]] &&
-        blue_geo_datacube_ingest - $datacube_id
+        blue_geo_catalog_ingest - $datacube_id
 
     [[ "$do_select" == 1 ]] &&
         abcli_select $datacube_id

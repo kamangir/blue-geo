@@ -33,7 +33,7 @@ function blue_geo_catalog_query() {
     fi
 
     if [[ $(abcli_option_int "$options" help 0) == 1 ]]; then
-        blue_geo_catalog_${catalog}_query "${@:2}"
+        blue_geo_catalog_query_${catalog} "${@:2}"
         return
     fi
 

@@ -12,7 +12,7 @@ function blue_geo_catalog_browse() {
     local catalog=$(abcli_option "$options" $blue_geo_catalog_list firms)
 
     abcli_log "@catalog: browsing $catalog ..."
-    blue_geo_catalog_${catalog}_browse "${@:2}"
+    blue_geo_catalog_browse_${catalog} "${@:2}"
 }
 
 abcli_source_path - caller,suffix=/browse

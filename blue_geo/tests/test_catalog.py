@@ -93,8 +93,6 @@ def test_get_datacube_classes(catalog_class: Type[GenericCatalog]):
     datacube_class_list = get_datacube_classes(catalog_class)
 
     assert all(
-        [
-            datacube_class.catalog == catalog_class
-            for datacube_class in datacube_class_list
-        ]
+        datacube_class.catalog == catalog_class
+        for datacube_class in datacube_class_list
     )

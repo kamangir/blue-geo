@@ -3,7 +3,7 @@ from .firms import FirmsCatalog
 from .generic import GenericCatalog, GenericDatacube, VoidDatacube
 from .firms.area import FirmsAreaDatacube
 
-list_of_catalog_classes: list[Type[GenericCatalog]] = [
+list_of_catalog_classes: List[Type[GenericCatalog]] = [
     GenericCatalog,
     FirmsCatalog,
 ]
@@ -29,7 +29,7 @@ def get_datacube_class(datacube_id: str) -> Type[GenericDatacube]:
 
 def get_datacube_classes(
     catalog_class: Type[GenericCatalog],
-) -> list[Type[GenericDatacube]]:
+) -> List[Type[GenericDatacube]]:
     return [
         datacube_class
         for datacube_class in list_of_datacube_classes

@@ -66,6 +66,3 @@ function blue_geo_catalog_query() {
     return 0
 
 }
-
-abcli_source_path - caller,suffix=/ingest
-abcli_source_path - caller,suffix=/query

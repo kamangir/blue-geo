@@ -14,5 +14,3 @@ function blue_geo_catalog_browse() {
     abcli_log "@catalog: browsing $catalog ..."
     blue_geo_catalog_browse_${catalog} "${@:2}"
 }
-
-abcli_source_path - caller,suffix=/browse

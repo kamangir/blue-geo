@@ -11,7 +11,7 @@ NAME = f"{NAME}.README"
 features = {
     "QGIS": {
         "description": "an AI terraform for [QGIS](https://www.qgis.org/).",
-        "icon": "🌐",
+        "icon": ICON,
         "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/QGIS.jpg",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/QGIS/README.md",
     },
@@ -23,7 +23,7 @@ features = {
     },
     "firms-area": {
         "description": "Fire Information for Resource Management System ([FIRMS](https://firms.modaps.eosdis.nasa.gov)) datacubes.",
-        "icon": "🌐",
+        "icon": ICON,
         "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/datacube-firms_area.jpg",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/datacube/firms_area/README.md",
     },

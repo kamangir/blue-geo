@@ -1,6 +1,6 @@
 import argparse
 from blue_geo import VERSION
-from blue_geo.catalog.classes import get_datacube
+from blue_geo.catalog import get_datacube
 from . import NAME
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit

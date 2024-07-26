@@ -29,7 +29,7 @@ def test_list_of_catalog_classes(catalog_class: Type[GenericCatalog]):
         [
             [datacube_id, datacube_class]
             for datacube_id, datacube_class in assets.datacubes.items()
-            if datacube_class in list_of_datacube_classes()
+            if datacube_class in list_of_datacube_classes
         ],
     ],
 )

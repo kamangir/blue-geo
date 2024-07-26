@@ -1,13 +1,15 @@
 import pytest
 from abcli.modules.objects import unique_object
 from blue_geo.tests import assets
-from blue_geo.catalog.generic import GenericDatacube
+from blue_geo.catalog.generic import GenericCatalog, GenericDatacube
 
 
 def test_datacube():
     object_name = unique_object()
 
     datacube = GenericDatacube()
+
+    assert isinstance(datacube.catalog, GenericCatalog)
 
     assert datacube.datacube_id
 
@@ -20,7 +22,7 @@ def test_datacube():
 @pytest.mark.parametrize(
     ["datacube_id"],
     [
-        ["datacube-generic"],
+        [assets.datacube_generic_parse_datacube_id[-1]],
     ],
 )
 def test_datacube_from_datacube_id(datacube_id: str):

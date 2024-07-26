@@ -1,5 +1,5 @@
 from typing import Any, Tuple, Dict
-from . import NAME
+from .name import NAME
 from .classes import GenericCatalog, VoidCatalog
 from blue_geo.logger import logger
 

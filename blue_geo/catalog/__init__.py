@@ -2,7 +2,7 @@ from blue_geo import NAME
 
 NAME = f"{NAME}.catalog"
 
-from classes import (
+from .classes import (
     list_of_catalog_classes,
     list_of_datacube_classes,
     get_datacube,

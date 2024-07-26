@@ -1,7 +1,7 @@
 from typing import List, Type
 from .generic import GenericCatalog
 from .firms import FirmsCatalog
-from .generic.datacube import GenericDatacube, VoidDatacube
+from .generic import GenericDatacube, VoidDatacube
 from .firms.area import FirmsAreaDatacube
 
 list_of_catalog_classes: list[Type[GenericCatalog]] = [

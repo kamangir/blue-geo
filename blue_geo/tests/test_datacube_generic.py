@@ -1,7 +1,7 @@
 import pytest
 from abcli.modules.objects import unique_object
 from blue_geo.tests import assets
-from blue_geo.datacube.generic import GenericDatacube
+from blue_geo.catalog.generic import GenericDatacube
 
 
 def test_datacube():

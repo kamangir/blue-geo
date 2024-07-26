@@ -2,9 +2,8 @@ import argparse
 from datetime import datetime, timedelta
 from blue_geo import VERSION
 from abcli.plugins.metadata import post_to_object
-from blue_geo.catalog.firms.area import NAME
-from blue_geo.catalog.firms.area.enums import Area, Source
-from blue_geo.catalog.firms.area import FirmsAreaDatacube
+from .enums import Area, Source
+from . import FirmsAreaDatacube, NAME
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 

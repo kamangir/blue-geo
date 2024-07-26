@@ -2,7 +2,7 @@ import pytest
 import geopandas as gpd
 from abcli.modules.objects import unique_object
 from blue_geo.tests import assets
-from blue_geo.datacube.firms.area import enums, FirmsAreaDatacube
+from blue_geo.catalog.firms.area import enums, FirmsAreaDatacube
 
 
 @pytest.mark.parametrize(

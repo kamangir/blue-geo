@@ -1,7 +1,6 @@
 import argparse
 from blue_geo import VERSION
-from .classes import list_of_catalog_classes
-from . import NAME
+from . import list_of_catalog_classes, NAME
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 

@@ -1,17 +1,18 @@
-# last datacube-id must be valid.
+from blue_geo.catalog.generic import GenericDatacube, VoidDatacube
+from blue_geo.catalog.firms.area import FirmsAreaDatacube
 
-datacube_generic_parse_datacube_id = [
-    ["void", False],
-    ["void-void-void-void-void-void-void-void", False],
-    ["datacube-void-void-void", False],
-    ["datacube-generic", True],
-]
 
-datacube_firms_area_parse_datacube_id = [
-    ["datacube-firms_void-void-void-void-void", False],
-    ["datacube-firms_area-void-void-void-void", False],
-    ["datacube-firms-area-void-void-void-void", False],
-    ["datacube-firms-area-world-void-2024-07-20-1", False],
-    ["datacube-firms-area-void-MODIS_NRT-2024-07-20-1", False],
-    ["datacube-firms-area-world-MODIS_NRT-2024-07-20-1", True],
-]
+datacubes = {
+    "void": VoidDatacube,
+    "void-void-void-void-void-void-void-void": VoidDatacube,
+    #
+    "datacube-void-void-void": VoidDatacube,
+    "datacube-generic": GenericDatacube,
+    #
+    "datacube-firms_void-void-void-void-void": VoidDatacube,
+    "datacube-firms_area-void-void-void-void": VoidDatacube,
+    "datacube-firms-area-void-void-void-void": VoidDatacube,
+    "datacube-firms-area-world-void-2024-07-20-1": VoidDatacube,
+    "datacube-firms-area-void-MODIS_NRT-2024-07-20-1": VoidDatacube,
+    "datacube-firms-area-world-MODIS_NRT-2024-07-20-1": FirmsAreaDatacube,
+}

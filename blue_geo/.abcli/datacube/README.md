@@ -1,6 +1,6 @@
 # 🧊 datacube
 
-`datacube`s are [objects](https://kamangir-public.s3.ca-central-1.amazonaws.com/giza-v1/giza.pdf) that can be [queried](../catalog/README.md) and [ingested](#ingest).
+`datacube`s are [objects](https://kamangir-public.s3.ca-central-1.amazonaws.com/giza-v1/giza.pdf) that can be queried on a [catalog](../catalog) and [ingested](#ingest).
 
 ## ingest
 

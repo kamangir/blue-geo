@@ -22,7 +22,7 @@ def test_list_of_catalog_classes(catalog_class: Type[GenericCatalog]):
 
 
 @pytest.mark.parametrize(
-    ["datacube_class", "datacube_id"],
+    ["datacube_id", "datacube_class"],
     [
         [datacube_id, datacube_class]
         for datacube_id, datacube_class in assets.datacubes.items()
@@ -30,8 +30,8 @@ def test_list_of_catalog_classes(catalog_class: Type[GenericCatalog]):
     ],
 )
 def test_list_of_datacube_classes(
-    datacube_class: Type[GenericDatacube],
     datacube_id: str,
+    datacube_class: Type[GenericDatacube],
 ):
     object_name = unique_object()
 
@@ -83,6 +83,6 @@ def test_get_datacube_classes(catalog_class: Type[GenericCatalog]):
     datacube_class_list = get_datacube_classes(catalog_class)
 
     assert all(
-        datacube_class.catalog == catalog_class
+        datacube_class.catalog.__class__ == catalog_class
         for datacube_class in datacube_class_list
     )

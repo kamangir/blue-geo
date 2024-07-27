@@ -33,5 +33,5 @@ def get_datacube_classes(
     return [
         datacube_class
         for datacube_class in list_of_datacube_classes
-        if isinstance(datacube_class.catalog, catalog_class)
+        if datacube_class.catalog.__class__ == catalog_class
     ]

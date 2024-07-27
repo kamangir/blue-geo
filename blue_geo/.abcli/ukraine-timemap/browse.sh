@@ -4,8 +4,8 @@ function ukraine_timemap_browse() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options="home$EOP|dataset|github$EOPE"
-        abcli_show_usage "ukraine_timemap browse$ABCUL$options" \
+        options="dataset|github"
+        abcli_show_usage "ukraine_timemap browse$ABCUL[$options]" \
             "browse ukraine-timemap."
         return
     fi

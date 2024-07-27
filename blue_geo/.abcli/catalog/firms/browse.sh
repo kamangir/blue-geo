@@ -4,8 +4,8 @@ function blue_geo_catalog_firms_browse() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options="|map_key|area"
-        abcli_show_usage "@catalog browse firms$ABCUL$options" \
+        options="map_key|area"
+        abcli_show_usage "@catalog browse firms$ABCUL[$options]" \
             "browse firms."
         return
     fi

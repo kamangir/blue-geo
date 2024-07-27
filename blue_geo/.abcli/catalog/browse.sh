@@ -4,7 +4,7 @@ function blue_geo_catalog_browse() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        abcli_show_usage "@catalog browse$ABCUL<catalog>$ABCUL<args>" \
+        abcli_show_usage "@catalog browse$ABCUL<catalog>$ABCUL[<args>]" \
             "browse <catalog>."
         return
     fi

@@ -1,12 +1,14 @@
 #! /usr/bin/env bash
 
 function blue_geo_catalog_ingest_firms() {
-    local options=$1
+    local ingest_options=$1
+
+    local options=$2
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options=$blue_geo_datacube_ingest_options
-        "$EOP~copy_template,dryrun,$EOPE"
-        abcli_show_usage "@catalog ingest firms$ABCUL[$options]$ABCUL[.|<object-name>]$ABCUL" \
+        ingest_options=$blue_geo_datacube_ingest_options
+        options="dryrun"
+        abcli_show_usage "@datacube ingest firms$ABCUL[$ingest_options]$ABCUL[.|<object-name>]$ABCUL[$options]$ABCUL[<args>]" \
             "firms -ingest-> <object-name>."
         return
     fi

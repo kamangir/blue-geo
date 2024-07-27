@@ -1,13 +1,13 @@
 #! /usr/bin/env bash
 
-export blue_geo_datacube_ingest_options="assets=all|<item-1+item-2>,dryrun,suffix=<suffix>,upload"
+export blue_geo_datacube_ingest_options="assets=all|<item-1+item-2>,~copy_template,dryrun,suffix=<suffix>,upload"
 
 function blue_geo_datacube_ingest() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options=$blue_geo_datacube_ingest_options
-        abcli_show_usage "@datacube ingest$ABCUL[$options]$ABCUL[.|<object-name>]$ABCUL<args>" \
+        abcli_show_usage "@datacube ingest$ABCUL[$options]$ABCUL[.|<object-name>]$ABCUL[<args>]" \
             "ingest <object-name>."
         return
     fi

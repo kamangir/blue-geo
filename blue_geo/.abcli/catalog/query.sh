@@ -9,7 +9,7 @@ function blue_geo_catalog_query() {
 
     if [ $(abcli_option_int "$catalog" help 0) == 1 ]; then
         options=$blue_geo_catalog_query_options
-        abcli_show_usage "@catalog query$ABCUL<catalog>$ABCUL$options$ABCUL-|<object-name>$ABCUL<query-options>$ABCUL<args>" \
+        abcli_show_usage "@catalog query$ABCUL<catalog>$ABCUL$options$ABCUL[-|<object-name>]$ABCUL[<query-options>]$ABCUL[<args>]" \
             "<catalog> -query-> <object-name>."
 
         blue_geo_catalog_query_read "$@"

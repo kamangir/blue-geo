@@ -1,6 +1,6 @@
 # 🌐 catalog
 
-`catalog`s can be listed and browsed and queried for [`datacube`s](../datacube/),
+`catalog`s can be listed and browsed and queried for [`datacube`](../datacube/)s,
 
 ```bash
  > @catalog help

@@ -19,11 +19,11 @@ class FirmsAreaDatacube(GenericDatacube):
 
     def __init__(
         self,
+        datacube_id: str = "",
         source: Source = Source.default(),
         area: Area = Area.default(),
         date: str = "",
         depth: int = 1,
-        datacube_id: str = "",
     ):
         super().__init__(datacube_id)
 
@@ -47,8 +47,6 @@ class FirmsAreaDatacube(GenericDatacube):
         self.date: str = (
             date if date else (datetime.now() - timedelta(days=5)).strftime("%Y-%m-%d")
         )
-
-        logger.info(self.description)
 
     @property
     def description(self) -> str:
@@ -79,22 +77,26 @@ class FirmsAreaDatacube(GenericDatacube):
         if not success:
             return False, {}
 
-        # datacube-firm_area-<area>-<source>
+        # datacube-firm-area-<area>-<source>-yyyy-mm-dd-depth
+        # datacube-firms-area-world-MODIS_NRT-2024-07-20-1
         segments = datacube_id.split("-")
-        if len(segments) < 8:
+        if len(segments) < 9:
             return False, {}
 
-        area_str = segments[2]
+        if segments[2] != "area":
+            return False, {}
+
+        area_str = segments[3]
         if area_str not in Area.values():
             return False, {}
 
-        source_str = segments[3]
+        source_str = segments[4]
         if source_str not in Source.values():
             return False, {}
 
-        date = "{}-{}-{}".format(segments[4], segments[5], segments[6])
+        date = "{}-{}-{}".format(segments[5], segments[6], segments[7])
 
-        depth_str = segments[7]
+        depth_str = segments[8]
         if not depth_str.isdigit():
             return False, {}
 

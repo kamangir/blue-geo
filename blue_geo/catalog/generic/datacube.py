@@ -28,13 +28,7 @@ class GenericDatacube:
         )
 
     def ingest(self, object_name: str) -> Tuple[bool, Any]:
-        logger.info(
-            "{}.{} -> {}".format(
-                NAME,
-                self.__class__.__name__,
-                object_name,
-            )
-        )
+        logger.info("{} -> {}".format(self.description, object_name))
         return True, None
 
     @classmethod

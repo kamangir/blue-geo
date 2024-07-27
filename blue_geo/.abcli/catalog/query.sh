@@ -58,7 +58,7 @@ function blue_geo_catalog_query() {
     abcli_log "🧊 $datacube_id"
 
     [[ "$do_ingest" == 1 ]] &&
-        blue_geo_catalog_ingest - $datacube_id
+        blue_geo_datacube_ingest - $datacube_id
 
     [[ "$do_select" == 1 ]] &&
         abcli_select $datacube_id

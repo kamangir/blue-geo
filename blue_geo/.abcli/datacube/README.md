@@ -1,4 +1,4 @@
-# 🧊
+# 🧊 datacube
 
 `datacube`s are [objects](https://kamangir-public.s3.ca-central-1.amazonaws.com/giza-v1/giza.pdf) that can be [queried](#query) and [ingested](#ingest).
 

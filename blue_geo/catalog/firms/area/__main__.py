@@ -1,11 +1,14 @@
 import argparse
+from blueness import module
 from datetime import datetime, timedelta
-from blue_geo import VERSION
+from blue_geo import NAME, VERSION
 from abcli.plugins.metadata import post_to_object
-from .enums import Area, Source
-from . import FirmsAreaDatacube, NAME
+from blue_geo.catalog.firms.area.enums import Area, Source
+from blue_geo.catalog.firms.area.classes import FirmsAreaDatacube
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
+
+NAME = module.name(__file__, NAME)
 
 parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
 parser.add_argument(

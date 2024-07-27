@@ -1,9 +1,12 @@
 import argparse
-from blue_geo import VERSION
+from blueness import module
+from blue_geo import NAME, VERSION
 from abcli.plugins.metadata import get_from_object
-from blue_geo.datacube import NAME
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
+
+NAME = module.name(__file__, NAME)
+
 
 parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
 parser.add_argument(

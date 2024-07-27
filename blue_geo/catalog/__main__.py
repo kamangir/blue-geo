@@ -1,9 +1,12 @@
 import argparse
-from blue_geo import VERSION
-from .name import NAME
-from .classes import list_of_catalog_classes
+from blueness import module
+from blue_geo import NAME, VERSION
+from blue_geo.catalog.classes import list_of_catalog_classes
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
+
+NAME = module.name(__file__, NAME)
+
 
 parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
 parser.add_argument(

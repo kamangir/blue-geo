@@ -3,12 +3,12 @@ from datetime import datetime, timedelta
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point
-from .enums import Area, Source
 from abcli import file
 from abcli.modules import objects
 from abcli.plugins import metadata
 from blue_geo.catalog.firms import FirmsCatalog
 from blue_geo.catalog.generic import GenericDatacube
+from blue_geo.catalog.firms.area.enums import Area, Source
 from blue_geo import env
 from blue_geo.logger import logger
 

@@ -1,3 +1,2 @@
-from .classes import GenericCatalog, VoidCatalog
-from .datacube import GenericDatacube, VoidDatacube
-from .name import NAME
+from blue_geo.catalog.generic.classes import GenericCatalog, VoidCatalog
+from blue_geo.catalog.generic.datacube import GenericDatacube, VoidDatacube

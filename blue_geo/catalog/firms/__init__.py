@@ -1,2 +1,1 @@
-from .classes import FirmsCatalog
-from .name import NAME
+from blue_geo.catalog.firms.classes import FirmsCatalog

@@ -1,9 +1,11 @@
 import argparse
-from blue_geo.QGIS import NAME
-from blue_geo import VERSION
+from blueness import module
+from blue_geo import NAME, VERSION
 from blue_geo.QGIS.seed import generate_seed
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
+
+NAME = module.name(__file__, NAME)
 
 
 parser = argparse.ArgumentParser(

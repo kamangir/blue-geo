@@ -1,7 +1,7 @@
 from typing import List, Type
-from .firms import FirmsCatalog
-from .generic import GenericCatalog, GenericDatacube, VoidDatacube
-from .firms.area import FirmsAreaDatacube
+from blue_geo.catalog.firms import FirmsCatalog
+from blue_geo.catalog.generic import GenericCatalog, GenericDatacube, VoidDatacube
+from blue_geo.catalog.firms.area import FirmsAreaDatacube
 
 list_of_catalog_classes: List[Type[GenericCatalog]] = [
     GenericCatalog,

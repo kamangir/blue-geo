@@ -1,7 +1,10 @@
 from typing import Any, Tuple, Dict
-from .name import NAME
-from .classes import GenericCatalog, VoidCatalog
+from blueness import module
+from blue_geo import NAME
+from blue_geo.catalog.generic.classes import GenericCatalog, VoidCatalog
 from blue_geo.logger import logger
+
+NAME = module.name(__file__, NAME)
 
 
 class GenericDatacube:

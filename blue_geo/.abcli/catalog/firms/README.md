@@ -20,13 +20,20 @@ the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire I
 
 ## example use
 
+🔥
+
 ```bash
-@catalog query firms ingest,select - area \
-  --date 2024-07-18
+@catalog query firms \
+	ingest,select \
+	- \
+	area,dryrun \
+	--date 2024-07-24
 
 @open QGIS .
 @publish tar .
 ```
+
+🔥
 
 ```yaml
 datacube:

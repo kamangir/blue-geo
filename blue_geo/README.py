@@ -1,4 +1,5 @@
 import os
+from blueness import module
 import abcli
 from abcli import file
 from abcli.file.functions import build_from_template
@@ -6,7 +7,7 @@ from abcli.plugins import markdown
 from blue_geo import NAME, VERSION, ICON
 from blue_geo.logger import logger
 
-NAME = f"{NAME}.README"
+NAME = module.name(__file__, NAME)
 
 features = {
     "QGIS": {

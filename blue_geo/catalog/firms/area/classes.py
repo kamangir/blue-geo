@@ -6,6 +6,7 @@ from shapely.geometry import Point
 from abcli import file
 from abcli.modules import objects
 from abcli.plugins import metadata
+from abcli.plugins.metadata import post_to_object
 from blue_geo.catalog.firms import FirmsCatalog
 from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.catalog.firms.area.enums import Area, Source
@@ -172,4 +173,16 @@ class FirmsAreaDatacube(GenericDatacube):
             self.area.name.lower(),
             self.depth,  # day_range
             self.date,
+        )
+
+    @staticmethod
+    def query(object_name: str, **kwargs) -> bool:
+        datacube = FirmsAreaDatacube(**kwargs)
+
+        logger.info(f"🧊 {datacube.description}")
+
+        return post_to_object(
+            object_name,
+            "datacube_id",
+            [datacube.datacube_id],
         )

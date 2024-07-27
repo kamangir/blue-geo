@@ -1,6 +1,7 @@
 from typing import Any, Tuple, Dict
 from blueness import module
 from blue_geo import NAME
+from abcli.plugins.metadata import post_to_object
 from blue_geo.catalog.generic.classes import GenericCatalog, VoidCatalog
 from blue_geo.logger import logger
 
@@ -43,6 +44,10 @@ class GenericDatacube:
             segments[0] == "datacube" and segments[1] == cls.catalog.name,
             {},
         )
+
+    @staticmethod
+    def query(object_name: str) -> bool:
+        return post_to_object(object_name, "datacube_id", [])
 
 
 class VoidDatacube(GenericDatacube):

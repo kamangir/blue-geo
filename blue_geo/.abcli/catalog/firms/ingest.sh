@@ -18,7 +18,7 @@ function blue_geo_catalog_ingest_firms() {
     local object_name=$(abcli_clarify_object $2 .)
 
     abcli_eval dryrun=$do_dryrun \
-        python3 -m blue_geo.datacube.firms \
+        python3 -m blue_geo.catalog.firms \
         ingest \
         --object_name $object_name \
         "${@:3}"

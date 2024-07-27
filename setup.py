@@ -11,9 +11,10 @@ setup(
     packages=[
         NAME,
         f"{NAME}.catalog",
+        f"{NAME}.catalog.firms",
+        f"{NAME}.catalog.firms.area",
+        f"{NAME}.catalog.generic",
         f"{NAME}.datacube",
-        f"{NAME}.datacube.firms",
-        f"{NAME}.datacube.firms.area",
         f"{NAME}.QGIS",
         f"{NAME}.ukraine_timemap",
     ],

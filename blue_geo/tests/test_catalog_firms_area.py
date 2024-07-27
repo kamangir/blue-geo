@@ -42,12 +42,10 @@ def test_datacube_from_query(
     ["datacube_id"],
     [
         [
-            [
-                datacube_id
-                for datacube_id, datacube_class in assets.datacubes.items()
-                if datacube_class == FirmsAreaDatacube
-            ][-1]
-        ],
+            [datacube_id]
+            for datacube_id, datacube_class in assets.datacubes.items()
+            if datacube_class == FirmsAreaDatacube
+        ][-1]
     ],
 )
 def test_datacube_from_datacube_id(datacube_id: str):
@@ -66,10 +64,8 @@ def test_datacube_from_datacube_id(datacube_id: str):
 @pytest.mark.parametrize(
     ["datacube_id", "expected_success"],
     [
-        [
-            [datacube_id, datacube_class == FirmsAreaDatacube]
-            for datacube_id, datacube_class in assets.datacubes.items()
-        ]
+        [datacube_id, datacube_class == FirmsAreaDatacube]
+        for datacube_id, datacube_class in assets.datacubes.items()
     ],
 )
 def test_parse_datacube_id(

@@ -14,9 +14,7 @@ from blue_geo.catalog.generic import GenericCatalog, GenericDatacube
 
 @pytest.mark.parametrize(
     ["catalog_class"],
-    [
-        list_of_catalog_classes,
-    ],
+    [[catalog_class] for catalog_class in list_of_catalog_classes],
 )
 def test_list_of_catalog_classes(catalog_class: Type[GenericCatalog]):
     catalog = catalog_class()
@@ -26,11 +24,9 @@ def test_list_of_catalog_classes(catalog_class: Type[GenericCatalog]):
 @pytest.mark.parametrize(
     ["datacube_class", "datacube_id"],
     [
-        [
-            [datacube_id, datacube_class]
-            for datacube_id, datacube_class in assets.datacubes.items()
-            if datacube_class in list_of_datacube_classes
-        ],
+        [datacube_id, datacube_class]
+        for datacube_id, datacube_class in assets.datacubes.items()
+        if datacube_class in list_of_datacube_classes
     ],
 )
 def test_list_of_datacube_classes(
@@ -52,10 +48,8 @@ def test_list_of_datacube_classes(
 @pytest.mark.parametrize(
     ["datacube_id", "expected_datacube_class"],
     [
-        [
-            [datacube_id, datacube_class]
-            for datacube_id, datacube_class in assets.datacubes.items()
-        ],
+        [datacube_id, datacube_class]
+        for datacube_id, datacube_class in assets.datacubes.items()
     ],
 )
 def test_get_datacube(
@@ -69,10 +63,8 @@ def test_get_datacube(
 @pytest.mark.parametrize(
     ["datacube_id", "expected_datacube_class"],
     [
-        [
-            [datacube_id, datacube_class]
-            for datacube_id, datacube_class in assets.datacubes.items()
-        ],
+        [datacube_id, datacube_class]
+        for datacube_id, datacube_class in assets.datacubes.items()
     ],
 )
 def test_get_datacube_class(
@@ -85,9 +77,7 @@ def test_get_datacube_class(
 
 @pytest.mark.parametrize(
     ["catalog_class"],
-    [
-        list_of_catalog_classes,
-    ],
+    [[catalog_class] for catalog_class in list_of_catalog_classes],
 )
 def test_get_datacube_classes(catalog_class: Type[GenericCatalog]):
     datacube_class_list = get_datacube_classes(catalog_class)

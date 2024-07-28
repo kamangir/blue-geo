@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function blue_geo_catalog_firms_browse() {
+function blue_geo_catalog_browse_firms() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then

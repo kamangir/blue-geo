@@ -15,6 +15,7 @@ from blue_geo.logger import logger
 
 
 class FirmsAreaDatacube(GenericDatacube):
+    name = "area"
     catalog = FirmsCatalog()
     QGIS_template = env.BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE
 

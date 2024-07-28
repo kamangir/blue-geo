@@ -7,7 +7,7 @@ from blue_geo.catalog import (
     list_of_datacube_classes,
     get_datacube,
     get_datacube_class,
-    get_datacube_classes,
+    get_collections,
 )
 from blue_geo.catalog.generic import GenericCatalog, GenericDatacube
 
@@ -79,8 +79,8 @@ def test_get_datacube_class(
     ["catalog_class"],
     [[catalog_class] for catalog_class in list_of_catalog_classes],
 )
-def test_get_datacube_classes(catalog_class: Type[GenericCatalog]):
-    datacube_class_list = get_datacube_classes(catalog_class)
+def test_get_collections(catalog_class: Type[GenericCatalog]):
+    datacube_class_list = get_collections(catalog_class)
 
     assert all(
         datacube_class.catalog.__class__ == catalog_class

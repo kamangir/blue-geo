@@ -9,6 +9,7 @@ NAME = module.name(__file__, NAME)
 
 
 class GenericDatacube:
+    name = "generic"
     catalog = GenericCatalog()
     QGIS_template = "unknown-template"
 
@@ -51,4 +52,5 @@ class GenericDatacube:
 
 
 class VoidDatacube(GenericDatacube):
+    name = "void"
     catalog = VoidCatalog()

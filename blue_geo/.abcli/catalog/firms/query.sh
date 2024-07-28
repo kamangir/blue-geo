@@ -5,7 +5,10 @@ function blue_geo_catalog_query_firms() {
 
     local catalog="firms"
 
-    local list_of_collectios=$(blue_geo_catalog get list_of_collections $catalog --delim ,)
+    local list_of_collectios=$(blue_geo_catalog get list_of_collections \
+        --catalog $catalog \
+        --delim , \
+        --log 0)
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options="$list_of_collectios,dryrun"

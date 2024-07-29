@@ -20,8 +20,6 @@ the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire I
 
 ## example use
 
-🔥
-
 ```bash
 @catalog query firms \
 	ingest,select \
@@ -33,22 +31,20 @@ the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire I
 @publish tar .
 ```
 
-🔥
-
 ```yaml
 datacube:
   area: WORLD
-  date: '2024-07-18'
+  date: '2024-07-24'
   depth: 1
-  id: datacube-firms-area-world-MODIS_NRT-2024-07-18-1
-  len: 23627
+  id: datacube-firms-area-world-MODIS_NRT-2024-07-24-1
+  len: 28543
   source: MODIS_NRT
 ```
 
 
 ![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/datacube-firms_area-ingest.png)
 
-[datacube-firms-area-world-MODIS_NRT-2024-07-18-1.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/datacube-firms-area-world-MODIS_NRT-2024-07-18-1.tar.gz)
+[datacube-firms-area-world-MODIS_NRT-2024-07-24-1.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/datacube-firms-area-world-MODIS_NRT-2024-07-24-1.tar.gz)
 
 ![image](https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/datacube-firms_area.jpg)
 

@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from abcli.logger import ABCUL
 from typing import Dict
 
 
@@ -16,10 +17,10 @@ def add_default_arguments(
 
 
 def as_list_of_args(default_args: Dict[str, Dict]) -> str:
-    return "$ABCUL".join(
+    return ABCUL.join(
         sorted(
             [
-                "--{} {}".format(
+                "[--{} {}]".format(
                     arg,
                     values["help"],
                 )

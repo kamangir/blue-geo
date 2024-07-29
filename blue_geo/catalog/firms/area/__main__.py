@@ -18,6 +18,11 @@ parser.add_argument(
 )
 add_default_arguments(default_args, parser)
 parser.add_argument(
+    "--object_name",
+    type=str,
+    default="",
+)
+parser.add_argument(
     "--what",
     type=str,
     default="area",

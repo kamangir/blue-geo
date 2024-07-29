@@ -8,17 +8,11 @@ function blue_geo_catalog_query() {
     local options=$2
 
     if [ $(abcli_option_int "$catalog" help 0) == 1 ]; then
-        options=$blue_geo_catalog_query_options
-        abcli_show_usage "@catalog query$ABCUL<catalog>$ABCUL[$options]$ABCUL[-|<object-name>]$ABCUL[<query-options>]$ABCUL[<args>]" \
-            "<catalog> -query-> <object-name>."
+        for catalog in $(echo $blue_geo_catalog_list | tr , " "); do
+            blue_geo_catalog_query_${catalog} "$@"
+        done
 
         blue_geo_catalog_query_read "$@"
-        return
-    fi
-
-    local function_name=blue_geo_catalog_query_$catalog
-    if [[ $(type -t $function_name) == "function" ]]; then
-        $function_name "${@:2}"
         return
     fi
 
@@ -28,6 +22,12 @@ function blue_geo_catalog_query() {
     local do_upload=$(abcli_option_int "$options" upload 0)
 
     if [[ ",$blue_geo_catalog_list," != *",$catalog,"* ]]; then
+        local function_name=blue_geo_catalog_query_$catalog
+        if [[ $(type -t $function_name) == "function" ]]; then
+            $function_name "${@:2}"
+            return
+        fi
+
         abcli_log_error "-@catalog: query: $catalog: catalog not found."
         return 1
     fi
@@ -39,10 +39,13 @@ function blue_geo_catalog_query() {
 
     local object_name=$(abcli_clarify_object $3 query-$catalog-$(abcli_string_timestamp))
 
+    local query_options=$4
+
+    abcli_log "🌐 query: $catalog -$query_options-> $object_name"
+
     [[ "$do_download" == 1 ]] &&
         abcli_download - $object_name
 
-    local query_options=$4
     blue_geo_catalog_query_${catalog} \
         ,$query_options \
         $object_name \
@@ -54,7 +57,7 @@ function blue_geo_catalog_query() {
     [[ "$do_ingest" == 0 ]] && [[ "$do_select" == 0 ]] &&
         return 0
 
-    local datacube_id=$(blue_geo_datacube_query_read - $object_name)
+    local datacube_id=$(blue_geo_catalog_query_read - $object_name)
     abcli_log "🧊 $datacube_id"
 
     [[ "$do_ingest" == 1 ]] &&

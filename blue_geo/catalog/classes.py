@@ -13,7 +13,7 @@ list_of_catalog_classes: List[Type[GenericCatalog]] = [
     FirmsCatalog,
 ]
 
-list_of_catalogs = sorted(
+list_of_catalogs: List[str] = sorted(
     [catalog_class.name for catalog_class in list_of_catalog_classes]
 )
 

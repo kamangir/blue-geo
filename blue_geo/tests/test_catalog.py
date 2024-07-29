@@ -50,7 +50,7 @@ def test_list_of_datacube_classes(
 
 @pytest.mark.parametrize(
     ["catalog_name", "expected_catalog_class"],
-    [[catalog_name, catalog_class] for catalog_name, catalog_class in list_of_catalogs],
+    [[catalog_class.name, catalog_class] for catalog_class in list_of_catalog_classes],
 )
 def test_get_catalog(
     catalog_name: str,
@@ -62,7 +62,7 @@ def test_get_catalog(
 
 @pytest.mark.parametrize(
     ["catalog_name", "expected_catalog_class"],
-    [[catalog_name, catalog_class] for catalog_name, catalog_class in list_of_catalogs],
+    [[catalog_class.name, catalog_class] for catalog_class in list_of_catalog_classes],
 )
 def test_get_catalog_class(
     catalog_name: str,

@@ -62,14 +62,11 @@ def test_get_catalog(
 
 @pytest.mark.parametrize(
     ["catalog_name", "expected_catalog_class"],
-    [
-        [datacube_id, datacube_class]
-        for datacube_id, datacube_class in assets.datacubes.items()
-    ],
+    [[catalog_name, catalog_class] for catalog_name, catalog_class in list_of_catalogs],
 )
-def test_get_datacube_class(
+def test_get_catalog_class(
     catalog_name: str,
-    expected_catalog_class: Type[GenericDatacube],
+    expected_catalog_class: Type[GenericCatalog],
 ):
     catalog_class = get_catalog_class(catalog_name)
     assert catalog_class == expected_catalog_class

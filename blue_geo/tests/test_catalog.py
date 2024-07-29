@@ -5,9 +5,12 @@ from blue_geo.tests import assets
 from blue_geo.catalog import (
     list_of_catalog_classes,
     list_of_datacube_classes,
+    get_catalog,
+    get_catalog_class,
     get_datacube,
     get_datacube_class,
     get_collections,
+    list_of_catalogs,
 )
 from blue_geo.catalog.generic import GenericCatalog, GenericDatacube
 
@@ -43,6 +46,33 @@ def test_list_of_datacube_classes(
 
     success, _ = datacube.ingest(object_name)
     assert success
+
+
+@pytest.mark.parametrize(
+    ["catalog_name", "expected_catalog_class"],
+    [[catalog_name, catalog_class] for catalog_name, catalog_class in list_of_catalogs],
+)
+def test_get_catalog(
+    catalog_name: str,
+    expected_catalog_class: Type[GenericCatalog],
+):
+    catalog = get_catalog(catalog_name)
+    assert isinstance(catalog, expected_catalog_class)
+
+
+@pytest.mark.parametrize(
+    ["catalog_name", "expected_catalog_class"],
+    [
+        [datacube_id, datacube_class]
+        for datacube_id, datacube_class in assets.datacubes.items()
+    ],
+)
+def test_get_datacube_class(
+    catalog_name: str,
+    expected_catalog_class: Type[GenericDatacube],
+):
+    catalog_class = get_catalog_class(catalog_name)
+    assert catalog_class == expected_catalog_class
 
 
 @pytest.mark.parametrize(

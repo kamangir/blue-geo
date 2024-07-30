@@ -5,8 +5,8 @@ from typing import Tuple
 from abcli.modules import objects
 import geopandas as gpd
 from geojson import Point
-from blue_geo import VERSION
-from blue_geo.ukraine_timemap import NAME
+from blueness import module
+from blue_geo import NAME, VERSION
 from blue_geo.logger import logger
 import matplotlib.pyplot as plt
 from typing import Dict
@@ -15,6 +15,9 @@ from typing import Any
 API_URL = "https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json"
 
 DESCRIPTION = "Civilian Harm in Ukraine TimeMap"
+
+
+NAME = module.name(__file__, NAME)
 
 
 def ingest(

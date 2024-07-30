@@ -3,27 +3,31 @@
 function test_blue_geo_datacube_get_catalog() {
     abcli_assert \
         $(blue_geo_datacube_get catalog void) \
-        unknown-catalog
+        void
+    [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
         $(blue_geo_datacube_get catalog datacube-generic) \
         generic
+    [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        $(blue_geo_datacube_get catalog datacube-firms_area-world-MODIS_NRT-2024-07-20-1) \
-        firms_area
+        $(blue_geo_datacube_get catalog $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA) \
+        firms
 }
 
 function test_blue_geo_datacube_get_template() {
     abcli_assert \
-        $(blue_geo_datacube_get template unknown-catalog) \
+        $(blue_geo_datacube_get template void) \
         unknown-template
+    [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        $(blue_geo_datacube_get template generic) \
+        $(blue_geo_datacube_get template datacube-generic) \
         unknown-template
+    [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        $(blue_geo_datacube_get template firms_area) \
+        $(blue_geo_datacube_get template $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA) \
         $BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE
 }

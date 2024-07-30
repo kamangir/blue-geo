@@ -1,4 +1,5 @@
 import os
+from blueness import module
 import abcli
 from abcli import file
 from abcli.file.functions import build_from_template
@@ -6,12 +7,12 @@ from abcli.plugins import markdown
 from blue_geo import NAME, VERSION, ICON
 from blue_geo.logger import logger
 
-NAME = f"{NAME}.README"
+NAME = module.name(__file__, NAME)
 
 features = {
     "QGIS": {
         "description": "an AI terraform for [QGIS](https://www.qgis.org/).",
-        "icon": "🌐",
+        "icon": ICON,
         "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/QGIS.jpg",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/QGIS/README.md",
     },
@@ -23,7 +24,7 @@ features = {
     },
     "firms-area": {
         "description": "Fire Information for Resource Management System ([FIRMS](https://firms.modaps.eosdis.nasa.gov)) datacubes.",
-        "icon": "🌐",
+        "icon": ICON,
         "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/datacube-firms_area.jpg",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/datacube/firms_area/README.md",
     },

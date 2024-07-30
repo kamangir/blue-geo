@@ -28,6 +28,12 @@ parser.add_argument(
     default=",",
 )
 parser.add_argument(
+    "--count",
+    type=int,
+    default=-1,
+    help="-1: all",
+)
+parser.add_argument(
     "--log",
     default=1,
     type=int,
@@ -53,6 +59,9 @@ if args.task == "get":
         output = [
             datacube_class.name for datacube_class in get_collections(args.catalog)
         ]
+
+    if args.count != -1:
+        output = output[: args.count]
 elif args.task == "list":
     item_name = "catalog"
     output = list_of_catalogs

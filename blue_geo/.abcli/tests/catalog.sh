@@ -25,6 +25,15 @@ function test_blue_geo_catalog_get_list_of_collections() {
             --delim , \
             --log 0
         [[ $? -ne 0 ]] && return 1
+
+        abcli_eval ,$options \
+            blue_geo catalog get \
+            list_of_collections \
+            --catalog $catalog \
+            --count 1 \
+            --delim , \
+            --log 0
+        [[ $? -ne 0 ]] && return 1
     done
 
     return 0
@@ -44,14 +53,16 @@ function test_blue_geo_catalog_query() {
     for catalog in $(echo $blue_geo_catalog_list | tr , " "); do
         local object_name="bashtest-$(abcli_string_timestamp)"
 
+        [[ "$catalog" == generic ]] && continue
+
         abcli_eval ,$options \
-            blue_geo catalog query firms \
+            blue_geo catalog query $catalog \
             ingest \
             $object_name
         [[ $? -ne 0 ]] && return 1
 
         abcli_assert \
-            $(blue_geo datacube query read len $object_name) \
+            $(blue_geo catalog query read len $object_name) \
             1
         [[ $? -ne 0 ]] && return 1
     done

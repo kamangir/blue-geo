@@ -15,6 +15,6 @@ function test_blue_geo_catalog_query_firms_area() {
     [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        $(blue_geo datacube query read - $object_name) \
+        $(blue_geo catalog query read - $object_name) \
         $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA
 }

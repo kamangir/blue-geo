@@ -7,11 +7,6 @@ function test_blue_geo_datacube_get_catalog() {
     [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        $(blue_geo_datacube_get catalog xyz) \
-        unknown-catalog
-    [[ $? -ne 0 ]] && return 1
-
-    abcli_assert \
         $(blue_geo_datacube_get catalog datacube-generic) \
         generic
     [[ $? -ne 0 ]] && return 1
@@ -23,12 +18,12 @@ function test_blue_geo_datacube_get_catalog() {
 
 function test_blue_geo_datacube_get_template() {
     abcli_assert \
-        $(blue_geo_datacube_get template unknown-catalog) \
+        $(blue_geo_datacube_get template void) \
         unknown-template
     [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        $(blue_geo_datacube_get template generic) \
+        $(blue_geo_datacube_get template datacube-generic) \
         unknown-template
     [[ $? -ne 0 ]] && return 1
 

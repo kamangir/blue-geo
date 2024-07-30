@@ -5,7 +5,7 @@ function blue_geo_catalog_get() {
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options="list_of_collections"
-        local args="[--catalog <catalog>]$ABCUL[--delim ,]$ABCUL[--log 0]"
+        local args="[--catalog <catalog>]$ABCUL[--count 1]$ABCUL[--delim ,]$ABCUL[--log 0]"
         abcli_show_usage "@catalog get$ABCUL[$options]$ABCUL$args" \
             "get list of collections in <catalog>."
         return

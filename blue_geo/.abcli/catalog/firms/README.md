@@ -22,9 +22,7 @@ the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire I
 
 ```bash
 @catalog query firms \
-	ingest,select \
-	- \
-	area,dryrun \
+	ingest,select - area \
 	--date 2024-07-24
 
 @open QGIS .

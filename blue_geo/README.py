@@ -26,7 +26,7 @@ features = {
         "description": "Fire Information for Resource Management System ([FIRMS](https://firms.modaps.eosdis.nasa.gov)) datacubes.",
         "icon": ICON,
         "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/datacube-firms_area.jpg",
-        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/datacube/firms_area/README.md",
+        "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/.abcli/catalog/firms",
     },
     "ukraine-timemap": {
         "description": "`ingest` for the [Bellingcat](https://www.bellingcat.com/) [Civilian Harm in Ukraine TimeMap](https://github.com/bellingcat/ukraine-timemap) dataset, available through [this UI](https://ukraine.bellingcat.com/) and [this API](https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json).",

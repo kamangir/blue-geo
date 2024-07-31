@@ -58,6 +58,10 @@ function blue_geo_catalog_query() {
         return 0
 
     local datacube_id=$(blue_geo_catalog_query_read - $object_name)
+    if [[ -z "$datacube_id" ]]; then
+        abcli_log_error "-@catalog: query: $catalog: no datacube id found."
+        return 1
+    fi
     abcli_log "🧊 $datacube_id"
 
     [[ "$do_ingest" == 1 ]] &&

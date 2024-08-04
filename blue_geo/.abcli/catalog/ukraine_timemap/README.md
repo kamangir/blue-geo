@@ -1,10 +1,18 @@
-# ukraine-timemap 🇺🇦
+# 🇺🇦 ukraine-timemap
 
-`ukraine-timemap` ingests the [Bellingcat](https://www.bellingcat.com/) [Civilian Harm in Ukraine TimeMap](https://github.com/bellingcat/ukraine-timemap) dataset, available through [this UI](https://ukraine.bellingcat.com/) and [this API](https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json), and generates a `geojson`, a QGIS project, and more.
+the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com/) [Civilian Harm in Ukraine TimeMap](https://github.com/bellingcat/ukraine-timemap) dataset, available through [this UI](https://ukraine.bellingcat.com/) and [this API](https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json).
 
-```bash
-pip install blue-geo
-```
+:fire
+
+## query
+
+:fire
+
+## example use
+
+:fire
+
+--- digest :below
 
 ```bash
  > ukraine_timemap help

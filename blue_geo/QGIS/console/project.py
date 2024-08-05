@@ -6,6 +6,10 @@ class ABCLI_QGIS_Project(object):
         pass
 
     @property
+    def filename(self):
+        return QgsProject.instance().fileName()
+
+    @property
     def name(self):
         return QgsProject.instance().homePath().split(os.sep)[-1]
 

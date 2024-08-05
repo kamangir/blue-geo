@@ -11,3 +11,4 @@ def test_blue_geo_env():
     assert env.BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE
     assert env.FIRMS_MAP_KEY
     assert env.BLUE_GEO_TEST_DATACUBE_FIRMS_AREA
+    assert env.BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP

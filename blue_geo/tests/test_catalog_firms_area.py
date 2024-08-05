@@ -57,8 +57,9 @@ def test_datacube_from_datacube_id(datacube_id: str):
 
     assert datacube.description
 
-    success, _ = datacube.ingest(object_name)
+    success, df = datacube.ingest(object_name)
     assert success
+    assert isinstance(df, gpd.GeoDataFrame)
 
 
 @pytest.mark.parametrize(

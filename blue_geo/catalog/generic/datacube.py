@@ -14,7 +14,7 @@ class GenericDatacube:
     QGIS_template = "unknown-template"
 
     def __init__(self, datacube_id: str = ""):
-        pass
+        self.datacube_id_ = datacube_id
 
     @property
     def datacube_id(self) -> str:

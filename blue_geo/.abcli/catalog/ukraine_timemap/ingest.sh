@@ -6,6 +6,6 @@ function blue_geo_catalog_ingest_firms() {
 
     blue_geo_catalog_ingest_generic \
         ,$ingest_options \
-        $options,catalog=firms \
+        $options,catalog=ukraine_timemap \
         "${@:3}"
 }

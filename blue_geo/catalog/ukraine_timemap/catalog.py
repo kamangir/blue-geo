@@ -7,5 +7,5 @@ NAME = module.name(__file__, NAME)
 
 
 class UkraineTimemapCatalog(GenericCatalog):
-    name = "ukraime_timemap"
-    collections = ["ukraime_timemap"]
+    name = "ukraine_timemap"
+    collections = ["ukraine_timemap"]

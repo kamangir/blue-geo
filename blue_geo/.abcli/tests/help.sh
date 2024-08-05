@@ -20,8 +20,7 @@ function test_blue_geo_help() {
         "blue_geo datacube ingest" \
         "blue_geo QGIS" \
         "blue_geo QGIS_expressions" \
-        "blue_geo QGIS_server" \
-        "ukraine_timemap"; do
+        "blue_geo QGIS_server"; do
         abcli_eval ,$options \
             $module help
         [[ $? -ne 0 ]] && return 1

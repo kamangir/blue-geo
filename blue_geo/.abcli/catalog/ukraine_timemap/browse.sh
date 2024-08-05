@@ -1,11 +1,11 @@
 #! /usr/bin/env bash
 
-function ukraine_timemap_browse() {
+function blue_geo_catalog_browse_ukraine_timemap() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options="dataset|github"
-        abcli_show_usage "ukraine_timemap browse$ABCUL[$options]" \
+        abcli_show_usage "@catalog browse ukraine_timemap$ABCUL[$options]" \
             "browse ukraine-timemap."
         return
     fi

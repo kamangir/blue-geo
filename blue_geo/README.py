@@ -32,7 +32,7 @@ features = {
         "description": "datacubes: [Bellingcat](https://www.bellingcat.com/) [Civilian Harm in Ukraine TimeMap](https://github.com/bellingcat/ukraine-timemap) dataset, available through [this UI](https://ukraine.bellingcat.com/) and [this API](https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json).",
         "icon": "🇺🇦",
         "thumbnail": "https://github.com/kamangir/assets/blob/main/nbs/ukraine-timemap/QGIS.png?raw=true",
-        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/catalog/ukraine-timemap",
+        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/catalog/ukraine_timemap",
     },
     "vancouver-watching": {
         "description": "datacubes: Vancouver watching with AI, last build: [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/test_vancouver_watching_ingest/animation.gif).",

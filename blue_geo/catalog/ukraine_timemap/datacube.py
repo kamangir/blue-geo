@@ -189,7 +189,7 @@ class UkraineTimemapDatacube(GenericDatacube):
 
         logger.info(f"🧊 {datacube.description}")
 
-        return not post_to_object(
+        return post_to_object(
             object_name,
             "datacube_id",
             [datacube.datacube_id],

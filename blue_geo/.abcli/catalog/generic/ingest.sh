@@ -3,7 +3,7 @@
 function blue_geo_catalog_ingest_generic() {
     local ingest_options=$1
 
-    local options=$2
+    local options=$3
     local catalog=$(abcli_option "$options" catalog generic)
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
@@ -22,5 +22,5 @@ function blue_geo_catalog_ingest_generic() {
         python3 -m blue_geo.catalog.$catalog \
         ingest \
         --object_name $object_name \
-        "${@:3}"
+        "${@:4}"
 }

@@ -13,14 +13,16 @@ def ukraine_timemap_display(project_filename, id, date, description, feature, pa
         "date",
     )
     """
-    version = "1.9.1"
+    version = "1.10.1"
 
     return "<hr/>".join(
         [
-            description,
-            '{} | {} | #<a href="https://ukraine.bellingcat.com/?id={}">{}</a>'.format(
-                project_filename.split(".")[0],
+            "{}: {}".format(
                 date.toString("yyyy-MM-dd"),
+                description,
+            ),
+            '{} / <a href="https://ukraine.bellingcat.com/?id={}">#{}</a>'.format(
+                project_filename.split(".")[0],
                 id,
                 id,
             ),

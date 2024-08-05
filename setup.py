@@ -14,9 +14,9 @@ setup(
         f"{NAME}.catalog.firms",
         f"{NAME}.catalog.firms.area",
         f"{NAME}.catalog.generic",
+        f"{NAME}.catalog.ukraine_timemap",
         f"{NAME}.datacube",
         f"{NAME}.QGIS",
-        f"{NAME}.ukraine_timemap",
     ],
     include_package_data=True,
     package_data={

@@ -7,6 +7,9 @@ import geopandas as gpd
 from geojson import Point
 from blueness import module
 from blue_geo import NAME, VERSION
+from blue_geo import env
+from blue_geo.catalog.generic import GenericDatacube
+from blue_geo.catalog.ukraine_timemap.catalog import UkraineTimemapCatalog
 from blue_geo.logger import logger
 import matplotlib.pyplot as plt
 from typing import Dict
@@ -18,6 +21,18 @@ DESCRIPTION = "Civilian Harm in Ukraine TimeMap"
 
 
 NAME = module.name(__file__, NAME)
+
+
+class UkraineTimemapDatacube(GenericDatacube):
+    name = "area"
+    catalog = UkraineTimemapCatalog()
+    QGIS_template = env.BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE
+
+    def __init__(
+        self,
+        datacube_id: str = "",
+    ):
+        super().__init__(datacube_id)
 
 
 def ingest(

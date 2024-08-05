@@ -1,7 +1,7 @@
 import argparse
 from blueness import module
 from blue_geo import NAME, VERSION
-from blue_geo.ukraine_timemap.functions import ingest
+from blue_geo.catalog.ukraine_timemap.functions import ingest
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 

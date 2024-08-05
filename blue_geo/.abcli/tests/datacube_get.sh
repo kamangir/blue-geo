@@ -30,4 +30,8 @@ function test_blue_geo_datacube_get_template() {
     abcli_assert \
         $(blue_geo_datacube_get template $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA) \
         $BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE
+
+    abcli_assert \
+        $(blue_geo_datacube_get template $BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP) \
+        $BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE
 }

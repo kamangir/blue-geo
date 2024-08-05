@@ -23,34 +23,11 @@ the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com
 @publish tar .
 ```
 
-:fire
-
---- digest :below
-
-```bash
- > ukraine_timemap help
-ukraine_timemap browse \
-	[dataset|github]
- . browse ukraine-timemap.
-ukraine_timemap ingest \
-	[dryrun,~upload] \
-	[-|<object-name>] \
-	[--verbose 1]
- . ingest the latest dataset from https://github.com/bellingcat/ukraine-timemap.
-```
-
-example use,
-
-```
-@select ukraine-timemap-$(@@timestamp)
-ukraine_timemap ingest - . --verbose 1
-@open . QGIS
-@publish tar .
-```
-
 ![image](https://github.com/kamangir/assets/blob/main/nbs/ukraine-timemap/ingest_log.png?raw=true)
 
-latest ingested object: [ukraine-timemap.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/ukraine_timemap.tar.gz), sandbox: [ukraine-timemap/sandbox.ipynb](./notebooks/ukraine-timemap/sandbox.ipynb).
+latest ingested object: [ukraine-timemap.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/ukraine_timemap.tar.gz), 
+
+sandbox: [ukraine-timemap/sandbox.ipynb](./notebooks/ukraine-timemap/sandbox.ipynb).
 
 last build [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/ukraine_timemap/ukraine_timemap.png)
 

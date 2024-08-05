@@ -41,7 +41,7 @@ args = parser.parse_args()
 
 success = False
 if args.task == "ingest":
-    datacube = get_datacube(datacube_id=args.object_name)
+    datacube = UkraineTimemapDatacube(datacube_id=args.object_name)
     success, _ = datacube.ingest(
         object_name=datacube.datacube_id,
         do_save=args.save == 1,

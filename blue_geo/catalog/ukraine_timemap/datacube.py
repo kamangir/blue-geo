@@ -29,12 +29,6 @@ class UkraineTimemapDatacube(GenericDatacube):
     catalog = UkraineTimemapCatalog()
     QGIS_template = env.BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE
 
-    def __init__(
-        self,
-        datacube_id: str = "",
-    ):
-        super().__init__(datacube_id)
-
     @property
     def datacube_id(self) -> str:
         return self.datacube_id_

@@ -48,7 +48,7 @@ if args.task == "ingest":
         do_visualize=args.visualize == 1,
         log=args.log == 1,
     )
-if args.task == "query":
+elif args.task == "query":
     success = UkraineTimemapDatacube.query(
         object_name=args.object_name,
     )

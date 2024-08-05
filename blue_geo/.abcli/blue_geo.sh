@@ -7,7 +7,6 @@ function blue_geo() {
         blue_geo_catalog "$@"
         blue_geo_datacube "$@"
         blue_geo_QGIS "$@"
-        ukraine_timemap "$@"
         return
     fi
 

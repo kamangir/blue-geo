@@ -2,11 +2,16 @@
 
 the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com/) [Civilian Harm in Ukraine TimeMap](https://github.com/bellingcat/ukraine-timemap) dataset, available through [this UI](https://ukraine.bellingcat.com/) and [this API](https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json).
 
-:fire
-
 ## query
 
-:fire
+```
+ > @catalog query ukraine_timemap help
+@catalog query ukraine_timemap \
+	[download,ingest,select,upload] \
+	[-|<object-name>] \
+	[dryrun]
+ . ukraine_timemap -query-> <object-name>.
+```
 
 ## example use
 

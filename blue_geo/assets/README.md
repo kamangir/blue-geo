@@ -1,4 +1,4 @@
-# 🌐 Blue-GEO
+# 🌐 Blue-GEO (`@geo`)
 
 AI for precise geospatial data analysis and visualization.
 

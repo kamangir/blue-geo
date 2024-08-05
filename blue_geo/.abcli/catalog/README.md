@@ -7,6 +7,9 @@
 @catalog browse firms \
 	[map_key|area]
  . browse firms.
+@catalog browse ukraine_timemap \
+	[dataset|github]
+ . browse ukraine-timemap.
 @catalog get \
 	[list_of_collections] \
 	[--catalog <catalog>] \
@@ -28,6 +31,11 @@
 	[--depth 1..10]\
 	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP]
  . firms/area -query-> <object-name>.
+@catalog query ukraine_timemap \
+	[download,ingest,select,upload] \
+	[-|<object-name>] \
+	[dryrun]
+ . ukraine_timemap -query-> <object-name>.
 @catalog query read \
 	[all,download,len] \
 	[.|<object-name>] \

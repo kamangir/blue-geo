@@ -6,6 +6,7 @@ function test_blue_geo_help() {
     local module
     for module in \
         "blue_geo" \
+        \
         "blue_geo catalog" \
         "blue_geo catalog browse" \
         "blue_geo catalog browse firms " \
@@ -15,9 +16,11 @@ function test_blue_geo_help() {
         "blue_geo catalog query firms" \
         "blue_geo catalog query firms_area" \
         "blue_geo catalog query read" \
+        \
         "blue_geo datacube" \
         "blue_geo datacube get" \
         "blue_geo datacube ingest" \
+        \
         "blue_geo QGIS" \
         "blue_geo QGIS_expressions" \
         "blue_geo QGIS_server"; do

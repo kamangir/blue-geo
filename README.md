@@ -14,15 +14,12 @@ pip install blue-geo
 
 ---
 
-[![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/)
-
 📜 [metadata](./metadata.yaml)
 
 🎁 [wish list and bugs](https://github.com/kamangir/blue-geo/issues/8)
 
----
+to use on [AWS SageMaker](https://aws.amazon.com/sagemaker/) replace `<plugin-name>` with "blue_geo" and follow [these instructions](https://github.com/kamangir/notebooks-and-scripts/blob/main/SageMaker.md).
 
-To use on [AWS SageMaker](https://aws.amazon.com/sagemaker/) replace `<plugin-name>` with the name of the plugin and follow [these instructions](https://github.com/kamangir/notebooks-and-scripts/blob/main/SageMaker.md).
+[![pylint](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/)
 
----
-built by 🪄 [`abcli-9.231.1-current`](https://github.com/kamangir/awesome-bash-cli), based on [`blue_geo-4.219.1`](https://github.com/kamangir/blue-geo).
+built by 🪄 [`abcli-9.243.1-current`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.220.1`](https://github.com/kamangir/blue-geo).

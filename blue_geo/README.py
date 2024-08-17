@@ -1,4 +1,3 @@
-import os
 from abcli import file
 from abcli.plugins.README import build as build_README
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
@@ -61,14 +60,8 @@ def build():
     return build_README(
         items=items,
         cols=2,
-        template_filename=os.path.join(
-            file.path(__file__),
-            "../template.md",
-        ),
-        filename=os.path.join(
-            file.path(__file__),
-            "../README.md",
-        ),
+        path=file.path(__file__),
+        ICON=ICON,
         NAME=NAME,
         VERSION=VERSION,
         REPO_NAME=REPO_NAME,

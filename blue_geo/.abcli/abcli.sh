@@ -1,10 +1,10 @@
 #! /usr/bin/env bash
 
-abcli_source_path - caller,suffix=/tests
+abcli_source_path - \
+    caller,suffix=/tests
 
-abcli_env dot load \
-    plugin=blue_geo
-abcli_env dot load \
-    filename=blue_geo/config.env,plugin=blue_geo
+abcli_env_dot_load \
+    caller,ssm,plugin=blue_geo,suffix=/../..
 
-
+abcli_env_dot_load \
+    caller,filename=config.env,suffix=/..

@@ -5,6 +5,7 @@ from blue_geo.catalog.generic import (
     GenericDatacube,
     VoidDatacube,
 )
+from blue_geo.catalog.copernicus import CopernicusCatalog, CopernicusDatacube
 from blue_geo.catalog.firms import FirmsCatalog
 from blue_geo.catalog.firms.area import FirmsAreaDatacube
 from blue_geo.catalog.ukraine_timemap import (
@@ -14,6 +15,7 @@ from blue_geo.catalog.ukraine_timemap import (
 
 list_of_catalog_classes: List[Type[GenericCatalog]] = [
     GenericCatalog,
+    CopernicusCatalog,
     FirmsCatalog,
     UkraineTimemapCatalog,
 ]
@@ -26,6 +28,7 @@ list_of_datacube_classes: List[Type[GenericDatacube]] = [
     GenericDatacube,
     FirmsAreaDatacube,
     UkraineTimemapDatacube,
+    CopernicusDatacube,
 ]
 
 

@@ -8,4 +8,3 @@ NAME = module.name(__file__, NAME)
 
 class FirmsCatalog(GenericCatalog):
     name = "firms"
-    collections = ["area"]

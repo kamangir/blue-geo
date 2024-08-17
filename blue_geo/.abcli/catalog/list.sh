@@ -27,9 +27,16 @@ function blue_geo_catalog_load_all() {
         --after "catalog(s)"
 
     local catalog
+    local list_of_collections
     for catalog in $(echo $blue_geo_catalog_list | tr , " "); do
-        abcli_log "🧊 $catalog"
         abcli_source_path - caller,civilized,suffix=/$catalog
+
+        list_of_collections=$(blue_geo_catalog get list_of_collections \
+            --catalog $catalog \
+            --log 0)
+        abcli_log_list "$list_of_collections" \
+            --before "🧊 loading" \
+            --after "collection(s) from $GREEN$catalog$NC"
     done
 
     return 0

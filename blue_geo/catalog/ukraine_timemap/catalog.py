@@ -8,4 +8,3 @@ NAME = module.name(__file__, NAME)
 
 class UkraineTimemapCatalog(GenericCatalog):
     name = "ukraine_timemap"
-    collections = ["ukraine_timemap"]

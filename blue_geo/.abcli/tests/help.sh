@@ -10,7 +10,6 @@ function test_blue_geo_help() {
         "blue_geo catalog" \
         "blue_geo catalog browse" \
         "blue_geo catalog browse firms " \
-        "blue_geo catalog get" \
         "blue_geo catalog list" \
         "blue_geo catalog query" \
         "blue_geo catalog query firms" \

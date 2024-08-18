@@ -9,11 +9,11 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 @catalog query copernicus \
 	[download,ingest,select,upload] \
 	[-|<object-name>] \
-	[copernicus,dryrun] \
+	[sentinel_2,dryrun] \
 	[--param help]
- . copernicus/copernicus -query-> <object-name>.
+ . copernicus/sentinel_2 -query-> <object-name>.
 ```
 
-## example use
+## example uses
 
-🔥
+- [Chilcotin River Landslide](./chilcotin_river_landslide.md)

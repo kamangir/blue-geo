@@ -10,7 +10,7 @@ NAME = module.name(__file__, NAME)
 
 
 class CopernicusSentinel2Datacube(GenericDatacube):
-    name = "copernicus-sentinel-2"
+    name = "sentinel_2"
     catalog = CopernicusCatalog()
     QGIS_template = "unknown-template"
 

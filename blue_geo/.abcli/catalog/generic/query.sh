@@ -5,42 +5,42 @@ function blue_geo_catalog_query_generic() {
 
     local catalog=$(abcli_option "$options" catalog generic)
 
-    local list_of_collectios=$(blue_geo_catalog list \
-        collections \
+    local list_of_datacube_classes=$(blue_geo_catalog list \
+        datacube_classes \
         --catalog $catalog \
         --delim , \
         --log 0)
-    local default_collection=$(blue_geo_catalog list \
-        collections \
+    local default_datacube_class=$(blue_geo_catalog list \
+        datacube_classes \
         --catalog $catalog \
         --count 1 \
         --delim , \
         --log 0)
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local collection
-        for collection in $(echo $list_of_collectios | tr , " "); do
-            blue_geo_catalog_query_${catalog}_${collection} "$@"
+        local datacube_class
+        for datacube_class in $(echo $list_of_datacube_classes | tr , " "); do
+            blue_geo_catalog_query_${catalog}_${datacube_class} "$@"
         done
         return 0
     fi
 
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
-    local collection=$(abcli_option_choice "$options" $list_of_collectios $default_collection)
+    local datacube_class=$(abcli_option_choice "$options" $list_of_datacube_classes $default_datacube_class)
 
-    if [[ ",$list_of_collectios," != *",$collection,"* ]]; then
-        abcli_log_error "-@catalog: query: $catalog: $collection: collection not found."
+    if [[ ",$list_of_datacube_classes," != *",$datacube_class,"* ]]; then
+        abcli_log_error "-@catalog: query: $catalog: $datacube_class: datacube_class not found."
         return 1
     fi
 
     if [[ "$2" == "help" ]]; then
-        blue_geo_catalog_query_${catalog}_${collection} help
+        blue_geo_catalog_query_${catalog}_${datacube_class} help
         return
     fi
 
-    abcli_log "🌐 query: $catalog/$collection"
+    abcli_log "🌐 query: $catalog/$datacube_class"
 
-    blue_geo_catalog_query_${catalog}_${collection} "$@"
+    blue_geo_catalog_query_${catalog}_${datacube_class} "$@"
 }
 
 function blue_geo_catalog_query_generic_generic() {

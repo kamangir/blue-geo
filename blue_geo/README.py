@@ -16,6 +16,12 @@ features = {
         "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/datacube.png?raw=true",
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/.abcli/datacube",
     },
+    "copernicus": {
+        "description": "catalog: [Copernicus Data Space Ecosystem - Europe's eyes on Earth](https://dataspace.copernicus.eu/)",
+        "icon": "🧊",
+        "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/copernicus.jpg?raw=true",
+        "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/.abcli/catalog/copernicus",
+    },
     "firms-area": {
         "description": "catalog: Fire Information for Resource Management System ([FIRMS](https://firms.modaps.eosdis.nasa.gov)).",
         "icon": ICON,

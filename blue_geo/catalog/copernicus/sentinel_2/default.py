@@ -17,12 +17,12 @@ args: Dict[str, Dict] = {
     },
     "lat": {
         "type": float,
-        "default": 0,
+        "default": 51.83,
         "help": "<51.83>",
     },
     "lon": {
         "type": float,
-        "default": 0,
+        "default": -122.78,
         "help": "<-122.78>",
     },
     "limit": {

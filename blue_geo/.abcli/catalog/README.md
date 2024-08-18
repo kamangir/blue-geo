@@ -49,4 +49,4 @@
  . read query results in <object-name>.
 ```
 
-supported `<catalog>`s: [firms](./firms/), [ukraine_timemap](./ukraine_timemap/).
+supported `<catalog>`s: [copernicus](./copernicus/), [firms](./firms/), [ukraine_timemap](./ukraine_timemap/).

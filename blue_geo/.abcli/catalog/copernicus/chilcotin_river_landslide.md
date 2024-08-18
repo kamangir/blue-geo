@@ -2,7 +2,7 @@
 
 ![image](https://github.com/kamangir/assets/blob/main/blue-geo/chilcotin-river-landslide-2.jpg?raw=true)
 
-objective: review of before and after views of the Chilcotin River landslide location on Sentinel-2.
+objective: review of before and after views of the Chilcotin River landslide on Sentinel-2.
 
 background:
 - [Chilcotin River Landslide Information Portal](https://chilcotin-river-landslide-2024-bcgov03.hub.arcgis.com/) - source of ⬆️ image.

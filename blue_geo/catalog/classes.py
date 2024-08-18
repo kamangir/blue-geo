@@ -44,19 +44,6 @@ def get_catalog(catalog_name: str) -> GenericCatalog:
     return get_catalog_class(catalog_name)()
 
 
-def get_collections(
-    catalog_class: Union[Type[GenericCatalog], str],
-) -> List[Type[GenericDatacube]]:
-    if isinstance(catalog_class, str):
-        catalog_class = get_catalog_class(catalog_class)
-
-    return [
-        datacube_class
-        for datacube_class in list_of_datacube_classes
-        if datacube_class.catalog.__class__ == catalog_class
-    ]
-
-
 def get_datacube(datacube_id: str) -> GenericDatacube:
     return get_datacube_class(datacube_id)(datacube_id)
 
@@ -68,3 +55,34 @@ def get_datacube_class(datacube_id: str) -> Type[GenericDatacube]:
             return datacube_class
 
     return VoidDatacube
+
+
+def get_list_of_collections(
+    catalog_class: Union[Type[GenericCatalog], str],
+) -> List[str]:
+    catalog = get_catalog(catalog_class)
+
+    return sorted(
+        list(
+            set(
+                catalog.get_collection_names()
+                + [
+                    datacube_class.name
+                    for datacube_class in get_list_of_datacube_classes(catalog_class)
+                ]
+            )
+        )
+    )
+
+
+def get_list_of_datacube_classes(
+    catalog_class: Union[Type[GenericCatalog], str],
+) -> List[Type[GenericDatacube]]:
+    if isinstance(catalog_class, str):
+        catalog_class = get_catalog_class(catalog_class)
+
+    return [
+        datacube_class
+        for datacube_class in list_of_datacube_classes
+        if datacube_class.catalog.__class__ == catalog_class
+    ]

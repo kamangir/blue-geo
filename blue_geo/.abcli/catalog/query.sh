@@ -8,7 +8,7 @@ function blue_geo_catalog_query() {
     local options=$2
 
     if [ $(abcli_option_int "$catalog" help 0) == 1 ]; then
-        for catalog in $(echo $blue_geo_catalog_list | tr , " "); do
+        for catalog in $(echo $blue_geo_list_of_catalogs | tr , " "); do
             blue_geo_catalog_query_${catalog} "$@"
         done
 
@@ -21,7 +21,7 @@ function blue_geo_catalog_query() {
     local do_select=$(abcli_option_int "$options" select 0)
     local do_upload=$(abcli_option_int "$options" upload 0)
 
-    if [[ ",$blue_geo_catalog_list," != *",$catalog,"* ]]; then
+    if [[ ",$blue_geo_list_of_catalogs," != *",$catalog,"* ]]; then
         local function_name=blue_geo_catalog_query_$catalog
         if [[ $(type -t $function_name) == "function" ]]; then
             $function_name "${@:2}"

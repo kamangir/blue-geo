@@ -5,11 +5,13 @@ function blue_geo_catalog_query_generic() {
 
     local catalog=$(abcli_option "$options" catalog generic)
 
-    local list_of_collectios=$(blue_geo_catalog get list_of_collections \
+    local list_of_collectios=$(blue_geo_catalog list \
+        collections \
         --catalog $catalog \
         --delim , \
         --log 0)
-    local default_collection=$(blue_geo_catalog get list_of_collections \
+    local default_collection=$(blue_geo_catalog list \
+        collections \
         --catalog $catalog \
         --count 1 \
         --delim , \

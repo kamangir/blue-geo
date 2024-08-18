@@ -9,7 +9,8 @@ from blue_geo.catalog import (
     get_catalog_class,
     get_datacube,
     get_datacube_class,
-    get_collections,
+    get_list_of_datacube_classes,
+    get_list_of_collections,
     list_of_catalogs,
 )
 from blue_geo.catalog.generic import GenericCatalog, GenericDatacube
@@ -106,10 +107,32 @@ def test_get_datacube_class(
     ["catalog_class"],
     [[catalog_class] for catalog_class in list_of_catalog_classes],
 )
-def test_get_collections(catalog_class: Type[GenericCatalog]):
-    datacube_class_list = get_collections(catalog_class)
+def test_get_list_of_collections_by_class(catalog_class: Type[GenericCatalog]):
+    assert get_list_of_collections(catalog_class)
+
+
+@pytest.mark.parametrize(
+    ["catalog_class_name"],
+    [[catalog_class.name] for catalog_class in list_of_catalog_classes],
+)
+def test_get_list_of_collections_by_class_name(
+    catalog_class_name: Type[GenericCatalog],
+):
+    assert get_list_of_collections(catalog_class_name)
+
+
+@pytest.mark.parametrize(
+    ["catalog_class"],
+    [[catalog_class] for catalog_class in list_of_catalog_classes],
+)
+def test_get_list_of_datacube_classes(catalog_class: Type[GenericCatalog]):
+    datacube_class_list = get_list_of_datacube_classes(catalog_class)
 
     assert all(
         datacube_class.catalog.__class__ == catalog_class
         for datacube_class in datacube_class_list
     )
+
+
+def test_list_of_catalogs():
+    assert list_of_catalogs

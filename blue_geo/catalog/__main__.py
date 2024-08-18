@@ -1,13 +1,17 @@
 import argparse
 from blueness import module
 from blue_geo import NAME, VERSION
-from blue_geo.catalog.classes import list_of_catalogs, get_collections
+from blue_geo.catalog.classes import (
+    list_of_catalogs,
+    get_list_of_collections,
+    get_list_of_datacube_classes,
+)
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
 NAME = module.name(__file__, NAME)
 
-list_of_tasks = "get,list"
+list_of_tasks = "list"
 
 
 parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
@@ -20,7 +24,7 @@ parser.add_argument(
     "--what",
     default="",
     type=str,
-    help="list_of_collections",
+    help="catalogs,collections,datacubes==datacube_classes",
 )
 parser.add_argument(
     "--delim",
@@ -51,20 +55,28 @@ delim = " " if args.delim == "space" else args.delim
 
 success = args.task in list_of_tasks
 item_name = "item"
-if args.task == "get":
+if args.task == "list":
     output = []
 
-    if args.what == "list_of_collections":
+    if args.what == "catalogs":
+        item_name = "catalog"
+        output = list_of_catalogs
+    elif args.what == "collections":
         item_name = "collection"
+        output = get_list_of_collections(catalog_class=args.catalog)
+    elif args.what in ["datacubes", "datacube_classes"]:
+        item_name = "datacube class"
         output = [
-            datacube_class.name for datacube_class in get_collections(args.catalog)
+            datacube_class.name
+            for datacube_class in get_list_of_datacube_classes(
+                catalog_class=args.catalog
+            )
         ]
+    else:
+        success = False
 
     if args.count != -1:
         output = output[: args.count]
-elif args.task == "list":
-    item_name = "catalog"
-    output = list_of_catalogs
 else:
     success = None
 

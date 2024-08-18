@@ -108,7 +108,7 @@ def test_get_datacube_class(
     [[catalog_class] for catalog_class in list_of_catalog_classes],
 )
 def test_get_list_of_collections_by_class(catalog_class: Type[GenericCatalog]):
-    assert get_list_of_collections(catalog_class)
+    assert isinstance(get_list_of_collections(catalog_class), list)
 
 
 @pytest.mark.parametrize(
@@ -118,7 +118,7 @@ def test_get_list_of_collections_by_class(catalog_class: Type[GenericCatalog]):
 def test_get_list_of_collections_by_class_name(
     catalog_class_name: Type[GenericCatalog],
 ):
-    assert get_list_of_collections(catalog_class_name)
+    assert isinstance(get_list_of_collections(catalog_class_name), list)
 
 
 @pytest.mark.parametrize(

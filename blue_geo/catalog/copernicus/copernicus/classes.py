@@ -13,3 +13,11 @@ class CopernicusDatacube(GenericDatacube):
     name = "copernicus"
     catalog = CopernicusCatalog()
     QGIS_template = "unknown-template"
+
+    @staticmethod
+    def query(object_name: str, **kwargs) -> bool:
+        return post_to_object(
+            object_name,
+            "datacube_id",
+            [],  # TODO
+        )

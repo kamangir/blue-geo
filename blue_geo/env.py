@@ -14,7 +14,20 @@ BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE = os.getenv(
     "",
 )
 
-FIRMS_MAP_KEY = os.getenv("FIRMS_MAP_KEY", "")
+FIRMS_MAP_KEY = os.getenv(
+    "FIRMS_MAP_KEY",
+    "",
+)
+
+COPERNICUS_AWS_ACCESS_KEY_ID = os.getenv(
+    "COPERNICUS_AWS_ACCESS_KEY_ID",
+    "",
+)
+
+COPERNICUS_AWS_SECRET_ACCESS_KEY = os.getenv(
+    "COPERNICUS_AWS_SECRET_ACCESS_KEY",
+    "",
+)
 
 QGIS_TEMPLATES = {
     "firms_area": BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE,

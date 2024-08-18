@@ -2,8 +2,8 @@ import argparse
 from blueness import module
 from blue_geo import NAME, VERSION
 from blue_geo.catalog.default import add_default_arguments, as_list_of_args
-from blue_geo.catalog.copernicus.copernicus.classes import CopernicusDatacube
-from blue_geo.catalog.copernicus.copernicus.default import args as default_args
+from blue_geo.catalog.copernicus.sentinel_2.classes import CopernicusSentinel2Datacube
+from blue_geo.catalog.copernicus.sentinel_2.default import args as default_args
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
@@ -40,7 +40,7 @@ if args.task == "get":
     print(output)
     success = True
 elif args.task == "query":
-    success = CopernicusDatacube.query(
+    success = CopernicusSentinel2Datacube.query(
         object_name=args.object_name,
     )
 else:

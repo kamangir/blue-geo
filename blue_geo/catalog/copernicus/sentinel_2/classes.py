@@ -9,8 +9,8 @@ from blue_geo.logger import logger
 NAME = module.name(__file__, NAME)
 
 
-class CopernicusDatacube(GenericDatacube):
-    name = "copernicus"
+class CopernicusSentinel2Datacube(GenericDatacube):
+    name = "copernicus-sentinel-2"
     catalog = CopernicusCatalog()
     QGIS_template = "unknown-template"
 

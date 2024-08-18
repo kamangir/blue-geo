@@ -48,17 +48,6 @@ function blue_geo_catalog_load_all() {
         abcli_log_list "$list_of_datacube_classes" \
             --before "🧊 $GREEN$catalog$NC: loaded" \
             --after "datacube class(es)"
-
-        list_of_collections=$(blue_geo_catalog list \
-            collections \
-            --catalog $catalog \
-            --log 0)
-
-        [[ "$list_of_datacube_classes" != "$list_of_collections" ]] &&
-            abcli_log_list "$list_of_collections" \
-                --before "🌐 $GREEN$catalog$NC:" \
-                --after "collection(s)"
-
     done
 
     return 0

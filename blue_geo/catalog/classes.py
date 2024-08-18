@@ -5,7 +5,7 @@ from blue_geo.catalog.generic import (
     GenericDatacube,
     VoidDatacube,
 )
-from blue_geo.catalog.copernicus import CopernicusCatalog, CopernicusDatacube
+from blue_geo.catalog.copernicus import CopernicusCatalog, CopernicusSentinel2Datacube
 from blue_geo.catalog.firms import FirmsCatalog
 from blue_geo.catalog.firms.area import FirmsAreaDatacube
 from blue_geo.catalog.ukraine_timemap import (
@@ -28,7 +28,7 @@ list_of_datacube_classes: List[Type[GenericDatacube]] = [
     GenericDatacube,
     FirmsAreaDatacube,
     UkraineTimemapDatacube,
-    CopernicusDatacube,
+    CopernicusSentinel2Datacube,
 ]
 
 
@@ -62,17 +62,7 @@ def get_list_of_collections(
 ) -> List[str]:
     catalog = get_catalog(catalog_class)
 
-    return sorted(
-        list(
-            set(
-                catalog.get_collection_names()
-                + [
-                    datacube_class.name
-                    for datacube_class in get_list_of_datacube_classes(catalog_class)
-                ]
-            )
-        )
-    )
+    return catalog.get_collection_names()
 
 
 def get_list_of_datacube_classes(

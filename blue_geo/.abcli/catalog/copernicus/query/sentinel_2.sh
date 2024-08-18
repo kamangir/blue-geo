@@ -1,10 +1,10 @@
 #! /usr/bin/env bash
 
-function blue_geo_catalog_query_copernicus_copernicus() {
+function blue_geo_catalog_query_copernicus_sentinel_2() {
     local options=$1
 
     local catalog="copernicus"
-    local collection="copernicus"
+    local collection="sentinel_2"
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options="$collection,dryrun"

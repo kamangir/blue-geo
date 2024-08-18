@@ -11,4 +11,4 @@ class CopernicusCatalog(GenericCatalog):
 
     def get_collection_names(self) -> List[str]:
         client = Client.open(self.url)
-        return [collection.id for collection in client.get_collections()]
+        return sorted([collection.id for collection in client.get_collections()])

@@ -1,6 +1,6 @@
 # 🌐 catalog
 
-`catalog`s can be [listed](#listing-catalogs) and [browsed](#browsing-a-catalog) and [queried](#running-a-query-for-datacubes) for [`datacube`](../datacube/)s.
+`catalog`s can be [listed](#listing-catalogs) and [browsed](#browsing-a-catalog) and [queried](#running-a-query-for-datacubes) for [`datacube`](../datacube/)s. `datacube`s are collections that are represented by children of [`GenericDatacube`](../../catalog/generic/datacube.py) and can be ingested.
 
 ## listing catalogs
 
@@ -21,8 +21,6 @@ to see the list of collections in a catalog,
 ```bash
 🌐  16 collection(s): CCM,COP-DEM,ENVISAT,GLOBAL-MOSAICS,LANDSAT-5,LANDSAT-7,LANDSAT-8,S2GLC,SENTINEL-1,SENTINEL-1-RTC,SENTINEL-2,SENTINEL-3,SENTINEL-5P,SENTINEL-6,SMOS,TERRAAQUA
 ```
-
-for special collections, a [datacube class](../datacube/) is defined, and, therefore, items from these collections can be ingested as datacubes, which are objects.
 
 to see the list of datacube classes for a catalog,
 

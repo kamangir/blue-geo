@@ -38,8 +38,8 @@ class CopernicusSentinel2Datacube(GenericDatacube):
             "datetime": datetime,
             "limit": limit,
         }
-        for param in search_parameters:
-            logger.info(f"🔎 {param}: {search_parameters[param]}")
+        for param, value in search_parameters.items():
+            logger.info(f"🔎 {param}: {value}")
 
         try:
             search = client.search(**search_parameters)

@@ -46,8 +46,10 @@ class GenericDatacube:
             {},
         )
 
-    @staticmethod
-    def query(object_name: str) -> bool:
+    @classmethod
+    def query(cls, object_name: str) -> bool:
+        logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
+
         return post_to_object(object_name, "datacube_id", [])
 
 

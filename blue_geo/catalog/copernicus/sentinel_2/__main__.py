@@ -42,6 +42,18 @@ if args.task == "get":
 elif args.task == "query":
     success = CopernicusSentinel2Datacube.query(
         object_name=args.object_name,
+        bbox=(
+            [float(item) for item in args.bbox.split(",") if item]
+            if args.bbox
+            else [
+                args.lon - args.radius,
+                args.lat - args.radius,
+                args.lon + args.radius,
+                args.lat + args.radius,
+            ]
+        ),
+        datetime=args.datetime,
+        limit=args.limit,
     )
 else:
     success = None

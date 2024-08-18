@@ -1,4 +1,5 @@
-from typing import Any, Tuple, Dict
+from typing import Any, Tuple, Dict, List
+from pystac_client import Client
 from blueness import module
 from blue_geo import NAME
 from abcli.plugins.metadata import post_to_object
@@ -14,10 +15,56 @@ class CopernicusSentinel2Datacube(GenericDatacube):
     catalog = CopernicusCatalog()
     QGIS_template = "unknown-template"
 
-    @staticmethod
-    def query(object_name: str, **kwargs) -> bool:
+    @classmethod
+    def query(
+        cls,
+        object_name: str,
+        datetime: str,
+        bbox: List[float],
+        limit: int = 16,
+        verbose: bool = False,
+    ) -> bool:
+        logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
+
+        try:
+            client = Client.open(cls.catalog.url)
+        except Exception as e:
+            logger.error(e)
+            return False
+
+        search_parameters = {
+            "collections": ["SENTINEL-2"],
+            "bbox": bbox,
+            "datetime": datetime,
+            "limit": limit,
+        }
+        for param in search_parameters:
+            logger.info(f"🔎 {param}: {search_parameters[param]}")
+
+        try:
+            search = client.search(**search_parameters)
+        except Exception as e:
+            logger.error(e)
+            return False
+
+        items = list(search.item_collection())
+        if verbose:
+            for item in items:
+                logger.info(
+                    "🧊 {}: {} @ {}".format(
+                        item.id, item.datetime, ", ".join(list(item.assets.keys()))
+                    )
+                )
+
+        list_of_datacube_ids: List[str] = [
+            item.id.replace(".SAFE", "-SAFE") for item in items
+        ]
+        logger.info(f"{len(list_of_datacube_ids)} datacubes(s) found.")
+        for index, datacube_id in enumerate(list_of_datacube_ids):
+            logger.info(f"🧊 {index+1:02}: {datacube_id}")
+
         return post_to_object(
             object_name,
             "datacube_id",
-            [],  # TODO
+            list_of_datacube_ids,
         )

@@ -21,10 +21,18 @@ aoi:
 ```
 
 ```bash
+@catalog query copernicus \
+  ingest,select - \
+  sentinel_2,suffix=TCI.jp2 \
+  --lat 51.83 \
+  --lon -122.78 \
+  --datetime 2024-07-30/2024-08-15 \
+  --limit 20
 
-
+@open QGIS .
 ```
 
+help += https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime 🔥
 
 :fire object
 

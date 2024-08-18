@@ -174,9 +174,11 @@ class UkraineTimemapDatacube(GenericDatacube):
 
         return True, gdf
 
-    @staticmethod
-    def query(object_name: str) -> bool:
-        datacube = UkraineTimemapDatacube(
+    @classmethod
+    def query(cls, object_name: str) -> bool:
+        logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
+
+        datacube = cls(
             "datacube-ukraine_timemap-{}".format(
                 string.pretty_date(as_filename=True),
             )

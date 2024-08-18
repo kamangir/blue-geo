@@ -176,9 +176,11 @@ class FirmsAreaDatacube(GenericDatacube):
             self.date,
         )
 
-    @staticmethod
-    def query(object_name: str, **kwargs) -> bool:
-        datacube = FirmsAreaDatacube(**kwargs)
+    @classmethod
+    def query(cls, object_name: str, **kwargs) -> bool:
+        logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
+
+        datacube = cls(**kwargs)
 
         logger.info(f"🧊 {datacube.description}")
 

@@ -4,13 +4,13 @@ function blue_geo_catalog_query_copernicus_sentinel_2() {
     local options=$1
 
     local catalog="copernicus"
-    local collection="sentinel_2"
+    local datacube_class="sentinel_2"
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options="$collection,dryrun"
-        local args=$(python3 -m blue_geo.catalog.$catalog.$collection get --what list_of_args)
+        options="$datacube_class,dryrun"
+        local args=$(python3 -m blue_geo.catalog.$catalog.$datacube_class get --what list_of_args)
         abcli_show_usage "@catalog query $catalog$ABCUL[$blue_geo_catalog_query_options]$ABCUL[-|<object-name>]$ABCUL[$options]$ABCUL$args" \
-            "$catalog/$collection -query-> <object-name>."
+            "$catalog/$datacube_class -query-> <object-name>."
         return
     fi
 
@@ -18,10 +18,10 @@ function blue_geo_catalog_query_copernicus_sentinel_2() {
 
     local object_name=$(abcli_clarify_object $2 -)
 
-    abcli_log "🌐 query: $catalog/$collection -> $object_name"
+    abcli_log "🌐 query: $catalog/$datacube_class -> $object_name"
 
     abcli_eval dryrun=$do_dryrun \
-        python3 -m blue_geo.catalog.$catalog.$collection \
+        python3 -m blue_geo.catalog.$catalog.$datacube_class \
         query \
         --object_name $object_name \
         "${@:3}"

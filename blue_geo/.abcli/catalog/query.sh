@@ -64,14 +64,16 @@ function blue_geo_catalog_query() {
     fi
     abcli_log "🧊 $datacube_id"
 
-    [[ "$do_ingest" == 1 ]] &&
+    local status=0
+    if [[ "$do_ingest" == 1 ]]; then
         blue_geo_datacube_ingest - $datacube_id
+        status="$?"
+    fi
 
     [[ "$do_select" == 1 ]] &&
         abcli_select $datacube_id
 
-    return 0
-
+    return $status
 }
 
 abcli_source_path - caller,suffix=/query

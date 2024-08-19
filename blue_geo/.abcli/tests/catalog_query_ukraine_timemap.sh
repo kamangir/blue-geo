@@ -3,7 +3,7 @@
 function test_blue_geo_ukraine_timemap() {
     local options=$1
 
-    local object_name=ukraine-timemap-$(abcli_string_timestamp_short)
+    local object_name=ukraine-timemap-test-$(abcli_string_timestamp_short)
 
     blue_geo catalog query ukraine_timemap \
         ingest \

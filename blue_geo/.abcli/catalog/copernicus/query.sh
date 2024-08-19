@@ -1,10 +1,8 @@
 #! /usr/bin/env bash
 
 function blue_geo_catalog_query_copernicus() {
-    local options=$1
-
     blue_geo_catalog_query_generic \
-        $options,catalog=copernicus \
+        catalog=copernicus,$1 \
         "${@:2}"
 }
 

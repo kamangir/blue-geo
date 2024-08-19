@@ -43,10 +43,4 @@ function blue_geo_catalog_query_generic() {
     blue_geo_catalog_query_${catalog}_${datacube_class} "$@"
 }
 
-function blue_geo_catalog_query_generic_generic() {
-    : # no query available.
-}
-
-function blue_geo_catalog_browse_generic() {
-    : # no browse available.
-}
+abcli_source_path - caller,suffix=/query

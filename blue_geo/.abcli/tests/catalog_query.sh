@@ -1,0 +1,30 @@
+#! /usr/bin/env bash
+
+function test_blue_geo_catalog_query() {
+    local options=$1
+    local list_of_catalogs=$(echo $blue_geo_list_of_catalogs | tr , +)
+    list_of_catalogs=$(abcli_option "$options" catalog $list_of_catalogs)
+
+    local catalog
+    for catalog in $(echo $list_of_catalogs | tr + " "); do
+        [[ "$catalog" == generic ]] && continue
+
+        abcli_log "testing $catalog.query ..."
+
+        local object_name="bashtest-$(abcli_string_timestamp)"
+
+        abcli_eval ,$options \
+            blue_geo catalog query $catalog \
+            ingest \
+            $object_name
+        [[ $? -ne 0 ]] && return 1
+
+        abcli_assert \
+            $(blue_geo catalog query read len $object_name) \
+            1
+        [[ $? -ne 0 ]] && return 1
+
+        abcli_hr
+    done
+    return 0
+}

@@ -25,10 +25,10 @@ args: Dict[str, Dict] = {
         "default": -122.78,
         "help": "<-122.78>",
     },
-    "limit": {
+    "count": {
         "type": int,
-        "default": 10,
-        "help": "<10>",
+        "default": -1,
+        "help": "<10>, -1: all",
     },
     "radius": {
         "type": float,

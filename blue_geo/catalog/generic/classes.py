@@ -8,8 +8,7 @@ class GenericCatalog:
     def __init__(self):
         pass
 
-    # list of collections that are not implemented as datacubes.
-    def get_collection_names(self) -> List[str]:
+    def get_list_of_collections(self) -> List[str]:
         return []
 
 

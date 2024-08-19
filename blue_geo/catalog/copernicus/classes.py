@@ -9,6 +9,6 @@ class CopernicusCatalog(GenericCatalog):
     # https://documentation.dataspace.copernicus.eu/APIs/STAC.html
     url = "https://catalogue.dataspace.copernicus.eu/stac"
 
-    def get_collection_names(self) -> List[str]:
+    def get_list_of_collections(self) -> List[str]:
         client = Client.open(self.url)
         return sorted([collection.id for collection in client.get_collections()])

@@ -53,7 +53,7 @@ elif args.task == "query":
             ]
         ),
         datetime=args.datetime,
-        limit=args.limit,
+        count=args.count,
     )
 else:
     success = None

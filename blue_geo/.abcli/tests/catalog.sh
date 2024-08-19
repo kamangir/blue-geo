@@ -49,12 +49,16 @@ function test_blue_geo_catalog_list() {
 
 function test_blue_geo_catalog_query() {
     local options=$1
+    local list_of_catalogs=$(echo $blue_geo_list_of_catalogs | tr , +)
+    list_of_catalogs=$(abcli_option "$options" catalog $list_of_catalogs)
 
     local catalog
-    for catalog in $(echo $blue_geo_list_of_catalogs | tr , " "); do
-        local object_name="bashtest-$(abcli_string_timestamp)"
-
+    for catalog in $(echo $list_of_catalogs | tr + " "); do
         [[ "$catalog" == generic ]] && continue
+
+        abcli_log "testing $catalog.query ..."
+
+        local object_name="bashtest-$(abcli_string_timestamp)"
 
         abcli_eval ,$options \
             blue_geo catalog query $catalog \

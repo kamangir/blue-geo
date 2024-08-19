@@ -62,7 +62,7 @@ def get_list_of_collections(
 ) -> List[str]:
     catalog = get_catalog(catalog_class)
 
-    return catalog.get_collection_names()
+    return catalog.get_list_of_collections()
 
 
 def get_list_of_datacube_classes(

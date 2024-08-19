@@ -16,12 +16,33 @@ class CopernicusSentinel2Datacube(GenericDatacube):
     QGIS_template = "unknown-template"
 
     @classmethod
+    def parse_datacube_id(cls, datacube_id: str) -> Tuple[
+        bool,
+        Dict[str, Any],
+    ]:
+        success, _ = super().parse_datacube_id(datacube_id)
+        if not success:
+            return False, {}
+
+        # datacube-copernicus-sentinel_1-<item_id>
+        segments = datacube_id.split("-")
+        if len(segments) < 4:
+            return False, {}
+
+        if segments[2] != cls.name:
+            return False, {}
+
+        return True, {
+            "item_id": datacube_id.split("-", 4)[3],
+        }
+
+    @classmethod
     def query(
         cls,
         object_name: str,
         datetime: str,
         bbox: List[float],
-        limit: int = 16,
+        count: int,
         verbose: bool = False,
     ) -> bool:
         logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
@@ -36,7 +57,6 @@ class CopernicusSentinel2Datacube(GenericDatacube):
             "collections": ["SENTINEL-2"],
             "bbox": bbox,
             "datetime": datetime,
-            "limit": limit,
         }
         for param, value in search_parameters.items():
             logger.info(f"🔎 {param}: {value}")
@@ -56,9 +76,18 @@ class CopernicusSentinel2Datacube(GenericDatacube):
                     )
                 )
 
-        list_of_datacube_ids: List[str] = [
-            item.id.replace(".SAFE", "-SAFE") for item in items
-        ]
+        list_of_datacube_ids: List[str] = sorted(
+            [
+                "datacube-{}-{}-{}".format(
+                    cls.catalog.name,
+                    cls.name,
+                    item.id.replace(".SAFE", "-SAFE"),
+                )
+                for item in items
+            ]
+        )
+        if count != -1:
+            list_of_datacube_ids = list_of_datacube_ids[:count]
         logger.info(f"{len(list_of_datacube_ids)} datacubes(s) found.")
         for index, datacube_id in enumerate(list_of_datacube_ids):
             logger.info(f"🧊 {index+1:02}: {datacube_id}")

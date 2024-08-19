@@ -85,7 +85,7 @@ class FirmsAreaDatacube(GenericDatacube):
         if len(segments) < 9:
             return False, {}
 
-        if segments[2] != "area":
+        if segments[2] != cls.name:
             return False, {}
 
         area_str = segments[3]

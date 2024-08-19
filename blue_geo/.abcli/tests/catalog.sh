@@ -70,6 +70,8 @@ function test_blue_geo_catalog_query() {
             $(blue_geo catalog query read len $object_name) \
             1
         [[ $? -ne 0 ]] && return 1
+
+        abcli_hr
     done
     return 0
 }

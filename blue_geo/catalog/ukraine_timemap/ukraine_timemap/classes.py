@@ -10,7 +10,7 @@ from abcli.plugins.metadata import post_to_object
 from blue_geo import NAME, VERSION
 from blue_geo import env
 from blue_geo.catalog.generic import GenericDatacube
-from blue_geo.catalog.ukraine_timemap.catalog import UkraineTimemapCatalog
+from blue_geo.catalog.ukraine_timemap.classes import UkraineTimemapCatalog
 from blue_geo.logger import logger
 import matplotlib.pyplot as plt
 from typing import Dict

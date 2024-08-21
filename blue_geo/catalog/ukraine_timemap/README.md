@@ -17,7 +17,7 @@ the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com
 
 ```bash
 @catalog query ukraine_timemap \
-	ingest,select - 
+	select ingest -
 
 @open QGIS .
 @publish tar .

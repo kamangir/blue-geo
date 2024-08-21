@@ -9,12 +9,8 @@ function test_blue_geo_help() {
         \
         "blue_geo catalog" \
         "blue_geo catalog browse" \
-        "blue_geo catalog browse firms " \
         "blue_geo catalog list" \
         "blue_geo catalog query" \
-        "blue_geo catalog query firms" \
-        "blue_geo catalog query firms_area" \
-        "blue_geo catalog query read" \
         \
         "blue_geo datacube" \
         "blue_geo datacube get" \

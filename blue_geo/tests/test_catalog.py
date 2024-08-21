@@ -4,6 +4,7 @@ from abcli.modules.objects import unique_object
 from blue_geo.tests import assets
 from blue_geo.catalog import (
     list_of_catalog_classes,
+    list_of_catalogs,
     list_of_datacube_classes,
     get_catalog,
     get_catalog_class,
@@ -11,7 +12,6 @@ from blue_geo.catalog import (
     get_datacube_class,
     get_list_of_datacube_classes,
     get_list_of_collections,
-    list_of_catalogs,
 )
 from blue_geo.catalog.generic import GenericCatalog, GenericDatacube
 

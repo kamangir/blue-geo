@@ -1,6 +1,6 @@
 # 🌐 firms
 
-the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire Information for Resource Management System. see [datacube](../README.md) for usage instructions.
+the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire Information for Resource Management System. see [datacube](../) for usage instructions.
 
 ## query
 

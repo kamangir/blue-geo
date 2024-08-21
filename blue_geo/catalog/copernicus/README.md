@@ -1,6 +1,6 @@
 # 🌐 copernicus
 
-the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes on Earth](https://dataspace.copernicus.eu/). see [datacube](../README.md) for usage instructions.
+the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes on Earth](https://dataspace.copernicus.eu/). see [datacube](../) for usage instructions.
 
 ## query
 
@@ -16,4 +16,4 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 
 ## example uses
 
-- [Chilcotin River Landslide](./chilcotin_river_landslide.md)
+- [Chilcotin River Landslide](./sentinel_2/chilcotin_river_landslide.md)

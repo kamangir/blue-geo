@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
 parser.add_argument(
     "task",
     type=str,
-    help="get",
+    help="get|ingest",
 )
 parser.add_argument(
     "--what",
@@ -21,7 +21,7 @@ parser.add_argument(
     help="catalog|template",
 )
 parser.add_argument(
-    "--object_name",
+    "--datacube_id",
     type=str,
     default="",
 )
@@ -35,7 +35,7 @@ args = parser.parse_args()
 success = False
 if args.task == "get":
     success = True
-    datacube = get_datacube(datacube_id=args.object_name)
+    datacube = get_datacube(datacube_id=args.datacube_id)
 
     output = f"unknown-{args.what}"
     if args.what == "template":
@@ -44,6 +44,9 @@ if args.task == "get":
         output = datacube.catalog.name
 
     print(output)
+elif args.task == "ingest":
+    datacube = get_datacube(datacube_id=args.datacube_id)
+    success, _ = datacube.ingest(object_name=datacube.datacube_id)
 else:
     success = None
 

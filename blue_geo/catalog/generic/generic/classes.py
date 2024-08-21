@@ -13,6 +13,13 @@ class GenericDatacube:
     catalog = GenericCatalog()
     QGIS_template = "unknown-template"
 
+    query_args: Dict[str, Dict] = {
+        "arg": {
+            "default": "value",
+            "help": "<value>",
+        },
+    }
+
     def __init__(self, datacube_id: str = ""):
         self.datacube_id_ = datacube_id
 

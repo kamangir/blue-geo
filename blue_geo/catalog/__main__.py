@@ -72,7 +72,7 @@ if args.task == "get":
         )
     elif args.what == "url_args":
         catalog_class = get_catalog_class(args.catalog)
-        print("|".join(sorted([item for item in catalog_class.url.keys() if item])))
+        print("|".join(sorted([item for item in catalog_class.url if item])))
     elif args.what == "list_of_args":
         datacube_class = get_datacube_class_in_catalog(
             args.catalog,

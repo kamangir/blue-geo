@@ -24,7 +24,7 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 ```bash
 @catalog query copernicus \
 	sentinel_2,select \
-	ingest,metadata - \
+	ingest - \
 	--count 1 \
 	--datetime 2024-07-30/2024-08-15 \
 	--lat 51.83 \

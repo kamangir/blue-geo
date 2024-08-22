@@ -7,23 +7,21 @@ the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire I
 ```bash
  > @catalog query firms help
 @catalog query firms \
-	[download,ingest,select,upload] \
+	[dryrun,area,select,upload] \
+	[ingest,assets=all|<item-1+item-2>,~copy_template,dryrun,suffix=<suffix>,upload] \
 	[-|<object-name>] \
-	[area,dryrun] \
-	[--date 2024-07-21] \
-	[--depth 1] \
-	[--area east|north|south|west|world] \
-	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP] \
-	[--log 1]
- . firms -query-> <object-name>.
+	[--area east|north|south|west|world]\
+	[--date <yyyy-mm-dd>]\
+	[--depth 1..10]\
+	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP]
+ . firms/area -query-> <object-name>.
 ```
 
 ## example use
 
 ```bash
-@catalog query firms \
-	ingest,select - area \
-	--date 2024-07-24
+@catalog query firms area,select ingest - \
+	--date 2024-07-20
 
 @open QGIS .
 @publish tar .

@@ -4,13 +4,14 @@ the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com
 
 ## query
 
-```
+```bash
  > @catalog query ukraine_timemap help
 @catalog query ukraine_timemap \
-	[download,ingest,select,upload] \
+	[dryrun,ukraine_timemap,select,upload] \
+	[ingest,assets=all|<item-1+item-2>,~copy_template,dryrun,suffix=<suffix>,upload] \
 	[-|<object-name>] \
-	[dryrun]
- . ukraine_timemap -query-> <object-name>.
+	[--arg <value>]
+ . ukraine_timemap/ukraine_timemap -query-> <object-name>.
 ```
 
 ## example use

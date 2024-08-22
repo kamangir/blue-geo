@@ -1,11 +1,11 @@
 #! /usr/bin/env bash
 
-function test_blue_geo_catalog_query_firms_area() {
+function test_blue_geo_catalog_query_copernicus_sentinel_2() {
     local options=$1
 
-    local object_name=firms-$(abcli_string_timestamp_short)
+    local object_name=copernicus-$(abcli_string_timestamp_short)
 
-    blue_geo catalog query firms area ingest \
+    blue_geo catalog query copernicus sentinel_2 ingest \
         $object_name \
         --date 2024-07-20
     [[ $? -ne 0 ]] && return 1
@@ -17,5 +17,5 @@ function test_blue_geo_catalog_query_firms_area() {
 
     abcli_assert \
         $(blue_geo catalog query read - $object_name) \
-        $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA
+        $BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2
 }

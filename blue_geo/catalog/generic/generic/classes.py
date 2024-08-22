@@ -10,8 +10,12 @@ NAME = module.name(__file__, NAME)
 
 class GenericDatacube:
     name = "generic"
+
     catalog = GenericCatalog()
-    QGIS_template = "unknown-template"
+
+    datacube_id = f"datacube-{catalog.name}"
+
+    metadata: Any = None
 
     query_args: Dict[str, Dict] = {
         "arg": {
@@ -20,12 +24,11 @@ class GenericDatacube:
         },
     }
 
-    def __init__(self, datacube_id: str = ""):
-        self.datacube_id_ = datacube_id
+    QGIS_template = "unknown-template"
 
-    @property
-    def datacube_id(self) -> str:
-        return f"datacube-{self.catalog.name}"
+    def __init__(self, datacube_id: str = ""):
+        self.datacube_id = datacube_id
+        self.update_metadata()
 
     @property
     def description(self) -> str:
@@ -58,6 +61,12 @@ class GenericDatacube:
         logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
 
         return post_to_object(object_name, "datacube_id", [])
+
+    def update_metadata(self, verbose: bool = False) -> bool:
+        if verbose:
+            logger.info(f"{self.description}.update_metadata()")
+
+        return True
 
 
 class VoidDatacube(GenericDatacube):

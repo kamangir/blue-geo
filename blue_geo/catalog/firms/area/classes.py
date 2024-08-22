@@ -16,8 +16,8 @@ from blue_geo.logger import logger
 
 class FirmsAreaDatacube(GenericDatacube):
     name = "area"
+
     catalog = FirmsCatalog()
-    QGIS_template = env.BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE
 
     query_args = {
         "area": {
@@ -38,6 +38,8 @@ class FirmsAreaDatacube(GenericDatacube):
             "help": "|".join(Source.values()),
         },
     }
+
+    QGIS_template = env.BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE
 
     def __init__(
         self,
@@ -70,6 +72,18 @@ class FirmsAreaDatacube(GenericDatacube):
             date if date else (datetime.now() - timedelta(days=5)).strftime("%Y-%m-%d")
         )
 
+        self.build_datacube_id()
+
+    def build_datacube_id(self):
+        self.datacube_id = "{}-{}-{}-{}-{}-{}".format(
+            super().datacube_id,
+            "area",
+            self.area.name.lower(),
+            self.source.name,
+            self.date,
+            self.depth,
+        )
+
     @property
     def description(self) -> str:
         return "{}, area:{}, source:{} ({})".format(
@@ -77,17 +91,6 @@ class FirmsAreaDatacube(GenericDatacube):
             self.area.name.lower(),
             self.source.name,
             self.source.description,
-        )
-
-    @property
-    def datacube_id(self) -> str:
-        return "{}-{}-{}-{}-{}-{}".format(
-            super().datacube_id,
-            "area",
-            self.area.name.lower(),
-            self.source.name,
-            self.date,
-            self.depth,
         )
 
     @classmethod

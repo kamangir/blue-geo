@@ -26,12 +26,10 @@ NAME = module.name(__file__, NAME)
 
 class UkraineTimemapDatacube(GenericDatacube):
     name = "ukraine_timemap"
-    catalog = UkraineTimemapCatalog()
-    QGIS_template = env.BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE
 
-    @property
-    def datacube_id(self) -> str:
-        return self.datacube_id_
+    catalog = UkraineTimemapCatalog()
+
+    QGIS_template = env.BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE
 
     def ingest(
         self,

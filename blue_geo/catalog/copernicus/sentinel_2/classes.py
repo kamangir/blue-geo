@@ -84,7 +84,7 @@ class CopernicusSentinel2Datacube(GenericDatacube):
         logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
 
         try:
-            client = Client.open(cls.catalog.url)
+            client = Client.open(cls.catalog.url["api"])
         except Exception as e:
             logger.error(e)
             return False

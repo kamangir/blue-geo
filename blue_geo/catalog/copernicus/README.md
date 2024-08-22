@@ -29,6 +29,8 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 	--datetime 2024-07-30/2024-08-15 \
 	--lat 51.83 \
 	--lon -122.78
+
+# ...
 ```
 
 also see:

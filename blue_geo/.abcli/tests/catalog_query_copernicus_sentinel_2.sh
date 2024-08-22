@@ -7,7 +7,8 @@ function test_blue_geo_catalog_query_copernicus_sentinel_2() {
 
     blue_geo catalog query copernicus sentinel_2 ingest \
         $object_name \
-        --date 2024-07-20
+        --date 2024-07-20/2024-07-30 \
+        --count 1
     [[ $? -ne 0 ]] && return 1
 
     abcli_assert \

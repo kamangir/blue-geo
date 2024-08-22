@@ -51,6 +51,15 @@ class CopernicusSentinel2Datacube(GenericDatacube):
         },
     }
 
+    def ingest(self, object_name: str) -> Tuple[bool, Any]:
+        success, metadata = super().ingest(object_name)
+        if not success:
+            return success, metadata
+
+        logger.info("🪄")
+
+        return True, metadata
+
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[
         bool,

@@ -1,8 +1,10 @@
 from typing import Any, Tuple, Dict, List, Union
+import boto3
 from datetime import datetime, timedelta
 from pystac_client import Client
 from blueness import module
 from blue_geo import NAME
+from blue_geo import env
 from abcli.plugins.metadata import post_to_object
 from blue_geo.catalog.copernicus.classes import CopernicusCatalog
 from blue_geo.catalog.generic.generic.classes import GenericDatacube
@@ -55,6 +57,45 @@ class CopernicusSentinel2Datacube(GenericDatacube):
 
     QGIS_template = "unknown-template"
 
+    def get_bucket(self, verbose: bool = False) -> Tuple[bool, Any, str]:
+        try:
+            href = (
+                self.metadata["Item"]
+                .assets["PRODUCT"]
+                .extra_fields.get("alternate")["s3"]["href"]
+            )
+        except:
+            return False, None, ""
+
+        bucket_name, s3_prefix = href.split("/", 2)[1:3]
+
+        if verbose:
+            logger.info(f"href: {href}")
+            logger.info(f"bucket_name: {bucket_name}")
+            logger.info(f"s3_prefix: {s3_prefix}")
+
+        s3 = boto3.resource(
+            "s3",
+            endpoint_url="https://eodata.dataspace.copernicus.eu",
+            aws_access_key_id=env.COPERNICUS_AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=env.COPERNICUS_AWS_SECRET_ACCESS_KEY,
+            region_name="default",
+        )
+
+        bucket = s3.Bucket(bucket_name)
+
+        return True, bucket, s3_prefix
+
+    @classmethod
+    def get_client(cls) -> Tuple[bool, Union[Client, None]]:
+        try:
+            client = Client.open(cls.catalog.url["api"])
+        except Exception as e:
+            logger.error(e)
+            return False, None
+
+        return True, client
+
     def ingest(self, object_name: str) -> Tuple[bool, Any]:
         success, metadata = super().ingest(object_name)
         if not success:
@@ -86,16 +127,6 @@ class CopernicusSentinel2Datacube(GenericDatacube):
         }
 
     @classmethod
-    def connect(cls) -> Tuple[bool, Union[Client, None]]:
-        try:
-            client = Client.open(cls.catalog.url["api"])
-        except Exception as e:
-            logger.error(e)
-            return False, None
-
-        return True, client
-
-    @classmethod
     def query(
         cls,
         object_name: str,
@@ -106,7 +137,7 @@ class CopernicusSentinel2Datacube(GenericDatacube):
     ) -> bool:
         logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
 
-        success, client = cls.connect()
+        success, client = cls.get_client()
         if not success:
             return success
 
@@ -159,7 +190,7 @@ class CopernicusSentinel2Datacube(GenericDatacube):
         if not super().update_metadata(verbose):
             return False
 
-        success, client = self.connect()
+        success, client = self.get_client()
         if not success:
             return success
 
@@ -185,13 +216,25 @@ class CopernicusSentinel2Datacube(GenericDatacube):
                 )
             )
         item = items[0]
-        self.metadata["Item"] = item
-
         if verbose:
             logger.info(
                 "🧊 {}: {} @ {}".format(
                     item.id, item.datetime, ", ".join(list(item.assets.keys()))
                 )
             )
+        self.metadata["Item"] = item
+
+        success, bucket, s3_prefix = self.get_bucket(verbose)
+
+        list_of_files = [
+            item.key.split(f"{s3_prefix}/", 1)[1]
+            for item in bucket.objects.filter(Prefix=s3_prefix)
+        ]
+        self.metadata["files"] = list_of_files
+
+        if verbose:
+            logger.info(f"{len(list_of_files)} file(s).")
+            for index, filename in enumerate(list_of_files):
+                logger.info(f"#{index+1}: {filename}")
 
         return True

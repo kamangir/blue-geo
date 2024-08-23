@@ -75,9 +75,9 @@ class FirmsAreaDatacube(GenericDatacube):
         self.build_datacube_id()
 
     def build_datacube_id(self):
-        self.datacube_id = "{}-{}-{}-{}-{}-{}".format(
-            super().datacube_id,
-            "area",
+        self.datacube_id = "datacube-{}-{}-{}-{}-{}-{}".format(
+            self.catalog.name,
+            self.name,
             self.area.name.lower(),
             self.source.name,
             self.date,

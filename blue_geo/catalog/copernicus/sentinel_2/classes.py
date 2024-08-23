@@ -199,8 +199,8 @@ class CopernicusSentinel2Datacube(GenericDatacube):
         search_parameters = {"ids": [segments[3]]}
 
         if verbose:
-            for param in search_parameters:
-                logger.info(f"{param}: {search_parameters[param]}")
+            for param, value in search_parameters.items():
+                logger.info(f"{param}: {value}")
 
         search = client.search(**search_parameters)
 

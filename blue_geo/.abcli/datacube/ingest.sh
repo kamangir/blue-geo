@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-export blue_geo_datacube_ingest_options="all,~copy_template,dryrun,suffix=<suffix>,upload"
+export blue_geo_datacube_ingest_options="all,~copy_template,dryrun,overwrite,suffix=<suffix>,upload"
 
 function blue_geo_datacube_ingest() {
     local options=$1
@@ -13,9 +13,10 @@ function blue_geo_datacube_ingest() {
     fi
 
     local do_all=$(abcli_option_int "$options" all 0)
-    local suffix=$(abcli_option "$options" suffix -)
-    local do_upload=$(abcli_option_int "$options" upload 0)
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
+    local do_overwrite=$(abcli_option_int "$options" overwrite 0)
+    local do_upload=$(abcli_option_int "$options" upload 0)
+    local suffix=$(abcli_option "$options" suffix -)
 
     local datacube_id=$(abcli_clarify_object $2 .)
 
@@ -33,11 +34,12 @@ function blue_geo_datacube_ingest() {
             $datacube_id \
             ~meta
 
-    abcli_eval dryrun=$do_dryrun \
-        python3 -m blue_geo.datacube \
+    python3 -m blue_geo.datacube \
         ingest \
         --datacube_id $datacube_id \
         --all $do_all \
+        --dryrun $do_dryrun \
+        --overwrite $do_overwrite \
         --suffix $suffix \
         "${@:3}"
     local status="$?"

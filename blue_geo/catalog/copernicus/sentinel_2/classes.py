@@ -1,8 +1,12 @@
+import os
 from typing import Any, Tuple, Dict, List, Union
 import boto3
 from datetime import datetime, timedelta
 from pystac_client import Client
+from tqdm import tqdm
 from blueness import module
+from abcli import file, path, string
+from abcli.modules import objects
 from blue_geo import NAME
 from blue_geo import env
 from abcli.plugins.metadata import post_to_object
@@ -99,15 +103,74 @@ class CopernicusSentinel2Datacube(GenericDatacube):
     def ingest(
         self,
         all: bool = False,
+        overwrite: bool = False,
+        dryrun: bool = False,
         suffix: str = "",
     ) -> Tuple[bool, Any]:
-        success, output = super().ingest(all, suffix)
+        success, output = super().ingest(all, overwrite, dryrun, suffix)
         if not success:
             return success, output
 
-        logger.info("🪄")
+        success, bucket, s3_prefix = self.get_bucket(verbose=True)
+        if not success:
+            return success, output
 
-        return True, output
+        datacube_path = objects.object_path(self.datacube_id)
+
+        list_of_items = bucket.objects.filter(Prefix=s3_prefix)
+
+        error_count = 0
+        for item in tqdm(list_of_items):
+            item_suffix = item.key.split(f"{s3_prefix}/", 1)[1]
+            if not item_suffix:
+                continue
+
+            item_filename = os.path.join(datacube_path, item_suffix)
+            if not path.create(file.path(item_filename)):
+                error_count += 1
+                continue
+            if item_filename.endswith(os.sep):
+                continue
+
+            if not overwrite and file.exist(item_filename):
+                logger.info(f"✅ {item_filename}")
+                continue
+
+            if (
+                not item.size <= 10**6
+                and not all
+                and not item_filename.endswith("TCI.jp2")
+                and not (suffix and item_filename.endswith(suffix))
+            ):
+                logger.info(
+                    "skipped {}: {}".format(
+                        string.pretty_bytes(item.size),
+                        item.key,
+                    )
+                )
+                continue
+
+            logger.info(
+                "downloading {}: {} -> {}".format(
+                    string.pretty_bytes(item.size),
+                    item.key,
+                    item_filename,
+                )
+            )
+            if dryrun:
+                continue
+
+            try:
+                bucket.download_file(item.key, item_filename)
+            except Exception as e:
+                logger.error(e)
+                error_count += 1
+                continue
+
+        if error_count:
+            logger.error(f"{error_count} error(s).")
+
+        return error_count == 0, output
 
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[

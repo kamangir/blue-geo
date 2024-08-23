@@ -37,6 +37,18 @@ parser.add_argument(
     help="0|1",
 )
 parser.add_argument(
+    "--dryrun",
+    default=0,
+    type=int,
+    help="0|1",
+)
+parser.add_argument(
+    "--overwrite",
+    default=0,
+    type=int,
+    help="0|1",
+)
+parser.add_argument(
     "--suffix",
     default="",
     type=str,
@@ -63,6 +75,8 @@ elif args.task == "ingest":
     datacube = get_datacube(datacube_id=args.datacube_id)
     success, _ = datacube.ingest(
         all=args.all == 1,
+        overwrite=args.overwrite == 1,
+        dryrun=args.dryrun == 1,
         suffix=suffix,
     )
 else:

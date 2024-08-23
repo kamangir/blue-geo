@@ -43,13 +43,23 @@ class GenericDatacube:
     def ingest(
         self,
         all: bool = False,
+        overwrite: bool = False,
+        dryrun: bool = False,
         suffix: str = "",
     ) -> Tuple[bool, Any]:
         logger.info(
-            "{}.{}.ingest{}: {}".format(
+            "{}.{}.ingest({}): {}".format(
                 NAME,
                 self.__class__.__name__,
-                "(all)" if all else f"({suffix})" if suffix else "",
+                ",".join(
+                    [
+                        item
+                        for item in ["dryrun" if dryrun else ""]
+                        + ["all" if all else f"{suffix}" if suffix else ""]
+                        + ["overwrite" if overwrite else ""]
+                        if item
+                    ]
+                ),
                 self.datacube_id,
             )
         )

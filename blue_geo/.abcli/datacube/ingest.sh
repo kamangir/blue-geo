@@ -13,7 +13,7 @@ function blue_geo_datacube_ingest() {
     fi
 
     local do_all=$(abcli_option_int "$options" all 0)
-    local suffix=$(abcli_option_int "$options" suffix -)
+    local suffix=$(abcli_option "$options" suffix -)
     local do_upload=$(abcli_option_int "$options" upload 0)
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
 

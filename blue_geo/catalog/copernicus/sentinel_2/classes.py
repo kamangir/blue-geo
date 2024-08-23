@@ -96,14 +96,18 @@ class CopernicusSentinel2Datacube(GenericDatacube):
 
         return True, client
 
-    def ingest(self, object_name: str) -> Tuple[bool, Any]:
-        success, metadata = super().ingest(object_name)
+    def ingest(
+        self,
+        all: bool = False,
+        suffix: str = "",
+    ) -> Tuple[bool, Any]:
+        success, output = super().ingest(all, suffix)
         if not success:
-            return success, metadata
+            return success, output
 
         logger.info("🪄")
 
-        return True, metadata
+        return True, output
 
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[

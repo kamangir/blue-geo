@@ -19,8 +19,6 @@ def test_datacube_from_query(
     area: enums.Area,
     source: enums.Source,
 ):
-    object_name = unique_object()
-
     datacube = FirmsAreaDatacube(area=area, source=source)
 
     assert isinstance(datacube.catalog, FirmsCatalog)
@@ -33,7 +31,7 @@ def test_datacube_from_query(
 
     assert datacube.ingest_url(html=True)
 
-    success, gdf = datacube.ingest(object_name)
+    success, gdf = datacube.ingest()
     assert success
     assert isinstance(gdf, gpd.GeoDataFrame)
 
@@ -49,15 +47,13 @@ def test_datacube_from_query(
     ],
 )
 def test_datacube_from_datacube_id(datacube_id: str):
-    object_name = unique_object()
-
     datacube = FirmsAreaDatacube(datacube_id)
 
     assert datacube.datacube_id
 
     assert datacube.description
 
-    success, df = datacube.ingest(object_name)
+    success, df = datacube.ingest()
     assert success
     assert isinstance(df, gpd.GeoDataFrame)
 

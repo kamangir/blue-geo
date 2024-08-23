@@ -30,7 +30,22 @@ parser.add_argument(
     type=str,
     default="",
 )
+parser.add_argument(
+    "--all",
+    default=0,
+    type=int,
+    help="0|1",
+)
+parser.add_argument(
+    "--suffix",
+    default="",
+    type=str,
+)
 args = parser.parse_args()
+
+suffix = args.suffix
+if suffix == "-":
+    suffix = ""
 
 success = False
 if args.task == "get":
@@ -46,7 +61,10 @@ if args.task == "get":
     print(output)
 elif args.task == "ingest":
     datacube = get_datacube(datacube_id=args.datacube_id)
-    success, _ = datacube.ingest(object_name=datacube.datacube_id)
+    success, _ = datacube.ingest(
+        all=args.all == 1,
+        suffix=suffix,
+    )
 else:
     success = None
 

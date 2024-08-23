@@ -135,13 +135,19 @@ class FirmsAreaDatacube(GenericDatacube):
             },
         )
 
-    def ingest(self, object_name: str) -> Tuple[
+    def ingest(
+        self,
+        all: bool = False,
+        suffix: str = "",
+    ) -> Tuple[
         bool,
         gpd.GeoDataFrame,
     ]:
-        super().ingest(object_name)
+        success, _ = super().ingest(all, suffix)
+        if not success:
+            return success, gpd.GeoDataFrame()
 
-        csv_filename = objects.path_of("firms_area.csv", object_name, create=True)
+        csv_filename = objects.path_of("firms_area.csv", self.datacube_id, create=True)
         if not file.download(
             self.ingest_url(),
             csv_filename,
@@ -167,13 +173,13 @@ class FirmsAreaDatacube(GenericDatacube):
         )
 
         if not file.save_geojson(
-            objects.path_of("firms_area.geojson", object_name),
+            objects.path_of("firms_area.geojson", self.datacube_id),
             gdf,
         ):
             return False, gdf
 
         if not metadata.post_to_object(
-            object_name,
+            self.datacube_id,
             "datacube",
             {
                 "id": self.datacube_id,

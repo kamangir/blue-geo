@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-export blue_geo_datacube_ingest_options="assets=all|<item-1+item-2>,~copy_template,dryrun,suffix=<suffix>,upload"
+export blue_geo_datacube_ingest_options="all,~copy_template,dryrun,suffix=<suffix>,upload"
 
 function blue_geo_datacube_ingest() {
     local options=$1
@@ -12,6 +12,8 @@ function blue_geo_datacube_ingest() {
         return
     fi
 
+    local do_all=$(abcli_option_int "$options" all 0)
+    local suffix=$(abcli_option_int "$options" suffix -)
     local do_upload=$(abcli_option_int "$options" upload 0)
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
 
@@ -35,6 +37,8 @@ function blue_geo_datacube_ingest() {
         python3 -m blue_geo.datacube \
         ingest \
         --datacube_id $datacube_id \
+        --all $do_all \
+        --suffix $suffix \
         "${@:3}"
     local status="$?"
 

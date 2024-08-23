@@ -33,16 +33,19 @@ class UkraineTimemapDatacube(GenericDatacube):
 
     def ingest(
         self,
-        object_name: str,
         do_save: bool = True,
+        all: bool = False,
+        suffix: str = "",
         do_visualize: bool = True,
         log: bool = True,
     ) -> Tuple[bool, gpd.GeoDataFrame]:
-        super().ingest(object_name)
+        success, _ = super().ingest(all, suffix)
+        if not success:
+            return success, gpd.GeoDataFrame()
 
         filename = objects.path_of(
             "ukraine_timemap.json",
-            object_name,
+            self.datacube_id,
             create=True,
         )
 
@@ -124,7 +127,7 @@ class UkraineTimemapDatacube(GenericDatacube):
                 " | ".join(
                     [
                         "Date",
-                        object_name,
+                        self.datacube_id,
                         f"{NAME}-{VERSION}.{fullname()}",
                     ]
                 )
@@ -148,7 +151,7 @@ class UkraineTimemapDatacube(GenericDatacube):
 
             if do_save:
                 file.save_fig(
-                    objects.path_of("ukraine_timemap.png", object_name),
+                    objects.path_of("ukraine_timemap.png", self.datacube_id),
                     log=log,
                 )
 
@@ -160,11 +163,11 @@ class UkraineTimemapDatacube(GenericDatacube):
 
         if do_save and not gdf.empty:
             if not file.save_geojson(
-                objects.path_of("ukraine_timemap.geojson", object_name),
+                objects.path_of("ukraine_timemap.geojson", self.datacube_id),
                 gdf,
                 log=log,
             ) or not file.save_yaml(
-                objects.path_of("metadata.yaml", object_name),
+                objects.path_of("metadata.yaml", self.datacube_id),
                 metadata,
                 log=log,
             ):

@@ -6,8 +6,6 @@ from blue_geo.catalog.generic import GenericCatalog, GenericDatacube
 
 
 def test_datacube():
-    object_name = unique_object()
-
     datacube = GenericDatacube(env.BLUE_GEO_TEST_DATACUBE_GENERIC_GENERIC)
 
     assert isinstance(datacube.catalog, GenericCatalog)
@@ -16,7 +14,7 @@ def test_datacube():
 
     assert datacube.description
 
-    success, _ = datacube.ingest(object_name)
+    success, _ = datacube.ingest()
     assert success
 
 
@@ -31,15 +29,13 @@ def test_datacube():
     ],
 )
 def test_datacube_from_datacube_id(datacube_id: str):
-    object_name = unique_object()
-
     datacube = GenericDatacube(datacube_id)
 
     assert datacube.datacube_id
 
     assert datacube.description
 
-    success, _ = datacube.ingest(object_name)
+    success, _ = datacube.ingest()
     assert success
 
 

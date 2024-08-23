@@ -40,8 +40,20 @@ class GenericDatacube:
             self.datacube_id,
         )
 
-    def ingest(self, object_name: str) -> Tuple[bool, Any]:
-        logger.info("{} -> {}".format(self.description, object_name))
+    def ingest(
+        self,
+        all: bool = False,
+        suffix: str = "",
+    ) -> Tuple[bool, Any]:
+        logger.info(
+            "{}.{}.ingest{}: {}".format(
+                NAME,
+                self.__class__.__name__,
+                "(all)" if all else f"({suffix})" if suffix else "",
+                self.datacube_id,
+            )
+        )
+
         return True, None
 
     @classmethod

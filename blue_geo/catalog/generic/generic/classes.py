@@ -13,7 +13,7 @@ class GenericDatacube:
 
     catalog = GenericCatalog()
 
-    datacube_id = f"datacube-{catalog.name}"
+    datacube_id = ""
 
     metadata: Any = None
 
@@ -28,7 +28,8 @@ class GenericDatacube:
 
     def __init__(self, datacube_id: str = ""):
         self.datacube_id = datacube_id
-        self.update_metadata()
+        if self.datacube_id:
+            self.update_metadata()
 
     @property
     def description(self) -> str:

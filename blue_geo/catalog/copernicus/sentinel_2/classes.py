@@ -110,16 +110,9 @@ class CopernicusSentinel2Datacube(GenericDatacube):
         if not success:
             return success, output
 
-        download_all = download_metadata = download_quick = False
-        suffix = ""
-        if what == "all":
-            download_all = True
-        elif what == "metadata":
-            download_metadata = True
-        elif what == "quick":
-            download_quick = True
-        else:
-            suffix = what
+        download_all = what == "all"
+        download_quick = what == "quick"
+        suffix = "" if download_all or download_quick or what == "metadata" else what
 
         success, bucket, s3_prefix = self.get_bucket(verbose=True)
         if not success:

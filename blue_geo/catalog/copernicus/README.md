@@ -39,6 +39,8 @@ aoi:
     - lon: -122.78
 ```
 
+---
+
 used by: [query on copernicus/sentinel-2](../../catalog/copernicus/), [`@geo watch`](../).
 
 ## example run

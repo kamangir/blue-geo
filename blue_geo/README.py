@@ -86,5 +86,5 @@ def build():
             VERSION=VERSION,
             REPO_NAME=REPO_NAME,
         )
-        for suffix in [f"catalog/copernicus", "watch"]
+        for suffix in ["catalog/copernicus", "watch"]
     )

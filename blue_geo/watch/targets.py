@@ -26,7 +26,7 @@ class Target:
         self.lon = -123.130760
 
     def __repr__(self) -> str:
-        return "{}[{}]: @(lat={},lon={}) datetime".format(
+        return "{}[{}]: @(lat={},lon={}) {}".format(
             self.__class__.__name__,
             self.name,
             self.lat,

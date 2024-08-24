@@ -34,7 +34,7 @@ aoi:
 
 ---
 
-used by: [query on copernicus/sentinel-2](../../catalog/copernicus/), [`@geo watch`](../).
+using [])().
 
 ## example run
 

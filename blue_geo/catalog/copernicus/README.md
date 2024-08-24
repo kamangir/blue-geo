@@ -39,6 +39,8 @@ aoi:
     - lon: -122.78
 ```
 
+## example run
+
 ```bash
 @select chilcotin-query-2024-08-23-v1
 @catalog query copernicus sentinel_2 ingest . \

@@ -22,6 +22,12 @@ features = {
         "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/copernicus.jpg?raw=true",
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog/copernicus",
     },
+    "geo-watch": {
+        "description": "`@geo watch`es target on Earth.",
+        "icon": ICON,
+        "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/blue-geo-watch.png?raw=true",
+        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
+    },
     "firms-area": {
         "description": "catalog: Fire Information for Resource Management System ([FIRMS](https://firms.modaps.eosdis.nasa.gov)).",
         "icon": ICON,

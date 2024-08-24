@@ -5,13 +5,14 @@ function blue_geo_watch() {
     local workflow_options=$2
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local list_of_targets=$(python3 -m bluegeo.watch list \
+        local list_of_targets=$(python3 -m blue_geo.watch list \
+            --log 0 \
             --what targets \
             --delim \|)
         options="dryrun,upload"
-        target_options="target=$list_of_targets,datetime=<2024-07-30/2024-08-15>,lat=<51.83>,lon=<-122.78>"
+        target_options="target=$list_of_targets$EOP,datetime=<2024-07-30/2024-08-15>,lat=<51.83>,lon=<-122.78>$EOPE"
         workflow_options="${EOP}dryrun,${EOPE}to=$NBS_RUNNERS_LIST"
-        abcli_show_usage "@geo watch$ABCUL[$options]$ABCUL[$target_options]$ABCUL[$workflow_options]$ABCUL[-|<object-name>]$ABCUL" \
+        abcli_show_usage "@geo watch$ABCUL[$options]$ABCUL[$target_options]$ABCUL[$workflow_options]$ABCUL[-|<object-name>]" \
             "watch a target."
         return
     fi

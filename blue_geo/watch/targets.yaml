@@ -1,0 +1,8 @@
+chilcotin-river-landslide:
+  toi:
+    from: 2024-07-30
+    to: 2024-08-09
+  aoi:
+    lat: 51.83
+    lon: -122.78
+  reference: https://chilcotin-river-landslide-2024-bcgov03.hub.arcgis.com/

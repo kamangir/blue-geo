@@ -12,8 +12,8 @@ watching targets through `@geo`.
  . watch a target.
 ```
 
-## example run
+...
 
-see [Chilcotin River Landslide](../catalog/copernicus) for background.
+## example run
 
 🔥

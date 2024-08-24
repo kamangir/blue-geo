@@ -29,7 +29,8 @@ def test_get_target(target_list, description: str):
 
 def test_load_targets(target_list):
     assert target_list.targets
-    for target in target_list.targets:
+
+    for target in target_list.targets.values():
         assert isinstance(target, Target)
 
     for target in ["chilcotin-river-landslide", "elkhema"]:

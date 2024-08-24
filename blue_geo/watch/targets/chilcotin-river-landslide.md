@@ -18,4 +18,4 @@ aoi:
     - lon: -122.78
 ```
 
-see: [query on copernicus/sentinel-2](../../catalog/copernicus/), [`@geo watch`](../).
+used by: [query on copernicus/sentinel-2](../../catalog/copernicus/), [`@geo watch`](../).

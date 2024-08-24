@@ -1,6 +1,6 @@
-# `@geo watch`
+# 🌐 `@geo watch`
 
-`@geo watch`es target on Earth.
+watching targets through `@geo`.
 
 ```bash
  > @geo watch help

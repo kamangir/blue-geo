@@ -23,7 +23,7 @@ features = {
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog/copernicus",
     },
     "geo-watch": {
-        "description": "`@geo watch`es target on Earth.",
+        "description": "watching targets through `@geo`.",
         "icon": ICON,
         "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/blue-geo-watch.png?raw=true",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",

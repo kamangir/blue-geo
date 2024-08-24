@@ -6,6 +6,11 @@ from blue_geo.catalog.copernicus import CopernicusCatalog
 from blue_geo.catalog.copernicus.sentinel_2 import CopernicusSentinel2Datacube
 
 
+def test_get_list_of_collections():
+    catalog = CopernicusCatalog()
+    assert catalog.get_list_of_collections()
+
+
 def test_query():
     object_name = unique_object()
 

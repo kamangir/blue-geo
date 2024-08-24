@@ -2,8 +2,7 @@ import argparse
 from blueness import module
 from blue_geo import NAME, VERSION
 from blue_geo.catalog.default import add_default_arguments
-from blue_geo.catalog.firms.area.enums import Area, Source
-from blue_geo.catalog.firms.area.classes import FirmsAreaDatacube
+from blue_geo.catalog.copernicus.sentinel_2.classes import CopernicusSentinel2Datacube
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
@@ -15,7 +14,7 @@ parser.add_argument(
     type=str,
     help="query",
 )
-add_default_arguments(FirmsAreaDatacube.query_args, parser)
+add_default_arguments(CopernicusSentinel2Datacube.query_args, parser)
 parser.add_argument(
     "--object_name",
     type=str,
@@ -26,12 +25,20 @@ args = parser.parse_args()
 
 success = False
 if args.task == "query":
-    success = FirmsAreaDatacube.query(
+    success = CopernicusSentinel2Datacube.query(
         object_name=args.object_name,
-        area=Area[args.area],
-        source=Source[args.source],
-        depth=args.depth,
-        date=args.date,
+        bbox=(
+            [float(item) for item in args.bbox.split(",") if item]
+            if args.bbox
+            else [
+                args.lon - args.radius,
+                args.lat - args.radius,
+                args.lon + args.radius,
+                args.lat + args.radius,
+            ]
+        ),
+        datetime=args.datetime,
+        count=args.count,
     )
 else:
     success = None

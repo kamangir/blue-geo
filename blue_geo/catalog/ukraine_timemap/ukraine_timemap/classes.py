@@ -10,7 +10,7 @@ from abcli.plugins.metadata import post_to_object
 from blue_geo import NAME, VERSION
 from blue_geo import env
 from blue_geo.catalog.generic import GenericDatacube
-from blue_geo.catalog.ukraine_timemap.catalog import UkraineTimemapCatalog
+from blue_geo.catalog.ukraine_timemap.classes import UkraineTimemapCatalog
 from blue_geo.logger import logger
 import matplotlib.pyplot as plt
 from typing import Dict
@@ -26,25 +26,27 @@ NAME = module.name(__file__, NAME)
 
 class UkraineTimemapDatacube(GenericDatacube):
     name = "ukraine_timemap"
-    catalog = UkraineTimemapCatalog()
-    QGIS_template = env.BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE
 
-    @property
-    def datacube_id(self) -> str:
-        return self.datacube_id_
+    catalog = UkraineTimemapCatalog()
+
+    QGIS_template = env.BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE
 
     def ingest(
         self,
-        object_name: str,
+        dryrun: bool = False,
+        overwrite: bool = False,
         do_save: bool = True,
+        what: str = "metadata",
         do_visualize: bool = True,
         log: bool = True,
     ) -> Tuple[bool, gpd.GeoDataFrame]:
-        super().ingest(object_name)
+        success, _ = super().ingest(dryrun, overwrite, what)
+        if not success:
+            return success, gpd.GeoDataFrame()
 
         filename = objects.path_of(
             "ukraine_timemap.json",
-            object_name,
+            self.datacube_id,
             create=True,
         )
 
@@ -126,7 +128,7 @@ class UkraineTimemapDatacube(GenericDatacube):
                 " | ".join(
                     [
                         "Date",
-                        object_name,
+                        self.datacube_id,
                         f"{NAME}-{VERSION}.{fullname()}",
                     ]
                 )
@@ -150,7 +152,7 @@ class UkraineTimemapDatacube(GenericDatacube):
 
             if do_save:
                 file.save_fig(
-                    objects.path_of("ukraine_timemap.png", object_name),
+                    objects.path_of("ukraine_timemap.png", self.datacube_id),
                     log=log,
                 )
 
@@ -162,11 +164,11 @@ class UkraineTimemapDatacube(GenericDatacube):
 
         if do_save and not gdf.empty:
             if not file.save_geojson(
-                objects.path_of("ukraine_timemap.geojson", object_name),
+                objects.path_of("ukraine_timemap.geojson", self.datacube_id),
                 gdf,
                 log=log,
             ) or not file.save_yaml(
-                objects.path_of("metadata.yaml", object_name),
+                objects.path_of("metadata.yaml", self.datacube_id),
                 metadata,
                 log=log,
             ):
@@ -174,9 +176,11 @@ class UkraineTimemapDatacube(GenericDatacube):
 
         return True, gdf
 
-    @staticmethod
-    def query(object_name: str) -> bool:
-        datacube = UkraineTimemapDatacube(
+    @classmethod
+    def query(cls, object_name: str) -> bool:
+        logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
+
+        datacube = cls(
             "datacube-ukraine_timemap-{}".format(
                 string.pretty_date(as_filename=True),
             )

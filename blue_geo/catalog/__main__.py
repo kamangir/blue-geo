@@ -1,13 +1,20 @@
 import argparse
 from blueness import module
 from blue_geo import NAME, VERSION
-from blue_geo.catalog.classes import list_of_catalogs, get_collections
+from blue_geo.catalog.functions import (
+    get_catalog_class,
+    get_datacube_class_in_catalog,
+    get_list_of_collections,
+    get_list_of_datacube_classes,
+)
+from blue_geo.catalog.classes import list_of_catalogs
+from blue_geo.catalog.default import as_list_of_args
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
 NAME = module.name(__file__, NAME)
 
-list_of_tasks = "get,list"
+list_of_tasks = "get|list"
 
 
 parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
@@ -20,7 +27,6 @@ parser.add_argument(
     "--what",
     default="",
     type=str,
-    help="list_of_collections",
 )
 parser.add_argument(
     "--delim",
@@ -45,6 +51,10 @@ parser.add_argument(
     type=str,
     help="|".join(list_of_catalogs),
 )
+parser.add_argument(
+    "--datacube_class",
+    type=str,
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
@@ -52,32 +62,60 @@ delim = " " if args.delim == "space" else args.delim
 success = args.task in list_of_tasks
 item_name = "item"
 if args.task == "get":
+    if args.what.startswith("url:"):
+        catalog_class = get_catalog_class(args.catalog)
+        print(
+            catalog_class.url.get(
+                args.what.split("url:", 1)[1],
+                "",
+            ),
+        )
+    elif args.what == "url_args":
+        catalog_class = get_catalog_class(args.catalog)
+        print("|".join(sorted([item for item in catalog_class.url if item])))
+    elif args.what == "list_of_args":
+        datacube_class = get_datacube_class_in_catalog(
+            args.catalog,
+            args.datacube_class,
+        )
+        print(as_list_of_args(datacube_class.query_args))
+    else:
+        print(f"unknown-{args.what}")
+elif args.task == "list":
     output = []
 
-    if args.what == "list_of_collections":
+    if args.what == "catalogs":
+        item_name = "catalog"
+        output = list_of_catalogs
+    elif args.what == "collections":
         item_name = "collection"
+        output = get_list_of_collections(catalog_class=args.catalog)
+    elif args.what in ["datacubes", "datacube_classes"]:
+        item_name = "datacube class"
         output = [
-            datacube_class.name for datacube_class in get_collections(args.catalog)
+            datacube_class.name
+            for datacube_class in get_list_of_datacube_classes(
+                catalog_class=args.catalog
+            )
         ]
+    else:
+        success = False
 
     if args.count != -1:
         output = output[: args.count]
-elif args.task == "list":
-    item_name = "catalog"
-    output = list_of_catalogs
+
+    if success:
+        if args.log:
+            logger.info(
+                "{:,} {}(s): {}".format(
+                    len(output),
+                    item_name,
+                    delim.join(output),
+                )
+            )
+        else:
+            print(delim.join(output))
 else:
     success = None
-
-if success:
-    if args.log:
-        logger.info(
-            "{:,} {}(s): {}".format(
-                len(output),
-                item_name,
-                delim.join(output),
-            )
-        )
-    else:
-        print(delim.join(output))
 
 sys_exit(logger, NAME, args.task, success)

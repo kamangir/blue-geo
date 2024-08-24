@@ -16,15 +16,13 @@ from blue_geo.catalog.ukraine_timemap import UkraineTimemapDatacube
     ],
 )
 def test_datacube_from_datacube_id(datacube_id: str):
-    object_name = unique_object()
-
     datacube = UkraineTimemapDatacube(datacube_id)
 
     assert datacube.datacube_id
 
     assert datacube.description
 
-    success, df = datacube.ingest(object_name)
+    success, df = datacube.ingest()
     assert success
     assert isinstance(df, gpd.GeoDataFrame)
 

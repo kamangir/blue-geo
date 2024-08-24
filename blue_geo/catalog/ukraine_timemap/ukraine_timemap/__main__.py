@@ -1,17 +1,20 @@
 import argparse
 from blueness import module
 from blue_geo import NAME, VERSION
-from blue_geo.catalog import get_datacube
+from blue_geo.catalog.ukraine_timemap.ukraine_timemap.classes import (
+    UkraineTimemapDatacube,
+)
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
 NAME = module.name(__file__, NAME)
 
+
 parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
 parser.add_argument(
     "task",
     type=str,
-    help="ingest",
+    help="query",
 )
 parser.add_argument(
     "--object_name",
@@ -19,11 +22,9 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-
 success = False
-if args.task == "ingest":
-    datacube = get_datacube(datacube_id=args.object_name)
-    success, _ = datacube.ingest(object_name=args.object_name)
+if args.task == "query":
+    success = UkraineTimemapDatacube.query(object_name=args.object_name)
 else:
     success = None
 

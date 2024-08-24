@@ -8,4 +8,9 @@ NAME = module.name(__file__, NAME)
 
 class FirmsCatalog(GenericCatalog):
     name = "firms"
-    collections = ["area"]
+
+    url = {
+        "": "https://firms.modaps.eosdis.nasa.gov/",
+        "area": "https://firms.modaps.eosdis.nasa.gov/api/area/",
+        "map_key": "https://firms.modaps.eosdis.nasa.gov/api/map_key/",
+    }

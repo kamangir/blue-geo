@@ -1,27 +1,20 @@
 #! /usr/bin/env bash
 
-export blue_geo_catalog_query_options="download,ingest,select,upload"
-
 function blue_geo_catalog_query() {
-    local catalog=${1:firms}
+    local catalog=$1
 
-    local options=$2
-
-    if [ $(abcli_option_int "$catalog" help 0) == 1 ]; then
-        for catalog in $(echo $blue_geo_catalog_list | tr , " "); do
-            blue_geo_catalog_query_${catalog} "$@"
+    if [[ "$catalog" == help ]]; then
+        for catalog in $(echo $blue_geo_list_of_catalogs | tr , " "); do
+            [[ "$catalog" == generic ]] &&
+                continue
+            blue_geo_catalog_query $catalog "$@"
         done
 
         blue_geo_catalog_query_read "$@"
         return
     fi
 
-    local do_download=$(abcli_option_int "$options" download 0)
-    local do_ingest=$(abcli_option_int "$options" ingest 0)
-    local do_select=$(abcli_option_int "$options" select 0)
-    local do_upload=$(abcli_option_int "$options" upload 0)
-
-    if [[ ",$blue_geo_catalog_list," != *",$catalog,"* ]]; then
+    if [[ ",$blue_geo_list_of_catalogs," != *",$catalog,"* ]]; then
         local function_name=blue_geo_catalog_query_$catalog
         if [[ $(type -t $function_name) == "function" ]]; then
             $function_name "${@:2}"
@@ -32,46 +25,93 @@ function blue_geo_catalog_query() {
         return 1
     fi
 
-    if [[ $(abcli_option_int "$options" help 0) == 1 ]]; then
-        blue_geo_catalog_query_${catalog} "${@:2}"
+    local options=$2
+    local do_dryrun=$(abcli_option_int "$options" dryrun 0)
+    local do_select=$(abcli_option_int "$options" select 0)
+    local do_upload=$(abcli_option_int "$options" upload 0)
+
+    local list_of_datacube_classes=$(blue_geo_catalog list \
+        datacube_classes \
+        --catalog $catalog \
+        --delim , \
+        --log 0)
+    local default_datacube_class=$(blue_geo_catalog list \
+        datacube_classes \
+        --catalog $catalog \
+        --count 1 \
+        --delim , \
+        --log 0)
+
+    local datacube_class=$(abcli_option_choice "$options" $list_of_datacube_classes)
+
+    local ingest_options=$3
+
+    if [[ $(abcli_option_int "$options" help 0) == 1 ]] ||
+        [[ $(abcli_option_int "$ingest_options" help 0) == 1 ]]; then
+        if [[ ! -z "$datacube_class" ]]; then
+            options="dryrun,$datacube_class,select,upload"
+            ingest_options="ingest,$blue_geo_datacube_ingest_options"
+
+            local args=$(python3 -m blue_geo.catalog \
+                get \
+                --catalog $catalog \
+                --datacube_class $datacube_class \
+                --what list_of_args)
+
+            abcli_show_usage "@catalog query $catalog$ABCUL[$options]$ABCUL[$ingest_options]$ABCUL[-|<object-name>]$ABCUL$args" \
+                "$catalog/$datacube_class -query-> <object-name>."
+        else
+            for datacube_class in $(echo $list_of_datacube_classes | tr , " "); do
+                blue_geo_catalog_query \
+                    $catalog \
+                    $datacube_class \
+                    help
+            done
+        fi
         return
     fi
 
-    local object_name=$(abcli_clarify_object $3 query-$catalog-$(abcli_string_timestamp))
+    [[ -z "$datacube_class" ]] &&
+        datacube_class=$default_datacube_class
 
-    local query_options=$4
+    local object_name=$(abcli_clarify_object $4 query-$catalog-$datacube_class-$(abcli_string_timestamp))
 
-    abcli_log "🌐 query: $catalog -$query_options-> $object_name"
+    abcli_log "🔎 query: $catalog/$datacube_class -> $object_name ..."
 
-    [[ "$do_download" == 1 ]] &&
-        abcli_download - $object_name
-
-    blue_geo_catalog_query_${catalog} \
-        ,$query_options \
-        $object_name \
+    abcli_eval dryrun=$do_dryrun \
+        python3 -m blue_geo.catalog.$catalog.$datacube_class \
+        query \
+        --object_name $object_name \
         "${@:5}"
 
     [[ "$do_upload" == 1 ]] &&
         abcli_upload - $object_name
 
-    [[ "$do_ingest" == 0 ]] && [[ "$do_select" == 0 ]] &&
+    local do_ingest=$(abcli_option_int "$ingest_options" ingest 0)
+
+    [[ "$do_ingest" == 0 ]] &&
+        [[ "$do_select" == 0 ]] &&
         return 0
 
     local datacube_id=$(blue_geo_catalog_query_read - $object_name)
     if [[ -z "$datacube_id" ]]; then
-        abcli_log_error "-@catalog: query: $catalog: no datacube id found."
+        abcli_log_error "-@catalog: query: $catalog: $datacube_class: no datacube id found."
         return 1
     fi
     abcli_log "🧊 $datacube_id"
 
-    [[ "$do_ingest" == 1 ]] &&
-        blue_geo_datacube_ingest - $datacube_id
+    local status=0
+    if [[ "$do_ingest" == 1 ]]; then
+        blue_geo_datacube_ingest \
+            ,$ingest_options \
+            $datacube_id
+        status="$?"
+    fi
 
     [[ "$do_select" == 1 ]] &&
         abcli_select $datacube_id
 
-    return 0
-
+    return $status
 }
 
 abcli_source_path - caller,suffix=/query

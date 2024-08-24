@@ -12,11 +12,11 @@ function blue_geo_datacube_get() {
 
     local what=$(abcli_option_choice "$options" catalog,template void)
 
-    local object_name=$(abcli_clarify_object $2 .)
+    local datacube_id=$(abcli_clarify_object $2 .)
 
     python3 -m blue_geo.datacube \
         get \
         --what "$what" \
-        --object_name $object_name \
+        --datacube_id $datacube_id \
         "${@:3}"
 }

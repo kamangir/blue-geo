@@ -16,7 +16,29 @@ from blue_geo.logger import logger
 
 class FirmsAreaDatacube(GenericDatacube):
     name = "area"
+
     catalog = FirmsCatalog()
+
+    query_args = {
+        "area": {
+            "default": Area.default().name,
+            "help": "|".join(Area.values()),
+        },
+        "date": {
+            "default": (datetime.now() - timedelta(days=5)).strftime("%Y-%m-%d"),
+            "help": "<yyyy-mm-dd>",
+        },
+        "depth": {
+            "type": int,
+            "default": 1,
+            "help": "1..10",
+        },
+        "source": {
+            "default": Source.default().name,
+            "help": "|".join(Source.values()),
+        },
+    }
+
     QGIS_template = env.BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE
 
     def __init__(
@@ -50,6 +72,18 @@ class FirmsAreaDatacube(GenericDatacube):
             date if date else (datetime.now() - timedelta(days=5)).strftime("%Y-%m-%d")
         )
 
+        self.build_datacube_id()
+
+    def build_datacube_id(self):
+        self.datacube_id = "datacube-{}-{}-{}-{}-{}-{}".format(
+            self.catalog.name,
+            self.name,
+            self.area.name.lower(),
+            self.source.name,
+            self.date,
+            self.depth,
+        )
+
     @property
     def description(self) -> str:
         return "{}, area:{}, source:{} ({})".format(
@@ -57,17 +91,6 @@ class FirmsAreaDatacube(GenericDatacube):
             self.area.name.lower(),
             self.source.name,
             self.source.description,
-        )
-
-    @property
-    def datacube_id(self) -> str:
-        return "{}-{}-{}-{}-{}-{}".format(
-            super().datacube_id,
-            "area",
-            self.area.name.lower(),
-            self.source.name,
-            self.date,
-            self.depth,
         )
 
     @classmethod
@@ -85,7 +108,7 @@ class FirmsAreaDatacube(GenericDatacube):
         if len(segments) < 9:
             return False, {}
 
-        if segments[2] != "area":
+        if segments[2] != cls.name:
             return False, {}
 
         area_str = segments[3]
@@ -112,13 +135,20 @@ class FirmsAreaDatacube(GenericDatacube):
             },
         )
 
-    def ingest(self, object_name: str) -> Tuple[
+    def ingest(
+        self,
+        dryrun: bool = False,
+        overwrite: bool = False,
+        what: str = "metadata",
+    ) -> Tuple[
         bool,
         gpd.GeoDataFrame,
     ]:
-        super().ingest(object_name)
+        success, _ = super().ingest(dryrun, overwrite, what)
+        if not success:
+            return success, gpd.GeoDataFrame()
 
-        csv_filename = objects.path_of("firms_area.csv", object_name, create=True)
+        csv_filename = objects.path_of("firms_area.csv", self.datacube_id, create=True)
         if not file.download(
             self.ingest_url(),
             csv_filename,
@@ -144,13 +174,13 @@ class FirmsAreaDatacube(GenericDatacube):
         )
 
         if not file.save_geojson(
-            objects.path_of("firms_area.geojson", object_name),
+            objects.path_of("firms_area.geojson", self.datacube_id),
             gdf,
         ):
             return False, gdf
 
         if not metadata.post_to_object(
-            object_name,
+            self.datacube_id,
             "datacube",
             {
                 "id": self.datacube_id,
@@ -176,9 +206,11 @@ class FirmsAreaDatacube(GenericDatacube):
             self.date,
         )
 
-    @staticmethod
-    def query(object_name: str, **kwargs) -> bool:
-        datacube = FirmsAreaDatacube(**kwargs)
+    @classmethod
+    def query(cls, object_name: str, **kwargs) -> bool:
+        logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
+
+        datacube = cls(**kwargs)
 
         logger.info(f"🧊 {datacube.description}")
 

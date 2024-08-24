@@ -4,20 +4,21 @@ the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com
 
 ## query
 
-```
+```bash
  > @catalog query ukraine_timemap help
 @catalog query ukraine_timemap \
-	[download,ingest,select,upload] \
+	[dryrun,ukraine_timemap,select,upload] \
+	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
 	[-|<object-name>] \
-	[dryrun]
- . ukraine_timemap -query-> <object-name>.
+	[--arg <value>]
+ . ukraine_timemap/ukraine_timemap -query-> <object-name>.
 ```
 
 ## example use
 
 ```bash
 @catalog query ukraine_timemap \
-	ingest,select - 
+	select ingest -
 
 @open QGIS .
 @publish tar .

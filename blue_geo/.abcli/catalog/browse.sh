@@ -1,17 +1,37 @@
 #! /usr/bin/env bash
 
 function blue_geo_catalog_browse() {
-    local options=$1
+    local catalog=$1
 
-    local catalog=$(abcli_option "$options" $blue_geo_catalog_list firms)
-
-    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        for catalog in $(echo $blue_geo_catalog_list | tr , " "); do
-            blue_geo_catalog_browse_${catalog} "$@"
+    if [[ "$catalog" == help ]]; then
+        for catalog in $(echo $blue_geo_list_of_catalogs | tr , " "); do
+            [[ "$catalog" == generic ]] &&
+                continue
+            blue_geo_catalog_browse $catalog "$@"
         done
         return
     fi
 
-    abcli_log "@catalog: browsing $catalog ..."
-    blue_geo_catalog_browse_${catalog} "${@:2}"
+    if [[ ",$blue_geo_list_of_catalogs," != *",$catalog,"* ]]; then
+        abcli_log_error "-@catalog: browse: $catalog: catalog not found."
+        return 1
+    fi
+
+    local what=$2
+
+    if [[ "$what" == help ]]; then
+        local args=$(python3 -m blue_geo.catalog get \
+            --catalog $catalog \
+            --what url_args)
+        abcli_show_usage "@catalog browse $catalog$ABCUL$args" \
+            "browse $catalog."
+        return
+    fi
+
+    local url=$(python3 -m blue_geo.catalog get \
+        --catalog $catalog \
+        --what "url:$what" \
+        "${@:3}")
+
+    abcli_browse $url
 }

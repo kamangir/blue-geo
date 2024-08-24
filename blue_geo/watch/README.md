@@ -34,7 +34,7 @@ aoi:
 
 ---
 
-using [])().
+using [chilcotin-river-landslide](./targets/chilcotin-river-landslide.md).
 
 ## example run
 

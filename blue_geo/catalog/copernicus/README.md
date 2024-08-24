@@ -8,7 +8,7 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
  > @catalog query copernicus help
 @catalog query copernicus \
 	[dryrun,sentinel_2,select,upload] \
-	[ingest,assets=all|<item-1+item-2>,~copy_template,dryrun,suffix=<suffix>,upload] \
+	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
 	[-|<object-name>] \
 	[--bbox <-122.88,51.73,-122.68,51.93>]\
 	[--count <10>, -1: all]\
@@ -30,8 +30,10 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 	--lat 51.83 \
 	--lon -122.78
 
-# ...
+@publish tar .
 ```
+
+[datacube-copernicus-sentinel_2-S2A_MSIL1C_20240731T191911_N0511_R099_T10UDC_20240801T003519-SAFE.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/datacube-copernicus-sentinel_2-S2A_MSIL1C_20240731T191911_N0511_R099_T10UDC_20240801T003519-SAFE.tar.gz)
 
 also see:
 

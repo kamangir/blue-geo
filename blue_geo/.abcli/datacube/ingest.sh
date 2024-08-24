@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-export blue_geo_datacube_ingest_options="all,~copy_template,dryrun,overwrite,suffix=<suffix>,upload"
+export blue_geo_datacube_ingest_options="$EOP~copy_template,dryrun,overwrite,upload,${EOPE}what=all|metadata|quick|<suffix>"
 
 function blue_geo_datacube_ingest() {
     local options=$1
@@ -8,15 +8,14 @@ function blue_geo_datacube_ingest() {
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options=$blue_geo_datacube_ingest_options
         abcli_show_usage "@datacube ingest$ABCUL[$options]$ABCUL[.|<datacube-id>]$ABCUL[<args>]" \
-            "ingest <datacube-id>."
+            "ingest <datacube-id>.${ABCUL2}all: ALL files.${ABCUL2}metadata (default): any < 1 MB.${ABCUL2}quick: around 200 MB, decided by the datacube class.${ABCUL2}suffix=<suffix>: any *<suffix>."
         return
     fi
 
-    local do_all=$(abcli_option_int "$options" all 0)
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
+    local what=$(abcli_option "$options" what metadata)
     local do_overwrite=$(abcli_option_int "$options" overwrite 0)
     local do_upload=$(abcli_option_int "$options" upload 0)
-    local suffix=$(abcli_option "$options" suffix -)
 
     local datacube_id=$(abcli_clarify_object $2 .)
 
@@ -37,10 +36,9 @@ function blue_geo_datacube_ingest() {
     python3 -m blue_geo.datacube \
         ingest \
         --datacube_id $datacube_id \
-        --all $do_all \
         --dryrun $do_dryrun \
         --overwrite $do_overwrite \
-        --suffix $suffix \
+        --what $what \
         "${@:3}"
     local status="$?"
 

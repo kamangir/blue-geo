@@ -137,15 +137,14 @@ class FirmsAreaDatacube(GenericDatacube):
 
     def ingest(
         self,
-        all: bool = False,
-        overwrite: bool = False,
         dryrun: bool = False,
-        suffix: str = "",
+        overwrite: bool = False,
+        what: str = "metadata",
     ) -> Tuple[
         bool,
         gpd.GeoDataFrame,
     ]:
-        success, _ = super().ingest(all, overwrite, dryrun, suffix)
+        success, _ = super().ingest(dryrun, overwrite, what)
         if not success:
             return success, gpd.GeoDataFrame()
 

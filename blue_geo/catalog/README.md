@@ -95,7 +95,7 @@ to see catalog-specific query args,
 ```bash
 @catalog query copernicus \
 	[dryrun,sentinel_2,select,upload] \
-	[ingest,assets=all|<item-1+item-2>,~copy_template,dryrun,suffix=<suffix>,upload] \
+	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
 	[-|<object-name>] \
 	[--bbox <-122.88,51.73,-122.68,51.93>]\
 	[--count <10>, -1: all]\
@@ -106,7 +106,7 @@ to see catalog-specific query args,
  . copernicus/sentinel_2 -query-> <object-name>.
 @catalog query firms \
 	[dryrun,area,select,upload] \
-	[ingest,assets=all|<item-1+item-2>,~copy_template,dryrun,suffix=<suffix>,upload] \
+	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
 	[-|<object-name>] \
 	[--area east|north|south|west|world]\
 	[--date <yyyy-mm-dd>]\
@@ -115,7 +115,7 @@ to see catalog-specific query args,
  . firms/area -query-> <object-name>.
 @catalog query ukraine_timemap \
 	[dryrun,ukraine_timemap,select,upload] \
-	[ingest,assets=all|<item-1+item-2>,~copy_template,dryrun,suffix=<suffix>,upload] \
+	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
 	[-|<object-name>] \
 	[--arg <value>]
  . ukraine_timemap/ukraine_timemap -query-> <object-name>.

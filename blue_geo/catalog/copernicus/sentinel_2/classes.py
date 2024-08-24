@@ -102,20 +102,32 @@ class CopernicusSentinel2Datacube(GenericDatacube):
 
     def ingest(
         self,
-        all: bool = False,
-        overwrite: bool = False,
         dryrun: bool = False,
-        suffix: str = "",
+        overwrite: bool = False,
+        what: str = "metadata",
     ) -> Tuple[bool, Any]:
-        success, output = super().ingest(all, overwrite, dryrun, suffix)
+        success, output = super().ingest(dryrun, overwrite, what)
         if not success:
             return success, output
+
+        download_all = download_metadata = download_quick = False
+        suffix = ""
+        if what == "all":
+            download_all = True
+        elif what == "metadata":
+            download_metadata = True
+        elif what == "quick":
+            download_quick = True
+        else:
+            suffix = what
 
         success, bucket, s3_prefix = self.get_bucket(verbose=True)
         if not success:
             return success, output
 
         datacube_path = objects.object_path(self.datacube_id)
+        if not path.create(datacube_path):
+            return False, output
 
         list_of_items = bucket.objects.filter(Prefix=s3_prefix)
 
@@ -138,8 +150,8 @@ class CopernicusSentinel2Datacube(GenericDatacube):
 
             if (
                 not item.size <= 10**6
-                and not all
-                and not item_filename.endswith("TCI.jp2")
+                and not download_all
+                and not (download_quick and item_filename.endswith("TCI.jp2"))
                 and not (suffix and item_filename.endswith(suffix))
             ):
                 logger.info(

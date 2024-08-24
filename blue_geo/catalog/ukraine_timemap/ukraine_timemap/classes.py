@@ -33,15 +33,14 @@ class UkraineTimemapDatacube(GenericDatacube):
 
     def ingest(
         self,
-        do_save: bool = True,
-        all: bool = False,
-        overwrite: bool = False,
         dryrun: bool = False,
-        suffix: str = "",
+        overwrite: bool = False,
+        do_save: bool = True,
+        what: str = "metadata",
         do_visualize: bool = True,
         log: bool = True,
     ) -> Tuple[bool, gpd.GeoDataFrame]:
-        success, _ = super().ingest(all, overwrite, dryrun, suffix)
+        success, _ = super().ingest(dryrun, overwrite, what)
         if not success:
             return success, gpd.GeoDataFrame()
 

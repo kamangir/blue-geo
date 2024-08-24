@@ -18,7 +18,7 @@ parser.add_argument(
     "--what",
     default="",
     type=str,
-    help="catalog|template",
+    help="get:catalog|template, ingest: all|metadata|quick|<suffix>",
 )
 parser.add_argument(
     "--datacube_id",
@@ -29,12 +29,6 @@ parser.add_argument(
     "--catalog",
     type=str,
     default="",
-)
-parser.add_argument(
-    "--all",
-    default=0,
-    type=int,
-    help="0|1",
 )
 parser.add_argument(
     "--dryrun",
@@ -48,16 +42,7 @@ parser.add_argument(
     type=int,
     help="0|1",
 )
-parser.add_argument(
-    "--suffix",
-    default="",
-    type=str,
-)
 args = parser.parse_args()
-
-suffix = args.suffix
-if suffix == "-":
-    suffix = ""
 
 success = False
 if args.task == "get":
@@ -74,10 +59,9 @@ if args.task == "get":
 elif args.task == "ingest":
     datacube = get_datacube(datacube_id=args.datacube_id)
     success, _ = datacube.ingest(
-        all=args.all == 1,
-        overwrite=args.overwrite == 1,
         dryrun=args.dryrun == 1,
-        suffix=suffix,
+        overwrite=args.overwrite == 1,
+        what=args.what if args.what else "metadata",
     )
 else:
     success = None

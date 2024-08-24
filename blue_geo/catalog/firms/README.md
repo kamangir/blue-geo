@@ -8,7 +8,7 @@ the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire I
  > @catalog query firms help
 @catalog query firms \
 	[dryrun,area,select,upload] \
-	[ingest,assets=all|<item-1+item-2>,~copy_template,dryrun,suffix=<suffix>,upload] \
+	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
 	[-|<object-name>] \
 	[--area east|north|south|west|world]\
 	[--date <yyyy-mm-dd>]\

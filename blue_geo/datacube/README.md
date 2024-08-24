@@ -15,9 +15,14 @@
 run `@datacube ingest` to ingest a [datacube](../datacube/), or use `@catalog query <catalog> <collection> ingest`. 
 
 ```bash
+> @datacube ingest help
 @datacube ingest \
-    [assets=all|<item-1+item-2>,~copy_template,dryrun,suffix=<suffix>,upload] \
-    [.|<datacube-id>] \
-    [<args>]
+	[~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
+	[.|<datacube-id>] \
+	[<args>]
  . ingest <datacube-id>.
- ```
+   all: ALL files.
+   metadata (default): any < 1 MB.
+   quick: around 200 MB, decided by the datacube class.
+   suffix=<suffix>: any *<suffix>.
+```

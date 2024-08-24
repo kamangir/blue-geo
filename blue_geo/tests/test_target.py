@@ -23,7 +23,7 @@ def target_list():
     ],
 )
 def test_get_target(target_list, description: str):
-    target = target_list.get_target(description)
+    target = target_list.get(description)
     assert isinstance(target, Target)
 
 

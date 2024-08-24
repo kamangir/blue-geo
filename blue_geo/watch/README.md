@@ -12,7 +12,7 @@ watching targets through `@geo`.
  . watch a target.
 ```
 
-## 🌐 Chilcotin River Landslide
+## case study: Chilcotin River Landslide
 
 ![image](https://github.com/kamangir/assets/blob/main/blue-geo/chilcotin-river-landslide-2.jpg?raw=true)
 

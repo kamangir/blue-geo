@@ -19,7 +19,7 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
  . copernicus/sentinel_2 -query-> <object-name>.
 ```
 
---include-- ../../watch/targets/chilcotin-river-landslide.md
+--include-- ../../watch/targets/chilcotin-river-landslide.md case study: Chilcotin River Landslide
 
 ## example run
 

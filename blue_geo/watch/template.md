@@ -12,7 +12,7 @@ watching targets through `@geo`.
  . watch a target.
 ```
 
---include-- ./targets/chilcotin-river-landslide.md
+--include-- ./targets/chilcotin-river-landslide.md case study: Chilcotin River Landslide
 
 ## example run
 

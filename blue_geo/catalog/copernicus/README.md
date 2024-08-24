@@ -19,22 +19,41 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
  . copernicus/sentinel_2 -query-> <object-name>.
 ```
 
-## example use
+## Chilcotin River Landslide
+
+![image](https://github.com/kamangir/assets/blob/main/blue-geo/chilcotin-river-landslide-2.jpg?raw=true)
+
+background:
+- [Chilcotin River Landslide Information Portal](https://chilcotin-river-landslide-2024-bcgov03.hub.arcgis.com/) - source of ⬆️ image.
+- [Google Map](https://maps.app.goo.gl/WHTNCDsFNoZAAnzX8): `lat: 51°50'51.1"N`, `lon: 122°47'06.8"W`.
+- [Chilcotin River’s Landslide Lake Begins Draining](https://www.bluemarble.nasa.gov/images/153195/chilcotin-rivers-landslide-lake-begins-draining)
+- [Reddit: Before and after satellite images of the Chilcotin River landslide](https://www.reddit.com/r/britishcolumbia/comments/1eh9eql/before_and_after_satellite_images_of_the/)
+
+
+```yaml
+toi:
+    - from: 2024-07-30
+    - to: 2024-08-09
+aoi: 
+    - lat: 51.83
+    - lon: -122.78
+```
 
 ```bash
-@catalog query copernicus \
-	sentinel_2,select \
-	ingest - \
-	--count 1 \
-	--datetime 2024-07-30/2024-08-15 \
-	--lat 51.83 \
-	--lon -122.78
+@select chilcotin-query-2024-08-23-v1
+@catalog query copernicus sentinel_2 ingest . \
+  --count 10 \
+  --datetime 2024-07-30/2024-08-09 \
+  --lat  51.83 \
+  --lon -122.78
 
+@select $(@catalog query read - . --count 1 --offset 3)
+@datacube ingest what=quick .
 @publish tar .
 ```
 
-[datacube-copernicus-sentinel_2-S2A_MSIL1C_20240731T191911_N0511_R099_T10UDC_20240801T003519-SAFE.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/datacube-copernicus-sentinel_2-S2A_MSIL1C_20240731T191911_N0511_R099_T10UDC_20240801T003519-SAFE.tar.gz)
+![image](https://github.com/kamangir/assets/blob/main/blue-geo/chilcotin-query-2024-08-23-v1.png?raw=true)
 
-also see:
+[datacube-copernicus-sentinel_2-S2A_MSIL1C_20240807T190911_N0511_R056_T10UEC_20240808T002811-SAFE.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/datacube-copernicus-sentinel_2-S2A_MSIL1C_20240807T190911_N0511_R056_T10UEC_20240808T002811-SAFE.tar.gz)
 
-- [Chilcotin River Landslide](./sentinel_2/chilcotin_river_landslide.md)
+more: [1](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-183-53e60268d40e)

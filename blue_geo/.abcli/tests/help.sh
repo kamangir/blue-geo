@@ -18,7 +18,9 @@ function test_blue_geo_help() {
         \
         "blue_geo QGIS" \
         "blue_geo QGIS_expressions" \
-        "blue_geo QGIS_server"; do
+        "blue_geo QGIS_server" \
+        \
+        "blue_geo watch"; do
         abcli_eval ,$options \
             $module help
         [[ $? -ne 0 ]] && return 1

@@ -38,4 +38,12 @@ using [chilcotin-river-landslide](./targets/chilcotin-river-landslide.md).
 
 ## example run
 
+```bash
+@geo watch  \
+	[dryrun,frames=<frames>,upload] \
+	[dryrun,datetime=<2024-07-30/2024-08-15>,lat=<51.83>,lon=<-122.78>,target=chilcotin-river-landslide] \
+	[dryrun,to=aws_batch|generic|local] \
+	[-|<object-name>]
+```
+
 🔥

@@ -1,6 +1,6 @@
 # `@geo watch`
 
-`@geo watch` watches a target on Earth.,
+`@geo watch`es target on Earth.
 
 ```bash
  > @geo watch help

@@ -12,7 +12,7 @@ elkhema:
     datetime: 2022-08-06/
     lat: 49.281209
     lon: -123.130760
-quick-test:
+test:
   catalog: copernicus
   collection: sentinel_2
   args:

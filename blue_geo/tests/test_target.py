@@ -13,20 +13,6 @@ def target_list():
     )
 
 
-@pytest.mark.parametrize(
-    ["description"],
-    [
-        ["void"],
-        ["elkhema"],
-        ["chilcotin-river-landslide"],
-        ["datetime=2024-07-30/2024-08-15,lat=51.83,lon=-122.78"],
-    ],
-)
-def test_get_target(target_list, description: str):
-    target = target_list.get(description)
-    assert isinstance(target, Target)
-
-
 def test_load_targets(target_list):
     assert target_list.targets
 

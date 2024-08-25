@@ -1,6 +1,6 @@
 # 🌐 catalog
 
-`catalog`s can be [listed](#listing-catalogs) and [browsed](#browsing-a-catalog) and [queried](#running-a-query-for-datacubes) for [`datacube`](../datacube/)s. `datacube`s are collections that are represented by children of [`GenericDatacube`](../../catalog/generic/datacube.py) and can be [ingested](../datacube/README.md#ingesting-a-datacube).
+`catalog`s are [lists](#listing-catalogs) of collections that can be [browsed](#browsing-a-catalog), [queried](#running-a-query-for-datacubes), and [ingested as `datacube`](../datacube/)s. 
 
 look for example uses in the supported catalogs: [copernicus](./copernicus/), [firms](./firms/), [ukraine_timemap](./ukraine_timemap/). 
 
@@ -43,7 +43,7 @@ to see the list of datacube classes for a catalog,
 
 ## browsing a catalog
 
-to see the list of pages that can be browsed for catalog,
+to see the list of pages that can be browsed for a catalog,
 
 ```bash
 @catalog browse firms help

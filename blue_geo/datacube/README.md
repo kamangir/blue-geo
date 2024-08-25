@@ -1,6 +1,6 @@
 # 🧊 datacube
 
-`datacube`s are [objects](https://kamangir-public.s3.ca-central-1.amazonaws.com/giza-v1/giza.pdf) that can be queried in [catalogs](../catalog) and [ingested](#ingesting-a-datacube).
+`datacube`s are items from [collections](../catalog/) that are represented by children of [`GenericDatacube`](../../catalog/generic/datacube.py) and can be [ingested](#ingesting-a-datacube) as [objects](https://kamangir-public.s3.ca-central-1.amazonaws.com/giza-v1/giza.pdf).
 
 ## adding a new datacube class
 
@@ -12,7 +12,7 @@
 
 ## ingesting a datacube
 
-run `@datacube ingest` to ingest a [datacube](../datacube/), or use `@catalog query <catalog> <collection> ingest`. 
+run `@datacube ingest`  or use [`@catalog query <catalog> <collection> ingest`](../catalog/). 
 
 ```bash
 > @datacube ingest help

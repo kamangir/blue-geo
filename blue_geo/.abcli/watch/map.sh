@@ -21,7 +21,7 @@ function blue_geo_watch_map() {
     [[ "$do_download" == 1 ]] &&
         abcli_download - $query_object_name
 
-    local datacube_id=$(@catalog query read - \
+    local datacube_id=$(blue_geo_catalog_query_read - \
         $query_object_name \
         --count 1 \
         --offset $offset)

@@ -8,7 +8,7 @@
 
 2️⃣ clone [blue_geo/catalog/generic/generic](../catalog/generic/generic/) similar to [blue_geo/catalog/copernicus/sentinel_2](../catalog/copernicus/sentinel_2/) and define `NovelDatacube`.
 
-3️⃣ update [blue_geo/catalog/classes.py](../catalog/classes.py).
+3️⃣ add `NovelDatacube` to [blue_geo/catalog/classes.py](../catalog/classes.py).
 
 ## ingesting a datacube
 

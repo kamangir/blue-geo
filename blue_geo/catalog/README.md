@@ -8,9 +8,9 @@ look for example uses in the supported catalogs: [copernicus](./copernicus/), [f
 
 1️⃣ clone [blue_geo/catalog/generic](./generic/) similar to [blue_geo/catalog/copernicus](./copernicus/) and define `NovelCatalog`.
 
-2️⃣ [add at least one datacube class](../datacube/README.md#adding-a-new-datacube-class).
+2️⃣ [add the datacube class `NovelDatacube`](../datacube/README.md#adding-a-new-datacube-class) to represent one of the collections in `NovelCatalog`.
 
-3️⃣ update [blue_geo/catalog/classes.py](./classes.py).
+3️⃣ add `NovelCatalog` to [blue_geo/catalog/classes.py](./classes.py).
 
 ## listing catalogs
 

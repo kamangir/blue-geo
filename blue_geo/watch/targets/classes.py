@@ -4,6 +4,7 @@ from abcli import file
 from abcli.modules import objects
 from blue_options.options import Options
 from abcli.file.load import load_yaml
+from blue_geo.logger import logger
 
 
 class Target:
@@ -58,7 +59,21 @@ class Target:
                 object_name,
             ),
             self.__dict__,
+        ) and self.generate_shape_file(object_name)
+
+    def generate_shape_file(self, object_name: str) -> bool:
+        logger.info(
+            "{}.generate_shape: {})".format(
+                self.__class__.__name__,
+                object_name,
+            )
         )
+
+        logger.info("🪄")
+
+        # save in objects.path_of("target/shape.shp",object_name)
+
+        return True
 
 
 class TargetList:

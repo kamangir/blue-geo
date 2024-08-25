@@ -4,7 +4,6 @@ from notebooks_and_scripts.workflow.generic import Workflow
 from abcli import string
 from blue_geo import NAME
 from blue_geo.watch.targets import Target
-from blue_geo.watch.QGIS import generate_target_shape
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -60,7 +59,7 @@ def generate_workflow(
         ]
     )
 
-    for offset, datacube_id in enumerate(list_of_datacube_id):
+    for offset in range(len(list_of_datacube_id)):
         node = f"map-{offset:03d}"
 
         workflow.G.add_node(node)
@@ -78,9 +77,4 @@ def generate_workflow(
 
         workflow.G.add_edge("reduce", node)
 
-    return all(
-        [
-            workflow.save(),
-            generate_target_shape(query_object_name, target),
-        ]
-    )
+    return workflow.save()

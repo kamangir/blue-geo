@@ -37,7 +37,7 @@ def generate_workflow(
     workflow.G.nodes["reduction"]["command_line"] = " ".join(
         [
             "workflow monitor",
-            f"node={datacube_id}",
+            f"node=reduction",
             job_name,
             "blue_geo_watch_reduce",
             reduce_options,

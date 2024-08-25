@@ -2,6 +2,8 @@ from blueness import module
 from abcli.plugins.metadata import get_from_object
 from notebooks_and_scripts.workflow.generic import Workflow
 from blue_geo import NAME
+from blue_geo.watch.QGIS import generate_marker
+from blue_geo.watch.targets import Target
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -19,9 +21,14 @@ def generate_workflow(
         "datacube_id",
     )
 
+    success, target = Target.load(query_object_name)
+    if not success:
+        return success
+
     logger.info(
-        "{}.generate_workflow: {}[{} X]: -[{} @ {} + {}]-> {}".format(
+        "{}.generate_workflow: {}[{} @ {}]: -[{} @ {} + {}]-> {}".format(
             NAME,
+            target,
             query_object_name,
             len(list_of_datacube_id),
             map_options,
@@ -60,4 +67,10 @@ def generate_workflow(
         )
         workflow.G.add_edge("reduction", datacube_id)
 
-    return workflow.save()
+    return all(
+        [
+            workflow.save(),
+            target.save(object_name),
+            generate_marker(object_name, target),
+        ]
+    )

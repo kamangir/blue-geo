@@ -77,6 +77,12 @@ function blue_geo_watch() {
             $query_object_name \
             --count -1 \
             $args
+        [[ $? -ne 0 ]] && return 1
+
+        python3 -m blue_geo.watch.targets save \
+            --target_name $target \
+            --object_name $query_object_name
+        [[ $? -ne 0 ]] && return 1
     fi
 
     local job_name="$object_name-job-$(abcli_string_timestamp_short)"

@@ -9,7 +9,7 @@ features = {
         "description": "an AI terraform for [QGIS](https://www.qgis.org/).",
         "icon": ICON,
         "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/QGIS.jpg",
-        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/.abcli/QGIS/README.md",
+        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/QGIS/README.md",
     },
     "datacube": {
         "description": "a datacube for geospatial AI.",

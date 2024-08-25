@@ -33,7 +33,8 @@ using [chilcotin-river-landslide](./targets/chilcotin-river-landslide.md).
 ## example run
 
 ```bash
-@geo watch - target=chilcotin-river-landslide to=aws_batch - -
+@geo watch - \
+    target=chilcotin-river-landslide to=aws_batch - -
 ```
 
 🔥

@@ -65,7 +65,7 @@ def generate_workflow(
 
         workflow.G.add_node(node)
 
-        workflow.G.nodes[datacube_id]["command_line"] = " ".join(
+        workflow.G.nodes[node]["command_line"] = " ".join(
             [
                 "workflow monitor",
                 f"node={node}",

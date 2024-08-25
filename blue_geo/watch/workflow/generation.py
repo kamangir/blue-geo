@@ -10,13 +10,15 @@ def generate_workflow(
     query_object_name: str,
     job_name: str,
     object_name: str,
-    processing_options: str,
+    map_options: str,
+    reduce_options: str,
 ) -> bool:
     logger.info(
-        "{}.generate_workflow: {}: -[{} @ {}]-> {}".format(
+        "{}.generate_workflow: {}: -[{} @ {} + {}]-> {}".format(
             NAME,
             query_object_name,
-            processing_options,
+            map_options,
+            reduce_options,
             job_name,
             object_name,
         )

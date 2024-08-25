@@ -5,6 +5,7 @@ folium
 geojson
 geopandas
 matplotlib
+notebooks_and_scripts
 numpy
 opencv-python
 pymysql==0.10.1

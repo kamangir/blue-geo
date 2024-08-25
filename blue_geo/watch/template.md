@@ -1,6 +1,6 @@
 # 🌐 `@geo watch`
 
-watching targets through `@geo`.
+watching [targets](./targets.yaml) through `@geo`.
 
 ```bash
  > @geo watch help

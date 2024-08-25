@@ -4,15 +4,13 @@ import argparse
 from blueness import module
 from abcli import file
 from blue_geo import NAME, VERSION
-from blue_geo.watch.targets import TargetList
-from blue_geo.watch.workflow import generate_workflow
+from blue_geo.watch.targets.classes import TargetList
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
 NAME = module.name(__file__, NAME)
 
-list_of_tasks = "generate_workflow|get"
-
+list_of_tasks = "get"
 
 parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
 parser.add_argument(
@@ -20,13 +18,11 @@ parser.add_argument(
     type=str,
     help=list_of_tasks,
 )
-
-# get
 parser.add_argument(
     "--what",
     default="",
     type=str,
-    help="args|catalog|collection|list_of_targets",
+    help="args|catalog|collection|list",
 )
 parser.add_argument(
     "--count",
@@ -49,38 +45,13 @@ parser.add_argument(
     "--target_name",
     type=str,
 )
-
-# generate_workflow
-parser.add_argument(
-    "--job_name",
-    type=str,
-)
-parser.add_argument(
-    "--processing_options",
-    type=str,
-)
-parser.add_argument(
-    "--object_name",
-    type=str,
-)
-parser.add_argument(
-    "--query_object_name",
-    type=str,
-)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
 
 success = args.task in list_of_tasks
-target_list = TargetList(os.path.join(file.path(__file__), "targets.yaml"))
-if args.task == "generate_workflow":
-    success = generate_workflow(
-        query_object_name=args.query_object_name,
-        job_name=args.job_name,
-        object_name=args.object_name,
-        processing_options=args.processing_options,
-    )
-elif args.task == "get":
+target_list = TargetList(os.path.join(file.path(__file__), "../targets.yaml"))
+if args.task == "get":
     output: Union[str, List[str]] = []
 
     if args.what == "args":
@@ -92,7 +63,7 @@ elif args.task == "get":
         output = target_list.targets.get(args.target_name).catalog
     elif args.what == "collection":
         output = target_list.targets.get(args.target_name).collection
-    elif args.what == "list_of_targets":
+    elif args.what == "list":
         output = list(target_list.targets.keys())
     else:
         success = False

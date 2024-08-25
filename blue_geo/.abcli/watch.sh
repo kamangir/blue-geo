@@ -7,9 +7,7 @@ function blue_geo_watch() {
     local processing_options=$4
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local list_of_targets=$(python3 -m blue_geo.watch get \
-            --what list_of_targets \
-            --delim \|)
+        local list_of_targets=$(blue_geo_watch_get list_of_targets --delim \|)
 
         options="$(xtra dryrun)"
 
@@ -22,8 +20,19 @@ function blue_geo_watch() {
         abcli_show_usage "@geo watch $(xwrap $options $target_options $workflow_options $processing_options '-|<object-name>')" \
             "watch target -> <object-name>."
 
+        blue_geo_watch_get "$@"
+        blue_geo_watch_view "$@"
+
         return
     fi
+
+    local task
+    for task in get view; do
+        if [ $(abcli_option_int "$options" $task 0) == 1 ]; then
+            blue_geo_watch_$task "${@:2}"
+            return
+        fi
+    done
 
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
 
@@ -40,16 +49,9 @@ function blue_geo_watch() {
 
         query_object_name=$object_name-query-$(abcli_string_timestamp_short)
 
-        local catalog=$(python3 -m blue_geo.watch get \
-            --target_name $target \
-            --what catalog)
-        local collection=$(python3 -m blue_geo.watch get \
-            --target_name $target \
-            --what collection)
-        local args=$(python3 -m blue_geo.watch get \
-            --target_name $target \
-            --what args \
-            --delim space)
+        local catalog=$(blue_geo_watch_get catalog --target_name $target)
+        local collection=$(blue_geo_watch_get collection --target_name $target)
+        local args=$(blue_geo_watch_get args --target_name $target --delim space)
 
         abcli_eval dryrun=$do_dryrun \
             blue_geo_catalog query $catalog \
@@ -79,3 +81,5 @@ function blue_geo_watch() {
         ~download,$workflow_options \
         $job_name
 }
+
+abcli_source_path - caller,suffix=/watch

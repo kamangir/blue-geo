@@ -1,6 +1,7 @@
 from blueness import module
 from blue_geo import NAME
 from blue_geo.watch.targets import Target
+from blue_geo.watch.QGIS import generate_marker
 from blue_geo.logger import logger
 
 
@@ -22,4 +23,4 @@ def reduce_function(object_name: str) -> bool:
 
     logger.info("🪄")
 
-    return True
+    return generate_marker(object_name, target)

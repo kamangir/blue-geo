@@ -1,8 +1,8 @@
 from blueness import module
 from abcli.plugins.metadata import get_from_object
 from notebooks_and_scripts.workflow.generic import Workflow
+from abcli import string
 from blue_geo import NAME
-from blue_geo.watch.QGIS import generate_marker
 from blue_geo.watch.targets import Target
 from blue_geo.logger import logger
 
@@ -25,12 +25,19 @@ def generate_workflow(
     if not success:
         return success
 
+    suffix = string.pretty_date(
+        include_date=False,
+        as_filename=True,
+        unique=True,
+    )
+
     logger.info(
-        "{}.generate_workflow: {}[{} @ {}]: -[{} @ {} + {}]-> {}".format(
+        "{}.generate_workflow: {}[{} @ {}]/{}: -[{} @ {} + {}]-> {}".format(
             NAME,
             target,
             query_object_name,
             len(list_of_datacube_id),
+            suffix,
             map_options,
             reduce_options,
             job_name,
@@ -40,37 +47,34 @@ def generate_workflow(
 
     workflow = Workflow(job_name)
 
-    workflow.G.add_node("reduction")
-    workflow.G.nodes["reduction"]["command_line"] = " ".join(
+    workflow.G.add_node("reduce")
+    workflow.G.nodes["reduce"]["command_line"] = " ".join(
         [
             "workflow monitor",
-            "node=reduction",
+            "node=reduce",
             job_name,
             "blue_geo_watch_reduce",
-            reduce_options,
+            f"suffix={suffix},{reduce_options}",
             object_name,
         ]
     )
 
-    for datacube_id in list_of_datacube_id:
-        workflow.G.add_node(datacube_id)
+    for offset, datacube_id in enumerate(list_of_datacube_id):
+        node = f"map-{offset:03d}"
+
+        workflow.G.add_node(node)
+
         workflow.G.nodes[datacube_id]["command_line"] = " ".join(
             [
                 "workflow monitor",
-                f"node={datacube_id}",
+                f"node={node}",
                 job_name,
                 "blue_geo_watch_map",
-                map_options,
-                datacube_id,
-                f"{object_name}-{datacube_id}",
+                f"offset={offset},suffix={suffix},{map_options}",
+                query_object_name,
             ]
         )
-        workflow.G.add_edge("reduction", datacube_id)
 
-    return all(
-        [
-            workflow.save(),
-            target.save(object_name),
-            generate_marker(object_name, target),
-        ]
-    )
+        workflow.G.add_edge("reduce", node)
+
+    return workflow.save()

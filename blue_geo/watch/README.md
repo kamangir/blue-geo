@@ -33,10 +33,7 @@ using [chilcotin-river-landslide](./targets/chilcotin-river-landslide.md).
 ## example run
 
 ```bash
-@geo watch  \
-	dryrun,query=chilcotin | query_object_name \
-	dryrun,to=generic \
-	$object-name
+@geo watch - target=chilcotin-river-landslide to=aws_batch - -
 ```
 
 🔥

@@ -11,10 +11,7 @@ watching targets through `@geo`.
 ## example run
 
 ```bash
-@geo watch  \
-	dryrun,query=chilcotin | query_object_name \
-	dryrun,to=generic \
-	$object-name
+@geo watch - target=chilcotin-river-landslide to=aws_batch - -
 ```
 
 🔥

@@ -36,7 +36,7 @@ parser.add_argument(
 )
 parser.add_argument(
     "--log",
-    default=1,
+    default=0,
     type=int,
     help="0|1",
 )
@@ -44,6 +44,10 @@ parser.add_argument(
     "--delim",
     type=str,
     default=",",
+)
+parser.add_argument(
+    "--target_name",
+    type=str,
 )
 
 # generate_workflow
@@ -80,11 +84,14 @@ elif args.task == "get":
     output: Union[str, List[str]] = []
 
     if args.what == "args":
-        output = target_list.targets.get(args.catalog).args
+        output = [
+            f"--{arg} {value}"
+            for arg, value in target_list.targets.get(args.target_name).args.items()
+        ]
     elif args.what == "catalog":
-        output = target_list.targets.get(args.catalog).catalog
+        output = target_list.targets.get(args.target_name).catalog
     elif args.what == "collection":
-        output = target_list.targets.get(args.catalog).collection
+        output = target_list.targets.get(args.target_name).collection
     elif args.what == "list_of_targets":
         output = list(target_list.targets.keys())
     else:

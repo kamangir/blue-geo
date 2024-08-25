@@ -9,8 +9,7 @@ function blue_geo_watch() {
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         local list_of_targets=$(python3 -m blue_geo.watch get \
             --what list_of_targets \
-            --delim \| \
-            --log 0)
+            --delim \|)
 
         options="$(xtra dryrun)"
 
@@ -75,7 +74,8 @@ function blue_geo_watch() {
         "${@:6}"
     [[ $? -ne 0 ]] && return 1
 
-    workflow submit \
+    abcli_eval dryrun=$do_dryrun \
+        workflow submit \
         ~download,$workflow_options \
         $job_name
 }

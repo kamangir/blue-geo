@@ -62,7 +62,7 @@ def generate_workflow(
                 "blue_geo_watch_map",
                 map_options,
                 datacube_id,
-                object_name,
+                f"{object_name}-{datacube_id}",
             ]
         )
         workflow.G.add_edge("reduction", datacube_id)

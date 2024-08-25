@@ -54,8 +54,8 @@ function blue_geo_watch() {
         abcli_eval dryrun=$do_dryrun \
             blue_geo_catalog query $catalog \
             dryrun=$do_dryrun_targetting,$collection \
-            dryrun=$do_dryrun_targetting,ingest,what=quick \
-            $object_name \
+            - \
+            $query_object_name \
             --count -1 \
             $args
     fi

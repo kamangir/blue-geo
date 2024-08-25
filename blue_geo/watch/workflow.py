@@ -1,4 +1,5 @@
 from blueness import module
+from notebooks_and_scripts.workflow.generic import Workflow
 from blue_geo import NAME
 from blue_geo.logger import logger
 
@@ -21,6 +22,12 @@ def generate_workflow(
         )
     )
 
+    workflow = Workflow(job_name)
+
+    workflow.G.add_node("combination")
+
+    workflow.G.nodes["combination"]["command_line"] = "echo 🪄"
+
     logger.info("🪄")
 
-    return True
+    return workflow.save()

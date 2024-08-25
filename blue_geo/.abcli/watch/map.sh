@@ -29,7 +29,7 @@ function blue_geo_watch_map() {
         map \
         --datacube_id "$datacube_id" \
         --object_name "$object_name" \
-        "${@:3}"
+        "${@:4}"
     local status="$?"
 
     [[ "$do_upload" == 1 ]] &&

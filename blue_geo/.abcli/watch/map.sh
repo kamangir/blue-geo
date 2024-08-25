@@ -16,9 +16,11 @@ function blue_geo_watch_map() {
     local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
 
     local datacube_id=$(abcli_clarify_object $2 .)
+    blue_geo_datacube_ingest \
+        dryrun=$do_dryrun,what=quick \
+        $datacube_id
 
     local object_name=$(abcli_clarify_object $3 $(abcli_string_timestamp))
-
     [[ "$do_download" == 1 ]] &&
         abcli_download - $object_name
 

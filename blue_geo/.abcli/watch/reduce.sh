@@ -16,7 +16,6 @@ function blue_geo_watch_reduce() {
     local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
 
     local object_name=$(abcli_clarify_object $2 .)
-
     [[ "$do_download" == 1 ]] &&
         abcli_download - $object_name
 

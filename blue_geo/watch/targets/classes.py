@@ -37,7 +37,12 @@ class Target:
 
     @classmethod
     def load(cls, object_name: str) -> Tuple[bool, "Target"]:
-        success, data = file.load_yaml(objects.path_of("target.yaml", object_name))
+        success, data = file.load_yaml(
+            objects.path_of(
+                "target/metadata.yaml",
+                object_name,
+            )
+        )
 
         return success, cls(
             name=data.get("name", ""),
@@ -48,7 +53,10 @@ class Target:
 
     def save(self, object_name: str) -> bool:
         return file.save_yaml(
-            objects.path_of("target.yaml", object_name),
+            objects.path_of(
+                "target/metadata.yaml",
+                object_name,
+            ),
             self.__dict__,
         )
 

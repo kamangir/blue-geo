@@ -36,11 +36,11 @@ function blue_geo_watch_map() {
 
     local object_name=$query_object_name-$suffix-$offset
 
-    local object_path=$abcli_object_root/$object_name
-    mkdir -pv $object_path
+    local target_path=$abcli_object_root/$object_name/target/
+    mkdir -pv $target_path
     cp -v \
-        $abcli_object_root/$query_object_name/target.* \
-        $object_path
+        $abcli_object_root/$query_object_name/target/* \
+        $target_path
 
     abcli_log "@geo watch map $query_object_name/#$suffix: $datacube_id -> $object_name"
 

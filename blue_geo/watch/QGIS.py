@@ -6,12 +6,12 @@ from blue_geo import NAME
 NAME = module.name(__file__, NAME)
 
 
-def generate_marker(
+def generate_target_shape(
     object_name: str,
     target: Target,
 ) -> bool:
     logger.info(
-        "{}.generate_marker: {} -> {})".format(
+        "{}.generate_target_shape: {} -> {})".format(
             NAME,
             target,
             object_name,
@@ -19,5 +19,7 @@ def generate_marker(
     )
 
     logger.info("🪄")
+
+    # save in objects.path_of("target/shape.shp",object_name)
 
     return True

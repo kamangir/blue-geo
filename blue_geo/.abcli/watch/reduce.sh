@@ -28,11 +28,11 @@ function blue_geo_watch_reduce() {
     [[ "$do_download" == 1 ]] &&
         abcli_download - $object_name
 
-    local object_path=$abcli_object_root/$object_name
-    mkdir -pv $object_path
+    local target_path=$abcli_object_root/$object_name/target/
+    mkdir -pv $target_path
     cp -v \
-        $abcli_object_root/$query_object_name/target.* \
-        $object_path
+        $abcli_object_root/$query_object_name/target/* \
+        $target_path
 
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \

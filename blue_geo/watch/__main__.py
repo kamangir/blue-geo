@@ -1,4 +1,5 @@
 import os
+from typing import List, Union
 import argparse
 from blueness import module
 from abcli import file
@@ -10,7 +11,7 @@ from blueness.argparse.generic import sys_exit
 
 NAME = module.name(__file__, NAME)
 
-list_of_tasks = "generate_workflow|list"
+list_of_tasks = "generate_workflow|get"
 
 
 parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
@@ -20,53 +21,48 @@ parser.add_argument(
     help=list_of_tasks,
 )
 
-# list
+# get
 parser.add_argument(
     "--what",
     default="",
     type=str,
-    help="targets",
+    help="args|catalog|collection|list_of_targets",
 )
-parser.add_argument("--count", type=int, default=-1, help="-1: all")
-parser.add_argument("--log", default=1, type=int, help="0|1")
-parser.add_argument("--delim", type=str, default=",")
-
-# generate_workflow
 parser.add_argument(
-    "--dryrun",
-    default=0,
+    "--count",
+    type=int,
+    default=-1,
+    help="-1: all",
+)
+parser.add_argument(
+    "--log",
+    default=1,
     type=int,
     help="0|1",
 )
 parser.add_argument(
-    "--frame_count",
-    default=10,
-    type=int,
-    help="<10>",
+    "--delim",
+    type=str,
+    default=",",
 )
-parser.add_argument(
-    "--radius_degree",
-    default=0.1,
-    type=float,
-    help="<0.1>",
-)
+
+# generate_workflow
 parser.add_argument(
     "--job_name",
     type=str,
 )
 parser.add_argument(
-    "--target_description",
-    type=str,
-)
-parser.add_argument(
-    "--process_options",
+    "--processing_options",
     type=str,
 )
 parser.add_argument(
     "--object_name",
     type=str,
 )
-
+parser.add_argument(
+    "--query_object_name",
+    type=str,
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
@@ -75,23 +71,26 @@ success = args.task in list_of_tasks
 target_list = TargetList(os.path.join(file.path(__file__), "targets.yaml"))
 if args.task == "generate_workflow":
     success = generate_workflow(
+        query_object_name=args.query_object_name,
         job_name=args.job_name,
         object_name=args.object_name,
-        frame_count=args.frame_count,
-        radius_degree=args.radius_degree,
-        target=target_list.get(args.target_description),
-        process_options=args.process_options,
-        dryrun=args.dryrun,
+        processing_options=args.processing_options,
     )
-elif args.task == "list":
-    output = []
+elif args.task == "get":
+    output: Union[str, List[str]] = []
 
-    if args.what == "targets":
+    if args.what == "args":
+        output = target_list.targets.get(args.catalog).args
+    elif args.what == "catalog":
+        output = target_list.targets.get(args.catalog).catalog
+    elif args.what == "collection":
+        output = target_list.targets.get(args.catalog).collection
+    elif args.what == "list_of_targets":
         output = list(target_list.targets.keys())
     else:
         success = False
 
-    if args.count != -1:
+    if args.count != -1 and isinstance(output, list):
         output = output[: args.count]
 
     if success:
@@ -102,9 +101,11 @@ elif args.task == "list":
                     args.what,
                     delim.join(output),
                 )
+                if isinstance(output, list)
+                else output
             )
         else:
-            print(delim.join(output))
+            print(delim.join(output) if isinstance(output, list) else output)
 else:
     success = None
 

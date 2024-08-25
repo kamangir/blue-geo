@@ -1,4 +1,4 @@
-from datetime import datetime
+import copy
 from typing import Dict, List
 from blue_options.options import Options
 from abcli.file.load import load_yaml
@@ -8,30 +8,29 @@ class Target:
     def __init__(
         self,
         name: str = "",
-        lat: float = 0,
-        lon: float = 0,
-        datetime: str = "",
+        catalog: str = "",
+        collection: str = "",
+        args: Dict[str, str] = {},
     ) -> None:
         self.name: str = name
 
-        self.lat = lat
-        self.lon = lon
+        self.catalog = catalog
+        self.collection = collection
 
-        self.datetime = datetime
-
-    def default(self):
-        self.name = "elkhema"
-        self.datetime = "2022-08-06/"
-        self.lat = 49.281209
-        self.lon = -123.130760
+        self.args = copy.deepcopy(args)
 
     def __repr__(self) -> str:
-        return "{}[{}]: @(lat={},lon={}) {}".format(
+        return "{}[{}]: {}/{}: {}".format(
             self.__class__.__name__,
             self.name,
-            self.lat,
-            self.lon,
-            self.datetime,
+            self.catalog,
+            self.collection,
+            self.args_as_str(" | "),
+        )
+
+    def args_as_str(self, delim: str = " ") -> str:
+        return delim.join(
+            [f"--{argument} {value}" for argument, value in self.args.items()]
         )
 
 
@@ -42,19 +41,6 @@ class TargetList:
         if filename:
             self.load(filename)
 
-    def get(self, description: str) -> Target:
-        options = Options(description)
-
-        if "name" in options:
-            return self.targets.get(options["name"], Target())
-
-        return Target(
-            name=options.get("name", ""),
-            lat=options.get("lat", 0),
-            lon=options.get("lon", 0),
-            datetime=options.get("datetime", ""),
-        )
-
     def load(self, filename: str) -> bool:
         self.targets = {}
 
@@ -63,9 +49,9 @@ class TargetList:
         for target_name, target_info in targets.items():
             self.targets[target_name] = Target(
                 name=target_name,
-                lat=target_info["lat"],
-                lon=target_info["lon"],
-                datetime=target_info["datetime"],
+                catalog=target_info["catalog"],
+                collection=target_info["collection"],
+                args=target_info["args"],
             )
 
         return success

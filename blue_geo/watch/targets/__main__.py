@@ -22,7 +22,7 @@ parser.add_argument(
     "--what",
     default="",
     type=str,
-    help="args|catalog|collection|list",
+    help="args|catalog|collection|exists|list",
 )
 parser.add_argument(
     "--count",
@@ -67,6 +67,8 @@ if args.task == "get":
         output = target.catalog
     elif args.what == "collection":
         output = target.collection
+    elif args.what == "exists":
+        output = str(bool(target.name))
     elif args.what == "list":
         output = list(target_list.targets.keys())
     else:

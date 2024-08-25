@@ -43,11 +43,6 @@ function blue_geo_watch() {
 
     local object_name=$(abcli_clarify_object $6 geo-watch-$(abcli_string_timestamp))
 
-    abcli_clone \
-        $BLUE_GEO_WATCH_TEMPLATE \
-        $object_name \
-        ~meta
-
     local target=$(abcli_option "$target_options" target)
     local query_object_name
     if [[ -z "$target" ]]; then
@@ -55,6 +50,14 @@ function blue_geo_watch() {
 
         abcli_download - $query_object_name
     else
+        local target_exists=$(python3 -m blue_geo.watch.targets get \
+            --what exists \
+            --target_name $target)
+        if [[ "$target_exists" != "True" ]]; then
+            abcli_log_error "-@geo: watch: $target: target not found."
+            return 1
+        fi
+
         local do_dryrun_targetting=$(abcli_option_int "$target_options" dryrun 0)
 
         query_object_name=$object_name-query-$(abcli_string_timestamp_short)
@@ -88,6 +91,11 @@ function blue_geo_watch() {
     local job_name="$object_name-job-$(abcli_string_timestamp_short)"
 
     abcli_log "🌐 @geo: watch: $query_object_name: -[ $workflow_options @ $map_options + $reduce_options @ $job_name]-> $object_name"
+
+    abcli_clone \
+        $BLUE_GEO_WATCH_TEMPLATE \
+        $object_name \
+        ~meta
 
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \

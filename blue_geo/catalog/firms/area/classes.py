@@ -39,7 +39,7 @@ class FirmsAreaDatacube(GenericDatacube):
         },
     }
 
-    QGIS_template = "firms_area-template-v1"
+    QGIS_template = env.BLUE_GEO_QGIS_TEMPLATE_FIRMS_AREA
 
     def __init__(
         self,

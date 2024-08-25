@@ -93,7 +93,7 @@ function blue_geo_watch() {
     abcli_log "🌐 @geo: watch: $query_object_name: -[ $workflow_options @ $map_options + $reduce_options @ $job_name]-> $object_name"
 
     abcli_clone \
-        $BLUE_GEO_WATCH_TEMPLATE \
+        $BLUE_GEO_QGIS_TEMPLATE_WATCH \
         $object_name \
         ~meta
 

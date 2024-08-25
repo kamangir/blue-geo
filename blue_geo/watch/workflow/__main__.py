@@ -47,8 +47,6 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-delim = " " if args.delim == "space" else args.delim
-
 success = args.task in list_of_tasks
 target_list = TargetList(os.path.join(file.path(__file__), "targets.yaml"))
 if args.task == "generate":

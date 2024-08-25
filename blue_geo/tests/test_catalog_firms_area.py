@@ -1,6 +1,5 @@
 import pytest
 import geopandas as gpd
-from abcli.modules.objects import unique_object
 from blue_geo.tests import assets
 from blue_geo.catalog.firms import FirmsCatalog
 from blue_geo.catalog.firms.area import enums, FirmsAreaDatacube

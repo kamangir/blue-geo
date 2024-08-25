@@ -3,15 +3,14 @@ from blue_geo.logger import logger
 from blue_geo import README
 from blueness.argparse.generic import main
 
-success, message = main(
-    __file__,
-    NAME,
-    VERSION,
-    DESCRIPTION,
-    ICON,
-    {
+main(
+    ICON=ICON,
+    NAME=NAME,
+    DESCRIPTION=DESCRIPTION,
+    VERSION=VERSION,
+    main_filename=__file__,
+    tasks={
         "build_README": lambda _: README.build(),
     },
+    logger=logger,
 )
-if not success:
-    logger.error(message)

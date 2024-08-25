@@ -1,8 +1,14 @@
-# Chilcotin River Landslide
+# 🌐 `@geo watch`
+
+watching [targets](./targets.yaml) through `@geo`.
+
+```bash
+ > @geo watch help
+```
+
+## case study: Chilcotin River Landslide
 
 ![image](https://github.com/kamangir/assets/blob/main/blue-geo/chilcotin-river-landslide-2.jpg?raw=true)
-
-objective: review of before and after views of the Chilcotin River landslide on Sentinel-2.
 
 background:
 - [Chilcotin River Landslide Information Portal](https://chilcotin-river-landslide-2024-bcgov03.hub.arcgis.com/) - source of ⬆️ image.
@@ -20,20 +26,15 @@ aoi:
     - lon: -122.78
 ```
 
+---
+
+using [chilcotin-river-landslide](./targets/chilcotin-river-landslide.md).
+
+## example run
+
 ```bash
-@catalog query copernicus \
-  ingest,select - \
-  sentinel_2,suffix=TCI.jp2 \
-  --lat 51.83 \
-  --lon -122.78 \
-  --datetime 2024-07-30/2024-08-15 \
-  --limit 20
-
-@open QGIS .
+@geo watch - \
+    target=chilcotin-river-landslide to=aws_batch - -
 ```
-
-help += https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime 🔥
-
-:fire object
 
 🔥

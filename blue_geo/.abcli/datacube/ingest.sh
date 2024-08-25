@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-export blue_geo_datacube_ingest_options="$EOP~copy_template,dryrun,overwrite,upload,${EOPE}what=all|metadata|quick|<suffix>"
+export blue_geo_datacube_ingest_options="$(xtra ~copy_template,dryrun,overwrite,upload,)what=all|metadata|quick|<suffix>"
 
 function blue_geo_datacube_ingest() {
     local options=$1

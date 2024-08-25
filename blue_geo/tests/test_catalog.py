@@ -10,6 +10,7 @@ from blue_geo.catalog import (
     get_catalog_class,
     get_datacube,
     get_datacube_class,
+    get_datacube_class_in_catalog,
     get_list_of_datacube_classes,
     get_list_of_collections,
 )

@@ -1,4 +1,5 @@
 from abcli import file
+import os
 from abcli.plugins.README import build as build_README
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
 
@@ -21,6 +22,12 @@ features = {
         "icon": "🧊",
         "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/copernicus.jpg?raw=true",
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog/copernicus",
+    },
+    "geo-watch": {
+        "description": "watching targets through `@geo`.",
+        "icon": ICON,
+        "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/blue-geo-watch.png?raw=true",
+        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
     },
     "firms-area": {
         "description": "catalog: Fire Information for Resource Management System ([FIRMS](https://firms.modaps.eosdis.nasa.gov)).",
@@ -66,9 +73,18 @@ def build():
     return build_README(
         items=items,
         cols=2,
-        path=file.path(__file__),
+        path=os.path.join(file.path(__file__), ".."),
         ICON=ICON,
         NAME=NAME,
         VERSION=VERSION,
         REPO_NAME=REPO_NAME,
+    ) and all(
+        build_README(
+            path=os.path.join(file.path(__file__), suffix),
+            ICON=ICON,
+            NAME=NAME,
+            VERSION=VERSION,
+            REPO_NAME=REPO_NAME,
+        )
+        for suffix in ["catalog/copernicus", "watch"]
     )

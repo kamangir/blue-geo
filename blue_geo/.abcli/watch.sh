@@ -43,6 +43,11 @@ function blue_geo_watch() {
 
     local object_name=$(abcli_clarify_object $6 geo-watch-$(abcli_string_timestamp))
 
+    abcli_clone \
+        $BLUE_GEO_WATCH_TEMPLATE \
+        $object_name \
+        ~meta
+
     local target=$(abcli_option "$target_options" target)
     local query_object_name
     if [[ -z "$target" ]]; then

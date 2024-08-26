@@ -50,6 +50,14 @@ function blue_geo_watch() {
 
         abcli_download - $query_object_name
     else
+        local target_exists=$(python3 -m blue_geo.watch.targets get \
+            --what exists \
+            --target_name $target)
+        if [[ "$target_exists" != "True" ]]; then
+            abcli_log_error "-@geo: watch: $target: target not found."
+            return 1
+        fi
+
         local do_dryrun_targetting=$(abcli_option_int "$target_options" dryrun 0)
 
         query_object_name=$object_name-query-$(abcli_string_timestamp_short)
@@ -60,8 +68,8 @@ function blue_geo_watch() {
         local collection=$(python3 -m blue_geo.watch.targets get \
             --what collection \
             --target_name $target)
-        local args=$(python3 -m blue_geo.watch.targets get \
-            --what args \
+        local query_args=$(python3 -m blue_geo.watch.targets get \
+            --what query_args \
             --target_name $target \
             --delim space)
 
@@ -71,12 +79,23 @@ function blue_geo_watch() {
             - \
             $query_object_name \
             --count -1 \
-            $args
+            $query_args
+        [[ $? -ne 0 ]] && return 1
+
+        python3 -m blue_geo.watch.targets save \
+            --target_name $target \
+            --object_name $query_object_name
+        [[ $? -ne 0 ]] && return 1
     fi
 
     local job_name="$object_name-job-$(abcli_string_timestamp_short)"
 
     abcli_log "🌐 @geo: watch: $query_object_name: -[ $workflow_options @ $map_options + $reduce_options @ $job_name]-> $object_name"
+
+    abcli_clone \
+        $BLUE_GEO_QGIS_TEMPLATE_WATCH \
+        $object_name \
+        ~meta
 
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \

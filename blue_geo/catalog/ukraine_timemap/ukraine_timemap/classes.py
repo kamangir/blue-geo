@@ -29,7 +29,7 @@ class UkraineTimemapDatacube(GenericDatacube):
 
     catalog = UkraineTimemapCatalog()
 
-    QGIS_template = env.BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE
+    QGIS_template = env.BLUE_GEO_QGIS_TEMPLATE_UKRAINE_TIMEMAP
 
     def ingest(
         self,

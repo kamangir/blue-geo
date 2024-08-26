@@ -4,16 +4,7 @@ from abcli.env import load_env, load_config
 load_env(__name__)
 load_config(__name__)
 
-
-BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE = os.getenv(
-    "BLUE_GEO_UKRAINE_TIMEMAP_QGIS_TEMPLATE", ""
-)
-
-BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE = os.getenv(
-    "BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE",
-    "",
-)
-
+# secrets
 FIRMS_MAP_KEY = os.getenv(
     "FIRMS_MAP_KEY",
     "",
@@ -29,10 +20,24 @@ COPERNICUS_AWS_SECRET_ACCESS_KEY = os.getenv(
     "",
 )
 
-QGIS_TEMPLATES = {
-    "firms_area": BLUE_GEO_FIRMS_AREA_QGIS_TEMPLATE,
-}
+# QGIS templates
+BLUE_GEO_QGIS_TEMPLATE_FIRMS_AREA = os.getenv(
+    "BLUE_GEO_QGIS_TEMPLATE_FIRMS_AREA",
+    "",
+)
 
+BLUE_GEO_QGIS_TEMPLATE_UKRAINE_TIMEMAP = os.getenv(
+    "BLUE_GEO_QGIS_TEMPLATE_UKRAINE_TIMEMAP",
+    "",
+)
+
+BLUE_GEO_QGIS_TEMPLATE_WATCH = os.getenv(
+    "BLUE_GEO_QGIS_TEMPLATE_WATCH",
+    "",
+)
+
+
+# test datacube-ids
 BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2 = os.getenv(
     "BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2",
     "",

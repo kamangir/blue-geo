@@ -45,6 +45,10 @@ parser.add_argument(
     "--query_object_name",
     type=str,
 )
+parser.add_argument(
+    "--suffix",
+    type=str,
+)
 args = parser.parse_args()
 
 success = args.task in list_of_tasks
@@ -63,7 +67,11 @@ elif args.task == "map":
         args.object_name,
     )
 elif args.task == "reduce":
-    success = reduce_function(args.object_name)
+    success = reduce_function(
+        query_object_name=args.query_object_name,
+        suffix=args.suffix,
+        object_name=args.object_name,
+    )
 else:
     success = None
 

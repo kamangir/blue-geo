@@ -5,6 +5,8 @@ chilcotin-river-landslide:
     datetime: 2024-07-30/2024-08-09
     lat: 51.83
     lon: -122.78
+    height: 0.051
+    width: 0.086
 elkhema:
   catalog: copernicus
   collection: sentinel_2
@@ -20,3 +22,5 @@ test:
     datetime: 2024-07-30/2024-08-09
     lat: 51.83
     lon: -122.78
+    height: 0.051
+    width: 0.086

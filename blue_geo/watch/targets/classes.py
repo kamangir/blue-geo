@@ -2,8 +2,9 @@ import copy
 from typing import Dict, Tuple
 from abcli import file
 from abcli.modules import objects
-from blue_options.options import Options
 from abcli.file.load import load_yaml
+import geopandas as gpd
+from shapely.geometry import Polygon
 from blue_geo.logger import logger
 
 
@@ -57,16 +58,34 @@ class Target:
             objects.path_of(
                 "target/metadata.yaml",
                 object_name,
+                create=True,
             ),
             self.__dict__,
         ):
             return False
 
-        logger.info("🪄")
+        lat = self.args.get("lat", 0)
+        lon = self.args.get("lon", 0)
+        width = self.args.get("width", 0.1)
+        height = self.args.get("height", 0.1)
 
-        # save in objects.path_of("target/shape.geojson", object_name)
+        half_width = width / 2
+        half_height = height / 2
 
-        return True
+        top_left = (lon - half_width, lat + half_height)
+        top_right = (lon + half_width, lat + half_height)
+        bottom_right = (lon + half_width, lat - half_height)
+        bottom_left = (lon - half_width, lat - half_height)
+
+        polygon = Polygon([top_left, top_right, bottom_right, bottom_left, top_left])
+
+        gdf = gpd.GeoDataFrame([1], geometry=[polygon], crs="EPSG:4326")
+
+        return file.save_geojson(
+            objects.path_of("target/shape.geojson", object_name),
+            gdf,
+            log=True,
+        )
 
 
 class TargetList:

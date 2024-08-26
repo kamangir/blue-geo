@@ -53,25 +53,18 @@ class Target:
         )
 
     def save(self, object_name: str) -> bool:
-        return file.save_yaml(
+        if not file.save_yaml(
             objects.path_of(
                 "target/metadata.yaml",
                 object_name,
             ),
             self.__dict__,
-        ) and self.generate_shape_file(object_name)
-
-    def generate_shape_file(self, object_name: str) -> bool:
-        logger.info(
-            "{}.generate_shape: {})".format(
-                self.__class__.__name__,
-                object_name,
-            )
-        )
+        ):
+            return False
 
         logger.info("🪄")
 
-        # save in objects.path_of("target/shape.shp",object_name)
+        # save in objects.path_of("target/shape.geojson", object_name)
 
         return True
 

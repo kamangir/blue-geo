@@ -17,10 +17,11 @@ def reduce_function(
         return success
 
     logger.info(
-        "{}.reduce {}/{} -> {}".format(
+        "{}.reduce {}/{} @ {} -> {}".format(
             NAME,
             query_object_name,
             suffix,
+            target,
             object_name,
         )
     )

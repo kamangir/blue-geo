@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
 function blue_geo_watch_map() {
-    local what=$1
+    local options=$1
 
-    if [[ "$what" == help ]]; then
+    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         local options="$(xtra dryrun,~download,)offset=<offset>,suffix=<suffix>$(xtra ,~upload)"
 
         abcli_show_usage "@geo watch map $(xwrap $options '.|<query-object-name>')" \

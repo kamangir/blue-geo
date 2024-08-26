@@ -68,8 +68,8 @@ function blue_geo_watch() {
         local collection=$(python3 -m blue_geo.watch.targets get \
             --what collection \
             --target_name $target)
-        local args=$(python3 -m blue_geo.watch.targets get \
-            --what args \
+        local query_args=$(python3 -m blue_geo.watch.targets get \
+            --what query_args \
             --target_name $target \
             --delim space)
 
@@ -79,7 +79,7 @@ function blue_geo_watch() {
             - \
             $query_object_name \
             --count -1 \
-            $args
+            $query_args
         [[ $? -ne 0 ]] && return 1
 
         python3 -m blue_geo.watch.targets save \

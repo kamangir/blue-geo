@@ -1,26 +1,28 @@
 chilcotin-river-landslide:
   catalog: copernicus
   collection: sentinel_2
-  args:
+  params:
+    height: 0.051
+    width: 0.086
+  query_args:
     datetime: 2024-07-30/2024-08-09
     lat: 51.83
     lon: -122.78
-    height: 0.051
-    width: 0.086
 elkhema:
   catalog: copernicus
   collection: sentinel_2
-  args:
+  query_args:
     datetime: 2022-08-06/
     lat: 49.281209
     lon: -123.130760
 test:
   catalog: copernicus
   collection: sentinel_2
-  args:
+  params:
+    height: 0.051
+    width: 0.086
+  query_args:
     count: 2
     datetime: 2024-07-30/2024-08-09
     lat: 51.83
     lon: -122.78
-    height: 0.051
-    width: 0.086

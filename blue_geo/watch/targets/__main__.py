@@ -22,7 +22,7 @@ parser.add_argument(
     "--what",
     default="",
     type=str,
-    help="args|catalog|collection|exists|list",
+    help="catalog|collection|exists|list|query_args",
 )
 parser.add_argument(
     "--count",
@@ -61,8 +61,8 @@ success = args.task in list_of_tasks
 if args.task == "get":
     output: Union[str, List[str]] = []
 
-    if args.what == "args":
-        output = [f"--{arg} {value}" for arg, value in target.args.items()]
+    if args.what == "query_args":
+        output = target.query_args_as_str()
     elif args.what == "catalog":
         output = target.catalog
     elif args.what == "collection":

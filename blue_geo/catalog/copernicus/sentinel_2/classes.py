@@ -138,10 +138,6 @@ class CopernicusSentinel2Datacube(GenericDatacube):
             if item_filename.endswith(os.sep):
                 continue
 
-            if not overwrite and file.exist(item_filename):
-                logger.info(f"✅ {item_filename}")
-                continue
-
             skip = True
             if download_all:
                 skip = False
@@ -167,6 +163,10 @@ class CopernicusSentinel2Datacube(GenericDatacube):
                             item_suffix,
                         )
                     )
+                continue
+
+            if not overwrite and file.exist(item_filename):
+                logger.info(f"✅ {item_filename}")
                 continue
 
             logger.info(

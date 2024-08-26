@@ -105,6 +105,7 @@ class CopernicusSentinel2Datacube(GenericDatacube):
         dryrun: bool = False,
         overwrite: bool = False,
         what: str = "metadata",
+        verbose: bool = False,
     ) -> Tuple[bool, Any]:
         success, output = super().ingest(dryrun, overwrite, what)
         if not success:
@@ -141,24 +142,37 @@ class CopernicusSentinel2Datacube(GenericDatacube):
                 logger.info(f"✅ {item_filename}")
                 continue
 
-            if (
-                not item.size <= 10**6
-                and not download_all
-                and not (download_quick and item_filename.endswith("TCI.jp2"))
-                and not (suffix and item_filename.endswith(suffix))
+            skip = True
+            if download_all:
+                skip = False
+            elif item.size <= 10**6 and not any(
+                item_filename.endswith(suffix)
+                for suffix in [
+                    ".jp2",
+                    ".tif",
+                    ".tiff",
+                ]
             ):
-                logger.info(
-                    "skipped {}: {}".format(
-                        string.pretty_bytes(item.size),
-                        item.key,
+                skip = False
+            elif download_quick and item_filename.endswith("TCI.jp2"):
+                skip = False
+            elif suffix and item_filename.endswith(suffix):
+                skip = False
+
+            if skip:
+                if verbose:
+                    logger.info(
+                        "skipped {}: {}".format(
+                            string.pretty_bytes(item.size),
+                            item_suffix,
+                        )
                     )
-                )
                 continue
 
             logger.info(
                 "downloading {}: {} -> {}".format(
                     string.pretty_bytes(item.size),
-                    item.key,
+                    item_suffix,
                     item_filename,
                 )
             )

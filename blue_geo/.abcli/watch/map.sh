@@ -38,11 +38,9 @@ function blue_geo_watch_map() {
 
     local object_name=$query_object_name-$suffix-$offset
 
-    local target_path=$abcli_object_root/$object_name/target/
-    mkdir -pv $target_path
-    cp -v \
-        $abcli_object_root/$query_object_name/target/* \
-        $target_path
+    blue_geo_watch_targets copy - \
+        $query_object_name \
+        $object_name
 
     local crop_suffix=$(abcli_string_timestamp_short)
     blue_geo_datacube_crop \

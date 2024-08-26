@@ -8,7 +8,7 @@ function blue_geo_watch() {
     local reduce_options=$5
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local list_of_targets=$(python3 -m blue_geo.watch.targets get \
+        local list_of_targets=$(blue_geo_watch_targets get \
             --what list \
             --delim \|)
 
@@ -27,6 +27,7 @@ function blue_geo_watch() {
 
         blue_geo_watch_map "$@"
         blue_geo_watch_reduce "$@"
+        blue_geo_watch_targets "$@"
 
         return
     fi
@@ -50,7 +51,7 @@ function blue_geo_watch() {
 
         abcli_download - $query_object_name
     else
-        local target_exists=$(python3 -m blue_geo.watch.targets get \
+        local target_exists=$(blue_geo_watch_targets get \
             --what exists \
             --target_name $target)
         if [[ "$target_exists" != "True" ]]; then
@@ -62,13 +63,13 @@ function blue_geo_watch() {
 
         query_object_name=$object_name-query-$(abcli_string_timestamp_short)
 
-        local catalog=$(python3 -m blue_geo.watch.targets get \
+        local catalog=$(blue_geo_watch_targets get \
             --what catalog \
             --target_name $target)
-        local collection=$(python3 -m blue_geo.watch.targets get \
+        local collection=$(blue_geo_watch_targets get \
             --what collection \
             --target_name $target)
-        local query_args=$(python3 -m blue_geo.watch.targets get \
+        local query_args=$(blue_geo_watch_targets get \
             --what query_args \
             --target_name $target \
             --delim space)
@@ -82,7 +83,7 @@ function blue_geo_watch() {
             $query_args
         [[ $? -ne 0 ]] && return 1
 
-        python3 -m blue_geo.watch.targets save \
+        blue_geo_watch_targets save \
             --target_name $target \
             --object_name $query_object_name
         [[ $? -ne 0 ]] && return 1

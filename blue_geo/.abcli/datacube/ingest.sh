@@ -29,9 +29,9 @@ function blue_geo_datacube_ingest() {
 
     [[ "$do_copy_template" == 1 ]] &&
         abcli_clone \
+            ~meta \
             $template_object_name \
-            $datacube_id \
-            ~meta
+            $datacube_id
 
     python3 -m blue_geo.datacube \
         ingest \

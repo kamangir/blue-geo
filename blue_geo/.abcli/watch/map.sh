@@ -30,6 +30,8 @@ function blue_geo_watch_map() {
         return 1
     fi
 
+    abcli_log "🌐 @geo watch map $query_object_name @ $offset==$datacube_id -> /$suffix"
+
     blue_geo_datacube_ingest \
         dryrun=$do_dryrun,what=quick \
         $datacube_id
@@ -42,7 +44,18 @@ function blue_geo_watch_map() {
         $abcli_object_root/$query_object_name/target/* \
         $target_path
 
-    abcli_log "🌐 @geo watch map $query_object_name @ $offset==$datacube_id -> /$suffix"
+    local crop_suffix=$(abcli_string_timestamp_short)
+    blue_geo_datacube_crop \
+        dryrun=$do_dryrun,suffix=$crop_suffix \
+        $object_name \
+        $datacube_id
+    [[ $? -ne 0 ]] && return 1
+
+    blue_geo_datacube_cp \
+        suffix=TCI.jp2 \
+        $datacube_id-DERIVED-$suffix \
+        $object_name
+    [[ $? -ne 0 ]] && return 1
 
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \

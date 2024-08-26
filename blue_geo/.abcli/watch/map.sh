@@ -53,7 +53,7 @@ function blue_geo_watch_map() {
 
     blue_geo_datacube_cp \
         suffix=TCI.jp2 \
-        $datacube_id-DERIVED-$suffix \
+        $datacube_id-DERIVED-$crop_suffix \
         $object_name
     [[ $? -ne 0 ]] && return 1
 

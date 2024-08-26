@@ -7,15 +7,20 @@ from blue_geo.logger import logger
 NAME = module.name(__file__, NAME)
 
 
-def reduce_function(object_name: str) -> bool:
+def reduce_function(
+    query_object_name: str,
+    suffix: str,
+    object_name: str,
+) -> bool:
     success, target = Target.load(object_name)
     if not success:
         return success
 
     logger.info(
-        "{}.reduce: {} -> {}".format(
+        "{}.reduce {}/{} -> {}".format(
             NAME,
-            target,
+            query_object_name,
+            suffix,
             object_name,
         )
     )

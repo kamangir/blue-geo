@@ -55,6 +55,7 @@ def generate_workflow(
             job_name,
             "blue_geo_watch_reduce",
             f"suffix={suffix},{reduce_options}",
+            query_object_name,
             object_name,
         ]
     )

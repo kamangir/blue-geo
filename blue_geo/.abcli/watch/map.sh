@@ -42,7 +42,7 @@ function blue_geo_watch_map() {
         $abcli_object_root/$query_object_name/target/* \
         $target_path
 
-    abcli_log "@geo watch map $query_object_name/#$suffix: $datacube_id -> $object_name"
+    abcli_log "🌐 @geo watch map $query_object_name @ $offset==$datacube_id -> /$suffix"
 
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \

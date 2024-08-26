@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
 function blue_geo_watch_reduce() {
-    local what=$1
+    local options=$1
 
-    if [[ "$what" == help ]]; then
+    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         local options="$(xtra dryrun,~download,)suffix=<suffix>$(xtra ~upload)"
 
         abcli_show_usage "@geo watch reduce $(xwrap $options '..|<query-object-name>' '.|<object-name>')" \
@@ -33,6 +33,8 @@ function blue_geo_watch_reduce() {
     cp -v \
         $abcli_object_root/$query_object_name/target/* \
         $target_path
+
+    abcli_log "🌐 @geo watch reduce $query_object_name/$suffix -> $object_name"
 
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \

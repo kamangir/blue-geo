@@ -191,6 +191,15 @@ class CopernicusSentinel2Datacube(GenericDatacube):
 
         return error_count == 0, output
 
+    def list_of_files(self) -> List[str]:
+        success, bucket, s3_prefix = self.get_bucket()
+        if not success:
+            return []
+
+        list_of_items = bucket.objects.filter(Prefix=s3_prefix)
+
+        return [item.key.split(f"{s3_prefix}/", 1)[1] for item in list_of_items]
+
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[
         bool,

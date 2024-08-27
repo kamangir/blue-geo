@@ -56,6 +56,8 @@ def test_datacube_from_datacube_id(datacube_id: str):
     assert success
     assert isinstance(df, gpd.GeoDataFrame)
 
+    assert datacube.list_of_files()
+
 
 @pytest.mark.parametrize(
     ["datacube_id", "expected_success"],

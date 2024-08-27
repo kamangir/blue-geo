@@ -6,7 +6,7 @@ function blue_geo_datacube_crop() {
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         options="download,dryrun,suffix=<suffix>"
         abcli_show_usage "@datacube crop$ABCUL[$options]$ABCUL[..|<object-name>]$ABCUL[.|<datacube-id>]$ABCUL" \
-            "crop <datacube-id> by <object-name>/target/shape.geojson -> <suffix>."
+            "crop <datacube-id> by <object-name>/target/shape.geojson -> <datacube-id>-DERIVED-crop-<suffix>."
         return
     fi
 
@@ -26,11 +26,15 @@ function blue_geo_datacube_crop() {
         $object_name \
         $cropped_datacube_id
 
-    local datacube_path=$abcli_object_root/$datacube_id
-    local filename
-    find "$datacube_path" -type f \( -name "*.tif" -o -name "*.tiff" -o -name "*.jp2" \) | while read -r filename; do
-        abcli_log "🪄 $filename"
-    done
+    local list_of_files=$(blue_geo_datacube_get list_of_files \
+        $datacube_id \
+        --suffix .jp2+.tif+.tiff)
+    abcli_log_list "$list_of_files" \
+        --before "cropping" \
+        --delim + \
+        --after "file(s)"
+
+    echo "🪄"
 
     return 0
 }

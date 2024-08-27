@@ -1,4 +1,4 @@
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict, Any, List
 from datetime import datetime, timedelta
 import pandas as pd
 import geopandas as gpd
@@ -93,48 +93,6 @@ class FirmsAreaDatacube(GenericDatacube):
             self.source.description,
         )
 
-    @classmethod
-    def parse_datacube_id(cls, datacube_id: str) -> Tuple[
-        bool,
-        Dict[str, Any],
-    ]:
-        success, _ = super().parse_datacube_id(datacube_id)
-        if not success:
-            return False, {}
-
-        # datacube-firm-area-<area>-<source>-yyyy-mm-dd-depth
-        # datacube-firms-area-world-MODIS_NRT-2024-07-20-1
-        segments = datacube_id.split("-")
-        if len(segments) < 9:
-            return False, {}
-
-        if segments[2] != cls.name:
-            return False, {}
-
-        area_str = segments[3]
-        if area_str not in Area.values():
-            return False, {}
-
-        source_str = segments[4]
-        if source_str not in Source.values():
-            return False, {}
-
-        date = "{}-{}-{}".format(segments[5], segments[6], segments[7])
-
-        depth_str = segments[8]
-        if not depth_str.isdigit():
-            return False, {}
-
-        return (
-            True,
-            {
-                "area": Area[area_str.upper()],
-                "source": Source[source_str],
-                "date": date,
-                "depth": int(depth_str),
-            },
-        )
-
     def ingest(
         self,
         dryrun: bool = False,
@@ -204,6 +162,57 @@ class FirmsAreaDatacube(GenericDatacube):
             self.area.name.lower(),
             self.depth,  # day_range
             self.date,
+        )
+
+    def list_of_files(self) -> List[str]:
+        return [
+            f"firms_area.{extension}"
+            for extension in [
+                "geojson",
+                "csv",
+            ]
+        ]
+
+    @classmethod
+    def parse_datacube_id(cls, datacube_id: str) -> Tuple[
+        bool,
+        Dict[str, Any],
+    ]:
+        success, _ = super().parse_datacube_id(datacube_id)
+        if not success:
+            return False, {}
+
+        # datacube-firm-area-<area>-<source>-yyyy-mm-dd-depth
+        # datacube-firms-area-world-MODIS_NRT-2024-07-20-1
+        segments = datacube_id.split("-")
+        if len(segments) < 9:
+            return False, {}
+
+        if segments[2] != cls.name:
+            return False, {}
+
+        area_str = segments[3]
+        if area_str not in Area.values():
+            return False, {}
+
+        source_str = segments[4]
+        if source_str not in Source.values():
+            return False, {}
+
+        date = "{}-{}-{}".format(segments[5], segments[6], segments[7])
+
+        depth_str = segments[8]
+        if not depth_str.isdigit():
+            return False, {}
+
+        return (
+            True,
+            {
+                "area": Area[area_str.upper()],
+                "source": Source[source_str],
+                "date": date,
+                "depth": int(depth_str),
+            },
         )
 
     @classmethod

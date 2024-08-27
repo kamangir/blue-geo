@@ -1,4 +1,4 @@
-from typing import Any, Tuple, Dict
+from typing import Any, Tuple, Dict, List
 from blueness import module
 from blue_geo import NAME
 from abcli.plugins.metadata import post_to_object
@@ -64,6 +64,9 @@ class GenericDatacube:
         )
 
         return True, None
+
+    def list_of_files(self) -> List[str]:
+        return []
 
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[

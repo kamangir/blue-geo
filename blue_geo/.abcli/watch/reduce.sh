@@ -34,6 +34,29 @@ function blue_geo_watch_reduce() {
 
     abcli_log "🌐 @geo watch reduce $query_object_name/$suffix -> $object_name"
 
+    local datacube_id_list=$(abcli_metadata get \
+        delim=space,key=datacube_id,object \
+        $query_object_name)
+    abcli_log_list "$datacube_id_list" \
+        --before "reducing" \
+        --delim space \
+        --after "datacube(s)"
+
+    local datacube_id
+    local offset=0
+    local leaf_object_name
+    for datacube_id in $datacube_id_list; do
+        leaf_object_name=$query_object_name-$suffix-$(python3 -c "print(f'{$offset:03d}')")
+        abcli_log "reducing $leaf_object_name ..."
+
+        abcli_clone \
+            cp,~meta \
+            $leaf_object_name \
+            $object_name
+
+        offset=$((offset + 1))
+    done
+
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \
         reduce \

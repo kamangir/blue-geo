@@ -13,7 +13,7 @@ function blue_geo_watch_map() {
 
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
     local do_download=$(abcli_option_int "$options" download $(abcli_not do_dryrun))
-    local offset=$(abcli_option_int "$options" offset 0)
+    local offset=$(abcli_option "$options" offset 0)
     local suffix=$(abcli_option "$options" suffix $(abcli_string_timestamp_short))
     local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
 

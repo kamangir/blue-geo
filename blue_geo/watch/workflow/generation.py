@@ -32,7 +32,7 @@ def generate_workflow(
     )
 
     logger.info(
-        "{}.generate_workflow: {}[{} @ {}]/{}: -[{} @ {} + {}]-> {}".format(
+        "{}.generate_workflow: {}[{} X {} datacube(s)]/{}: -[{} @ {} + {}]-> {}".format(
             NAME,
             target,
             query_object_name,
@@ -71,7 +71,7 @@ def generate_workflow(
                 f"node={node}",
                 job_name,
                 "blue_geo_watch_map",
-                f"offset={offset},suffix={suffix},{map_options}",
+                f"offset={offset:03d},suffix={suffix},{map_options}",
                 query_object_name,
             ]
         )

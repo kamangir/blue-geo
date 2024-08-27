@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
 function blue_geo_watch_map() {
-    local what=$1
+    local options=$1
 
-    if [[ "$what" == help ]]; then
+    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         local options="$(xtra dryrun,~download,)offset=<offset>,suffix=<suffix>$(xtra ,~upload)"
 
         abcli_show_usage "@geo watch map $(xwrap $options '.|<query-object-name>')" \
@@ -30,19 +30,32 @@ function blue_geo_watch_map() {
         return 1
     fi
 
+    abcli_log "🌐 @geo watch map $query_object_name @ $offset==$datacube_id -> /$suffix"
+
     blue_geo_datacube_ingest \
         dryrun=$do_dryrun,what=quick \
         $datacube_id
 
     local object_name=$query_object_name-$suffix-$offset
 
-    local target_path=$abcli_object_root/$object_name/target/
-    mkdir -pv $target_path
-    cp -v \
-        $abcli_object_root/$query_object_name/target/* \
-        $target_path
+    blue_geo_watch_targets copy - \
+        $query_object_name \
+        $object_name
 
-    abcli_log "🌐 @geo watch map $query_object_name @ $offset==$datacube_id -> /$suffix"
+    local crop_suffix=$(abcli_string_timestamp_short)
+    blue_geo_datacube_crop \
+        dryrun=$do_dryrun,suffix=$crop_suffix \
+        $object_name \
+        $datacube_id
+    [[ $? -ne 0 ]] && return 1
+
+    local filename=$(blue_geo_datacube_get list_of_files $datacube_id \
+        --suffix .jp2+.tif+.tiff \
+        --count 1 \
+        --exists 1)
+    cp -v \
+        $abcli_object_root/$datacube_id-DERIVED-crop-$crop_suffix/$filename \
+        $abcli_object_root/$object_name/
 
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \

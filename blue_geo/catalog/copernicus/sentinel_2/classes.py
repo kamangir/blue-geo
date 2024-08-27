@@ -105,6 +105,7 @@ class CopernicusSentinel2Datacube(GenericDatacube):
         dryrun: bool = False,
         overwrite: bool = False,
         what: str = "metadata",
+        verbose: bool = False,
     ) -> Tuple[bool, Any]:
         success, output = super().ingest(dryrun, overwrite, what)
         if not success:
@@ -137,28 +138,41 @@ class CopernicusSentinel2Datacube(GenericDatacube):
             if item_filename.endswith(os.sep):
                 continue
 
-            if not overwrite and file.exist(item_filename):
-                logger.info(f"✅ {item_filename}")
+            skip = True
+            if download_all:
+                skip = False
+            elif item.size <= 10**6 and not any(
+                item_filename.endswith(suffix)
+                for suffix in [
+                    ".jp2",
+                    ".tif",
+                    ".tiff",
+                ]
+            ):
+                skip = False
+            elif download_quick and item_filename.endswith("TCI.jp2"):
+                skip = False
+            elif suffix and item_filename.endswith(suffix):
+                skip = False
+
+            if skip:
+                if verbose:
+                    logger.info(
+                        "skipped {}: {}".format(
+                            string.pretty_bytes(item.size),
+                            item_suffix,
+                        )
+                    )
                 continue
 
-            if (
-                not item.size <= 10**6
-                and not download_all
-                and not (download_quick and item_filename.endswith("TCI.jp2"))
-                and not (suffix and item_filename.endswith(suffix))
-            ):
-                logger.info(
-                    "skipped {}: {}".format(
-                        string.pretty_bytes(item.size),
-                        item.key,
-                    )
-                )
+            if not overwrite and file.exist(item_filename):
+                logger.info(f"✅ {item_filename}")
                 continue
 
             logger.info(
                 "downloading {}: {} -> {}".format(
                     string.pretty_bytes(item.size),
-                    item.key,
+                    item_suffix,
                     item_filename,
                 )
             )
@@ -176,6 +190,15 @@ class CopernicusSentinel2Datacube(GenericDatacube):
             logger.error(f"{error_count} error(s).")
 
         return error_count == 0, output
+
+    def list_of_files(self) -> List[str]:
+        success, bucket, s3_prefix = self.get_bucket()
+        if not success:
+            return []
+
+        list_of_items = bucket.objects.filter(Prefix=s3_prefix)
+
+        return [item.key.split(f"{s3_prefix}/", 1)[1] for item in list_of_items]
 
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[

@@ -1,5 +1,7 @@
-from typing import Any, Tuple, Dict
+import os
+from typing import Any, Tuple, Dict, List
 from blueness import module
+from abcli.modules import objects
 from blue_geo import NAME
 from abcli.plugins.metadata import post_to_object
 from blue_geo.catalog.generic.classes import GenericCatalog, VoidCatalog
@@ -40,6 +42,9 @@ class GenericDatacube:
             self.datacube_id,
         )
 
+    def full_filename(self, filename: str) -> str:
+        return objects.path_of(filename, self.datacube_id, create=True)
+
     def ingest(
         self,
         dryrun: bool = False,
@@ -64,6 +69,9 @@ class GenericDatacube:
         )
 
         return True, None
+
+    def list_of_files(self) -> List[str]:
+        return []
 
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[

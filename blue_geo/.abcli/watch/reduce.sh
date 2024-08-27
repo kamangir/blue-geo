@@ -28,11 +28,9 @@ function blue_geo_watch_reduce() {
     [[ "$do_download" == 1 ]] &&
         abcli_download - $object_name
 
-    local target_path=$abcli_object_root/$object_name/target/
-    mkdir -pv $target_path
-    cp -v \
-        $abcli_object_root/$query_object_name/target/* \
-        $target_path
+    blue_geo_watch_targets copy - \
+        $query_object_name \
+        $object_name
 
     abcli_log "🌐 @geo watch reduce $query_object_name/$suffix -> $object_name"
 

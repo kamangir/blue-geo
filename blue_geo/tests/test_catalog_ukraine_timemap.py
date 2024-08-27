@@ -1,6 +1,5 @@
 import pytest
 import geopandas as gpd
-from abcli.modules.objects import unique_object
 from blue_geo.tests import assets
 from blue_geo.catalog.ukraine_timemap import UkraineTimemapDatacube
 
@@ -25,6 +24,8 @@ def test_datacube_from_datacube_id(datacube_id: str):
     success, df = datacube.ingest()
     assert success
     assert isinstance(df, gpd.GeoDataFrame)
+
+    assert datacube.list_of_files()
 
 
 @pytest.mark.parametrize(

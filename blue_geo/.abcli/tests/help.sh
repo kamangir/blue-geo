@@ -16,6 +16,8 @@ function test_blue_geo_help() {
         "blue_geo datacube get" \
         "blue_geo datacube ingest" \
         \
+        "blue_geo gdal" \
+        \
         "blue_geo QGIS" \
         "blue_geo QGIS_expressions" \
         "blue_geo QGIS_server" \

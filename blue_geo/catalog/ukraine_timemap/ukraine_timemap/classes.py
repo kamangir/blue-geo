@@ -1,6 +1,6 @@
 from datetime import datetime
 from collections import Counter
-from typing import Tuple
+from typing import Tuple, List
 from abcli.modules import objects
 import geopandas as gpd
 from geojson import Point
@@ -175,6 +175,16 @@ class UkraineTimemapDatacube(GenericDatacube):
                 return False, gdf
 
         return True, gdf
+
+    def list_of_files(self) -> List[str]:
+        return [
+            f"ukraine_timemap.{extension}"
+            for extension in [
+                "geojson",
+                "json",
+                "png",
+            ]
+        ]
 
     @classmethod
     def query(cls, object_name: str) -> bool:

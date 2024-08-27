@@ -40,6 +40,8 @@ def test_datacube_from_datacube_id(datacube_id: str):
     success, _ = datacube.ingest()
     assert success
 
+    assert datacube.list_of_files()
+
 
 @pytest.mark.parametrize(
     ["datacube_id", "expected_success"],

@@ -49,11 +49,13 @@ function blue_geo_watch_map() {
         $datacube_id
     [[ $? -ne 0 ]] && return 1
 
-    blue_geo_datacube_cp \
-        suffix=TCI.jp2 \
-        $datacube_id-DERIVED-$crop_suffix \
-        $object_name
-    [[ $? -ne 0 ]] && return 1
+    local filename=$(blue_geo_datacube_get list_of_files $datacube_id \
+        --suffix .jp2+.tif+.tiff \
+        --count 1 \
+        --exists 1)
+    cp -v \
+        $abcli_object_root/$datacube_id-DERIVED-crop-$crop_suffix/$filename \
+        $abcli_object_root/$object_name/
 
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \

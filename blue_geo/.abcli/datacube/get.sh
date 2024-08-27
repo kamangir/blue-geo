@@ -9,7 +9,7 @@ function blue_geo_datacube_get() {
             "get datacube properties."
 
         options="list_of_files"
-        local args="[--delim +]$ABCUL[--suffix <.jp2+.tif+.tiff>]"
+        local args="[--count 1]$ABCUL[--delim +]$ABCUL[--suffix <.jp2+.tif+.tiff>]"
         abcli_show_usage "@datacube get$ABCUL[$options]$ABCUL[.|<datacube-id>]$ABCUL$args" \
             "get list of datacube files."
         return

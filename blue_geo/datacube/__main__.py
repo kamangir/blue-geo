@@ -1,5 +1,6 @@
 import argparse
 from blueness import module
+from abcli import file
 from blue_geo import NAME, VERSION
 from blue_geo.catalog import get_datacube
 from blue_geo.logger import logger
@@ -53,6 +54,18 @@ parser.add_argument(
     type=str,
     default="+",
 )
+parser.add_argument(
+    "--count",
+    type=int,
+    default=-1,
+    help="-1: all",
+)
+parser.add_argument(
+    "--exists",
+    type=int,
+    default=0,
+    help="0|1",
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
@@ -66,13 +79,23 @@ if args.task == "get":
     if args.what == "catalog":
         output = datacube.catalog.name
     elif args.what == "list_of_files":
-        output = delim.join(
-            [
+        list_of_files = [
+            filename
+            for filename in datacube.list_of_files()
+            if any(filename.endswith(suffix) for suffix in args.suffix.split("+"))
+        ]
+
+        if args.exists == 1:
+            list_of_files = [
                 filename
-                for filename in datacube.list_of_files()
-                if any(filename.endswith(suffix) for suffix in args.suffix.split("+"))
+                for filename in list_of_files
+                if file.exist(datacube.full_filename(filename))
             ]
-        )
+
+        if args.count != -1:
+            list_of_files = list_of_files[: args.count]
+
+        output = delim.join(list_of_files)
     elif args.what == "template":
         output = datacube.QGIS_template
 

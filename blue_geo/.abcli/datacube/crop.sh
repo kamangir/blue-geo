@@ -18,6 +18,12 @@ function blue_geo_datacube_crop() {
     [[ "$do_download" == 1 ]] &&
         abcli_download - $object_name
 
+    local cutline=$abcli_object_root/$object_name/target/shape.geojson
+    if [[ ! -f "$cutline" ]]; then
+        abcli_log_error "-@datacube: crop: $cutline: file not found."
+        return 1
+    fi
+
     local datacube_id=$(abcli_clarify_object $3 .)
 
     local cropped_datacube_id=$datacube_id-DERIVED-crop-$suffix
@@ -28,13 +34,27 @@ function blue_geo_datacube_crop() {
 
     local list_of_files=$(blue_geo_datacube_get list_of_files \
         $datacube_id \
-        --suffix .jp2+.tif+.tiff)
-    abcli_log_list "$list_of_files" \
-        --before "cropping" \
-        --delim + \
-        --after "file(s)"
+        --suffix .jp2+.tif+.tiff \
+        --delim space)
+    local filename
+    local source_filename
+    local destination_filename
+    for filename in $list_of_files; do
+        source_filename=$abcli_object_root/$datacube_id/$filename
+        [[ ! -f $source_filename ]] && continue
 
-    echo "🪄"
+        abcli_log "cropping $filename ..."
 
-    return 0
+        destination_filename=$abcli_object_root/$cropped_datacube_id/$filename
+        destination_path=$(dirname "$destination_filename")
+        mkdir -pv $destination_path
+
+        abcli_eval dryrun=$do_dryrun \
+            gdalwarp -cutline $cutline \
+            -crop_to_cutline \
+            -dstalpha \
+            $source_filename \
+            $destination_filename
+        [[ $? -ne 0 ]] && return 1
+    done
 }

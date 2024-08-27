@@ -26,13 +26,12 @@ class Target:
         self.query_args = copy.deepcopy(query_args)
 
     def __repr__(self) -> str:
-        return "{}[{}]: {}/{}: {} + {}".format(
+        return "{}: {} | {}/{} | {}".format(
             self.__class__.__name__,
             self.name,
             self.catalog,
             self.collection,
-            self.params,
-            self.query_args,
+            self.query_args_as_str(" | "),
         )
 
     @classmethod

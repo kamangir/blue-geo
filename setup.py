@@ -32,6 +32,7 @@ setup(
             "sample.env",
             ".abcli/**/*.sh",
             "**/*.md",
+            "watch/targets.yaml",
         ],
     },
 )

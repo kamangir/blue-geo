@@ -89,6 +89,8 @@ function blue_geo_watch() {
         [[ $? -ne 0 ]] && return 1
     fi
 
+    abcli_upload - $query_object_name
+
     local job_name="$object_name-job-$(abcli_string_timestamp_short)"
 
     abcli_log "🌐 @geo: watch: $query_object_name: -[ $workflow_options @ $map_options + $reduce_options @ $job_name]-> $object_name"

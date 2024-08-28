@@ -53,6 +53,10 @@ function blue_geo_watch_map() {
         --suffix .jp2+.tif+.tiff \
         --count 1 \
         --exists 1)
+    if [[ -z "$filename" ]]; then
+        abcli_log_error "-@geo: watch: map: offset=$offset: $datacube_id: file not found."
+        return 1
+    fi
     cp -v \
         $abcli_object_root/$datacube_id-DERIVED-crop-$crop_suffix/$filename \
         $abcli_object_root/$object_name/

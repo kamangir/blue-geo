@@ -126,6 +126,7 @@ class CopernicusSentinel2Datacube(GenericDatacube):
         list_of_items = bucket.objects.filter(Prefix=s3_prefix)
 
         error_count = 0
+        TCI_downloaded = False
         for item in tqdm(list_of_items):
             item_suffix = item.key.split(f"{s3_prefix}/", 1)[1]
             if not item_suffix:
@@ -150,7 +151,13 @@ class CopernicusSentinel2Datacube(GenericDatacube):
                 ]
             ):
                 skip = False
-            elif download_quick and item_filename.endswith("TCI.jp2"):
+            elif (
+                download_quick
+                and not TCI_downloaded
+                and item_filename.endswith(".jp2")
+                and "TCI" in item_filename
+            ):
+                TCI_downloaded = True
                 skip = False
             elif suffix and item_filename.endswith(suffix):
                 skip = False

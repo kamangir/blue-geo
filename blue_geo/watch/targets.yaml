@@ -1,3 +1,16 @@
+burning-man-2024:
+  catalog: copernicus
+  collection: sentinel_2
+  params:
+    height: 0.051
+    width: 0.12
+  query_args:
+    datetime: 2024-08-18/2024-09-15
+    keyword: L1C
+    lat: 40.7864
+    lon: -119.2065
+    radius: 0.01
+
 chilcotin-river-landslide:
   catalog: copernicus
   collection: sentinel_2
@@ -10,6 +23,7 @@ chilcotin-river-landslide:
     lat: 51.847180
     lon: -122.790264
     radius: 0.01
+
 elkhema:
   catalog: copernicus
   collection: sentinel_2
@@ -17,6 +31,20 @@ elkhema:
     datetime: 2022-08-06/
     lat: 49.281209
     lon: -123.130760
+
+Mount-Etna:
+  catalog: copernicus
+  collection: sentinel_2
+  params:
+    height: 0.051
+    width: 0.12
+  query_args:
+    datetime: 2024-06-15/2024-07-20
+    keyword: L1C
+    lat: 37.7510
+    lon: 14.9934
+    radius: 0.01
+
 test:
   catalog: copernicus
   collection: sentinel_2

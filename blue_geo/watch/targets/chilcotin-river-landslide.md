@@ -9,15 +9,6 @@ background:
 - [Reddit: Before and after satellite images of the Chilcotin River landslide](https://www.reddit.com/r/britishcolumbia/comments/1eh9eql/before_and_after_satellite_images_of_the/)
 
 
-```yaml
-toi:
-    - from: 2024-07-30
-    - to: 2024-08-09
-aoi: 
-    - lat: 51.83
-    - lon: -122.78
-```
-
----
+details: [targets.yaml](../targets.yaml).
 
 used by: [query on copernicus/sentinel-2](../../catalog/copernicus/), [`@geo watch`](../).

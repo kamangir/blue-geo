@@ -6,8 +6,6 @@ watching [targets](./targets.yaml) through `@geo`.
  > @geo watch help
 ```
 
---include-- ./targets/chilcotin-river-landslide.md case study: Chilcotin River Landslide
-
 ## example run
 
 ```bash

@@ -17,7 +17,7 @@ items = [
         ],
         [
             f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)",
-            "Chilcotin River-Landslide, first almost successful run on [AWS Batch](https://aws.amazon.com/batch/), ([details]({https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-199-11f9b5497ef0})).",
+            "Chilcotin River-Landslide, first almost successful run on [AWS Batch](https://aws.amazon.com/batch/), ([details](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-199-11f9b5497ef0)).",
         ],
     )
 ]

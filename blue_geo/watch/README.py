@@ -1,3 +1,4 @@
+from abcli import string
 from blue_geo import REPO_NAME
 
 url_prefix = "https://kamangir-public.s3.ca-central-1.amazonaws.com"
@@ -6,7 +7,7 @@ url_prefix = "https://kamangir-public.s3.ca-central-1.amazonaws.com"
 items = [
     " ".join(
         [
-            f"![image]({url_prefix}/{object_name}/{object_name}.gif)",
+            f"![image]({url_prefix}/{object_name}/{object_name}.gif?raw=true&random={string.random_()})",
             f"{description} [`{object_name}`]({url_prefix}/{object_name}.tar.gz)",
         ]
     )

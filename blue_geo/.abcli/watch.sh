@@ -20,7 +20,7 @@ function blue_geo_watch() {
 
         map_options="$(xtra dryrun)"
 
-        reduce_options="$(xtra dryrun,~gif)"
+        reduce_options="$(xtra dryrun,~gif,)publish"
 
         abcli_show_usage "@geo watch $(xwrap $options $target_options $workflow_options $map_options $reduce_options '-|<object-name>')" \
             "watch target -> <object-name>."

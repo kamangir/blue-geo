@@ -12,16 +12,8 @@ watching [targets](./targets.yaml) through `@geo`.
 
 ```bash
 @batch eval - \
-  blue_geo watch - target=chilcotin-river-landslide to=aws_batch - - \
+  blue_geo watch - target=chilcotin-river-landslide to=aws_batch - publish \
   geo-watch-2024-08-31-chilcotin-c
 ```
 
-```
-@select geo-watch-2024-08-31-chilcotin-c
-@publish tar .
-@publish suffix=.gif .
-```
-
-[geo-watch-2024-08-31-chilcotin-c.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-08-31-chilcotin-c.tar.gz)
-
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-08-31-chilcotin-c/geo-watch-2024-08-31-chilcotin-c.gif)
+--table--

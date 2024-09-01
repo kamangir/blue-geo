@@ -34,16 +34,10 @@ using [chilcotin-river-landslide](./targets/chilcotin-river-landslide.md).
 
 ```bash
 @batch eval - \
-  blue_geo watch - target=chilcotin-river-landslide to=aws_batch - - \
+  blue_geo watch - target=chilcotin-river-landslide to=aws_batch - publish \
   geo-watch-2024-08-31-chilcotin-c
 ```
 
-```
-@select geo-watch-2024-08-31-chilcotin-c
-@publish tar .
-@publish suffix=.gif .
-```
-
-[geo-watch-2024-08-31-chilcotin-c.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-08-31-chilcotin-c.tar.gz)
-
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-08-31-chilcotin-c/geo-watch-2024-08-31-chilcotin-c.gif)
+|   |   |
+| --- | --- |
+| ![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/test_blue_geo_watch/test_blue_geo_watch.gif) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [`test_blue_geo_watch`](https://kamangir-public.s3.ca-central-1.amazonaws.com/test_blue_geo_watch.tar.gz) | ![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-08-31-chilcotin-c/geo-watch-2024-08-31-chilcotin-c.gif) Chilcotin River-Landslide, first almost successful run on [AWS Batch](https://aws.amazon.com/batch/), ([details]({https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-199-11f9b5497ef0})). [`geo-watch-2024-08-31-chilcotin-c`](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-08-31-chilcotin-c.tar.gz) |

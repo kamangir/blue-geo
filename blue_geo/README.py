@@ -1,6 +1,7 @@
 from abcli import file
 import os
 from abcli.plugins.README import build as build_README
+from blue_geo.watch.README import items as watch_items
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
 
 
@@ -70,21 +71,19 @@ items = [
 
 
 def build():
-    return build_README(
-        items=items,
-        cols=2,
-        path=os.path.join(file.path(__file__), ".."),
-        ICON=ICON,
-        NAME=NAME,
-        VERSION=VERSION,
-        REPO_NAME=REPO_NAME,
-    ) and all(
+    return all(
         build_README(
+            items=items,
+            cols=cols,
             path=os.path.join(file.path(__file__), suffix),
             ICON=ICON,
             NAME=NAME,
             VERSION=VERSION,
             REPO_NAME=REPO_NAME,
         )
-        for suffix in ["catalog/copernicus", "watch"]
+        for items, cols, suffix in zip(
+            [[], watch_items, items],
+            [3, 3, 2],
+            ["catalog/copernicus", "watch", ".."],
+        )
     )

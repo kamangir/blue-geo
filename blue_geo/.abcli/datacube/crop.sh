@@ -55,6 +55,8 @@ function blue_geo_datacube_crop() {
             -dstalpha \
             $source_filename \
             $destination_filename
-        [[ $? -ne 0 ]] && return 1
+        # [[ $? -ne 0 ]] && return 1
     done
+
+    return 0
 }

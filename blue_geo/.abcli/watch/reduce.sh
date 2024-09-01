@@ -4,7 +4,7 @@ function blue_geo_watch_reduce() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local options="$(xtra dryrun,~download,)suffix=<suffix>$(xtra ~upload)"
+        local options="$(xtra dryrun,~download,)publish,suffix=<suffix>$(xtra ~upload)"
 
         abcli_show_usage "@geo watch reduce $(xwrap $options '..|<query-object-name>' '.|<object-name>')" \
             "@geo watch reduce <query-object-name>/<suffix> -> <object-name>."
@@ -14,6 +14,7 @@ function blue_geo_watch_reduce() {
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
     local do_download=$(abcli_option_int "$options" download $(abcli_not do_dryrun))
     local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
+    local do_publish=$(abcli_option_int "$options" publish 0)
     local suffix=$(abcli_option "$options" suffix)
     if [[ -z "$suffix" ]]; then
         abcli_log_error "-@geo: watch: reduce: suffix not found."
@@ -68,6 +69,11 @@ function blue_geo_watch_reduce() {
 
     [[ "$do_upload" == 1 ]] &&
         abcli_upload - $object_name
+
+    if [[ "$do_publish" == 1 ]]; then
+        abcli_publish tar $object_name
+        abcli_publish suffix=.gif $object_name
+    fi
 
     return $status
 }

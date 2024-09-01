@@ -165,11 +165,18 @@ def reduce_function(
     ):
         return False
 
-    return generate_animated_gif(
-        list_of_frames,
-        objects.path_of(
-            f"{object_name}.gif",
-            object_name,
-        ),
-        frame_duration=1000,
+    return all(
+        generate_animated_gif(
+            list_of_frames,
+            objects.path_of(
+                "{}{}.gif".format(
+                    object_name,
+                    f"-{scale}X" if scale != 1 else "",
+                ),
+                object_name,
+            ),
+            frame_duration=1000,
+            scale=scale,
+        )
+        for scale in [1, 2]
     )

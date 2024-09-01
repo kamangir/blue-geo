@@ -25,7 +25,7 @@ items = [
     " ".join(
         [
             f"![image]({url_prefix}/{object_name}/{object_name}-2X.gif?raw=true&random={string.random_()})",
-            f"{description}, object: [`{object_name}`]({url_prefix}/{object_name}.tar.gz), gif: [🔗]({url_prefix}/{object_name}/{object_name}.gif).",
+            f"{description}, object: [`{object_name}`]({url_prefix}/{object_name}.tar.gz), [gif]({url_prefix}/{object_name}/{object_name}.gif).",
         ]
     )
     for object_name, description in zip(

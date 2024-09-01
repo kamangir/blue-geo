@@ -10,8 +10,11 @@ watching [targets](./targets.yaml) through `@geo`.
 
 ```bash
 @batch eval - \
-  blue_geo watch - target=chilcotin-river-landslide to=aws_batch - publish \
-  geo-watch-2024-08-31-chilcotin-c
+  blue_geo watch - \
+  target=chilcotin-river-landslide \
+  to=aws_batch - \
+  publish \
+  geo-watch-2024-09-01-chilcotin-a
 ```
 
 --table--

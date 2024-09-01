@@ -15,10 +15,12 @@ items = [
         [
             "test_blue_geo_watch",
             "geo-watch-2024-08-31-chilcotin-c",
+            "geo-watch-2024-09-01-chilcotin-a",
         ],
         [
             f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)",
-            "[Chilcotin River-Landslide](./targets/chilcotin-river-landslide.md), ([details](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-199-11f9b5497ef0)).",
+            "[Chilcotin River-Landslide](./targets/chilcotin-river-landslide.md), 🛰️ Sentinel-2, ([details](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-199-11f9b5497ef0)).",
+            "L1C, `2024-07-15/2024-08-24`.",
         ],
     )
 ]

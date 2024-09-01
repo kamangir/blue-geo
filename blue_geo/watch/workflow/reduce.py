@@ -48,7 +48,7 @@ def reduce_function(
     for filename in tqdm(
         glob.glob(
             objects.path_of(
-                f"metadata-*.yaml",
+                "metadata-*.yaml",
                 object_name,
             )
         )

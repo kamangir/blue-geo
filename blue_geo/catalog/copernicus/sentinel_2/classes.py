@@ -35,7 +35,7 @@ class CopernicusSentinel2Datacube(GenericDatacube):
                 (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d"),
                 datetime.now().strftime("%Y-%m-%d"),
             ),
-            "help": "<2024-07-30/2024-08-09>",
+            "help": "<2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime",
         },
         "lat": {
             "type": float,

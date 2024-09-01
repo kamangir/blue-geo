@@ -57,6 +57,10 @@ class CopernicusSentinel2Datacube(GenericDatacube):
             "default": 0.1,
             "help": "<0.1>",
         },
+        "keyword": {
+            "default": "",
+            "help": "<keyword>",
+        },
     }
 
     QGIS_template = "unknown-template"
@@ -235,9 +239,16 @@ class CopernicusSentinel2Datacube(GenericDatacube):
         datetime: str,
         bbox: List[float],
         count: int,
+        keyword: str = "",
         verbose: bool = False,
     ) -> bool:
-        logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
+        logger.info(
+            "🔎 {}.query -{}> {}".format(
+                cls.__name__,
+                f"{keyword}-" if keyword else "",
+                object_name,
+            )
+        )
 
         success, client = cls.get_client()
         if not success:
@@ -276,8 +287,17 @@ class CopernicusSentinel2Datacube(GenericDatacube):
                 for item in items
             ]
         )
+
+        if keyword:
+            list_of_datacube_ids = [
+                datacube_id
+                for datacube_id in list_of_datacube_ids
+                if keyword in datacube_id
+            ]
+
         if count != -1:
             list_of_datacube_ids = list_of_datacube_ids[:count]
+
         logger.info(f"{len(list_of_datacube_ids)} datacubes(s) found.")
         for index, datacube_id in enumerate(list_of_datacube_ids):
             logger.info(f"🧊 {index+1:02}: {datacube_id}")

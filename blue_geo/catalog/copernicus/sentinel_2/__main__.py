@@ -39,6 +39,7 @@ if args.task == "query":
         ),
         datetime=args.datetime,
         count=args.count,
+        keyword=args.keyword,
     )
 else:
     success = None

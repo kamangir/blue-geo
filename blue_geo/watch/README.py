@@ -31,8 +31,10 @@ items = [
     for object_name, description in zip(
         [
             "geo-watch-2024-09-01-chilcotin-a",
+            "geo-watch-2024-09-01-chilcotin-c",
         ],
-        [
+        2
+        * [
             "[Chilcotin River-Landslide](./targets/chilcotin-river-landslide.md), [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-201-d64e9bb3716b)",
         ],
     )

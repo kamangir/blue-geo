@@ -1,6 +1,5 @@
-import glob
+from typing import List
 from tqdm import tqdm
-from functools import reduce
 from blueness import module
 from abcli import file
 from abcli.plugins.graphics.signature import add_signature
@@ -11,9 +10,8 @@ from abcli.plugins.metadata import post_to_object
 from abcli.modules import objects
 from blue_geo import NAME, VERSION
 from blue_geo import NAME as BLUE_GEO_NAME
-from blue_geo.watch.targets import Target
+from blue_geo.watch.workflow.common import load_watch
 from blue_geo.logger import logger
-from typing import List
 
 
 NAME = module.name(__file__, NAME)
@@ -24,35 +22,20 @@ def reduce_function(
     suffix: str,
     object_name: str,
 ) -> bool:
-    success, target = Target.load(object_name)
+    success, target, list_of_files = load_watch(object_name)
     if not success:
         return success
 
     logger.info(
-        "{}.reduce {}/{} @ {} -> {}".format(
+        "{}.reduce {}/{} @ {} -{} file(s)-> {}".format(
             NAME,
             query_object_name,
             suffix,
             target,
+            len(list_of_files),
             object_name,
         )
     )
-
-    list_of_files = sorted(
-        reduce(
-            lambda x, y: x + y,
-            [
-                glob.glob(
-                    objects.path_of(
-                        f"*{suffix}",
-                        object_name,
-                    )
-                )
-                for suffix in [".jp2", ".tif", ".tiff"]
-            ],
-        )
-    )
-    logger.info("{} file(s) to process.".format(len(list_of_files)))
 
     bad_images: List[str] = []
     list_of_frames: List[str] = []
@@ -84,6 +67,10 @@ def reduce_function(
         "reduce",
         {
             "bad_images": bad_images,
+            "list_of_files": [
+                file.name_and_extension(filename) for filename in list_of_files
+            ],
+            "target": target.__dict__,
         },
     ):
         return False

@@ -1,6 +1,4 @@
-from typing import List
-from blue_geo.logger import logger
-from typing import Dict
+from typing import List, Dict
 
 
 class GenericCatalog:

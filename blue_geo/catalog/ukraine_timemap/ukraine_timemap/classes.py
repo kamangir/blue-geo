@@ -11,6 +11,7 @@ from blue_geo import NAME, VERSION
 from blue_geo import env
 from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.catalog.ukraine_timemap.classes import UkraineTimemapCatalog
+from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
 import matplotlib.pyplot as plt
 from typing import Dict
@@ -176,7 +177,11 @@ class UkraineTimemapDatacube(GenericDatacube):
 
         return True, gdf
 
-    def list_of_files(self) -> List[str]:
+    def list_of_files(
+        self,
+        scope: DatacubeScope = DatacubeScope("all"),
+        verbose: bool = False,
+    ) -> List[str]:
         return [
             f"ukraine_timemap.{extension}"
             for extension in [

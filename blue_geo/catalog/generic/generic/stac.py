@@ -4,14 +4,15 @@ from datetime import datetime, timedelta
 from tqdm import tqdm
 from pystac_client import Client
 from abcli import file, path, string
-from abcli.modules import objects
 from abcli.plugins.metadata import post_to_object
 from blue_geo.catalog.generic.generic.classes import GenericDatacube
+from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
 
 
 class STACDatacube(GenericDatacube):
     collection = "unknown"
+
     QGIS_template = "unknown-template"
 
     metadata: Any = {}
@@ -76,86 +77,25 @@ class STACDatacube(GenericDatacube):
         if not success:
             return success, output
 
-        download_all = what == "all"
-        download_quick = what == "quick"
-        suffix = "" if download_all or download_quick or what == "metadata" else what
-
-        success, bucket, s3_prefix = self.get_bucket(verbose=True)
-        if not success:
-            return success, output
-
-        datacube_path = objects.object_path(self.datacube_id)
-        if not path.create(datacube_path):
-            return False, output
+        list_of_files = self.list_of_files(DatacubeScope(what))
+        logger.info(
+            "ingesting {} file(s){}...".format(
+                len(list_of_files),
+                " in dryrun mode " if dryrun else "",
+            )
+        )
 
         error_count = 0
-        TCI_downloaded = False
-        list_of_items = bucket.objects.filter(Prefix=s3_prefix)
-        for item in tqdm(list_of_items):
-            item_suffix = item.key.split(f"{s3_prefix}/", 1)[1]
-            if not item_suffix:
-                continue
-
-            item_filename = os.path.join(datacube_path, item_suffix)
-            if not path.create(file.path(item_filename)):
-                error_count += 1
-                continue
-            if item_filename.endswith(os.sep):
-                continue
-
-            skip = True
-            if download_all:
-                skip = False
-            elif item.size <= 10**6 and not any(
-                item_filename.endswith(suffix)
-                for suffix in [
-                    ".jp2",
-                    ".tif",
-                    ".tiff",
-                ]
-            ):
-                skip = False
-            elif (
-                download_quick
-                and not TCI_downloaded
-                and item_filename.endswith(".jp2")
-                and "TCI" in item_filename
-            ):
-                TCI_downloaded = True
-                skip = False
-            elif suffix and item_filename.endswith(suffix):
-                skip = False
-
-            if skip:
-                if verbose:
-                    logger.info(
-                        "skipped {}: {}".format(
-                            string.pretty_bytes(item.size),
-                            item_suffix,
-                        )
-                    )
-                continue
-
-            if not overwrite and file.exist(item_filename):
-                logger.info(f"✅ {item_filename}")
-                continue
-
-            logger.info(
-                "downloading {}: {} -> {}".format(
-                    string.pretty_bytes(item.size),
-                    item_suffix,
-                    item_filename,
-                )
-            )
+        for filename in tqdm(list_of_files):
             if dryrun:
                 continue
 
-            try:
-                bucket.download_file(item.key, item_filename)
-            except Exception as e:
-                logger.error(e)
+            if not self.ingest_filename(
+                filename,
+                overwrite=overwrite,
+                verbose=verbose,
+            ):
                 error_count += 1
-                continue
 
         if error_count:
             logger.error(f"{error_count} error(s).")

@@ -3,6 +3,7 @@ from blueness import module
 from abcli import file
 from blue_geo import NAME, VERSION
 from blue_geo.catalog import get_datacube
+from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
@@ -79,11 +80,7 @@ if args.task == "get":
     if args.what == "catalog":
         output = datacube.catalog.name
     elif args.what == "list_of_files":
-        list_of_files = [
-            filename
-            for filename in datacube.list_of_files()
-            if any(filename.endswith(suffix) for suffix in args.suffix.split("+"))
-        ]
+        list_of_files = datacube.list_of_files(DatacubeScope(args.suffix))
 
         if args.exists == 1:
             list_of_files = [

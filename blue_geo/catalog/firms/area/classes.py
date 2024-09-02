@@ -10,6 +10,7 @@ from abcli.plugins.metadata import post_to_object
 from blue_geo.catalog.firms import FirmsCatalog
 from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.catalog.firms.area.enums import Area, Source
+from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo import env
 from blue_geo.logger import logger
 
@@ -164,7 +165,11 @@ class FirmsAreaDatacube(GenericDatacube):
             self.date,
         )
 
-    def list_of_files(self) -> List[str]:
+    def list_of_files(
+        self,
+        scope: DatacubeScope = DatacubeScope("all"),
+        verbose: bool = False,
+    ) -> List[str]:
         return [
             f"firms_area.{extension}"
             for extension in [

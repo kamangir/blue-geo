@@ -5,6 +5,7 @@ from abcli.modules import objects
 from blue_geo import NAME
 from abcli.plugins.metadata import post_to_object
 from blue_geo.catalog.generic.classes import GenericCatalog, VoidCatalog
+from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -70,7 +71,20 @@ class GenericDatacube:
 
         return True, None
 
-    def list_of_files(self) -> List[str]:
+    def ingest_filename(
+        self,
+        filename: str,
+        overwrite: bool = False,
+        verbose: bool = False,
+    ) -> bool:
+        logger.info(f"{self.datacube_id}.ingest({filename}) ...")
+        return True
+
+    def list_of_files(
+        self,
+        scope: DatacubeScope = DatacubeScope("all"),
+        verbose: bool = False,
+    ) -> List[str]:
         return []
 
     @classmethod
@@ -85,6 +99,10 @@ class GenericDatacube:
             segments[0] == "datacube" and segments[1] == cls.catalog.name,
             {},
         )
+
+    @property
+    def path(self) -> str:
+        return objects.object_path(self.datacube_id)
 
     @classmethod
     def query(cls, object_name: str) -> bool:

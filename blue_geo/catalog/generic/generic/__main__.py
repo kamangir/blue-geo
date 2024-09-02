@@ -17,26 +17,8 @@ parser.add_argument(
     help="query",
 )
 parser.add_argument(
-    "--log",
-    type=int,
-    default=1,
-    help="0|1",
-)
-parser.add_argument(
     "--object_name",
     type=str,
-)
-parser.add_argument(
-    "--save",
-    type=int,
-    default=1,
-    help="0|1",
-)
-parser.add_argument(
-    "--visualize",
-    type=int,
-    default=1,
-    help="0|1",
 )
 args = parser.parse_args()
 

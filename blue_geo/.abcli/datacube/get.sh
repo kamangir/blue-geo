@@ -7,11 +7,6 @@ function blue_geo_datacube_get() {
         options="catalog|template"
         abcli_show_usage "@datacube get$ABCUL[$options]$ABCUL[.|<datacube-id>]" \
             "get datacube properties."
-
-        options="list_of_files"
-        local args="[--count 1]$ABCUL[--delim +]$ABCUL[--suffix <.jp2+.tif+.tiff>]"
-        abcli_show_usage "@datacube get$ABCUL[$options]$ABCUL[.|<datacube-id>]$ABCUL$args" \
-            "get list of datacube files."
         return
     fi
 

@@ -49,8 +49,9 @@ function blue_geo_watch_map() {
         $datacube_id
     [[ $? -ne 0 ]] && return 1
 
-    local filename=$(blue_geo_datacube_get list_of_files $datacube_id \
-        --suffix .jp2+.tif+.tiff \
+    local filename=$(blue_geo_datacube_list $datacube_id \
+        --scope .jp2+.tif+.tiff \
+        --log 0 \
         --count 1 \
         --exists 1)
     if [[ -z "$filename" ]]; then

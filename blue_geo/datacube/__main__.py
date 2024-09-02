@@ -14,13 +14,19 @@ parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
 parser.add_argument(
     "task",
     type=str,
-    help="get|ingest",
+    help="get|ingest|list",
 )
 parser.add_argument(
     "--what",
     default="",
     type=str,
-    help="get:catalog|list_of_files|template, ingest: all|metadata|quick|<suffix>",
+    help="catalog|template",
+)
+parser.add_argument(
+    "--scope",
+    default=DatacubeScope.default,
+    type=str,
+    help=DatacubeScope.help,
 )
 parser.add_argument(
     "--datacube_id",
@@ -45,12 +51,6 @@ parser.add_argument(
     help="0|1",
 )
 parser.add_argument(
-    "--suffix",
-    default="",
-    type=str,
-    help="<.jp2+.tif+.tiff>",
-)
-parser.add_argument(
     "--delim",
     type=str,
     default="+",
@@ -67,6 +67,12 @@ parser.add_argument(
     default=0,
     help="0|1",
 )
+parser.add_argument(
+    "--log",
+    type=int,
+    default=1,
+    help="0|1",
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
@@ -77,22 +83,9 @@ if args.task == "get":
     datacube = get_datacube(datacube_id=args.datacube_id)
 
     output = f"unknown-{args.what}"
+
     if args.what == "catalog":
         output = datacube.catalog.name
-    elif args.what == "list_of_files":
-        list_of_files = datacube.list_of_files(DatacubeScope(args.suffix))
-
-        if args.exists == 1:
-            list_of_files = [
-                filename
-                for filename in list_of_files
-                if file.exist(datacube.full_filename(filename))
-            ]
-
-        if args.count != -1:
-            list_of_files = list_of_files[: args.count]
-
-        output = delim.join(list_of_files)
     elif args.what == "template":
         output = datacube.QGIS_template
 
@@ -102,8 +95,30 @@ elif args.task == "ingest":
     success, _ = datacube.ingest(
         dryrun=args.dryrun == 1,
         overwrite=args.overwrite == 1,
-        what=args.what if args.what else "metadata",
+        scope=args.scope,
     )
+elif args.task == "list":
+    success = True
+    datacube = get_datacube(datacube_id=args.datacube_id)
+
+    list_of_files = datacube.list_of_files(DatacubeScope(args.scope))
+
+    if args.exists == 1:
+        list_of_files = [
+            filename
+            for filename in list_of_files
+            if file.exist(datacube.full_filename(filename))
+        ]
+
+    if args.count != -1:
+        list_of_files = list_of_files[: args.count]
+
+    if args.log:
+        logger.info("{} file(s)".format(len(list_of_files)))
+        for index, filename in enumerate(list_of_files):
+            logger.info(f"#{index:03d} - {filename}")
+    else:
+        print(delim.join(list_of_files))
 else:
     success = None
 

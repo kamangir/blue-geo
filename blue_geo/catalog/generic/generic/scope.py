@@ -1,4 +1,7 @@
 class DatacubeScope:
+    help = "all|metadata|quick|<.jp2+.tif+.tiff>"
+    default = "metadata"
+
     def __init__(self, what: str):
         self.all = what == "all"
 

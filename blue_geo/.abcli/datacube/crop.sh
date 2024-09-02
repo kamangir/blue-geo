@@ -32,9 +32,9 @@ function blue_geo_datacube_crop() {
         $object_name \
         $cropped_datacube_id
 
-    local list_of_files=$(blue_geo_datacube_get list_of_files \
-        $datacube_id \
-        --suffix .jp2+.tif+.tiff \
+    local list_of_files=$(blue_geo_datacube_list $datacube_id \
+        --scope .jp2+.tif+.tiff \
+        --log 0 \
         --delim space)
     local filename
     local source_filename

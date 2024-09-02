@@ -70,14 +70,14 @@ class STACDatacube(GenericDatacube):
         self,
         dryrun: bool = False,
         overwrite: bool = False,
-        what: str = "metadata",
+        scope: str = DatacubeScope.default,
         verbose: bool = False,
     ) -> Tuple[bool, Any]:
-        success, output = super().ingest(dryrun, overwrite, what)
+        success, output = super().ingest(dryrun, overwrite, scope)
         if not success:
             return success, output
 
-        list_of_files = self.list_of_files(DatacubeScope(what))
+        list_of_files = self.list_of_files(DatacubeScope(scope))
         logger.info(
             "ingesting {} file(s){}...".format(
                 len(list_of_files),

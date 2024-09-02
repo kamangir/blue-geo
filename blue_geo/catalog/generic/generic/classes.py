@@ -50,7 +50,7 @@ class GenericDatacube:
         self,
         dryrun: bool = False,
         overwrite: bool = False,
-        what: str = "metadata",
+        scope: str = DatacubeScope.default,
     ) -> Tuple[bool, Any]:
         logger.info(
             "{}.{}.ingest({}): {} @ {}".format(
@@ -64,7 +64,7 @@ class GenericDatacube:
                         if item
                     ]
                 ),
-                what,
+                scope,
                 self.datacube_id,
             )
         )

@@ -15,6 +15,7 @@ function test_blue_geo_help() {
         "blue_geo datacube" \
         "blue_geo datacube get" \
         "blue_geo datacube ingest" \
+        "blue_geo datacube list" \
         \
         "blue_geo gdal" \
         \

@@ -13,6 +13,8 @@ setup(
         f"{NAME}.catalog",
         f"{NAME}.catalog.copernicus",
         f"{NAME}.catalog.copernicus.sentinel_2",
+        f"{NAME}.catalog.EarthSearch",
+        f"{NAME}.catalog.EarthSearch.sentinel_2_l1c",
         f"{NAME}.catalog.firms",
         f"{NAME}.catalog.firms.area",
         f"{NAME}.catalog.generic",

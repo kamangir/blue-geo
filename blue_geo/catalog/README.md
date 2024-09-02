@@ -12,6 +12,8 @@ look for example uses in the supported catalogs: [copernicus](./copernicus/), [f
 
 3️⃣ add `NovelCatalog` to [blue_geo/catalog/classes.py](./classes.py).
 
+4️⃣ add the new files to [`setup.py`](../../setup.py).
+
 ## listing catalogs
 
 to see the list of catalogs, 

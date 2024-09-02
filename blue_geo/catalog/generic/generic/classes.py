@@ -77,7 +77,6 @@ class GenericDatacube:
         overwrite: bool = False,
         verbose: bool = False,
     ) -> bool:
-        logger.info(f"{self.datacube_id}.ingest({filename}) ...")
         return True
 
     def list_of_files(

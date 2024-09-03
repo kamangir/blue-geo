@@ -1,4 +1,4 @@
-from blue_geo.catalog.generic.stac import STACCatalog
+from blue_geo.catalog.generic.stac.classes import STACCatalog
 
 
 class CopernicusCatalog(STACCatalog):

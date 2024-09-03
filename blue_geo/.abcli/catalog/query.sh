@@ -52,11 +52,10 @@ function blue_geo_catalog_query() {
             options="dryrun,$datacube_class,select,upload"
             ingest_options="ingest,$blue_geo_datacube_ingest_options"
 
-            local args=$(python3 -m blue_geo.catalog \
-                get \
+            local args=$(blue_geo_catalog_get \
+                list_of_args \
                 --catalog $catalog \
-                --datacube_class $datacube_class \
-                --what list_of_args)
+                --datacube_class $datacube_class)
 
             abcli_show_usage "@catalog query $catalog$ABCUL[$options]$ABCUL[$ingest_options]$ABCUL[-|<object-name>]$ABCUL$args" \
                 "$catalog/$datacube_class -query-> <object-name>."
@@ -76,12 +75,24 @@ function blue_geo_catalog_query() {
 
     local object_name=$(abcli_clarify_object $4 query-$catalog-$datacube_class-$(abcli_string_timestamp))
 
-    abcli_log "🔎 query: $catalog/$datacube_class -> $object_name ..."
+    local is_STAC=$(blue_geo_catalog_get is_STAC --catalog $catalog)
+
+    local log_suffix="🔎"
+    local module_name="blue_geo.catalog.$catalog.$datacube_class"
+    local extra_args=""
+    if [[ "$is_STAC" == 1 ]]; then
+        log_suffix="🌐 STAC"
+        module_name="blue_geo.catalog.generic.stac"
+        extra_args="--catalog $catalog --collection $datacube_class"
+    fi
+
+    abcli_log "$log_suffix query: $catalog/$datacube_class -> $object_name ..."
 
     abcli_eval dryrun=$do_dryrun \
-        python3 -m blue_geo.catalog.$catalog.$datacube_class \
+        python3 -m $module_name \
         query \
         --object_name $object_name \
+        $extra_args \
         "${@:5}"
 
     [[ "$do_upload" == 1 ]] &&

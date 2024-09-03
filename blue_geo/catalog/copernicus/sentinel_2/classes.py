@@ -8,12 +8,6 @@ from blue_geo.catalog.generic.generic.stac import STACDatacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
 
-raster_suffix = [
-    ".jp2",
-    ".tif",
-    ".tiff",
-]
-
 
 class CopernicusSentinel2Datacube(STACDatacube):
     catalog = CopernicusCatalog()
@@ -98,46 +92,14 @@ class CopernicusSentinel2Datacube(STACDatacube):
         list_of_items = bucket.objects.filter(Prefix=s3_prefix)
 
         list_of_files: List[str] = []
-        TCI_found = False
+        quick_found = False
         for item in list_of_items:
             item_filename = item.key.split(f"{s3_prefix}/", 1)[1]
 
-            skip = True
-            if scope.all:
-                skip = False
-            elif (
-                scope.metadata
-                and item.size <= 10**6
-                and not any(item_filename.endswith(suffix) for suffix in raster_suffix)
-            ):
-                skip = False
-            elif (
-                scope.quick
-                and not TCI_found
-                and item_filename.endswith(".jp2")
-                and "TCI" in item_filename
-            ):
-                TCI_found = True
-                skip = False
-            elif scope.raster and any(
-                item_filename.endswith(suffix) for suffix in raster_suffix
-            ):
-                skip = False
-            elif scope.suffix and any(
-                item_filename.endswith(suffix) for suffix in scope.suffix
-            ):
-                skip = False
-
-            if skip:
-                if verbose:
-                    logger.info(
-                        "skipped {}: {}".format(
-                            string.pretty_bytes(item.size),
-                            item_filename,
-                        )
-                    )
-                continue
-
-            list_of_files.append(item_filename)
+            includes, quick_found = scope.includes(
+                item_filename, item.size, verbose, quick_found
+            )
+            if includes:
+                list_of_files.append(item_filename)
 
         return list_of_files

@@ -33,7 +33,7 @@ function blue_geo_watch_map() {
     abcli_log "🌐 @geo watch map $query_object_name @ $offset==$datacube_id -> /$suffix"
 
     blue_geo_datacube_ingest \
-        dryrun=$do_dryrun,what=quick \
+        dryrun=$do_dryrun,scope=quick \
         $datacube_id
 
     local object_name=$query_object_name-$suffix-$offset

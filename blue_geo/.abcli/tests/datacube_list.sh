@@ -1,27 +1,25 @@
 #! /usr/bin/env bash
 
 function test_blue_geo_datacube_list() {
-    abcli_assert \
-        "$(blue_geo_datacube_list void --log 0)" \
-        - empty
-    [[ $? -ne 0 ]] && return 1
+    local datacube_id
 
-    abcli_assert \
-        "$(blue_geo_datacube_list datacube-generic --log 0)" \
-        - empty
-    [[ $? -ne 0 ]] && return 1
+    for datacube_id in \
+        void \
+        datacube-generic; do
+        abcli_assert \
+            "$(blue_geo_datacube_list $datacube_id --log 0)" \
+            - empty
+        [[ $? -ne 0 ]] && return 1
+    done
 
-    abcli_assert \
-        $(blue_geo_datacube_list $BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2 --log 0) \
-        - non-empty
-    [[ $? -ne 0 ]] && return 1
-
-    abcli_assert \
-        $(blue_geo_datacube_list $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA --log 0) \
-        - non-empty
-    [[ $? -ne 0 ]] && return 1
-
-    abcli_assert \
-        $(blue_geo_datacube_list $BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP --log 0) \
-        - non-empty
+    for datacube_id in \
+        $BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2 \
+        $BLUE_GEO_TEST_DATACUBE_EARTHSEARCH_SENTINEL2_L1C \
+        $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA \
+        $BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP; do
+        abcli_assert \
+            $(blue_geo_datacube_list $datacube_id --log 0) \
+            - non-empty
+        [[ $? -ne 0 ]] && return 1
+    done
 }

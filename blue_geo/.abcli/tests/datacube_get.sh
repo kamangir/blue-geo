@@ -1,54 +1,46 @@
 #! /usr/bin/env bash
 
 function test_blue_geo_datacube_get_catalog() {
-    abcli_assert \
-        $(blue_geo_datacube_get catalog void) \
-        void
-    [[ $? -ne 0 ]] && return 1
+    local test_asset
+    local datacube_id
+    local expected_catalog
+    for test_asset in \
+        void:void \
+        datacube-generic:generic \
+        $BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2:copernicus \
+        $BLUE_GEO_TEST_DATACUBE_EARTHSEARCH_SENTINEL2_L1C:EarthSearch \
+        $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA:firms \
+        $BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP:ukraine_timemap; do
 
-    abcli_assert \
-        $(blue_geo_datacube_get catalog datacube-generic) \
-        generic
-    [[ $? -ne 0 ]] && return 1
+        datacube_id=$(python3 -c "print('$test_asset'.split(':',1)[0])")
+        expected_catalog=$(python3 -c "print('$test_asset'.split(':',1)[1])")
 
-    abcli_assert \
-        $(blue_geo_datacube_get catalog $BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2) \
-        copernicus
-    [[ $? -ne 0 ]] && return 1
-
-    abcli_assert \
-        $(blue_geo_datacube_get catalog $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA) \
-        firms
-    [[ $? -ne 0 ]] && return 1
-
-    abcli_assert \
-        $(blue_geo_datacube_get catalog $BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP) \
-        ukraine_timemap
+        abcli_assert \
+            $(blue_geo_datacube_get catalog $datacube_id) \
+            $expected_catalog
+        [[ $? -ne 0 ]] && return 1
+    done
 }
 
 function test_blue_geo_datacube_get_template() {
-    abcli_assert \
-        $(blue_geo_datacube_get template void) \
-        unknown-template
-    [[ $? -ne 0 ]] && return 1
+    local test_asset
+    local datacube_id
+    local expected_template
 
-    abcli_assert \
-        $(blue_geo_datacube_get template datacube-generic) \
-        unknown-template
-    [[ $? -ne 0 ]] && return 1
+    for test_asset in \
+        void:unknown-template \
+        datacube-generic:unknown-template \
+        $BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2:unknown-template \
+        $BLUE_GEO_TEST_DATACUBE_EARTHSEARCH_SENTINEL2_L1C:unknown-template \
+        $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA:$BLUE_GEO_QGIS_TEMPLATE_FIRMS_AREA \
+        $BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP:$BLUE_GEO_QGIS_TEMPLATE_UKRAINE_TIMEMAP; do
 
-    # no template.
-    # abcli_assert \
-    #     $(blue_geo_datacube_get template $BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2) \
-    #     void
-    # [[ $? -ne 0 ]] && return 1
+        datacube_id=$(python3 -c "print('$test_asset'.split(':',1)[0])")
+        expected_template=$(python3 -c "print('$test_asset'.split(':',1)[1])")
 
-    abcli_assert \
-        $(blue_geo_datacube_get template $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA) \
-        $BLUE_GEO_QGIS_TEMPLATE_FIRMS_AREA
-    [[ $? -ne 0 ]] && return 1
-
-    abcli_assert \
-        $(blue_geo_datacube_get template $BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP) \
-        $BLUE_GEO_QGIS_TEMPLATE_UKRAINE_TIMEMAP
+        abcli_assert \
+            $(blue_geo_datacube_get template $datacube_id) \
+            $expected_template
+        [[ $? -ne 0 ]] && return 1
+    done
 }

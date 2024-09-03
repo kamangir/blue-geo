@@ -12,7 +12,7 @@ raster_suffix = [
 class DatacubeScope:
     special_options = ["all", "metadata", "quick", "raster"]
 
-    help = "|".join(special_options + ["<.jp2+.tif+.tiff>"])
+    help = "|".join(special_options + ["<{}>".format("+".join(raster_suffix))])
 
     def __init__(self, what: str):
         list_of_what = what.split("+")

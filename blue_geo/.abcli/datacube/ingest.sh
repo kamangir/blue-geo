@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
-export blue_geo_datacube_ingest_options="$(xtra ~copy_template,dryrun,overwrite,upload,)scope=all|metadata|quick|<.jp2+.tif+.tiff>"
+export blue_geo_scope_help=$(python3 -c "from blue_geo.catalog.generic.generic.scope import DatacubeScope; print(DatacubeScope.help)")
+export blue_geo_datacube_ingest_options="$(xtra ~copy_template,dryrun,overwrite,upload,)scope=$blue_geo_scope_help"
 
 function blue_geo_datacube_ingest() {
     local options=$1

@@ -3,6 +3,7 @@ import glob
 from functools import reduce
 from abcli.modules import objects
 from blue_geo.watch.targets import Target
+from blue_geo.catalog.generic.generic.scope import raster_suffix
 from blue_geo.logger import logger
 
 
@@ -19,7 +20,7 @@ def load_watch(object_name: str) -> Tuple[bool, Target, List[str]]:
                         object_name,
                     )
                 )
-                for suffix in [".jp2", ".tif", ".tiff"]
+                for suffix in raster_suffix
             ],
         )
     )

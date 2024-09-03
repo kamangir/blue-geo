@@ -50,7 +50,7 @@ function blue_geo_watch_map() {
     [[ $? -ne 0 ]] && return 1
 
     local filename=$(blue_geo_datacube_list $datacube_id \
-        --scope .jp2+.tif+.tiff \
+        --scope raster \
         --log 0 \
         --count 1 \
         --exists 1)

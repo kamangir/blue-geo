@@ -21,4 +21,4 @@ class EarthSearchSentinel2L1CDatacube(STACDatacube):
         scope: DatacubeScope = DatacubeScope("all"),
         verbose: bool = False,
     ) -> List[str]:
-        return []
+        return ["fake"]

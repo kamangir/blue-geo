@@ -98,7 +98,7 @@ class FirmsAreaDatacube(GenericDatacube):
         self,
         dryrun: bool = False,
         overwrite: bool = False,
-        scope: str = DatacubeScope.default,
+        scope: str = "metadata",
     ) -> Tuple[
         bool,
         gpd.GeoDataFrame,

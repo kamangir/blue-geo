@@ -37,7 +37,7 @@ class UkraineTimemapDatacube(GenericDatacube):
         dryrun: bool = False,
         overwrite: bool = False,
         do_save: bool = True,
-        scope: str = DatacubeScope.default,
+        scope: str = "metadata",
         do_visualize: bool = True,
         log: bool = True,
     ) -> Tuple[bool, gpd.GeoDataFrame]:

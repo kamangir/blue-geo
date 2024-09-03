@@ -14,8 +14,6 @@ class DatacubeScope:
 
     help = "|".join(special_options + ["<.jp2+.tif+.tiff>"])
 
-    default = "metadata"
-
     def __init__(self, what: str):
         list_of_what = what.split("+")
 

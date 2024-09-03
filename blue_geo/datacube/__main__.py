@@ -24,7 +24,7 @@ parser.add_argument(
 )
 parser.add_argument(
     "--scope",
-    default=DatacubeScope.default,
+    default="metadata",
     type=str,
     help=DatacubeScope.help,
 )

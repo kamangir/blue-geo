@@ -70,7 +70,7 @@ class STACDatacube(GenericDatacube):
         self,
         dryrun: bool = False,
         overwrite: bool = False,
-        scope: str = DatacubeScope.default,
+        scope: str = "metadata",
         verbose: bool = False,
     ) -> Tuple[bool, Any]:
         success, output = super().ingest(dryrun, overwrite, scope)

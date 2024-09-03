@@ -8,6 +8,12 @@ from blue_geo.catalog.generic.generic.stac import STACDatacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
 
+raster_suffix = [
+    ".jp2",
+    ".tif",
+    ".tiff",
+]
+
 
 class CopernicusSentinel2Datacube(STACDatacube):
     catalog = CopernicusCatalog()
@@ -99,13 +105,10 @@ class CopernicusSentinel2Datacube(STACDatacube):
             skip = True
             if scope.all:
                 skip = False
-            elif item.size <= 10**6 and not any(
-                item_filename.endswith(suffix)
-                for suffix in [
-                    ".jp2",
-                    ".tif",
-                    ".tiff",
-                ]
+            elif (
+                scope.metadata
+                and item.size <= 10**6
+                and not any(item_filename.endswith(suffix) for suffix in raster_suffix)
             ):
                 skip = False
             elif (
@@ -115,6 +118,10 @@ class CopernicusSentinel2Datacube(STACDatacube):
                 and "TCI" in item_filename
             ):
                 TCI_found = True
+                skip = False
+            elif scope.raster and any(
+                item_filename.endswith(suffix) for suffix in raster_suffix
+            ):
                 skip = False
             elif scope.suffix and any(
                 item_filename.endswith(suffix) for suffix in scope.suffix

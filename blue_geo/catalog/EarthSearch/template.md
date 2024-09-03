@@ -29,6 +29,8 @@ the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex
 @publish tar .
 ```
 
+🔥
+
 ![image](https://github.com/kamangir/assets/blob/main/blue-geo/TBA.png?raw=true)
 
 [datacube-EarthSearch-sentinel_2_l1c-TBA.tar.gz](TBA)

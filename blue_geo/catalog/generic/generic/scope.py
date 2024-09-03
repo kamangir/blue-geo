@@ -1,16 +1,24 @@
+from typing import List
+
+
 class DatacubeScope:
-    help = "all|metadata|quick|<.jp2+.tif+.tiff>"
+    special_options = ["all", "metadata", "quick", "raster"]
+
+    help = "|".join(special_options + ["<.jp2+.tif+.tiff>"])
+
     default = "metadata"
 
     def __init__(self, what: str):
-        self.all = what == "all"
+        list_of_what = what.split("+")
 
-        self.quick = what == "quick"
+        self.all = "all" in list_of_what
 
-        self.metadata = what == "metadata"
+        self.metadata = "metadata" in list_of_what
 
-        self.suffix = (
-            []
-            if self.all or self.quick or self.metadata
-            else [suffix for suffix in what.split("+") if suffix]
-        )
+        self.quick = "quick" in list_of_what
+
+        self.raster = "raster" in list_of_what
+
+        self.suffix = [
+            item for item in list_of_what if item not in self.special_options
+        ]

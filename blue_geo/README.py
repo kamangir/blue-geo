@@ -82,8 +82,8 @@ def build():
             REPO_NAME=REPO_NAME,
         )
         for items, cols, suffix in zip(
-            [[], watch_items, items],
-            [3, 2, 2],
-            ["catalog/copernicus", "watch", ".."],
+            [[], [], watch_items, items],
+            [3, 3, 2, 2],
+            ["catalog/copernicus", "catalog/EarthSearch", "watch", ".."],
         )
     )

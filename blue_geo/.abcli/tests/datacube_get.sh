@@ -20,6 +20,8 @@ function test_blue_geo_datacube_get_catalog() {
             $expected_catalog
         [[ $? -ne 0 ]] && return 1
     done
+
+    return 0
 }
 
 function test_blue_geo_datacube_get_template() {
@@ -43,4 +45,6 @@ function test_blue_geo_datacube_get_template() {
             $expected_template
         [[ $? -ne 0 ]] && return 1
     done
+
+    return 0
 }

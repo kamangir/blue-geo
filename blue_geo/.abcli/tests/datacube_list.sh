@@ -22,4 +22,6 @@ function test_blue_geo_datacube_list() {
             - non-empty
         [[ $? -ne 0 ]] && return 1
     done
+
+    return 0
 }

@@ -40,14 +40,15 @@ using [chilcotin-river-landslide](../../watch/targets/chilcotin-river-landslide.
 
 ```bash
 @select chilcotin-query-2024-08-23-v1
-@catalog query copernicus sentinel_2 ingest . \
+@catalog query copernicus sentinel_2 - . \
   --count 10 \
   --datetime 2024-07-30/2024-08-09 \
   --lat  51.83 \
   --lon -122.78
 
 @select $(@catalog query read - . --count 1 --offset 3)
-@datacube ingest what=quick .
+@datacube ingest scope=quick .
+
 @publish tar .
 ```
 

@@ -10,7 +10,7 @@
 
 3️⃣ add `NovelDatacube` to [blue_geo/catalog/classes.py](../catalog/classes.py).
 
-4️⃣ add the new files to [`setup.py`](../../setup.py).
+4️⃣ add the package extensions to [`setup.py`](../../setup.py).
 
 ## ingesting a datacube
 

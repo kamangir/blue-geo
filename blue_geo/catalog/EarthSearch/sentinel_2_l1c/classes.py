@@ -1,5 +1,6 @@
-from typing import Any, Dict, List
+from typing import List
 from blueness import module
+from abcli.modules.host import shell
 from blue_geo import NAME
 from blue_geo.catalog.EarthSearch.classes import EarthSearchCatalog
 from blue_geo.catalog.generic.generic.stac import STACDatacube
@@ -17,6 +18,24 @@ class EarthSearchSentinel2L1CDatacube(STACDatacube):
     name = "sentinel_2_l1c"
 
     s3_prefix = "s3://sentinel-s2-l1c/tiles"
+
+    def ingest_filename(
+        self,
+        filename: str,
+        overwrite: bool = False,
+        verbose: bool = False,
+    ) -> bool:
+        if super().ingest_filename(filename, overwrite, verbose):
+            return True
+
+        # https://registry.opendata.aws/sentinel-2/
+        return shell(
+            "aws s3 cp --request-payer requester {}/{} {}".format(
+                self.s3_prefix,
+                filename.replace("_", "/"),
+                self.full_filename(filename),
+            )
+        )
 
     def list_of_files(
         self,

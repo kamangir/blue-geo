@@ -1,6 +1,7 @@
 import os
 from typing import Any, Tuple, Dict, List
 from blueness import module
+from abcli import file, path
 from abcli.modules import objects
 from blue_geo import NAME
 from abcli.plugins.metadata import post_to_object
@@ -71,13 +72,27 @@ class GenericDatacube:
 
         return True, None
 
+    # returns True if ingest is complete.
     def ingest_filename(
         self,
         filename: str,
         overwrite: bool = False,
         verbose: bool = False,
     ) -> bool:
-        return True
+        item_filename = self.full_filename(filename)
+
+        assert path.create(file.path(item_filename))
+
+        if item_filename.endswith(os.sep):
+            return True
+
+        if not overwrite and file.exist(item_filename):
+            logger.info(f"✅ {item_filename}")
+            return True
+
+        logger.info("ingesting {} ...".format(filename))
+
+        return False
 
     def list_of_files(
         self,

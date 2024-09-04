@@ -1,7 +1,5 @@
-import os
 from typing import Any, Tuple, List
 import boto3
-from abcli import file, path, string
 from blue_geo import env
 from blue_geo.catalog.copernicus.classes import CopernicusCatalog
 from blue_geo.catalog.generic.generic.stac import STACDatacube
@@ -51,26 +49,14 @@ class CopernicusSentinel2Datacube(STACDatacube):
         overwrite: bool = False,
         verbose: bool = False,
     ) -> bool:
-        if not super().ingest_filename(filename, overwrite, verbose):
-            return False
+        if super().ingest_filename(filename, overwrite, verbose):
+            return True
 
         success, bucket, s3_prefix = self.get_bucket(verbose)
         if not success:
             return success
 
         item_filename = self.full_filename(filename)
-
-        if not path.create(file.path(item_filename)):
-            return False
-
-        if item_filename.endswith(os.sep):
-            return True
-
-        if not overwrite and file.exist(item_filename):
-            logger.info(f"✅ {item_filename}")
-            return True
-
-        logger.info("ingesting {} ...".format(filename))
 
         try:
             bucket.download_file(f"{s3_prefix}/{filename}", item_filename)

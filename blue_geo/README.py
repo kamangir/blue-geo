@@ -36,17 +36,17 @@ features = {
         "thumbnail": "https://kamangir-public.s3.ca-central-1.amazonaws.com/test_vancouver_watching_ingest/animation.gif?raw=true",
         "url": "https://github.com/kamangir/Vancouver-Watching",
     },
-    "geo-watch": {
-        "description": "watching targets through `@geo`.",
-        "icon": ICON,
-        "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/blue-geo-watch.png?raw=true",
-        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
-    },
     "QGIS": {
         "description": "an AI terraform for [QGIS](https://www.qgis.org/).",
         "icon": ICON,
         "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/QGIS.jpg",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/QGIS/README.md",
+    },
+    "geo-watch": {
+        "description": "watching targets through `@geo`.",
+        "icon": ICON,
+        "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/blue-geo-watch.png?raw=true",
+        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
     },
     "datacube": {
         "description": "a datacube for geospatial AI.",

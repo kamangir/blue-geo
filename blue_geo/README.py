@@ -48,12 +48,6 @@ features = {
         "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/blue-geo-watch.png?raw=true",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
     },
-    "datacube": {
-        "description": "a datacube for geospatial AI.",
-        "icon": "🧊",
-        "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/datacube.png?raw=true",
-        "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/datacube",
-    },
     "template": {
         "description": "",
         "icon": "",

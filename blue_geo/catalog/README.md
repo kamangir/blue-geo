@@ -2,7 +2,12 @@
 
 `catalog`s are [lists](#listing-catalogs) of collections that can be [browsed](#browsing-a-catalog), [queried](#running-a-query-for-datacubes), and [ingested as `datacube`](../datacube/)s. 
 
-look for example uses in the supported catalogs: [copernicus](./copernicus/), [firms](./firms/), [ukraine_timemap](./ukraine_timemap/). 
+## supported catalogs
+
+- [copernicus](./copernicus/)
+- [EarthSearch](./EarthSearch/)
+- [firms](./firms/)
+- [ukraine_timemap](./ukraine_timemap/)
 
 ## adding a new catalog
 
@@ -95,29 +100,42 @@ to see catalog-specific query args,
 @catalog query help
 ```
 ```bash
+@catalog query EarthSearch \
+	[dryrun,sentinel_2_l1c,select,upload] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
+	[-|<object-name>] \
+	[--bbox <-122.88,51.73,-122.68,51.93>] \
+	[--count <10>, -1: all] \
+	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
+	[--keyword <keyword>] \
+	[--lat <51.83>] \
+	[--lon <-122.78>] \
+	[--radius <0.1>]
+ . EarthSearch/sentinel_2_l1c -query-> <object-name>.
 @catalog query copernicus \
 	[dryrun,sentinel_2,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
-	[--bbox <-122.88,51.73,-122.68,51.93>]\
-	[--count <10>, -1: all]\
-	[--datetime <2024-07-30/2024-08-09>]\
-	[--lat <51.83>]\
-	[--lon <-122.78>]\
+	[--bbox <-122.88,51.73,-122.68,51.93>] \
+	[--count <10>, -1: all] \
+	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
+	[--keyword <keyword>] \
+	[--lat <51.83>] \
+	[--lon <-122.78>] \
 	[--radius <0.1>]
  . copernicus/sentinel_2 -query-> <object-name>.
 @catalog query firms \
 	[dryrun,area,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
-	[--area east|north|south|west|world]\
-	[--date <yyyy-mm-dd>]\
-	[--depth 1..10]\
+	[--area east|north|south|west|world] \
+	[--date <yyyy-mm-dd>] \
+	[--depth 1..10] \
 	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP]
  . firms/area -query-> <object-name>.
 @catalog query ukraine_timemap \
 	[dryrun,ukraine_timemap,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
 	[--arg <value>]
  . ukraine_timemap/ukraine_timemap -query-> <object-name>.
@@ -126,10 +144,10 @@ to see catalog-specific query args,
 	[.|<object-name>] \
 	[--count <count>] \
 	[--delim <delim>] \
-	[--index <index>] \
+	[--offset <offset>] \
 	[--prefix <prefix>] \
 	[--suffix <suffix>] \
 	[--contains <contains>] \
 	[--notcontains <not-contains>]
  . read query results in <object-name>.
- ```
+```

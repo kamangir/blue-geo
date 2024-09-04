@@ -11,4 +11,7 @@ background:
 
 details: [targets.yaml](../targets.yaml).
 
-used by: [query on copernicus/sentinel-2](../../catalog/copernicus/), [`@geo watch`](../).
+used by:
+- [copernicus/sentinel-2](../../catalog/copernicus/).
+- [EarthSearch/sentinel_2_l1c](../../catalog/EarthSearch/)
+- [`@geo watch`](../).

@@ -48,6 +48,12 @@ features = {
         "thumbnail": "https://kamangir-public.s3.ca-central-1.amazonaws.com/test_vancouver_watching_ingest/animation.gif?raw=true",
         "url": "https://github.com/kamangir/Vancouver-Watching",
     },
+    "EarthSearch": {
+        "description": "catalog: [Earth Search by Element 84 (earth-search-aws)](https://stacindex.org/catalogs/earth-search#/).",
+        "icon": ICON,
+        "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/viewer-aws-element84-com.png?raw=true",
+        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/catalog/EarthSearch",
+    },
     "template": {
         "description": "",
         "icon": "",
@@ -55,6 +61,7 @@ features = {
         "url": "",
     },
 }
+
 
 items = [
     "{}[`{}`]({}) [![image]({})]({}) {}".format(

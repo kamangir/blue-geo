@@ -9,6 +9,7 @@ from blue_geo.catalog.functions import (
 )
 from blue_geo.catalog.classes import list_of_catalogs
 from blue_geo.catalog.default import as_list_of_args
+from blue_geo.catalog.generic.stac.classes import STACCatalog
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
 
@@ -62,7 +63,10 @@ delim = " " if args.delim == "space" else args.delim
 success = args.task in list_of_tasks
 item_name = "item"
 if args.task == "get":
-    if args.what.startswith("url:"):
+    if args.what == "is_STAC":
+        catalog_class = get_catalog_class(args.catalog)
+        print(int(issubclass(catalog_class, STACCatalog)))
+    elif args.what.startswith("url:"):
         catalog_class = get_catalog_class(args.catalog)
         print(
             catalog_class.url.get(

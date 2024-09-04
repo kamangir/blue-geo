@@ -26,15 +26,16 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 ## example run
 
 ```bash
-@select chilcotin-query-2024-08-23-v1
-@catalog query copernicus sentinel_2 ingest . \
+@select
+@catalog query copernicus sentinel_2 - . \
   --count 10 \
   --datetime 2024-07-30/2024-08-09 \
   --lat  51.83 \
   --lon -122.78
 
 @select $(@catalog query read - . --count 1 --offset 3)
-@datacube ingest what=quick .
+@datacube ingest scope=metadata+quick .
+
 @publish tar .
 ```
 
@@ -42,4 +43,4 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 
 [datacube-copernicus-sentinel_2-S2A_MSIL1C_20240807T190911_N0511_R056_T10UEC_20240808T002811-SAFE.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/datacube-copernicus-sentinel_2-S2A_MSIL1C_20240807T190911_N0511_R056_T10UEC_20240808T002811-SAFE.tar.gz)
 
-more: [1](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-183-53e60268d40e)
+- [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-183-53e60268d40e)

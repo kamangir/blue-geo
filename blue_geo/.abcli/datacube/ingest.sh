@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
-export blue_geo_datacube_ingest_options="$(xtra ~copy_template,dryrun,overwrite,upload,)what=all|metadata|quick|<suffix>"
+export blue_geo_scope_help=$(python3 -c "from blue_geo.catalog.generic.generic.scope import DatacubeScope; print(DatacubeScope.help)")
+export blue_geo_datacube_ingest_options="$(xtra ~copy_template,dryrun,overwrite,upload,)scope=$blue_geo_scope_help"
 
 function blue_geo_datacube_ingest() {
     local options=$1
@@ -13,7 +14,7 @@ function blue_geo_datacube_ingest() {
     fi
 
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
-    local what=$(abcli_option "$options" what metadata)
+    local scope=$(abcli_option "$options" scope metadata)
     local do_overwrite=$(abcli_option_int "$options" overwrite 0)
     local do_upload=$(abcli_option_int "$options" upload 0)
 
@@ -38,7 +39,7 @@ function blue_geo_datacube_ingest() {
         --datacube_id $datacube_id \
         --dryrun $do_dryrun \
         --overwrite $do_overwrite \
-        --what $what \
+        --scope $scope \
         "${@:3}"
     local status="$?"
 

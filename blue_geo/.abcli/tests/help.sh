@@ -9,12 +9,14 @@ function test_blue_geo_help() {
         \
         "blue_geo catalog" \
         "blue_geo catalog browse" \
+        "blue_geo catalog get" \
         "blue_geo catalog list" \
         "blue_geo catalog query" \
         \
         "blue_geo datacube" \
         "blue_geo datacube get" \
         "blue_geo datacube ingest" \
+        "blue_geo datacube list" \
         \
         "blue_geo gdal" \
         \

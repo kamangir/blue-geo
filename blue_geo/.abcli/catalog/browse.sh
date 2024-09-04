@@ -20,17 +20,17 @@ function blue_geo_catalog_browse() {
     local what=$2
 
     if [[ "$what" == help ]]; then
-        local url_args=$(python3 -m blue_geo.catalog get \
-            --catalog $catalog \
-            --what url_args)
+        local url_args=$(blue_geo_catalog_get \
+            url_args \
+            --catalog $catalog)
         abcli_show_usage "@catalog browse $catalog$ABCUL$url_args" \
             "browse $catalog."
         return
     fi
 
-    local url=$(python3 -m blue_geo.catalog get \
+    local url=$(blue_geo_catalog_get \
+        "url:$what" \
         --catalog $catalog \
-        --what "url:$what" \
         "${@:3}")
 
     abcli_browse $url

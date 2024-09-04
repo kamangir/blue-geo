@@ -33,7 +33,7 @@ function blue_geo_watch_map() {
     abcli_log "🌐 @geo watch map $query_object_name @ $offset==$datacube_id -> /$suffix"
 
     blue_geo_datacube_ingest \
-        dryrun=$do_dryrun,what=quick \
+        dryrun=$do_dryrun,scope=quick \
         $datacube_id
 
     local object_name=$query_object_name-$suffix-$offset
@@ -49,8 +49,9 @@ function blue_geo_watch_map() {
         $datacube_id
     [[ $? -ne 0 ]] && return 1
 
-    local filename=$(blue_geo_datacube_get list_of_files $datacube_id \
-        --suffix .jp2+.tif+.tiff \
+    local filename=$(blue_geo_datacube_list $datacube_id \
+        --scope raster \
+        --log 0 \
         --count 1 \
         --exists 1)
     if [[ -z "$filename" ]]; then

@@ -1,10 +1,12 @@
 import os
 from typing import Any, Tuple, Dict, List
 from blueness import module
+from abcli import file, path
 from abcli.modules import objects
 from blue_geo import NAME
 from abcli.plugins.metadata import post_to_object
 from blue_geo.catalog.generic.classes import GenericCatalog, VoidCatalog
+from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -49,7 +51,7 @@ class GenericDatacube:
         self,
         dryrun: bool = False,
         overwrite: bool = False,
-        what: str = "metadata",
+        scope: str = "metadata",
     ) -> Tuple[bool, Any]:
         logger.info(
             "{}.{}.ingest({}): {} @ {}".format(
@@ -63,14 +65,40 @@ class GenericDatacube:
                         if item
                     ]
                 ),
-                what,
+                scope,
                 self.datacube_id,
             )
         )
 
         return True, None
 
-    def list_of_files(self) -> List[str]:
+    # returns True if ingest is complete.
+    def ingest_filename(
+        self,
+        filename: str,
+        overwrite: bool = False,
+        verbose: bool = False,
+    ) -> bool:
+        item_filename = self.full_filename(filename)
+
+        assert path.create(file.path(item_filename))
+
+        if item_filename.endswith(os.sep):
+            return True
+
+        if not overwrite and file.exist(item_filename):
+            logger.info(f"✅ {item_filename}")
+            return True
+
+        logger.info("ingesting {} ...".format(filename))
+
+        return False
+
+    def list_of_files(
+        self,
+        scope: DatacubeScope = DatacubeScope("all"),
+        verbose: bool = False,
+    ) -> List[str]:
         return []
 
     @classmethod
@@ -85,6 +113,10 @@ class GenericDatacube:
             segments[0] == "datacube" and segments[1] == cls.catalog.name,
             {},
         )
+
+    @property
+    def path(self) -> str:
+        return objects.object_path(self.datacube_id)
 
     @classmethod
     def query(cls, object_name: str) -> bool:

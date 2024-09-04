@@ -1,5 +1,6 @@
 from blue_geo.catalog.generic import GenericDatacube, VoidDatacube
 from blue_geo.catalog.copernicus import CopernicusSentinel2Datacube
+from blue_geo.catalog.EarthSearch import EarthSearchSentinel2L1CDatacube
 from blue_geo.catalog.firms.area import FirmsAreaDatacube
 from blue_geo.catalog.ukraine_timemap import UkraineTimemapDatacube
 from blue_geo import env
@@ -14,6 +15,8 @@ datacubes = {
     #
     "datacube-copernicus-void": VoidDatacube,
     env.BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2: CopernicusSentinel2Datacube,
+    #
+    env.BLUE_GEO_TEST_DATACUBE_EARTHSEARCH_SENTINEL2_L1C: EarthSearchSentinel2L1CDatacube,
     #
     "datacube-firms_void-void-void-void-void": VoidDatacube,
     "datacube-firms_area-void-void-void-void": VoidDatacube,

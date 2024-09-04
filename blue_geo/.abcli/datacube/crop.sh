@@ -32,16 +32,16 @@ function blue_geo_datacube_crop() {
         $object_name \
         $cropped_datacube_id
 
-    local list_of_files=$(blue_geo_datacube_get list_of_files \
-        $datacube_id \
-        --suffix .jp2+.tif+.tiff \
-        --delim space)
+    local list_of_files=$(blue_geo_datacube_list $datacube_id \
+        --delim space \
+        --exists 1 \
+        --scope raster \
+        --log 0)
     local filename
     local source_filename
     local destination_filename
     for filename in $list_of_files; do
         source_filename=$abcli_object_root/$datacube_id/$filename
-        [[ ! -f $source_filename ]] && continue
 
         abcli_log "cropping $filename ..."
 

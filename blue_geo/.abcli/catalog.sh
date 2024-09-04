@@ -5,6 +5,7 @@ function blue_geo_catalog() {
 
     if [ "$task" == "help" ]; then
         blue_geo_catalog_browse "$@"
+        blue_geo_catalog_get "$@"
         blue_geo_catalog_list "$@"
         blue_geo_catalog_query "$@"
         return

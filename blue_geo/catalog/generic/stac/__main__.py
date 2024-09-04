@@ -2,6 +2,8 @@ import argparse
 from blueness import module
 from blue_geo import NAME, VERSION
 from blue_geo.catalog.default import add_default_arguments
+from blue_geo.catalog import get_datacube_class_in_catalog
+from blue_geo.catalog.generic.generic.stac import STACDatacube
 from blue_geo.catalog.copernicus.sentinel_2.classes import CopernicusSentinel2Datacube
 from blue_geo.logger import logger
 from blueness.argparse.generic import sys_exit
@@ -14,18 +16,33 @@ parser.add_argument(
     type=str,
     help="query",
 )
-add_default_arguments(CopernicusSentinel2Datacube.query_args, parser)
+add_default_arguments(STACDatacube.query_args, parser)
 parser.add_argument(
     "--object_name",
     type=str,
     default="",
+)
+parser.add_argument(
+    "--catalog",
+    type=str,
+)
+parser.add_argument(
+    "--collection",
+    type=str,
 )
 args = parser.parse_args()
 
 
 success = False
 if args.task == "query":
-    success = CopernicusSentinel2Datacube.query(
+    datacube_class = get_datacube_class_in_catalog(
+        args.catalog,
+        args.collection,
+    )
+
+    assert issubclass(datacube_class, STACDatacube)
+
+    success = datacube_class.query(
         object_name=args.object_name,
         bbox=(
             [float(item) for item in args.bbox.split(",") if item]

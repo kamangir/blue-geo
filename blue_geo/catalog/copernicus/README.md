@@ -34,9 +34,6 @@ background:
 
 details: [targets.yaml](../targets.yaml).
 
-- [copernicus/sentinel-2](../../catalog/copernicus/)
-- [EarthSearch/sentinel_2_l1c](../../catalog/EarthSearch/)
-- [`@geo watch`](../)
 using [chilcotin-river-landslide](../../watch/targets/chilcotin-river-landslide.md).
 
 ## example run

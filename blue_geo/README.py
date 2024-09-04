@@ -90,7 +90,7 @@ def build():
         )
         for items, cols, suffix in zip(
             [[], [], watch_items, items],
-            [3, 3, 2, 2],
+            [3, 3, 2, 3],
             ["catalog/copernicus", "catalog/EarthSearch", "watch", ".."],
         )
     )

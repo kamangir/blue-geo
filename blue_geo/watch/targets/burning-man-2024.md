@@ -4,6 +4,6 @@
 
 - [Google Map](https://maps.app.goo.gl/e58UsDThr8ryqCRa8): `lat: 40°47'11.0"N`, `lon: 119°12'23.4"W`.
 
-details: [targets.yaml](../targets.yaml), by ChatGPT.
+details: [targets.yaml](../targets.yaml).
 
 used by: [`@geo watch`](../).

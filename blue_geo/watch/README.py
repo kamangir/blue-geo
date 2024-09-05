@@ -33,6 +33,11 @@ list_of_targets = {
             "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-205-c272a95ce266)",
         ]
     },
+    "Fagradalsfjall": {
+        "geo-watch-2024-09-04-Fagradalsfjall-a": [
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-206-f7996520dc15)",
+        ]
+    },
 }
 
 

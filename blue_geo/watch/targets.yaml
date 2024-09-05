@@ -1,6 +1,7 @@
 burning-man-2024:
   catalog: EarthSearch
   collection: sentinel_2_l1c
+  comments: suggested by ChatGPT
   params:
     height: 0.051
     width: 0.12
@@ -34,6 +35,7 @@ elkhema:
 Mount-Etna:
   catalog: EarthSearch
   collection: sentinel_2_l1c
+  comments: suggested by ChatGPT
   params:
     height: 0.051
     width: 0.12

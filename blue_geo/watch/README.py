@@ -22,7 +22,9 @@ list_of_objects = {
         "geo-watch-2024-09-01-chilcotin-c": [
             "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-202-d59ba811398b)",
         ],
-    }
+    },
+    "burning-man-2024": {},
+    "Mount-Etna": {},
 }
 
 
@@ -45,10 +47,14 @@ for target_name in list_of_objects:
         for object_name, description in list_of_objects[target_name].items()
     ]
 
-    last_object_name = list(list_of_objects[target_name].keys())[-1]
+    if list_of_objects[target_name]:
+        last_object_name = list(list_of_objects[target_name].keys())[-1]
+        items += [
+            "",
+            f"![image]({url_prefix}/{last_object_name}/{last_object_name}-2X.gif?raw=true&random={string.random_()})",
+        ]
+
     items += [
-        "",
-        f"![image]({url_prefix}/{last_object_name}/{last_object_name}-2X.gif?raw=true&random={string.random_()})",
         "",
         f"[details](./targets/{target_name}.md)",
         "",

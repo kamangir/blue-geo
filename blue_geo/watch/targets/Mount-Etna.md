@@ -5,6 +5,6 @@
 - [Wikipedia](https://en.wikipedia.org/wiki/Mount_Etna)
 - [Google Map](https://maps.app.goo.gl/vcCRk16tHBPxB3a47): `lat: 37°45'03.6"N`, `lon: 14°59'36.2"E`.
 
-details: [targets.yaml](../targets.yaml), by ChatGPT.
+details: [targets.yaml](../targets.yaml).
 
 used by: [`@geo watch`](../).

@@ -6,7 +6,7 @@ from blue_geo import REPO_NAME
 url_prefix = "https://kamangir-public.s3.ca-central-1.amazonaws.com"
 
 
-list_of_objects = {
+list_of_targets = {
     "chilcotin-river-landslide": {
         "test_blue_geo_watch": [
             f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)"
@@ -29,7 +29,7 @@ list_of_objects = {
 
 
 items: List[str] = []
-for target_name in list_of_objects:
+for target_name, list_of_objects in list_of_targets.items():
     items += [
         "## {}".format(target_name.replace("-", " ").title()),
     ]
@@ -44,11 +44,11 @@ for target_name in list_of_objects:
                 + description
             )
         )
-        for object_name, description in list_of_objects[target_name].items()
+        for object_name, description in list_of_objects.items()
     ]
 
-    if list_of_objects[target_name]:
-        last_object_name = list(list_of_objects[target_name].keys())[-1]
+    if list_of_objects:
+        last_object_name = list(list_of_objects.keys())[-1]
         items += [
             "",
             f"![image]({url_prefix}/{last_object_name}/{last_object_name}-2X.gif?raw=true&random={string.random_()})",

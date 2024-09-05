@@ -23,8 +23,16 @@ list_of_targets = {
             "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-202-d59ba811398b)",
         ],
     },
-    "burning-man-2024": {},
-    "Mount-Etna": {},
+    "burning-man-2024": {
+        "geo-watch-2024-09-04-burning-man-2024-a": [
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-205-c272a95ce266)",
+        ]
+    },
+    "Mount-Etna": {
+        "geo-watch-2024-09-04-Mount-Etna-a": [
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-205-c272a95ce266)",
+        ]
+    },
 }
 
 

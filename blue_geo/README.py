@@ -75,7 +75,6 @@ def build():
     return all(
         build_README(
             items=items,
-            items_as_table=items_as_table,
             cols=cols,
             path=os.path.join(file.path(__file__), suffix),
             ICON=ICON,
@@ -83,10 +82,9 @@ def build():
             VERSION=VERSION,
             REPO_NAME=REPO_NAME,
         )
-        for items, cols, suffix, items_as_table in zip(
+        for items, cols, suffix in zip(
             [[], [], watch_items, items],
-            [3, 3, 2, 3],
+            [3, 3, -1, 3],
             ["catalog/copernicus", "catalog/EarthSearch", "watch", ".."],
-            [True, True, False, True],
         )
     )

@@ -1,41 +1,68 @@
+from typing import List, Union
+from functools import reduce
 from abcli import string
 from blue_geo import REPO_NAME
 
 url_prefix = "https://kamangir-public.s3.ca-central-1.amazonaws.com"
 
 
-items = [
-    " ".join(
-        [
-            f"![image]({url_prefix}/{object_name}/{object_name}.gif?raw=true&random={string.random_()})",
-            f"{description}, object: [`{object_name}`]({url_prefix}/{object_name}.tar.gz), [gif]({url_prefix}/{object_name}/{object_name}.gif).",
+list_of_targets = {
+    "chilcotin-river-landslide": {
+        "test_blue_geo_watch": [
+            f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)"
+        ],
+        "geo-watch-2024-08-31-chilcotin-c": [
+            "L1C and L2A mixed",
+            "`2024-07-30/2024-08-09`",
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-199-11f9b5497ef0)",
+        ],
+        "geo-watch-2024-09-01-chilcotin-a": [
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-201-d64e9bb3716b)",
+        ],
+        "geo-watch-2024-09-01-chilcotin-c": [
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-202-d59ba811398b)",
+        ],
+    },
+    "burning-man-2024": {
+        "geo-watch-2024-09-04-burning-man-2024-a": [
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-205-c272a95ce266)",
         ]
-    )
-    for object_name, description in zip(
-        [
-            "test_blue_geo_watch",
-            "geo-watch-2024-08-31-chilcotin-c",
-        ],
-        [
-            f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)",
-            "1️⃣  L1C and L2A mixed, `2024-07-30/2024-08-09`, [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-199-11f9b5497ef0)",
-        ],
-    )
-] + [
-    " ".join(
-        [
-            f"![image]({url_prefix}/{object_name}/{object_name}-2X.gif?raw=true&random={string.random_()})",
-            f"{description}, object: [`{object_name}`]({url_prefix}/{object_name}.tar.gz), [gif]({url_prefix}/{object_name}/{object_name}.gif).",
+    },
+    "Mount-Etna": {
+        "geo-watch-2024-09-04-Mount-Etna-a": [
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-205-c272a95ce266)",
         ]
-    )
-    for object_name, description in zip(
-        [
-            "geo-watch-2024-09-01-chilcotin-a",
-            "geo-watch-2024-09-01-chilcotin-c",
-        ],
-        [
-            "1️⃣ [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-201-d64e9bb3716b)",
-            "1️⃣ [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-202-d59ba811398b)",
-        ],
-    )
-]
+    },
+}
+
+
+items: List[str] = []
+for target_name, list_of_objects in list_of_targets.items():
+    items += [
+        "## [{}]({})".format(
+            target_name.replace("-", " ").title(),
+            f"./targets/{target_name}.md",
+        ),
+    ]
+
+    items += [
+        "- {}.".format(
+            ", ".join(
+                [
+                    f"[`{object_name}`]({url_prefix}/{object_name}.tar.gz)",
+                    f"[gif]({url_prefix}/{object_name}/{object_name}.gif)",
+                ]
+                + description
+            )
+        )
+        for object_name, description in list_of_objects.items()
+    ]
+
+    if list_of_objects:
+        last_object_name = list(list_of_objects.keys())[-1]
+        items += [
+            "",
+            f"![image]({url_prefix}/{last_object_name}/{last_object_name}-2X.gif?raw=true&random={string.random_()})",
+        ]
+
+    items += [""]

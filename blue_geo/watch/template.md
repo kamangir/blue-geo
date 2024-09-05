@@ -26,5 +26,3 @@ watching [targets](./targets.yaml) through `@geo`.
 ```
 
 --table--
-
-1️⃣ [Chilcotin River Landslide](./targets/chilcotin-river-landslide.md)

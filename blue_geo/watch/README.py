@@ -31,7 +31,10 @@ list_of_targets = {
 items: List[str] = []
 for target_name, list_of_objects in list_of_targets.items():
     items += [
-        "## {}".format(target_name.replace("-", " ").title()),
+        "## [{}]({})".format(
+            target_name.replace("-", " ").title(),
+            f"./targets/{target_name}.md",
+        ),
     ]
 
     items += [
@@ -54,8 +57,4 @@ for target_name, list_of_objects in list_of_targets.items():
             f"![image]({url_prefix}/{last_object_name}/{last_object_name}-2X.gif?raw=true&random={string.random_()})",
         ]
 
-    items += [
-        "",
-        f"[details](./targets/{target_name}.md)",
-        "",
-    ]
+    items += [""]

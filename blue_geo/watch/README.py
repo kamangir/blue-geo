@@ -21,6 +21,7 @@ list_of_targets = {
         ],
         "geo-watch-2024-09-01-chilcotin-c": [
             "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-202-d59ba811398b)",
+            "[on reddit](https://www.reddit.com/r/bash/comments/1f9cvyx/a_bash_python_tool_to_watch_a_target_in_satellite/).",
         ],
     },
     "burning-man-2024": {

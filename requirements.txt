@@ -5,7 +5,7 @@ folium
 geojson
 geopandas
 matplotlib
-notebooks_and_scripts
+notebooks-and-scripts
 numpy
 opencv-python
 pymysql

@@ -1,9 +1,7 @@
-from typing import List, Union
-from functools import reduce
+from typing import List
+from blue_objects.env import ABCLI_PUBLIC_PREFIX
 from abcli import string
 from blue_geo import REPO_NAME
-
-url_prefix = "https://kamangir-public.s3.ca-central-1.amazonaws.com"
 
 
 list_of_targets = {
@@ -39,6 +37,11 @@ list_of_targets = {
             "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-206-f7996520dc15)",
         ]
     },
+    "Jasper": {
+        "geo-watch-2024-09-06-Jasper-a": [
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-208-7063fca1423b)",
+        ]
+    },
 }
 
 
@@ -55,8 +58,8 @@ for target_name, list_of_objects in list_of_targets.items():
         "- {}.".format(
             ", ".join(
                 [
-                    f"[`{object_name}`]({url_prefix}/{object_name}.tar.gz)",
-                    f"[gif]({url_prefix}/{object_name}/{object_name}.gif)",
+                    f"[`{object_name}`]({ABCLI_PUBLIC_PREFIX}/{object_name}.tar.gz)",
+                    f"[gif]({ABCLI_PUBLIC_PREFIX}/{object_name}/{object_name}.gif)",
                 ]
                 + description
             )
@@ -68,7 +71,7 @@ for target_name, list_of_objects in list_of_targets.items():
         last_object_name = list(list_of_objects.keys())[-1]
         items += [
             "",
-            f"![image]({url_prefix}/{last_object_name}/{last_object_name}-2X.gif?raw=true&random={string.random_()})",
+            f"![image]({ABCLI_PUBLIC_PREFIX}/{last_object_name}/{last_object_name}-2X.gif?raw=true&random={string.random_()})",
         ]
 
     items += [""]

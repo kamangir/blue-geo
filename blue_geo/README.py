@@ -1,6 +1,11 @@
 from abcli import file
 import os
 from abcli.plugins.README import build as build_README
+from blue_objects.env import ABCLI_PUBLIC_PREFIX
+from blue_geo.watch.targets.jasper import (
+    items as jasper_items,
+    list_of_dates as jasper_dates,
+)
 from blue_geo.watch.README import items as watch_items
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
 
@@ -31,9 +36,9 @@ features = {
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/catalog/ukraine_timemap",
     },
     "vancouver-watching": {
-        "description": "catalog: Vancouver watching with AI, last build: [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/test_vancouver_watching_ingest/animation.gif).",
+        "description": f"catalog: Vancouver watching with AI, last build: [🔗]({ABCLI_PUBLIC_PREFIX}/test_vancouver_watching_ingest/animation.gif).",
         "icon": "🌈",
-        "thumbnail": "https://kamangir-public.s3.ca-central-1.amazonaws.com/test_vancouver_watching_ingest/animation.gif?raw=true",
+        "thumbnail": f"{ABCLI_PUBLIC_PREFIX}/test_vancouver_watching_ingest/animation.gif?raw=true",
         "url": "https://github.com/kamangir/Vancouver-Watching",
     },
     "QGIS": {
@@ -82,9 +87,11 @@ def build():
             VERSION=VERSION,
             REPO_NAME=REPO_NAME,
         )
-        for items, cols, suffix in zip(
-            [[], [], watch_items, items],
-            [3, 3, -1, 3],
-            ["catalog/copernicus", "catalog/EarthSearch", "watch", ".."],
-        )
+        for suffix, items, cols, in [
+            ("..", items, 3),
+            ("catalog/copernicus", [], 3),
+            ("catalog/EarthSearch", [], 3),
+            ("watch", watch_items, -1),
+            ("watch/targets/Jasper.md", jasper_items, len(jasper_dates)),
+        ]
     )

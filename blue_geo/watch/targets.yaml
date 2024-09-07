@@ -56,6 +56,19 @@ Fagradalsfjall:
     lon: -22.2667
     radius: 0.01
 
+Jasper:
+  catalog: EarthSearch
+  collection: sentinel_2_l1c
+  params:
+    height: 0.051
+    width: 0.12
+  query_args:
+    count: 30
+    datetime: 2024-06-22/2024-08-22
+    lat: 52.8734
+    lon: -118.0814
+    radius: 0.01
+
 test:
   catalog: copernicus
   collection: sentinel_2

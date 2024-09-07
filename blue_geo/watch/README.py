@@ -37,6 +37,11 @@ list_of_targets = {
             "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-206-f7996520dc15)",
         ]
     },
+    "Jasper": {
+        "geo-watch-2024-09-06-Jasper-a": [
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-208-7063fca1423b)",
+        ]
+    },
 }
 
 

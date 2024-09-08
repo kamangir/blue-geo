@@ -1,3 +1,5 @@
+# to avoid import complications.
+# from blue_objects.env import ABCLI_PUBLIC_PREFIX
 ABCLI_PUBLIC_PREFIX = "https://kamangir-public.s3.ca-central-1.amazonaws.com"
 
 NAME = "blue_geo"

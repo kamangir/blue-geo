@@ -38,7 +38,7 @@ features = {
     "vancouver-watching": {
         "description": f"catalog: Vancouver watching with AI, last build: [🔗]({ABCLI_PUBLIC_PREFIX}/test_vancouver_watching_ingest/animation.gif).",
         "icon": "🌈",
-        "thumbnail": f"{ABCLI_PUBLIC_PREFIX}/test_vancouver_watching_ingest/animation.gif?raw=true",
+        "thumbnail": f"{ABCLI_PUBLIC_PREFIX}/2024-01-06-20-39-46-73614/2024-01-06-20-39-46-73614-2X.gif?raw=true",
         "url": "https://github.com/kamangir/Vancouver-Watching",
     },
     "QGIS": {

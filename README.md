@@ -1,6 +1,6 @@
 # 🌐 Blue-GEO (`@geo`)
 
-AI for precise geospatial data analysis and visualization.
+🌐 AI for a Blue Planet.
 
 ```bash
 pip install blue-geo
@@ -22,4 +22,4 @@ to use on [AWS SageMaker](https://aws.amazon.com/sagemaker/) replace `<plugin-na
 
 [![pylint](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/)
 
-built by 🪄 [`abcli-9.277.1-blue-objects-attempt-2-b-2024-09-07-99677`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.448.1`](https://github.com/kamangir/blue-geo).
+built by 🪄 [`abcli-9.277.1-blue-objects-attempt-2-b-2024-09-07-99677`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.449.1`](https://github.com/kamangir/blue-geo).

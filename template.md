@@ -1,6 +1,6 @@
 # 🌐 Blue-GEO (`@geo`)
 
-AI for precise geospatial data analysis and visualization.
+🌐 AI for a Blue Planet.
 
 ```bash
 pip install blue-geo

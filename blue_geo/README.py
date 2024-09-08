@@ -50,7 +50,7 @@ features = {
     "geo-watch": {
         "description": "watch the planet's story unfold.",
         "icon": ICON,
-        "thumbnail": f"{ABCLI_PUBLIC_PREFIX}/geo-watch-2024-09-04-burning-man-2024-a/geo-watch-2024-09-04-burning-man-2024-a-2X.gif",
+        "thumbnail": f"{ABCLI_PUBLIC_PREFIX}/geo-watch-2024-09-06-Jasper-a/geo-watch-2024-09-06-Jasper-a-2X.gif",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
     },
     "template": {

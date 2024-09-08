@@ -48,7 +48,7 @@ features = {
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/QGIS/README.md",
     },
     "geo-watch": {
-        "description": "watching targets through `@geo`.",
+        "description": "watch the planet's story unfold.",
         "icon": ICON,
         "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/blue-geo-watch.png?raw=true",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",

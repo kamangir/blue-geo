@@ -1,6 +1,6 @@
 # 🌐 `@geo watch`
 
-watching [targets](./targets.yaml) through `@geo`.
+watch the planet's [story](./targets.yaml) unfold
 
 ```bash
  > @geo watch help

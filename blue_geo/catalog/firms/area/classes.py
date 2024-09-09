@@ -3,7 +3,9 @@ from datetime import datetime, timedelta
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point
-from abcli import file
+
+from blue_objects import file
+
 from abcli.modules import objects
 from abcli.plugins import metadata
 from abcli.plugins.metadata import post_to_object

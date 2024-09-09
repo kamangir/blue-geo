@@ -1,6 +1,6 @@
 from typing import List
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
-from abcli import string
+from blue_options import string
 from blue_geo import REPO_NAME
 
 
@@ -71,7 +71,7 @@ for target_name, list_of_objects in list_of_targets.items():
         last_object_name = list(list_of_objects.keys())[-1]
         items += [
             "",
-            f"![image]({ABCLI_PUBLIC_PREFIX}/{last_object_name}/{last_object_name}-2X.gif?raw=true&random={string.random_()})",
+            f"![image]({ABCLI_PUBLIC_PREFIX}/{last_object_name}/{last_object_name}-2X.gif?raw=true&random={string.random()})",
         ]
 
     items += [""]

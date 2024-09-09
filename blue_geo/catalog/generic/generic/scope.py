@@ -1,5 +1,7 @@
 from typing import Tuple
-from abcli import string
+
+from blue_options import string
+
 from blue_geo.logger import logger
 
 raster_suffix = [

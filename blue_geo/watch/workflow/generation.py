@@ -1,7 +1,8 @@
 from blueness import module
+from blue_options import string
 from abcli.plugins.metadata import get_from_object
 from notebooks_and_scripts.workflow.generic import Workflow
-from abcli import string
+
 from blue_geo import NAME
 from blue_geo.watch.targets import Target
 from blue_geo.logger import logger

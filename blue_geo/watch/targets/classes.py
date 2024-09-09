@@ -3,8 +3,7 @@ import copy
 import geopandas as gpd
 from shapely.geometry import Polygon
 
-from blue_objects import file
-from abcli.modules import objects
+from blue_objects import file, objects
 
 
 class Target:

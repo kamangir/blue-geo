@@ -1,7 +1,9 @@
 from typing import Tuple, List
 import glob
 from functools import reduce
-from abcli.modules import objects
+
+from blue_objects import objects
+
 from blue_geo.watch.targets import Target
 from blue_geo.catalog.generic.generic.scope import raster_suffix
 from blue_geo.logger import logger

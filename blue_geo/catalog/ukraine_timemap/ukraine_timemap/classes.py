@@ -7,9 +7,8 @@ import geopandas as gpd
 from geojson import Point
 
 from blueness import module
-from blue_options import string
+from blue_options import fullname, string
 from blue_objects import file
-from abcli import fullname
 from abcli.plugins.metadata import post_to_object
 
 from blue_geo import NAME, VERSION

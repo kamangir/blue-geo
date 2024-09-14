@@ -6,8 +6,7 @@ import numpy as np
 from blueness import module
 from blue_options import string
 from blue_options.host import signature as host_signature
-from blue_objects import file
-from blue_objects.objects import signature as object_signature
+from blue_objects import file, objects
 from blue_objects.graphics.gif import generate_animated_gif
 from blue_objects.graphics.signature import add_signature
 from abcli.plugins.metadata import post_to_object
@@ -118,7 +117,7 @@ def reduce_function(
             frame,
             header=[
                 " | ".join(
-                    object_signature(
+                    objects.signature(
                         "{} / {}".format(
                             datacube_id,
                             file.name_and_extension(filename),

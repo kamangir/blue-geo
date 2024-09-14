@@ -1,11 +1,13 @@
 import argparse
+
 from blueness import module
-from abcli import file
+from blueness.argparse.generic import sys_exit
+from blue_objects import file
+
 from blue_geo import NAME, VERSION
 from blue_geo.catalog import get_datacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
-from blueness.argparse.generic import sys_exit
 
 NAME = module.name(__file__, NAME)
 
@@ -107,7 +109,7 @@ elif args.task == "list":
         list_of_files = [
             filename
             for filename in list_of_files
-            if file.exist(datacube.full_filename(filename))
+            if file.exists(datacube.full_filename(filename))
         ]
 
     if args.count != -1:

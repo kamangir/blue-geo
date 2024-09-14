@@ -14,7 +14,7 @@ NAME = "blue_geo.QGIS"
 
 VERSION = "5.14.1"
 
-abcli_object_root = os.path.join(
+ABCLI_OBJECT_ROOT = os.path.join(
     os.getenv("HOME", ""),
     "storage/abcli",
 )
@@ -177,7 +177,7 @@ class ABCLI_QGIS(object):
 
     def object_path(self, object_name=""):
         output = os.path.join(
-            abcli_object_root,
+            ABCLI_OBJECT_ROOT,
             object_name if object_name else project.name,
         )
         os.makedirs(output, exist_ok=True)

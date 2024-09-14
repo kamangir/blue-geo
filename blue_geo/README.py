@@ -1,7 +1,8 @@
-from abcli import file
 import os
-from abcli.plugins.README import build as build_README
+
+from blue_objects import file, README
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
+
 from blue_geo.watch.targets.jasper import (
     items as jasper_items,
     list_of_dates as jasper_dates,
@@ -78,7 +79,7 @@ items = [
 
 def build():
     return all(
-        build_README(
+        README.build(
             items=items,
             cols=cols,
             path=os.path.join(file.path(__file__), suffix),

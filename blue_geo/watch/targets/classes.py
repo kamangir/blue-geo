@@ -1,11 +1,9 @@
-import copy
 from typing import Dict, Tuple
-from abcli import file
-from abcli.modules import objects
-from abcli.file.load import load_yaml
+import copy
 import geopandas as gpd
 from shapely.geometry import Polygon
-from blue_geo.logger import logger
+
+from blue_objects import file, objects
 
 
 class Target:
@@ -119,7 +117,7 @@ class TargetList:
     def load(self, filename: str) -> bool:
         self.targets = {}
 
-        success, targets = load_yaml(filename, civilized=True)
+        success, targets = file.load_yaml(filename, ignore_error=True)
 
         for target_name, target_info in targets.items():
             self.targets[target_name] = Target.from_dict(

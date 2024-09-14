@@ -59,8 +59,8 @@ function blue_geo_watch_map() {
         return 1
     fi
     cp -v \
-        $abcli_object_root/$datacube_id-DERIVED-crop-$crop_suffix/$filename \
-        $abcli_object_root/$object_name/
+        $ABCLI_OBJECT_ROOT/$datacube_id-DERIVED-crop-$crop_suffix/$filename \
+        $ABCLI_OBJECT_ROOT/$object_name/
 
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \

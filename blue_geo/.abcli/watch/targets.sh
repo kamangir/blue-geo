@@ -21,10 +21,10 @@ function blue_geo_watch_targets() {
         local object_name_1=$(abcli_clarify_object $3 .)
         local object_name_2=$(abcli_clarify_object $4 .)
 
-        local target_path=$abcli_object_root/$object_name_2/target/
+        local target_path=$ABCLI_OBJECT_ROOT/$object_name_2/target/
         mkdir -pv $target_path
         cp -v \
-            $abcli_object_root/$object_name_1/target/* \
+            $ABCLI_OBJECT_ROOT/$object_name_1/target/* \
             $target_path
 
         return

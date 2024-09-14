@@ -1,7 +1,7 @@
-from blue_geo import NAME, VERSION, DESCRIPTION, ICON
-from blue_geo.logger import logger
-from blue_geo import README
 from blueness.argparse.generic import main
+
+from blue_geo import NAME, VERSION, DESCRIPTION, ICON, README
+from blue_geo.logger import logger
 
 main(
     ICON=ICON,

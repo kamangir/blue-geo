@@ -109,7 +109,7 @@ elif args.task == "list":
         list_of_files = [
             filename
             for filename in list_of_files
-            if file.exist(datacube.full_filename(filename))
+            if file.exists(datacube.full_filename(filename))
         ]
 
     if args.count != -1:

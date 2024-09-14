@@ -2,7 +2,7 @@ import os
 from typing import Any, Tuple, Dict, List
 
 from blueness import module
-from blue_objects import file, objects
+from blue_objects import file, objects, path
 from abcli.plugins.metadata import post_to_object
 
 from blue_geo import NAME
@@ -87,7 +87,7 @@ class GenericDatacube:
         if item_filename.endswith(os.sep):
             return True
 
-        if not overwrite and file.exist(item_filename):
+        if not overwrite and file.exists(item_filename):
             logger.info(f"✅ {item_filename}")
             return True
 

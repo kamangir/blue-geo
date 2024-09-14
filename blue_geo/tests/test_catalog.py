@@ -1,6 +1,8 @@
 import pytest
 from typing import Type
-from abcli.modules.objects import unique_object
+
+from blue_objects.objects import unique_object
+
 from blue_geo.tests import assets
 from blue_geo.catalog import (
     list_of_catalog_classes,
@@ -10,7 +12,6 @@ from blue_geo.catalog import (
     get_catalog_class,
     get_datacube,
     get_datacube_class,
-    get_datacube_class_in_catalog,
     get_list_of_datacube_classes,
     get_list_of_collections,
 )

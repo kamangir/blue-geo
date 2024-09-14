@@ -1,6 +1,7 @@
 import pytest
-import geopandas as gpd
-from abcli.modules.objects import unique_object
+
+from blue_objects.objects import unique_object
+
 from blue_geo.tests import assets
 from blue_geo.catalog.copernicus import CopernicusCatalog
 from blue_geo.catalog.copernicus.sentinel_2 import CopernicusSentinel2Datacube

@@ -9,7 +9,7 @@ from blue_options.host import signature as host_signature
 from blue_objects import file, objects
 from blue_objects.graphics.gif import generate_animated_gif
 from blue_objects.graphics.signature import add_signature
-from abcli.plugins.metadata import post_to_object
+from blue_objects.metadata import post_to_object
 from notebooks_and_scripts import NAME as NBS_NAME, VERSION as NBS_VERSION
 
 from blue_geo import NAME, VERSION

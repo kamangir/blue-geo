@@ -8,7 +8,7 @@ from geojson import Point
 from blueness import module
 from blue_options import fullname, string
 from blue_objects import file, objects
-from abcli.plugins.metadata import post_to_object
+from blue_objects.metadata import post_to_object
 
 from blue_geo import NAME, VERSION, env
 from blue_geo.catalog.generic import GenericDatacube

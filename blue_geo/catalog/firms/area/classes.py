@@ -5,8 +5,7 @@ import geopandas as gpd
 from shapely.geometry import Point
 
 from blue_objects import file, objects
-from abcli.plugins import metadata
-from abcli.plugins.metadata import post_to_object
+from blue_objects import metadata
 
 from blue_geo.catalog.firms import FirmsCatalog
 from blue_geo.catalog.generic import GenericDatacube
@@ -229,7 +228,7 @@ class FirmsAreaDatacube(GenericDatacube):
 
         logger.info(f"🧊 {datacube.description}")
 
-        return post_to_object(
+        return metadata.post_to_object(
             object_name,
             "datacube_id",
             [datacube.datacube_id],

@@ -5,7 +5,7 @@ from blueness import module
 from blueness.argparse.generic import sys_exit
 from blue_objects import file
 
-from blue_geo import NAME, VERSION
+from blue_geo import NAME
 from blue_geo.watch.targets.classes import TargetList
 from blue_geo.watch.workflow.generation import generate_workflow
 from blue_geo.watch.workflow.map import map_function
@@ -17,7 +17,7 @@ NAME = module.name(__file__, NAME)
 list_of_tasks = "generate|map|reduce"
 
 
-parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
+parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,

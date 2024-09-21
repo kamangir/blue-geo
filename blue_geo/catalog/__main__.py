@@ -1,6 +1,9 @@
 import argparse
+
 from blueness import module
-from blue_geo import NAME, VERSION
+from blueness.argparse.generic import sys_exit
+
+from blue_geo import NAME
 from blue_geo.catalog.functions import (
     get_catalog_class,
     get_datacube_class_in_catalog,
@@ -11,14 +14,13 @@ from blue_geo.catalog.classes import list_of_catalogs
 from blue_geo.catalog.default import as_list_of_args
 from blue_geo.catalog.generic.stac.classes import STACCatalog
 from blue_geo.logger import logger
-from blueness.argparse.generic import sys_exit
 
 NAME = module.name(__file__, NAME)
 
 list_of_tasks = "get|list"
 
 
-parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
+parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,

@@ -6,7 +6,7 @@ from blueness import module
 from blueness.argparse.generic import sys_exit
 from blue_objects import file
 
-from blue_geo import NAME, VERSION
+from blue_geo import NAME
 from blue_geo.watch.targets.classes import TargetList, Target
 from blue_geo.logger import logger
 
@@ -14,7 +14,7 @@ NAME = module.name(__file__, NAME)
 
 list_of_tasks = "get|save"
 
-parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
+parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,

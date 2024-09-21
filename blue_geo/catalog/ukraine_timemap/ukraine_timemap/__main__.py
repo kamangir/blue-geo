@@ -1,16 +1,18 @@
 import argparse
+
 from blueness import module
-from blue_geo import NAME, VERSION
+from blueness.argparse.generic import sys_exit
+
+from blue_geo import NAME
 from blue_geo.catalog.ukraine_timemap.ukraine_timemap.classes import (
     UkraineTimemapDatacube,
 )
 from blue_geo.logger import logger
-from blueness.argparse.generic import sys_exit
 
 NAME = module.name(__file__, NAME)
 
 
-parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
+parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,

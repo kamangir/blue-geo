@@ -1,16 +1,18 @@
 import argparse
+
 from blueness import module
-from blue_geo import NAME, VERSION
+from blueness.argparse.generic import sys_exit
+
+from blue_geo import NAME
 from blue_geo.catalog.default import add_default_arguments
 from blue_geo.catalog import get_datacube_class_in_catalog
 from blue_geo.catalog.generic.generic.stac import STACDatacube
 from blue_geo.catalog.copernicus.sentinel_2.classes import CopernicusSentinel2Datacube
 from blue_geo.logger import logger
-from blueness.argparse.generic import sys_exit
 
 NAME = module.name(__file__, NAME)
 
-parser = argparse.ArgumentParser(NAME, description=f"{NAME}-{VERSION}")
+parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,

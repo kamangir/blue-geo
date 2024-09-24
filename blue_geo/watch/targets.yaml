@@ -81,7 +81,6 @@ Hurricane-Idalia-2023:
     lat: 29.0
     lon: -83.0
     radius: 0.9
-    description: Monitoring the development, trajectory, and aftermath of Hurricane Idalia, including pre-storm conditions and post-storm recovery.
 
 test:
   catalog: copernicus

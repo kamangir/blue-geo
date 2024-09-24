@@ -43,7 +43,7 @@ list_of_targets = {
         ]
     },
     "Hurricane-Idalia-2023": {
-        "object-name": [
+        "geo-watch-2024-09-23-Hurricane-Idalia-2023-b": [
             "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-228-f55a0fdf409a)",
         ]
     },

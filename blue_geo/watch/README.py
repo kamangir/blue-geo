@@ -42,6 +42,11 @@ list_of_targets = {
             "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-208-7063fca1423b)",
         ]
     },
+    "Hurricane-Idalia-2023": {
+        "object-name": [
+            "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-228-f55a0fdf409a)",
+        ]
+    },
 }
 
 

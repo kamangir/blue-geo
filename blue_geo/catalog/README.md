@@ -1,6 +1,8 @@
 # 🌐 catalog
 
-`catalog`s are [lists](#listing-catalogs) of collections that can be [browsed](#browsing-a-catalog), [queried](#running-a-query-for-datacubes), and [ingested as `datacube`](../datacube/)s. see [STAC](https://stacspec.org/en/tutorials/intro-to-stac/) for the terminology.
+`catalog`s are [lists](#listing-catalogs) of collections that can be [browsed](#browsing-a-catalog), [queried](#running-a-query-for-datacubes), and [ingested as `datacube`](../datacube/)s.
+
+`catalog`s are generalized [STAC](https://stacspec.org/en/tutorials/intro-to-stac/) Catalogs.
 
 ## supported catalogs
 

@@ -1,6 +1,8 @@
 # 🧊 datacube
 
-`datacube`s are items from [collections in catalogs](../catalog/) that are represented by children of [`GenericDatacube`](../../catalog/generic/datacube.py) and can be [ingested](#ingesting-a-datacube) as 🌀 [objects](https://kamangir-public.s3.ca-central-1.amazonaws.com/giza-v1/giza.pdf). see [STAC](https://stacspec.org/en/tutorials/intro-to-stac/) for the terminology.
+`datacube`s are items from [collections in catalogs](../catalog/) that are represented by children of [`GenericDatacube`](../../catalog/generic/datacube.py) and can be [ingested](#ingesting-a-datacube) as 🌀 [objects](https://kamangir-public.s3.ca-central-1.amazonaws.com/giza-v1/giza.pdf).
+
+`datacube`s are generalized [STAC](https://stacspec.org/en/tutorials/intro-to-stac/) Items.
 
 ## adding a new datacube class
 

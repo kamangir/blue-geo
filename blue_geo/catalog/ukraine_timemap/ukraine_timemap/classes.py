@@ -77,24 +77,26 @@ class UkraineTimemapDatacube(GenericDatacube):
                         float(event["latitude"]),
                     )
                 )
-                record = {
-                    "geometry": point,
-                    "sources": ", ".join(event["sources"]),
-                    "id": event["id"],
-                    "description": event["description"],
-                    "date": event["date"],
-                    "date_obj": datetime.strptime(event["date"], "%m/%d/%Y").date(),
-                    "location": event["location"],
-                    "graphic": event["graphic"],
-                    "associations": ", ".join(event["associations"]),
-                    "time": event["time"],
-                }
+                record = {"geometry": point}
+
+                for keyword, value in event.items():
+                    record[keyword] = (
+                        ", ".join(value) if isinstance(value, list) else value
+                    )
+
+                record["date_obj"] = datetime.strptime(event["date"], "%Y-%m-%d").date()
+
             except Exception as e:
-                logger.error(f"ingest failed:\nevent: {event}\nerror: {e}")
+                logger.info(f"ingest failed: {e}: {event}")
                 failure_count += 1
                 continue
 
             records.append(record)
+
+        if not records:
+            logger.error("no records to ingest.")
+            return False, gdf
+
         gdf = gpd.GeoDataFrame(records)
 
         gdf.set_crs(epsg=4326, inplace=True)  # WGS 84

@@ -56,13 +56,13 @@ features = {
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/QGIS/README.md",
     },
     "catalog": {
-        "description": "`catalog`s are lists of collections that can be browsed, queried, and ingested as `datacube`s.",
+        "description": "`catalog`s are generalized STAC Catalogs.",
         "icon": ICON,
         "thumbnail": default_MARQUEE,
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog",
     },
     "datacube": {
-        "description": "`datacube`s are items from collections in catalogs that are represented by children of `GenericDatacube` and can be ingested as 🌀 [objects](https://kamangir-public.s3.ca-central-1.amazonaws.com/giza-v1/giza.pdf).",
+        "description": "`datacube`s are generalized STAC Items.",
         "icon": "🧊",
         "thumbnail": default_MARQUEE,
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/datacube",

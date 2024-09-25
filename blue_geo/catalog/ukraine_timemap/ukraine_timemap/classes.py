@@ -87,7 +87,7 @@ class UkraineTimemapDatacube(GenericDatacube):
                 record["date_obj"] = datetime.strptime(event["date"], "%Y-%m-%d").date()
 
             except Exception as e:
-                logger.info(f"ingest failed: {e}: {event}")
+                logger.warning(f"ingest failed: {e}: {event}")
                 failure_count += 1
                 continue
 

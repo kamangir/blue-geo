@@ -106,7 +106,7 @@ class UkraineTimemapDatacube(GenericDatacube):
         logger.info("{:,} event(s) -ingested-> gdf.".format(len(gdf)))
         metadata["ingested_count"] = len(gdf)
         if failure_count:
-            logger.error(f"{failure_count:,} event(s) failed to ingest.")
+            logger.warning(f"{failure_count:,} event(s) failed to ingest.")
         metadata["failure_count"] = failure_count
 
         histogram = Counter(list(gdf["date_obj"].values))

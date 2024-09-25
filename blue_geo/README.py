@@ -49,12 +49,6 @@ features = {
         "thumbnail": f"{ABCLI_PUBLIC_PREFIX}/geo-watch-2024-09-06-Jasper-a/geo-watch-2024-09-06-Jasper-a-2X.gif",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
     },
-    "QGIS": {
-        "description": "an AI terraform for [QGIS](https://www.qgis.org/).",
-        "icon": ICON,
-        "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/QGIS.jpg",
-        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/QGIS/README.md",
-    },
     "catalog": {
         "description": "`catalog`s are generalized STAC Catalogs.",
         "icon": ICON,
@@ -66,6 +60,12 @@ features = {
         "icon": "🧊",
         "thumbnail": default_MARQUEE,
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/datacube",
+    },
+    "QGIS": {
+        "description": "an AI terraform for [QGIS](https://www.qgis.org/).",
+        "icon": ICON,
+        "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/QGIS.jpg",
+        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/QGIS/README.md",
     },
     "template": {
         "description": "",

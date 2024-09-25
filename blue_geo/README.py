@@ -1,5 +1,6 @@
 import os
 
+from blue_options import MARQUEE as default_MARQUEE
 from blue_objects import file, README
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
@@ -54,10 +55,22 @@ features = {
         "thumbnail": f"{ABCLI_PUBLIC_PREFIX}/geo-watch-2024-09-06-Jasper-a/geo-watch-2024-09-06-Jasper-a-2X.gif",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
     },
+    "catalog": {
+        "description": "`catalog`s are lists of collections that can be browsed, queried, and ingested as `datacube`s.",
+        "icon": ICON,
+        "thumbnail": default_MARQUEE,
+        "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog",
+    },
+    "datacube": {
+        "description": "`datacube`s are items from collections in catalogs that are represented by children of `GenericDatacube` and can be ingested as 🌀 [objects](https://kamangir-public.s3.ca-central-1.amazonaws.com/giza-v1/giza.pdf).",
+        "icon": "🧊",
+        "thumbnail": default_MARQUEE,
+        "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/datacube",
+    },
     "template": {
         "description": "",
         "icon": "",
-        "thumbnail": "",
+        "thumbnail": default_MARQUEE,
         "url": "",
     },
 }

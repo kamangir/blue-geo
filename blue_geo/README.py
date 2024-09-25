@@ -50,13 +50,13 @@ features = {
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
     },
     "catalog": {
-        "description": "`catalog`s are generalized STAC Catalogs.",
+        "description": "generalized STAC Catalogs.",
         "icon": ICON,
         "thumbnail": default_MARQUEE,
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog",
     },
     "datacube": {
-        "description": "`datacube`s are generalized STAC Items.",
+        "description": "generalized STAC Items.",
         "icon": "🧊",
         "thumbnail": default_MARQUEE,
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/datacube",

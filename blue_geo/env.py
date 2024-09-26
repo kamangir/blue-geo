@@ -72,3 +72,17 @@ BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP = os.getenv(
     "BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP",
     "",
 )
+
+
+SKYFOX_ACCESS_TOKEN_URL = os.getenv(
+    "SKYFOX_ACCESS_TOKEN_URL",
+    "",
+)
+SKYFOX_CLIENT_ID = os.getenv(
+    "SKYFOX_CLIENT_ID",
+    "",
+)
+SKYFOX_CLIENT_SECRET = os.getenv(
+    "SKYFOX_CLIENT_SECRET",
+    "",
+)

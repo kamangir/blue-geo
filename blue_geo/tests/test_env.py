@@ -23,3 +23,7 @@ def test_blue_geo_env():
     assert env.BLUE_GEO_TEST_DATACUBE_FIRMS_AREA
     assert env.BLUE_GEO_TEST_DATACUBE_GENERIC_GENERIC
     assert env.BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP
+
+    assert env.SKYFOX_ACCESS_TOKEN_URL
+    assert env.SKYFOX_CLIENT_ID
+    assert env.SKYFOX_CLIENT_SECRET

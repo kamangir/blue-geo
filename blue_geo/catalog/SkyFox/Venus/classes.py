@@ -22,6 +22,7 @@ class SkyFoxVenusDatacube(STACDatacube):
             return True
 
         logger.info("🪄")
+        return True
 
     def list_of_files(
         self,

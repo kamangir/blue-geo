@@ -7,6 +7,7 @@ from blue_objects.metadata import post_to_object
 
 from blue_geo.catalog.generic.generic.classes import GenericDatacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
+from blue_geo.catalog.generic.stac.classes import STACCatalog
 from blue_geo.logger import logger
 
 
@@ -55,16 +56,6 @@ class STACDatacube(GenericDatacube):
             "help": "<keyword>",
         },
     }
-
-    @classmethod
-    def get_client(cls) -> Tuple[bool, Union[Client, None]]:
-        try:
-            client = Client.open(cls.catalog.url["api"])
-        except Exception as e:
-            logger.error(e)
-            return False, None
-
-        return True, client
 
     def ingest(
         self,
@@ -133,6 +124,8 @@ class STACDatacube(GenericDatacube):
         keyword: str = "",
         verbose: bool = False,
     ) -> bool:
+        assert isinstance(cls.catalog, STACCatalog)
+
         logger.info(
             "🔎 {}.query -{}> {}".format(
                 cls.__name__,
@@ -141,7 +134,7 @@ class STACDatacube(GenericDatacube):
             )
         )
 
-        success, client = cls.get_client()
+        success, client = cls.catalog.get_client()
         if not success:
             return success
 
@@ -200,10 +193,12 @@ class STACDatacube(GenericDatacube):
         )
 
     def update_metadata(self, verbose: bool = False) -> bool:
+        assert isinstance(self.catalog, STACCatalog)
+
         if not super().update_metadata(verbose):
             return False
 
-        success, client = self.get_client()
+        success, client = self.catalog.get_client()
         if not success:
             return success
 

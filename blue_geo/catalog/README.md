@@ -9,6 +9,7 @@
 - [copernicus](./copernicus/)
 - [EarthSearch](./EarthSearch/)
 - [firms](./firms/)
+- [SkyFox](./SkyFox/)
 - [ukraine_timemap](./ukraine_timemap/)
 
 ## adding a new catalog

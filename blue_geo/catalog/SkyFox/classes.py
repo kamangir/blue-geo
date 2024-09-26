@@ -1,6 +1,7 @@
-from typing import Tuple
+from typing import Tuple, Union
 import requests
 import json
+from pystac_client import Client
 
 from blueness import module
 
@@ -17,10 +18,32 @@ class SkyFoxCatalog(STACCatalog):
 
     url = {
         "account": "https://console.earthdaily.com/account",
+        # https://github.com/earthdaily/EDA-Documentation/blob/gh-pages/API/APIUsage/earthplatform_stac_api_examples.py
+        "api": "https://api.earthdaily.com/platform/v1/stac/",
         "doc": "https://earthdaily.github.io/EDA-Documentation/",
         "platform": "https://console.earthdaily.com/platform",
         "signin": "https://console.earthdaily.com/mosaics/signin",
     }
+
+    @classmethod
+    def get_client(cls) -> Tuple[bool, Union[Client, None]]:
+        success, token = cls.get_new_token()
+        if not success:
+            return False, None
+
+        try:
+            # https://earthdaily.github.io/EDA-Documentation/API/APIUsage/Python/#getting-the-authentication-token-for-pystac-client
+            client = Client.open(
+                cls.url["api"],
+                headers={
+                    "Authorization": f"Bearer {token}",
+                },
+            )
+        except Exception as e:
+            logger.error(e)
+            return False, None
+
+        return True, client
 
     @staticmethod
     # https://earthdaily.github.io/EDA-Documentation/API/APIUsage/Python/#getting-the-authentication-token-for-pystac-client

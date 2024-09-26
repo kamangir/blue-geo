@@ -1,4 +1,5 @@
 from typing import Any, List
+
 from blue_geo.catalog.SkyFox.classes import SkyFoxCatalog
 from blue_geo.catalog.generic.generic.stac import STACDatacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope

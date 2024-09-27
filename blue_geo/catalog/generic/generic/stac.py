@@ -204,7 +204,10 @@ class STACDatacube(GenericDatacube):
 
         segments = self.datacube_id.replace("-SAFE", ".SAFE").split("-", 3)
         assert len(segments) == 4, self.datacube_id
-        search_parameters = {"ids": [segments[3]]}
+        search_parameters = {
+            "ids": [segments[3]],
+            "collections": [self.collection],
+        }
 
         if verbose:
             for param, value in search_parameters.items():

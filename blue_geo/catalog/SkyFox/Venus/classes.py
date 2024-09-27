@@ -9,9 +9,9 @@ from blue_geo.logger import logger
 class SkyFoxVenusDatacube(STACDatacube):
     catalog = SkyFoxCatalog()
 
-    collection = "venus"  # TODO
+    collection = "venus-l2a"
 
-    name = "venus"
+    name = "Venus"
 
     def ingest_filename(
         self,

@@ -14,7 +14,7 @@ NAME = module.name(__file__, NAME)
 
 
 class SkyFoxCatalog(STACCatalog):
-    name = "skyfox"
+    name = "SkyFox"
 
     url = {
         "account": "https://console.earthdaily.com/account",

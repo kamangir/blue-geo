@@ -69,6 +69,19 @@ Jasper:
     lon: -118.0814
     radius: 0.01
 
+Leonardo:
+  catalog: skyfox
+  collection: venus
+  params:
+    height: 0.145
+    width: 0.145
+  query_args:
+    count: 30
+    datetime: 2019-12-13/2020-10-28
+    lat: 41.8003
+    lon: 12.2389
+    radius: 0.01
+
 Hurricane-Idalia-2023:
   catalog: EarthSearch
   collection: sentinel_2_l1c

@@ -132,9 +132,8 @@ class GenericDatacube:
         datacube_id = self.datacube_id if not datacube_id else datacube_id
 
         segments = datacube_id.split("-", 3)
-        assert len(segments) == 4, self.datacube_id
 
-        return segments[3]
+        return segments[3] if len(segments) >= 4 else ""
 
     def update_metadata(self, verbose: bool = False) -> bool:
         if verbose:

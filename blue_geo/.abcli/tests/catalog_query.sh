@@ -18,14 +18,29 @@ function test_blue_geo_catalog_query() {
         [[ $? -ne 0 ]] && return 1
 
         for datacube_class in $(echo $list_of_datacube_classes | tr , " "); do
-            abcli_log "testing $catalog/$datacube_class/query ..."
-
             local object_name="bashtest-$catalog-$datacube_class-$(abcli_string_timestamp)"
+
+            local target=$(blue_geo_watch_targets get \
+                --what target \
+                --catalog_name $catalog \
+                --datacube_class $datacube_class)
+            if [[ -z "$target" ]]; then
+                abcli_log_error "target not found for $catalog/$datacube_class."
+                return 1
+            fi
+
+            abcli_log "testing $catalog/$datacube_class/query on $target ..."
+
+            local query_args=$(blue_geo_watch_targets get \
+                --what query_args \
+                --target_name $target \
+                --delim space)
 
             abcli_eval ,$options \
                 blue_geo catalog query $catalog $datacube_class \
                 ingest \
-                $object_name
+                $object_name \
+                $query_args
             [[ $? -ne 0 ]] && return 1
 
             abcli_assert \

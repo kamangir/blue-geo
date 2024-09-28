@@ -1,4 +1,5 @@
 from typing import Tuple, Union
+import urllib3
 import requests
 import json
 from pystac_client import Client
@@ -11,6 +12,9 @@ from blue_geo.catalog.generic.stac.classes import STACCatalog
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
+
+# https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+urllib3.disable_warnings()
 
 
 class SkyFoxCatalog(STACCatalog):

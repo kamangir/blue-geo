@@ -51,7 +51,8 @@ function blue_geo_watch() {
     else
         local target_exists=$(blue_geo_watch_targets get \
             --what exists \
-            --target_name $target)
+            --target_name $target \
+            --log 0)
         if [[ "$target_exists" != "True" ]]; then
             abcli_log_error "-@geo: watch: $target: target not found."
             return 1
@@ -63,14 +64,17 @@ function blue_geo_watch() {
 
         local catalog=$(blue_geo_watch_targets get \
             --what catalog \
-            --target_name $target)
+            --target_name $target \
+            --log 0)
         local collection=$(blue_geo_watch_targets get \
             --what collection \
-            --target_name $target)
+            --target_name $target \
+            --log 0)
         local query_args=$(blue_geo_watch_targets get \
             --what query_args \
             --target_name $target \
-            --delim space)
+            --delim space \
+            --log 0)
 
         abcli_eval dryrun=$do_dryrun \
             blue_geo_catalog query $catalog \

@@ -34,7 +34,8 @@ function test_blue_geo_catalog_query() {
                 query_args=$(blue_geo_watch_targets get \
                     --what query_args \
                     --target_name $target \
-                    --delim space)
+                    --delim space \
+                    --log 0)
             fi
 
             abcli_eval ,$options \

@@ -70,8 +70,8 @@ Jasper:
     radius: 0.01
 
 Leonardo:
-  catalog: skyfox
-  collection: venus
+  catalog: SkyFox
+  collection: Venus
   params:
     height: 0.145
     width: 0.145

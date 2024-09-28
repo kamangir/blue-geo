@@ -8,9 +8,7 @@ function blue_geo_watch() {
     local reduce_options=$5
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local list_of_targets=$(blue_geo_watch_targets get \
-            --what list \
-            --delim \|)
+        local list_of_targets=$(blue_geo_watch_targets list --delim \| --log 0)
 
         options="$(xtra dryrun)"
 
@@ -33,7 +31,7 @@ function blue_geo_watch() {
     fi
 
     local task
-    for task in map reduce; do
+    for task in map reduce targets; do
         if [ $(abcli_option_int "$options" $task 0) == 1 ]; then
             blue_geo_watch_$task "${@:2}"
             return

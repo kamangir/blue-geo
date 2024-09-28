@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
 import copy
 import geopandas as gpd
 from shapely.geometry import Polygon
@@ -113,6 +113,20 @@ class TargetList:
 
         if filename:
             self.load(filename)
+
+    def get_list(
+        self,
+        catalog_name: str = "",
+        collection: str = "",
+    ) -> List[str]:
+        return sorted(
+            [
+                target.name
+                for target in self.targets.values()
+                if (target.catalog == catalog_name or not catalog_name)
+                and (target.collection == collection or not collection)
+            ]
+        )
 
     def load(self, filename: str) -> bool:
         self.targets = {}

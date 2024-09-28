@@ -75,17 +75,18 @@ class CopernicusSentinel2Datacube(STACDatacube):
         if not success:
             return []
 
-        list_of_items = bucket.objects.filter(Prefix=s3_prefix)
+        return scope.filter(
+            {
+                item.key.split(f"{s3_prefix}/", 1)[1]: item.size
+                for item in bucket.objects.filter(Prefix=s3_prefix)
+            },
+            verbose=verbose,
+        )
 
-        list_of_files: List[str] = []
-        quick_found = False
-        for item in list_of_items:
-            item_filename = item.key.split(f"{s3_prefix}/", 1)[1]
+    def raw_datacube_id(
+        self,
+        datacube_id: str = "",  # to enable upstream modifications
+    ) -> str:
+        datacube_id = self.datacube_id if not datacube_id else datacube_id
 
-            includes, quick_found = scope.includes(
-                item_filename, item.size, verbose, quick_found
-            )
-            if includes:
-                list_of_files.append(item_filename)
-
-        return list_of_files
+        return super().raw_datacube_id(datacube_id.replace("-SAFE", ".SAFE"))

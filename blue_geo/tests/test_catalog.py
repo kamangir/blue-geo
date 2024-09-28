@@ -87,6 +87,9 @@ def test_get_datacube(
     expected_datacube_class: Type[GenericDatacube],
 ):
     datacube = get_datacube(datacube_id)
+
+    assert datacube.raw_datacube_id()
+
     assert isinstance(datacube, expected_datacube_class)
 
 

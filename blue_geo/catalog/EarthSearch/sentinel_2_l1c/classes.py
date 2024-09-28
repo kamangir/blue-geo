@@ -43,17 +43,10 @@ class EarthSearchSentinel2L1CDatacube(STACDatacube):
         scope: DatacubeScope = DatacubeScope("all"),
         verbose: bool = False,
     ) -> List[str]:
-        list_of_items = [asset.href for asset in self.metadata["Item"].assets.values()]
-
-        list_of_files: List[str] = []
-        quick_found = False
-        for item in list_of_items:
-            item_filename = item.split(f"{self.s3_prefix}/", 1)[1].replace("/", "_")
-
-            includes, quick_found = scope.includes(
-                item_filename, -1, verbose, quick_found
-            )
-            if includes:
-                list_of_files.append(item_filename)
-
-        return list_of_files
+        return scope.filter(
+            {
+                asset.href.split(f"{self.s3_prefix}/", 1)[1].replace("/", "_"): -1
+                for asset in self.metadata["Item"].assets.values()
+            },
+            verbose=verbose,
+        )

@@ -125,6 +125,17 @@ class GenericDatacube:
 
         return post_to_object(object_name, "datacube_id", [])
 
+    def raw_datacube_id(
+        self,
+        datacube_id: str = "",  # to enable upstream modifications
+    ) -> str:
+        datacube_id = self.datacube_id if not datacube_id else datacube_id
+
+        segments = datacube_id.split("-", 3)
+        assert len(segments) == 4, self.datacube_id
+
+        return segments[3]
+
     def update_metadata(self, verbose: bool = False) -> bool:
         if verbose:
             logger.info(f"{self.description}.update_metadata()")

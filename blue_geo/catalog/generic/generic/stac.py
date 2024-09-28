@@ -202,10 +202,8 @@ class STACDatacube(GenericDatacube):
         if not success:
             return success
 
-        segments = self.datacube_id.replace("-SAFE", ".SAFE").split("-", 3)
-        assert len(segments) == 4, self.datacube_id
         search_parameters = {
-            "ids": [segments[3]],
+            "ids": [self.raw_datacube_id()],
             "collections": [self.collection],
         }
 

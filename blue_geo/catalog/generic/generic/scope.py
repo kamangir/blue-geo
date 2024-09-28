@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, Dict, List
 
 from blue_options import string
 
@@ -30,6 +30,27 @@ class DatacubeScope:
         self.suffix = [
             item for item in list_of_what if item not in self.special_options
         ]
+
+    def filter(
+        self,
+        dict_of_items: Dict[str, float],  # {filename: size}
+        verbose: bool = False,
+    ) -> List[str]:
+        list_of_files: List[str] = []
+
+        quick_found = False
+        for item_filename, item_size in dict_of_items.items():
+            includes, quick_found = self.includes(
+                item_filename,
+                item_size,
+                verbose,
+                quick_found,
+            )
+
+            if includes:
+                list_of_files.append(item_filename)
+
+        return list_of_files
 
     def includes(
         self,

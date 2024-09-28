@@ -30,4 +30,16 @@ class SkyFoxVenusDatacube(STACDatacube):
         scope: DatacubeScope = DatacubeScope("all"),
         verbose: bool = False,
     ) -> List[str]:
-        return []
+        raw_datacube_id = self.raw_datacube_id()
+
+        return scope.filter(
+            {
+                (
+                    value.href.split(f"{raw_datacube_id}/", 1)[1]
+                    if raw_datacube_id in value.href
+                    else value.href.split("/")[-1]
+                ): -1
+                for value in self.metadata["Item"].assets.values()
+            },
+            verbose=verbose,
+        )

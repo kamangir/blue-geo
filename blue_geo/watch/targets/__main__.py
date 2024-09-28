@@ -67,9 +67,7 @@ target_list = TargetList(
     os.path.join(file.path(__file__), "../targets.yaml"),
 )
 
-if args.task in ["get", "save"]:
-    target = target_list.targets.get(args.target_name, Target())
-
+target = target_list.targets.get(args.target_name, Target())
 
 success = args.task in list_of_tasks
 if args.task == "get":

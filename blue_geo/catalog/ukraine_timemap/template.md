@@ -10,7 +10,7 @@ the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com
  > @catalog query ukraine_timemap help
 @catalog query ukraine_timemap \
 	[dryrun,ukraine_timemap,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
 	[--arg <value>]
  . ukraine_timemap/ukraine_timemap -query-> <object-name>.

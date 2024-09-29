@@ -12,13 +12,14 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
  > @catalog query copernicus help
 @catalog query copernicus \
 	[dryrun,sentinel_2,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
-	[--bbox <-122.88,51.73,-122.68,51.93>]\
-	[--count <10>, -1: all]\
-	[--datetime <2024-07-30/2024-08-09>]\
-	[--lat <51.83>]\
-	[--lon <-122.78>]\
+	[--bbox <-122.88,51.73,-122.68,51.93>] \
+	[--count <10>, -1: all] \
+	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
+	[--keyword <keyword>] \
+	[--lat <51.83>] \
+	[--lon <-122.78>] \
 	[--radius <0.1>]
  . copernicus/sentinel_2 -query-> <object-name>.
 ```
@@ -36,7 +37,7 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
   --lon -122.78
 
 @select $(@catalog query read - . --count 1 --offset 3)
-@datacube ingest scope=metadata+quick .
+@datacube ingest scope=metadata+rgb .
 
 @publish tar .
 ```

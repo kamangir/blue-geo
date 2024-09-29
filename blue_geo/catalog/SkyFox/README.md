@@ -19,7 +19,7 @@ the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.i
  > @catalog query SkyFox help
 @catalog query SkyFox \
 	[dryrun,Venus,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
 	[--bbox <-122.88,51.73,-122.68,51.93>] \
 	[--count <10>, -1: all] \
@@ -58,7 +58,7 @@ using [Leonardo](../../watch/targets/Leonardo.md).
   --lon 12.2389
 
 @select $(@catalog query read - . --count 1 --offset 3)
-@datacube ingest scope=metadata+quick .
+@datacube ingest scope=metadata+rgbx .
 
 @publish tar .
 ```

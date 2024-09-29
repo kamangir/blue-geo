@@ -7,7 +7,7 @@ from blue_geo.catalog.generic.generic.stac import STACDatacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
 
-quick_suffixes = [f"SRE_B{band_index}.tif" for band_index in [7, 4, 3]]
+rgb_suffixes = [f"SRE_B{band_index}.tif" for band_index in [7, 4, 3]]
 
 
 class SkyFoxVenusDatacube(STACDatacube):
@@ -25,13 +25,13 @@ class SkyFoxVenusDatacube(STACDatacube):
         verbose: bool = True,
     ) -> Tuple[bool, Any]:
         success, output = super().ingest(dryrun, overwrite, scope, verbose)
-        if not success or not DatacubeScope(scope).quick:
+        if not success or not DatacubeScope(scope).rgbx:
             return success, output
 
         list_of_colors = ["red", "green", "blue"]
 
         filenames: Dict[str, str] = {}
-        for suffix, color in zip(quick_suffixes, list_of_colors):
+        for suffix, color in zip(rgb_suffixes, list_of_colors):
             candidates = self.list_of_files(DatacubeScope(suffix))
             if not candidates:
                 logger.error(f"cannot find {suffix}.")
@@ -39,7 +39,7 @@ class SkyFoxVenusDatacube(STACDatacube):
 
             filenames[color] = self.full_filename(candidates[0])
 
-        rgb_filename = filenames["red"].replace(quick_suffixes[0], "SRE_RGB.tif")
+        rgb_filename = filenames["red"].replace(rgb_suffixes[0], "SRE_RGB.tif")
         if file.exists(rgb_filename):
             logger.info(f"✅ {rgb_filename}")
             return True, output
@@ -102,8 +102,8 @@ class SkyFoxVenusDatacube(STACDatacube):
                 for value in self.metadata["Item"].assets.values()
                 if raw_datacube_id in value.href
             ],
-            needed_for_quick=lambda filename: any(
-                filename.endswith(suffix) for suffix in quick_suffixes
+            needed_for_rgb=lambda filename: any(
+                filename.endswith(suffix) for suffix in rgb_suffixes
             ),
             verbose=verbose,
         )

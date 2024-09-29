@@ -12,9 +12,18 @@ raster_suffix = [
 
 
 class DatacubeScope:
-    special_options = ["all", "metadata", "quick", "raster"]
+    # description under blue_geo_datacube_ingest
+    special_options = [
+        "all",
+        "metadata",
+        "raster",
+        "rgb",
+        "rgbx",
+    ]
 
-    help = "|".join(special_options + ["<{}>".format("+".join(raster_suffix))])
+    help = "+".join(
+        sorted(special_options) + [f"<{suffix}>" for suffix in raster_suffix]
+    )
 
     def __init__(self, what: str):
         list_of_what = what.split("+")
@@ -23,7 +32,8 @@ class DatacubeScope:
 
         self.metadata = "metadata" in list_of_what
 
-        self.quick = "quick" in list_of_what
+        self.rgb = "rgb" in list_of_what
+        self.rgbx = "rgbx" in list_of_what
 
         self.raster = "raster" in list_of_what
 
@@ -35,7 +45,7 @@ class DatacubeScope:
         self,
         list_of_items: List[Dict[str, Any]],  # {"filename": filename, ["size": size]}
         verbose: bool = False,
-        needed_for_quick: Union[Callable, None] = None,
+        needed_for_rgb: Union[Callable, None] = None,
     ) -> List[str]:
         list_of_files: List[str] = []
 
@@ -44,7 +54,7 @@ class DatacubeScope:
                 item_filename=item["filename"],
                 item_size=item.get("size", -1),
                 verbose=verbose,
-                needed_for_quick=needed_for_quick,
+                needed_for_rgb=needed_for_rgb,
             ):
                 list_of_files.append(item["filename"])
 
@@ -55,7 +65,7 @@ class DatacubeScope:
         item_filename: str,
         item_size: int = -1,
         verbose: bool = False,
-        needed_for_quick: Union[Callable, None] = None,
+        needed_for_rgb: Union[Callable, None] = None,
     ) -> bool:
         if self.all:
             return True
@@ -67,11 +77,7 @@ class DatacubeScope:
         ):
             return True
 
-        if (
-            self.quick
-            and (needed_for_quick is not None)
-            and needed_for_quick(item_filename)
-        ):
+        if self.rgbx and (needed_for_rgb is not None) and needed_for_rgb(item_filename):
             return True
 
         if self.raster and any(

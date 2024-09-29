@@ -101,11 +101,10 @@ to see catalog-specific query args,
 
 ```bash
 @catalog query help
-```
-```bash
+ > @catalog query help
 @catalog query EarthSearch \
 	[dryrun,sentinel_2_l1c,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
 	[--bbox <-122.88,51.73,-122.68,51.93>] \
 	[--count <10>, -1: all] \
@@ -115,9 +114,21 @@ to see catalog-specific query args,
 	[--lon <-122.78>] \
 	[--radius <0.1>]
  . EarthSearch/sentinel_2_l1c -query-> <object-name>.
+@catalog query SkyFox \
+	[dryrun,Venus,select,upload] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
+	[-|<object-name>] \
+	[--bbox <-122.88,51.73,-122.68,51.93>] \
+	[--count <10>, -1: all] \
+	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
+	[--keyword <keyword>] \
+	[--lat <51.83>] \
+	[--lon <-122.78>] \
+	[--radius <0.1>]
+ . SkyFox/Venus -query-> <object-name>.
 @catalog query copernicus \
 	[dryrun,sentinel_2,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
 	[--bbox <-122.88,51.73,-122.68,51.93>] \
 	[--count <10>, -1: all] \
@@ -129,7 +140,7 @@ to see catalog-specific query args,
  . copernicus/sentinel_2 -query-> <object-name>.
 @catalog query firms \
 	[dryrun,area,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
 	[--area east|north|south|west|world] \
 	[--date <yyyy-mm-dd>] \
@@ -138,7 +149,7 @@ to see catalog-specific query args,
  . firms/area -query-> <object-name>.
 @catalog query ukraine_timemap \
 	[dryrun,ukraine_timemap,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
 	[--arg <value>]
  . ukraine_timemap/ukraine_timemap -query-> <object-name>.

@@ -54,6 +54,6 @@ class EarthSearchSentinel2L1CDatacube(STACDatacube):
                 }
                 for asset in self.metadata["Item"].assets.values()
             ],
-            needed_for_quick=lambda filename: filename.endswith("TCI.jp2"),
+            needed_for_rgb=lambda filename: filename.endswith("TCI.jp2"),
             verbose=verbose,
         )

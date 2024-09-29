@@ -10,7 +10,7 @@ the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex
  > @catalog query EarthSearch help
 @catalog query EarthSearch \
 	[dryrun,sentinel_2_l1c,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
+	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
 	[-|<object-name>] \
 	[--bbox <-122.88,51.73,-122.68,51.93>] \
 	[--count <10>, -1: all] \
@@ -35,7 +35,7 @@ the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex
   --lon -122.78
 
 @select $(@catalog query read - . --count 1 --offset 3)
-@datacube ingest scope=metadata+quick .
+@datacube ingest scope=metadata+rgbx .
 @publish tar .
 ```
 

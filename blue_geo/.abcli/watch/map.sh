@@ -33,7 +33,7 @@ function blue_geo_watch_map() {
     abcli_log "🌐 @geo watch map $query_object_name @ $offset==$datacube_id -> /$suffix"
 
     blue_geo_datacube_ingest \
-        dryrun=$do_dryrun,scope=quick \
+        dryrun=$do_dryrun,scope=rgbx \
         $datacube_id
 
     local object_name=$query_object_name-$suffix-$offset
@@ -49,8 +49,10 @@ function blue_geo_watch_map() {
         $datacube_id
     [[ $? -ne 0 ]] && return 1
 
+    : # TODO: build rgb
+
     local filename=$(blue_geo_datacube_list $datacube_id \
-        --scope raster \
+        --scope rgb \
         --log 0 \
         --count 1 \
         --exists 1)

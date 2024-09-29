@@ -4,6 +4,7 @@ from blue_options import MARQUEE as default_MARQUEE
 from blue_objects import file, README
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
+from blue_geo.catalog.README import build as build_catalog
 from blue_geo.watch.README import items as watch_items
 from blue_geo.watch.targets.README import build as build_targets
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
@@ -93,7 +94,7 @@ items = [
 ]
 
 
-def build():
+def build() -> bool:
     return (
         all(
             README.build(
@@ -108,14 +109,9 @@ def build():
             )
             for suffix, items, cols, macros, in [
                 ("..", items, 3, {}),
-                #
                 ("watch", watch_items, -1, {}),
             ]
-            + [
-                ("catalog/copernicus", [], 3, {}),
-                ("catalog/EarthSearch", [], 3, {}),
-                ("catalog/SkyFox", [], 3, {}),
-            ]
         )
+        and build_catalog()
         and build_targets()
     )

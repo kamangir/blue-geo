@@ -2,8 +2,10 @@
 
 the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex.org/catalogs/earth-search#/). see [datacube](../) for usage instructions.
 
-- https://registry.opendata.aws/sentinel-2/
-- https://viewer.aws.element84.com/
+ - [api](https://earth-search.aws.element84.com/v1/)
+ - [sentinel 2 on aws open data](https://registry.opendata.aws/sentinel-2/)
+ - [stac api info](https://stacindex.org/catalogs/earth-search#/)
+ - [ui](https://viewer.aws.element84.com/)
 
 ## query
 

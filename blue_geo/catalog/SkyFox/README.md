@@ -2,6 +2,17 @@
 
 the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.io/EDA-Documentation/). see [datacube](../) for usage instructions.
 
+ - [account](https://console.earthdaily.com/account)
+ - [api use example](https://github.com/earthdaily/EDA-Documentation/blob/gh-pages/API/APIUsage/earthplatform_stac_api_examples.py)
+ - [api](https://api.earthdaily.com/platform/v1/stac)
+ - [doc](https://earthdaily.github.io/EDA-Documentation/)
+ - [platform](https://console.earthdaily.com/platform)
+ - [signin](https://console.earthdaily.com/mosaics/signin)
+ - [venus bands](https://un-regard-sur-la-terre.org/2017/08/les-premieres-images-du-satellite-ven-s-sont-arrivees.html)
+ - [venus mission](https://www.eoportal.org/satellite-missions/venus)
+ - [venus on aws open data](https://registry.opendata.aws/venus-l2a-cogs/)
+ - [venus wikipedia](https://en.wikipedia.org/wiki/VEN%CE%BCS)
+
 ## query
 
 ```bash

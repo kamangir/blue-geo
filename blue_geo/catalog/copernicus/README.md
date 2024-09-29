@@ -4,6 +4,11 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 
 ⚠️ "Too Many Requests" error likely.
 
+ - [api](https://catalogue.dataspace.copernicus.eu/stac)
+ - [aws access](https://documentation.dataspace.copernicus.eu/APIs/S3.html)
+ - [docs](https://documentation.dataspace.copernicus.eu/APIs/STAC.html)
+ - [home](https://dataspace.copernicus.eu/)
+
 ## query
 
 ```bash

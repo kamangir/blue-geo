@@ -2,9 +2,7 @@
 
 the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire Information for Resource Management System. see [datacube](../) for usage instructions.
 
- - [area](https://firms.modaps.eosdis.nasa.gov/api/area/)
- - [home](https://firms.modaps.eosdis.nasa.gov/)
- - [map key](https://firms.modaps.eosdis.nasa.gov/api/map_key/)
+--urls--
 
 ## query
 
@@ -53,4 +51,3 @@ datacube:
 map-key: https://firms.modaps.eosdis.nasa.gov/api/map_key/
 
 area api: https://firms.modaps.eosdis.nasa.gov/api/area/
-

@@ -4,6 +4,8 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 
 ⚠️ "Too Many Requests" error likely.
 
+--urls--
+
 ## query
 
 ```bash

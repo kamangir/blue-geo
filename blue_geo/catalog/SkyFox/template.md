@@ -2,6 +2,8 @@
 
 the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.io/EDA-Documentation/). see [datacube](../) for usage instructions.
 
+--urls--
+
 ## query
 
 ```bash

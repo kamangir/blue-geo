@@ -2,8 +2,7 @@
 
 the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex.org/catalogs/earth-search#/). see [datacube](../) for usage instructions.
 
-- https://registry.opendata.aws/sentinel-2/
-- https://viewer.aws.element84.com/
+--urls--
 
 ## query
 

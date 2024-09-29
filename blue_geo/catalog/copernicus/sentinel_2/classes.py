@@ -47,12 +47,12 @@ class CopernicusSentinel2Datacube(STACDatacube):
         self,
         filename: str,
         overwrite: bool = False,
-        verbose: bool = False,
+        verbose: bool = True,
     ) -> bool:
         if super().ingest_filename(filename, overwrite, verbose):
             return True
 
-        success, bucket, s3_prefix = self.get_bucket(verbose)
+        success, bucket, s3_prefix = self.get_bucket(verbose=False)
         if not success:
             return success
 
@@ -76,10 +76,13 @@ class CopernicusSentinel2Datacube(STACDatacube):
             return []
 
         return scope.filter(
-            {
-                item.key.split(f"{s3_prefix}/", 1)[1]: item.size
+            [
+                {
+                    "filename": item.key.split(f"{s3_prefix}/", 1)[1],
+                    "size": item.size,
+                }
                 for item in bucket.objects.filter(Prefix=s3_prefix)
-            },
+            ],
             needed_for_quick=lambda filename: filename.endswith("TCI.jp2"),
             verbose=verbose,
         )

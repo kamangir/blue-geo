@@ -62,7 +62,7 @@ class STACDatacube(GenericDatacube):
         dryrun: bool = False,
         overwrite: bool = False,
         scope: str = "metadata",
-        verbose: bool = False,
+        verbose: bool = True,
     ) -> Tuple[bool, Any]:
         success, output = super().ingest(dryrun, overwrite, scope)
         if not success:

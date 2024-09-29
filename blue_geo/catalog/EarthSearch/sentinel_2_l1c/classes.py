@@ -25,7 +25,7 @@ class EarthSearchSentinel2L1CDatacube(STACDatacube):
         self,
         filename: str,
         overwrite: bool = False,
-        verbose: bool = False,
+        verbose: bool = True,
     ) -> bool:
         if super().ingest_filename(filename, overwrite, verbose):
             return True
@@ -46,10 +46,14 @@ class EarthSearchSentinel2L1CDatacube(STACDatacube):
         verbose: bool = False,
     ) -> List[str]:
         return scope.filter(
-            {
-                asset.href.split(f"{self.s3_prefix}/", 1)[1].replace("/", "_"): -1
+            [
+                {
+                    "filename": asset.href.split(f"{self.s3_prefix}/", 1)[1].replace(
+                        "/", "_"
+                    ),
+                }
                 for asset in self.metadata["Item"].assets.values()
-            },
+            ],
             needed_for_quick=lambda filename: filename.endswith("TCI.jp2"),
             verbose=verbose,
         )

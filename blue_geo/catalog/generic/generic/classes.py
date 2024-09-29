@@ -78,7 +78,7 @@ class GenericDatacube:
         self,
         filename: str,
         overwrite: bool = False,
-        verbose: bool = False,
+        verbose: bool = True,
     ) -> bool:
         item_filename = self.full_filename(filename)
 

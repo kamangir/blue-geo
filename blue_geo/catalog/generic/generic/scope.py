@@ -1,4 +1,4 @@
-from typing import Tuple, Dict, List, Union, Callable
+from typing import Tuple, Dict, List, Union, Callable, Any
 
 from blue_options import string
 
@@ -33,20 +33,20 @@ class DatacubeScope:
 
     def filter(
         self,
-        dict_of_items: Dict[str, float],  # {filename: size}
+        list_of_items: List[Dict[str, Any]],  # {"filename": filename, ["size": size]}
         verbose: bool = False,
         needed_for_quick: Union[Callable, None] = None,
     ) -> List[str]:
         list_of_files: List[str] = []
 
-        for item_filename, item_size in dict_of_items.items():
+        for item in list_of_items:
             if self.includes(
-                item_filename=item_filename,
-                item_size=item_size,
+                item_filename=item["filename"],
+                item_size=item.get("size", -1),
                 verbose=verbose,
                 needed_for_quick=needed_for_quick,
             ):
-                list_of_files.append(item_filename)
+                list_of_files.append(item["filename"])
 
         return list_of_files
 

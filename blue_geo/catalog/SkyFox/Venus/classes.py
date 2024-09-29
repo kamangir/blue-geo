@@ -1,11 +1,13 @@
-from typing import List
+from typing import List, Tuple, Any, Dict
 
-from blue_objects import host
+from blue_objects import host, file, host
 
 from blue_geo.catalog.SkyFox.classes import SkyFoxCatalog
 from blue_geo.catalog.generic.generic.stac import STACDatacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
+
+quick_suffixes = [f"SRE_B{band_index}.tif" for band_index in [7, 4, 3]]
 
 
 class SkyFoxVenusDatacube(STACDatacube):
@@ -15,11 +17,53 @@ class SkyFoxVenusDatacube(STACDatacube):
 
     name = "Venus"
 
+    def ingest(
+        self,
+        dryrun: bool = False,
+        overwrite: bool = False,
+        scope: str = "metadata",
+        verbose: bool = True,
+    ) -> Tuple[bool, Any]:
+        success, output = super().ingest(dryrun, overwrite, scope, verbose)
+        if not success or not DatacubeScope(scope).quick:
+            return success, output
+
+        list_of_colors = ["red", "green", "blue"]
+
+        filenames: Dict[str, str] = {}
+        for suffix, color in zip(quick_suffixes, list_of_colors):
+            candidates = self.list_of_files(DatacubeScope(suffix))
+            if not candidates:
+                logger.error(f"cannot find {suffix}.")
+                return False, output
+
+            filenames[color] = self.full_filename(candidates[0])
+
+        rgb_filename = filenames["red"].replace(quick_suffixes[0], "SRE_RGB.tif")
+        if file.exists(rgb_filename):
+            logger.info(f"✅ {rgb_filename}")
+            return True, output
+
+        return (
+            host.shell(
+                " ".join(
+                    [
+                        "gdal_merge",
+                        "-separate",
+                        f"-o {rgb_filename}",
+                    ]
+                    + [filenames[color] for color in list_of_colors]
+                ),
+                log=verbose,
+            ),
+            output,
+        )
+
     def ingest_filename(
         self,
         filename: str,
         overwrite: bool = False,
-        verbose: bool = False,
+        verbose: bool = True,
     ) -> bool:
         if super().ingest_filename(filename, overwrite, verbose):
             return True
@@ -39,7 +83,8 @@ class SkyFoxVenusDatacube(STACDatacube):
             "aws s3 cp --no-sign-request {} {}".format(
                 s3_uri,
                 self.full_filename(filename),
-            )
+            ),
+            log=verbose,
         )
 
     def list_of_files(
@@ -50,14 +95,15 @@ class SkyFoxVenusDatacube(STACDatacube):
         raw_datacube_id = self.raw_datacube_id()
 
         return scope.filter(
-            {
-                (value.href.split(f"{raw_datacube_id}/", 1)[1]): -1
+            [
+                {
+                    "filename": (value.href.split(f"{raw_datacube_id}/", 1)[1]),
+                }
                 for value in self.metadata["Item"].assets.values()
                 if raw_datacube_id in value.href
-            },
+            ],
             needed_for_quick=lambda filename: any(
-                filename.endswith(extension)
-                for extension in [f"SRE_B{band_index}.tif" for band_index in [3, 4, 7]]
+                filename.endswith(suffix) for suffix in quick_suffixes
             ),
             verbose=verbose,
         )

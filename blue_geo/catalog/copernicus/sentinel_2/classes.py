@@ -80,6 +80,7 @@ class CopernicusSentinel2Datacube(STACDatacube):
                 item.key.split(f"{s3_prefix}/", 1)[1]: item.size
                 for item in bucket.objects.filter(Prefix=s3_prefix)
             },
+            needed_for_quick=lambda filename: filename.endswith("TCI.jp2"),
             verbose=verbose,
         )
 

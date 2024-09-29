@@ -50,5 +50,6 @@ class EarthSearchSentinel2L1CDatacube(STACDatacube):
                 asset.href.split(f"{self.s3_prefix}/", 1)[1].replace("/", "_"): -1
                 for asset in self.metadata["Item"].assets.values()
             },
+            needed_for_quick=lambda filename: filename.endswith("TCI.jp2"),
             verbose=verbose,
         )

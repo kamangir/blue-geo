@@ -28,6 +28,8 @@ class SkyFoxCatalog(STACCatalog):
         "platform": "https://console.earthdaily.com/platform",
         "signin": "https://console.earthdaily.com/mosaics/signin",
         "venus-on-aws-open-data": "https://registry.opendata.aws/venus-l2a-cogs/",
+        "venus-mission": "https://www.eoportal.org/satellite-missions/venus",
+        "venus-wikipedia": "https://en.wikipedia.org/wiki/VEN%CE%BCS",
     }
 
     @classmethod

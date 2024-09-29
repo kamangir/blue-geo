@@ -1,9 +1,6 @@
 # 🌐 SkyFox
 
-the `SkyFox` catalog covers ...
-
-
-[Copernicus Data Space Ecosystem - Europe's eyes on Earth](https://dataspace.copernicus.eu/). see [datacube](../) for usage instructions.
+the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.io/EDA-Documentation/). see [datacube](../) for usage instructions.
 
 ## query
 
@@ -45,9 +42,9 @@ using [Leonardo](../../watch/targets/Leonardo.md).
 @select
 @catalog query SkyFox Venus - . \
   --count 10 \
-  --datetime 2024-07-30/2024-08-09 \
-  --lat  51.83 \
-  --lon -122.78
+  --datetime 2019-12-13/2020-10-28 \
+  --lat  41.8003 \
+  --lon 12.2389
 
 @select $(@catalog query read - . --count 1 --offset 3)
 @datacube ingest scope=metadata+quick .

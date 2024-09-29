@@ -55,5 +55,9 @@ class SkyFoxVenusDatacube(STACDatacube):
                 for value in self.metadata["Item"].assets.values()
                 if raw_datacube_id in value.href
             },
+            needed_for_quick=lambda filename: any(
+                filename.endswith(extension)
+                for extension in [f"SRE_B{band_index}.tif" for band_index in [3, 4, 7]]
+            ),
             verbose=verbose,
         )

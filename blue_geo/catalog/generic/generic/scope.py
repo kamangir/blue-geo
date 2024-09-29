@@ -1,4 +1,4 @@
-from typing import Tuple, Dict, List
+from typing import Tuple, Dict, List, Union, Callable
 
 from blue_options import string
 
@@ -35,19 +35,17 @@ class DatacubeScope:
         self,
         dict_of_items: Dict[str, float],  # {filename: size}
         verbose: bool = False,
+        needed_for_quick: Union[Callable, None] = None,
     ) -> List[str]:
         list_of_files: List[str] = []
 
-        quick_found = False
         for item_filename, item_size in dict_of_items.items():
-            includes, quick_found = self.includes(
-                item_filename,
-                item_size,
-                verbose,
-                quick_found,
-            )
-
-            if includes:
+            if self.includes(
+                item_filename=item_filename,
+                item_size=item_size,
+                verbose=verbose,
+                needed_for_quick=needed_for_quick,
+            ):
                 list_of_files.append(item_filename)
 
         return list_of_files
@@ -57,35 +55,34 @@ class DatacubeScope:
         item_filename: str,
         item_size: int = -1,
         verbose: bool = False,
-        quick_found: bool = False,
-    ) -> Tuple[bool, bool]:
+        needed_for_quick: Union[Callable, None] = None,
+    ) -> bool:
         if self.all:
-            return True, quick_found
+            return True
 
         if (
             self.metadata
             and item_size <= 10**6
             and not any(item_filename.endswith(suffix) for suffix in raster_suffix)
         ):
-            return True, quick_found
+            return True
 
         if (
             self.quick
-            and not quick_found
-            and item_filename.endswith(".jp2")
-            and "TCI" in item_filename
+            and (needed_for_quick is not None)
+            and needed_for_quick(item_filename)
         ):
-            return True, True
+            return True
 
         if self.raster and any(
             item_filename.endswith(suffix) for suffix in raster_suffix
         ):
-            return True, quick_found
+            return True
 
         if self.suffix and any(
             item_filename.endswith(suffix) for suffix in self.suffix
         ):
-            return True, quick_found
+            return True
 
         if verbose:
             logger.info(
@@ -95,4 +92,4 @@ class DatacubeScope:
                 )
             )
 
-        return False, quick_found
+        return False

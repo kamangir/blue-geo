@@ -6,7 +6,7 @@ class EarthSearchCatalog(STACCatalog):
 
     url = {
         "api": "https://earth-search.aws.element84.com/v1/",
-        "aws_open_data": "https://registry.opendata.aws/sentinel-2/",
-        "stac_api": "https://stacindex.org/catalogs/earth-search#/",
+        "sentinel-2-on-aws-open-data": "https://registry.opendata.aws/sentinel-2/",
+        "stac-api-info": "https://stacindex.org/catalogs/earth-search#/",
         "ui": "https://viewer.aws.element84.com/",
     }

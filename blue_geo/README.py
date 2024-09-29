@@ -19,17 +19,23 @@ features = {
         "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/copernicus.jpg?raw=true",
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog/copernicus",
     },
-    "firms-area": {
-        "description": "catalog: Fire Information for Resource Management System ([FIRMS](https://firms.modaps.eosdis.nasa.gov)).",
+    "SkyFox": {
+        "description": "catalog: [Earth Data Store](https://earthdaily.github.io/EDA-Documentation/).",
         "icon": ICON,
-        "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/datacube-firms_area.jpg",
-        "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog/firms",
+        "thumbnail": "https://earthdaily.github.io/EDA-Documentation/Images/EarthDailyEDS.png",
+        "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog/SkyFox",
     },
     "EarthSearch": {
         "description": "catalog: [Earth Search by Element 84 (earth-search-aws)](https://stacindex.org/catalogs/earth-search#/).",
         "icon": ICON,
         "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/viewer-aws-element84-com.png?raw=true",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/catalog/EarthSearch",
+    },
+    "firms-area": {
+        "description": "catalog: Fire Information for Resource Management System ([FIRMS](https://firms.modaps.eosdis.nasa.gov)).",
+        "icon": ICON,
+        "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/datacube-firms_area.jpg",
+        "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog/firms",
     },
     "ukraine-timemap": {
         "description": "catalog: [Bellingcat](https://www.bellingcat.com/) [Civilian Harm in Ukraine TimeMap](https://github.com/bellingcat/ukraine-timemap) dataset, available through [this UI](https://ukraine.bellingcat.com/) and [this API](https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json).",
@@ -105,6 +111,7 @@ def build():
             ("..", items, 3),
             ("catalog/copernicus", [], 3),
             ("catalog/EarthSearch", [], 3),
+            ("catalog/SkyFox", [], 3),
             ("watch", watch_items, -1),
             ("watch/targets/Jasper.md", jasper_items, len(jasper_dates)),
         ]

@@ -12,5 +12,5 @@ class FirmsCatalog(GenericCatalog):
     url = {
         "": "https://firms.modaps.eosdis.nasa.gov/",
         "area": "https://firms.modaps.eosdis.nasa.gov/api/area/",
-        "map_key": "https://firms.modaps.eosdis.nasa.gov/api/map_key/",
+        "map-key": "https://firms.modaps.eosdis.nasa.gov/api/map_key/",
     }

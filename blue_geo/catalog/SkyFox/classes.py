@@ -22,12 +22,12 @@ class SkyFoxCatalog(STACCatalog):
 
     url = {
         "account": "https://console.earthdaily.com/account",
-        # https://github.com/earthdaily/EDA-Documentation/blob/gh-pages/API/APIUsage/earthplatform_stac_api_examples.py
         "api": "https://api.earthdaily.com/platform/v1/stac",
+        "api-use-example": "https://github.com/earthdaily/EDA-Documentation/blob/gh-pages/API/APIUsage/earthplatform_stac_api_examples.py",
         "doc": "https://earthdaily.github.io/EDA-Documentation/",
         "platform": "https://console.earthdaily.com/platform",
         "signin": "https://console.earthdaily.com/mosaics/signin",
-        "venus-on-open-data": "https://registry.opendata.aws/venus-l2a-cogs/",
+        "venus-on-aws-open-data": "https://registry.opendata.aws/venus-l2a-cogs/",
     }
 
     @classmethod

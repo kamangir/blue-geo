@@ -7,6 +7,6 @@ class CopernicusCatalog(STACCatalog):
     url = {
         "": "https://dataspace.copernicus.eu/",
         "api": "https://catalogue.dataspace.copernicus.eu/stac",
-        "aws_access": "https://documentation.dataspace.copernicus.eu/APIs/S3.html",
+        "aws-access": "https://documentation.dataspace.copernicus.eu/APIs/S3.html",
         "docs": "https://documentation.dataspace.copernicus.eu/APIs/STAC.html",
     }

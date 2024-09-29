@@ -63,14 +63,14 @@ class DatacubeScope:
             return True, quick_found
 
         if (
-            (self.metadata or self.quick or self.raster)
+            self.metadata
             and item_size <= 10**6
             and not any(item_filename.endswith(suffix) for suffix in raster_suffix)
         ):
             return True, quick_found
 
         if (
-            (self.quick or self.raster)
+            self.quick
             and not quick_found
             and item_filename.endswith(".jp2")
             and "TCI" in item_filename

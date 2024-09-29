@@ -27,6 +27,7 @@ class SkyFoxCatalog(STACCatalog):
         "doc": "https://earthdaily.github.io/EDA-Documentation/",
         "platform": "https://console.earthdaily.com/platform",
         "signin": "https://console.earthdaily.com/mosaics/signin",
+        "venus-bands": "https://un-regard-sur-la-terre.org/2017/08/les-premieres-images-du-satellite-ven-s-sont-arrivees.html",
         "venus-on-aws-open-data": "https://registry.opendata.aws/venus-l2a-cogs/",
         "venus-mission": "https://www.eoportal.org/satellite-missions/venus",
         "venus-wikipedia": "https://en.wikipedia.org/wiki/VEN%CE%BCS",

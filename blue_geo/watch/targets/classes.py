@@ -14,6 +14,7 @@ class Target:
         collection: str = "",
         params: Dict[str, str] = {},
         query_args: Dict[str, str] = {},
+        urls: Dict[str, str] = {},
     ) -> None:
         self.name: str = name
 
@@ -22,6 +23,8 @@ class Target:
 
         self.params = copy.deepcopy(params)
         self.query_args = copy.deepcopy(query_args)
+
+        self.urls = copy.deepcopy(urls)
 
     def __repr__(self) -> str:
         return "{}: {} | {}/{} | {}".format(
@@ -44,6 +47,19 @@ class Target:
             collection=data.get("collection", ""),
             params=copy.deepcopy(data.get("params", {})),
             query_args=copy.deepcopy(data.get("query_args", {})),
+            urls=copy.deepcopy(data.get("urls", {})),
+        )
+
+    @property
+    def lat_and_lon(self) -> str:
+        lat = self.query_args["lat"]
+        lon = self.query_args["lon"]
+
+        return '`lat: {:.04f}"{}`, `lon: {:.04f}"{}`.'.format(
+            abs(lat),
+            "N" if lat > 0 else "S",
+            abs(lon),
+            "E" if lon > 0 else "W",
         )
 
     @classmethod

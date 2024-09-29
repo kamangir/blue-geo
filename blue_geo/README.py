@@ -4,11 +4,8 @@ from blue_options import MARQUEE as default_MARQUEE
 from blue_objects import file, README
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
-from blue_geo.watch.targets.jasper import (
-    items as jasper_items,
-    list_of_dates as jasper_dates,
-)
 from blue_geo.watch.README import items as watch_items
+from blue_geo.watch.targets.README import build as build_targets
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
 
 
@@ -97,24 +94,28 @@ items = [
 
 
 def build():
-    return all(
-        README.build(
-            items=items,
-            cols=cols,
-            path=os.path.join(file.path(__file__), suffix),
-            ICON=ICON,
-            NAME=NAME,
-            VERSION=VERSION,
-            REPO_NAME=REPO_NAME,
+    return (
+        all(
+            README.build(
+                items=items,
+                cols=cols,
+                path=os.path.join(file.path(__file__), suffix),
+                macros=macros,
+                ICON=ICON,
+                NAME=NAME,
+                VERSION=VERSION,
+                REPO_NAME=REPO_NAME,
+            )
+            for suffix, items, cols, macros, in [
+                ("..", items, 3, {}),
+                #
+                ("watch", watch_items, -1, {}),
+            ]
+            + [
+                ("catalog/copernicus", [], 3, {}),
+                ("catalog/EarthSearch", [], 3, {}),
+                ("catalog/SkyFox", [], 3, {}),
+            ]
         )
-        for suffix, items, cols, in [
-            ("..", items, 3),
-            #
-            ("watch", watch_items, -1),
-            ("watch/targets/Jasper.md", jasper_items, len(jasper_dates)),
-            #
-            ("catalog/copernicus", [], 3),
-            ("catalog/EarthSearch", [], 3),
-            ("catalog/SkyFox", [], 3),
-        ]
+        and build_targets()
     )

@@ -27,6 +27,7 @@ class SkyFoxCatalog(STACCatalog):
         "doc": "https://earthdaily.github.io/EDA-Documentation/",
         "platform": "https://console.earthdaily.com/platform",
         "signin": "https://console.earthdaily.com/mosaics/signin",
+        "venus-on-open-data": "https://registry.opendata.aws/venus-l2a-cogs/",
     }
 
     @classmethod

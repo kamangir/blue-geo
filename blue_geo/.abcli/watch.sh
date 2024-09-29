@@ -53,7 +53,7 @@ function blue_geo_watch() {
             --what exists \
             --target_name $target \
             --log 0)
-        if [[ "$target_exists" != "True" ]]; then
+        if [[ "$target_exists" != 1 ]]; then
             abcli_log_error "-@geo: watch: $target: target not found."
             return 1
         fi

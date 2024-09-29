@@ -78,7 +78,7 @@ if args.task == "get":
     elif args.what == "collection":
         output = target.collection
     elif args.what == "exists":
-        output = str(bool(target.name))
+        output = "1" if target.name else "0"
     elif args.what == "query_args":
         output = target.query_args_as_str()
     else:

@@ -12,10 +12,10 @@ function test_blue_geo_watch_targets_get_catalog() {
     [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        $(blue_geo_watch_targets get \
+        "$(blue_geo_watch_targets get \
             --what catalog \
             --target_name Deadpool \
-            --log 0) \
+            --log 0)" \
         - empty
 }
 
@@ -31,10 +31,10 @@ function test_blue_geo_watch_targets_get_collection() {
     [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        $(blue_geo_watch_targets get \
+        "$(blue_geo_watch_targets get \
             --what collection \
             --target_name Deadpool \
-            --log 0) \
+            --log 0)" \
         - empty
 }
 
@@ -70,11 +70,11 @@ function test_blue_geo_watch_targets_get_query_args() {
     [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        $(blue_geo_watch_targets get \
+        "$(blue_geo_watch_targets get \
             --what query_args \
             --target_name Deadpool \
             --log 0 \
-            --delim +) \
+            --delim +)" \
         - empty
 }
 

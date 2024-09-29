@@ -109,10 +109,12 @@ def build():
         )
         for suffix, items, cols, in [
             ("..", items, 3),
+            #
+            ("watch", watch_items, -1),
+            ("watch/targets/Jasper.md", jasper_items, len(jasper_dates)),
+            #
             ("catalog/copernicus", [], 3),
             ("catalog/EarthSearch", [], 3),
             ("catalog/SkyFox", [], 3),
-            ("watch", watch_items, -1),
-            ("watch/targets/Jasper.md", jasper_items, len(jasper_dates)),
         ]
     )

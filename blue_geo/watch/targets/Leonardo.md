@@ -9,4 +9,4 @@ background:
 
 details: [targets.yaml](../targets.yaml).
 
-used by: [skyfox/venus](../../catalog/SkyFox/), [EarthSearch/sentinel_2_l1c](../../catalog/EarthSearch/), [`@geo watch`](../).
+used by: [SkyFox/Venus](../../catalog/SkyFox/) [`@geo watch`](../).

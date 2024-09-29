@@ -4,9 +4,7 @@ function blue_geo_datacube_crop() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options="download,dryrun,suffix=<suffix>"
-        abcli_show_usage "@datacube crop$ABCUL[$options]$ABCUL[..|<object-name>]$ABCUL[.|<datacube-id>]$ABCUL" \
-            "crop <datacube-id> by <object-name>/target/shape.geojson -> <datacube-id>-DERIVED-crop-<suffix>."
+        abcli_show_usage_2 blue_geo datacube crop
         return
     fi
 

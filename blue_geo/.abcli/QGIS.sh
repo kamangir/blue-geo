@@ -23,8 +23,7 @@ function blue_geo_QGIS() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ $task == "help" ]; then
-        abcli_show_usage "QGIS seed [screen]" \
-            "seed 🌱 QGIS."
+        abcli_show_usage_2 blue_geo QGIS seed
 
         blue_geo_QGIS_expressions "$@"
         blue_geo_QGIS_server "$@"

@@ -3,16 +3,9 @@
 watch the planet's [story](./targets.yaml) unfold
 
 ```bash
- > @geo watch help
-@geo watch  \
-  [dryrun] \
-  [<query-object-name>,target=burning-man-2024|chilcotin-river-landslide|elkhema|Mount-Etna|test] \
-  [dryrun,to=aws_batch|generic|local] \
-  [dryrun] \
-  [dryrun,~gif,publish] \
-  [-|<object-name>]
-  . watch target -> <object-name>.
+@geo watch help
 ```
+--help-- blue_geo watch help
 
 ## example run
 

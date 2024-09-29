@@ -110,6 +110,7 @@ def build() -> bool:
             for suffix, items, cols, macros, in [
                 ("..", items, 3, {}),
                 ("watch", watch_items, -1, {}),
+                ("QGIS", [], -1, {}),
             ]
         )
         and build_catalog()

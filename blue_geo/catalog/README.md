@@ -58,11 +58,7 @@ to see the list of pages that can be browsed for a catalog,
 ```bash
 @catalog browse firms help
 ```
-```bash
-@catalog browse firms \
-	area|map_key
- . browse firms.
-```
+--help-- blue_geo_catalog browse firms help
 
 ```bash
 @catalog browse firms area
@@ -101,67 +97,5 @@ to see catalog-specific query args,
 
 ```bash
 @catalog query help
- > @catalog query help
-@catalog query EarthSearch \
-	[dryrun,sentinel_2_l1c,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--bbox <-122.88,51.73,-122.68,51.93>] \
-	[--count <10>, -1: all] \
-	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
-	[--keyword <keyword>] \
-	[--lat <51.83>] \
-	[--lon <-122.78>] \
-	[--radius <0.1>]
- . EarthSearch/sentinel_2_l1c -query-> <object-name>.
-@catalog query SkyFox \
-	[dryrun,Venus,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--bbox <-122.88,51.73,-122.68,51.93>] \
-	[--count <10>, -1: all] \
-	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
-	[--keyword <keyword>] \
-	[--lat <51.83>] \
-	[--lon <-122.78>] \
-	[--radius <0.1>]
- . SkyFox/Venus -query-> <object-name>.
-@catalog query copernicus \
-	[dryrun,sentinel_2,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--bbox <-122.88,51.73,-122.68,51.93>] \
-	[--count <10>, -1: all] \
-	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
-	[--keyword <keyword>] \
-	[--lat <51.83>] \
-	[--lon <-122.78>] \
-	[--radius <0.1>]
- . copernicus/sentinel_2 -query-> <object-name>.
-@catalog query firms \
-	[dryrun,area,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--area east|north|south|west|world] \
-	[--date <yyyy-mm-dd>] \
-	[--depth 1..10] \
-	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP]
- . firms/area -query-> <object-name>.
-@catalog query ukraine_timemap \
-	[dryrun,ukraine_timemap,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--arg <value>]
- . ukraine_timemap/ukraine_timemap -query-> <object-name>.
-@catalog query read \
-	[all,download,len] \
-	[.|<object-name>] \
-	[--count <count>] \
-	[--delim <delim>] \
-	[--offset <offset>] \
-	[--prefix <prefix>] \
-	[--suffix <suffix>] \
-	[--contains <contains>] \
-	[--notcontains <not-contains>]
- . read query results in <object-name>.
 ```
+--help-- blue_geo_catalog query help

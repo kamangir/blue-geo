@@ -19,6 +19,6 @@
 run `@datacube ingest`  or use [`@catalog query <catalog> <collection> ingest`](../catalog/). 
 
 ```bash
-> @datacube ingest help
-TODO
+@datacube ingest help
 ```
+--help-- blue_geo_datacube ingest help

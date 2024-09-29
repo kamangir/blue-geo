@@ -58,7 +58,7 @@ function blue_geo_catalog_query() {
                 --datacube_class $datacube_class)
 
             abcli_show_usage "@catalog query $catalog$ABCUL[$options]$ABCUL[$ingest_options]$ABCUL[-|<object-name>]$ABCUL$args" \
-                "$catalog/$datacube_class -query-> <object-name>."
+                "$catalog/$datacube_class -query-> <object-name>.${ABCUL2}scope: @datacube ingest help."
         else
             for datacube_class in $(echo $list_of_datacube_classes | tr , " "); do
                 blue_geo_catalog_query \

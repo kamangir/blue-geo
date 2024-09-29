@@ -7,14 +7,9 @@ the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com
 ## query
 
 ```bash
- > @catalog query ukraine_timemap help
-@catalog query ukraine_timemap \
-	[dryrun,ukraine_timemap,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--arg <value>]
- . ukraine_timemap/ukraine_timemap -query-> <object-name>.
+@catalog query ukraine_timemap help
 ```
+--help-- blue_geo_catalog query ukraine_timemap help
 
 ## example use
 

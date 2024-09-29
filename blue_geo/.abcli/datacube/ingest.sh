@@ -7,9 +7,7 @@ function blue_geo_datacube_ingest() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options=$blue_geo_datacube_ingest_options
-        abcli_show_usage "@datacube ingest$ABCUL[$options]$ABCUL[.|<datacube-id>]$ABCUL[<args>]" \
-            "ingest <datacube-id>/<scope>.${ABCUL2}scope=$blue_geo_scope_help${ABCUL3}all: ALL files.${ABCUL3}metadata (default): any < 1 MB.${ABCUL3}raster: all raster.${ABCUL3}rgb: rgb.${ABCUL3}rgbx: rgb and what is needed to build rgb.${ABCUL3}<suffix>: any *<suffix>."
+        abcli_show_usage_2 blue_geo datacube ingest
         return
     fi
 

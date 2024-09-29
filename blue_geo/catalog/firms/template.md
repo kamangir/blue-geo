@@ -7,17 +7,9 @@ the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire I
 ## query
 
 ```bash
- > @catalog query firms help
-@catalog query firms \
-	[dryrun,area,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--area east|north|south|west|world] \
-	[--date <yyyy-mm-dd>] \
-	[--depth 1..10] \
-	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP]
- . firms/area -query-> <object-name>.
+@catalog query firms help
 ```
+--help-- blue_geo_catalog query firms help
 
 ## example use
 

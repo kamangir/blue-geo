@@ -16,20 +16,9 @@ the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.i
 ## query
 
 ```bash
- > @catalog query SkyFox help
-@catalog query SkyFox \
-	[dryrun,Venus,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|rgb|rgbx|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--bbox <-122.88,51.73,-122.68,51.93>] \
-	[--count <10>, -1: all] \
-	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
-	[--keyword <keyword>] \
-	[--lat <51.83>] \
-	[--lon <-122.78>] \
-	[--radius <0.1>]
- . SkyFox/Venus -query-> <object-name>.
+@catalog query SkyFox help
 ```
+--help-- blue_geo_catalog query SkyFox help
 
 ## case study: Leonardo da Vinci International Airport
 

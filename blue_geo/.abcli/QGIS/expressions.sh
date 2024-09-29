@@ -4,13 +4,8 @@ function blue_geo_QGIS_expressions() {
     local task=$1
 
     if [ "$task" == help ]; then
-        abcli_show_usage "QGIS expressions pull" \
-            "pull QGIS expressions."
-        abcli_show_usage "QGIS expressions push [push]" \
-            "push QGIS expressions."
-
-        abcli_log " 📂 $abcli_QGIS_path_expressions"
-        abcli_log " 📂 $abcli_QGIS_path_expressions_git"
+        abcli_show_usage_2 blue_geo QGIS expressions pull
+        abcli_show_usage_2 blue_geo QGIS expressions push
         return
     fi
 

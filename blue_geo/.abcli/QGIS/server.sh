@@ -7,8 +7,7 @@ function blue_geo_QGIS_serve() {
 function blue_geo_QGIS_server() {
     local options=$1
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        abcli_show_usage "QGIS serve[r] [start]" \
-            "start QGIS server."
+        abcli_show_usage_2 blue_geo QGIS server
         return
     fi
 

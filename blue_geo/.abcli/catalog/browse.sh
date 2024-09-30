@@ -5,8 +5,7 @@ function blue_geo_catalog_browse() {
 
     if [[ "$catalog" == help ]]; then
         for catalog in $(echo $blue_geo_list_of_catalogs | tr , " "); do
-            [[ "$catalog" == generic ]] &&
-                continue
+            [[ "$catalog" == generic ]] && continue
             blue_geo_catalog_browse $catalog "$@"
         done
         return
@@ -20,11 +19,7 @@ function blue_geo_catalog_browse() {
     local what=$2
 
     if [[ "$what" == help ]]; then
-        local url_args=$(blue_geo_catalog_get \
-            url_args \
-            --catalog $catalog)
-        abcli_show_usage "@catalog browse $catalog$ABCUL$url_args" \
-            "browse $catalog."
+        abcli_show_usage_2 blue_geo catalog browse $catalog
         return
     fi
 

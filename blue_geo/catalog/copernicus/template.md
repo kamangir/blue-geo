@@ -4,22 +4,14 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 
 ⚠️ "Too Many Requests" error likely.
 
+--urls--
+
 ## query
 
 ```bash
- > @catalog query copernicus help
-@catalog query copernicus \
-	[dryrun,sentinel_2,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
-	[-|<object-name>] \
-	[--bbox <-122.88,51.73,-122.68,51.93>]\
-	[--count <10>, -1: all]\
-	[--datetime <2024-07-30/2024-08-09>]\
-	[--lat <51.83>]\
-	[--lon <-122.78>]\
-	[--radius <0.1>]
- . copernicus/sentinel_2 -query-> <object-name>.
+@catalog query copernicus help
 ```
+--help-- blue_geo catalog query copernicus sentinel_2
 
 --include-- ../../watch/targets/chilcotin-river-landslide.md case study: Chilcotin River Landslide
 
@@ -34,7 +26,7 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
   --lon -122.78
 
 @select $(@catalog query read - . --count 1 --offset 3)
-@datacube ingest scope=metadata+quick .
+@datacube ingest scope=metadata+rgb .
 
 @publish tar .
 ```

@@ -14,6 +14,8 @@ function test_blue_geo_help() {
         "blue_geo catalog query" \
         \
         "blue_geo datacube" \
+        "blue_geo datacube crop" \
+        "blue_geo datacube generate" \
         "blue_geo datacube get" \
         "blue_geo datacube ingest" \
         "blue_geo datacube list" \
@@ -26,7 +28,8 @@ function test_blue_geo_help() {
         \
         "blue_geo watch" \
         "blue_geo watch map" \
-        "blue_geo watch reduce"; do
+        "blue_geo watch reduce" \
+        "blue_geo watch targets"; do
         abcli_eval ,$options \
             $module help
         [[ $? -ne 0 ]] && return 1

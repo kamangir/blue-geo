@@ -1,0 +1,98 @@
+#! /usr/bin/env bash
+
+function test_blue_geo_watch_targets_get_catalog() {
+    local options=$1
+
+    abcli_assert \
+        $(blue_geo_watch_targets get \
+            --what catalog \
+            --target_name Leonardo \
+            --log 0) \
+        SkyFox
+    [[ $? -ne 0 ]] && return 1
+
+    abcli_assert \
+        "$(blue_geo_watch_targets get \
+            --what catalog \
+            --target_name Deadpool \
+            --log 0)" \
+        - empty
+}
+
+function test_blue_geo_watch_targets_get_collection() {
+    local options=$1
+
+    abcli_assert \
+        $(blue_geo_watch_targets get \
+            --what collection \
+            --target_name Leonardo \
+            --log 0) \
+        Venus
+    [[ $? -ne 0 ]] && return 1
+
+    abcli_assert \
+        "$(blue_geo_watch_targets get \
+            --what collection \
+            --target_name Deadpool \
+            --log 0)" \
+        - empty
+}
+
+function test_blue_geo_watch_targets_get_exists() {
+    local options=$1
+
+    abcli_assert \
+        $(blue_geo_watch_targets get \
+            --what exists \
+            --target_name Leonardo \
+            --log 0) \
+        1
+    [[ $? -ne 0 ]] && return 1
+
+    abcli_assert \
+        $(blue_geo_watch_targets get \
+            --what exists \
+            --target_name Deadpool \
+            --log 0) \
+        0
+}
+
+function test_blue_geo_watch_targets_get_query_args() {
+    local options=$1
+
+    abcli_assert \
+        $(blue_geo_watch_targets get \
+            --what query_args \
+            --target_name Leonardo \
+            --log 0 \
+            --delim +) \
+        Venus
+    [[ $? -ne 0 ]] && return 1
+
+    abcli_assert \
+        "$(blue_geo_watch_targets get \
+            --what query_args \
+            --target_name Deadpool \
+            --log 0 \
+            --delim +)" \
+        - empty
+}
+
+function test_blue_geo_watch_targets_list() {
+    local options=$1
+
+    abcli_assert \
+        $(blue_geo_watch_targets list \
+            --delim + \
+            --log 0) \
+        - non-empty
+    [[ $? -ne 0 ]] && return 1
+
+    abcli_assert \
+        $(blue_geo_watch_targets list \
+            --catalog_name SkyFox \
+            --collection Venus \
+            --delim + \
+            --log 0) \
+        - non-empty
+}

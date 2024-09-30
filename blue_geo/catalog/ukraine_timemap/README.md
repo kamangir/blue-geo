@@ -2,16 +2,23 @@
 
 the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com/) [Civilian Harm in Ukraine TimeMap](https://github.com/bellingcat/ukraine-timemap) dataset, available through [this UI](https://ukraine.bellingcat.com/) and [this API](https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json).
 
+ - [dataset](https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json)
+ - [github](https://github.com/bellingcat/ukraine-timemap)
+ - [home](https://ukraine.bellingcat.com/)
+
 ## query
 
 ```bash
- > @catalog query ukraine_timemap help
+@catalog query ukraine_timemap
+```
+```bash
 @catalog query ukraine_timemap \
 	[dryrun,ukraine_timemap,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
+	[ingest,~copy_template,dryrun,overwrite,scope=<scope>,upload] \
 	[-|<object-name>] \
 	[--arg <value>]
  . ukraine_timemap/ukraine_timemap -query-> <object-name>.
+   scope: @datacube ingest help.
 ```
 
 ## example use

@@ -4,10 +4,7 @@ function blue_geo_catalog_query_read() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options="all,download,len"
-        local args="[--count <count>]$ABCUL[--delim <delim>]$ABCUL[--offset <offset>]$ABCUL[--prefix <prefix>]$ABCUL[--suffix <suffix>]$ABCUL[--contains <contains>]$ABCUL[--notcontains <not-contains>]"
-        abcli_show_usage "@catalog query read$ABCUL[$options]$ABCUL[.|<object-name>]$ABCUL$args" \
-            "read query results in <object-name>."
+        abcli_show_usage_2 blue_geo catalog query read
         return
     fi
 

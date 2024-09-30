@@ -4,16 +4,14 @@ function blue_geo_watch_map() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local options="$(xtra dryrun,~download,)offset=<offset>,suffix=<suffix>$(xtra ,~upload)"
-
-        abcli_show_usage "@geo watch map $(xwrap $options '.|<query-object-name>')" \
-            "@geo watch map <query-object-name> @ <offset> -> /<suffix>."
+        abcli_show_usage_2 blue_geo watch map
         return
     fi
 
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
     local do_download=$(abcli_option_int "$options" download $(abcli_not do_dryrun))
     local offset=$(abcli_option "$options" offset 0)
+    local modality=$(abcli_option "$options" modality rgb)
     local suffix=$(abcli_option "$options" suffix $(abcli_string_timestamp_short))
     local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
 
@@ -33,7 +31,7 @@ function blue_geo_watch_map() {
     abcli_log "🌐 @geo watch map $query_object_name @ $offset==$datacube_id -> /$suffix"
 
     blue_geo_datacube_ingest \
-        dryrun=$do_dryrun,scope=quick \
+        dryrun=$do_dryrun,scope=rgbx \
         $datacube_id
 
     local object_name=$query_object_name-$suffix-$offset
@@ -49,8 +47,14 @@ function blue_geo_watch_map() {
         $datacube_id
     [[ $? -ne 0 ]] && return 1
 
+    blue_geo_datacube_generate \
+        dryrun=$do_dryrun \
+        $datacube_id \
+        --modality $modality
+    [[ $? -ne 0 ]] && return 1
+
     local filename=$(blue_geo_datacube_list $datacube_id \
-        --scope raster \
+        --scope rgb \
         --log 0 \
         --count 1 \
         --exists 1)

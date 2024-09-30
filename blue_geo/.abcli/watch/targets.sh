@@ -2,19 +2,16 @@
 
 function blue_geo_watch_targets() {
     local task=$1
+    local options=$2
 
     if [[ "$task" == "help" ]]; then
-        blue_geo_watch_targets cp "$@"
+        abcli_show_usage_2 blue_geo watch targets
         return
     fi
 
     if [[ ",cp,copy," == *",$task,"* ]]; then
-        local options=$2
-
         if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-            local options="$(xtra -)"
-            abcli_show_usage "@geo watch targets $(xwrap 'cp|copy' $options '..|<object-name-1>' '.|<object-name-2>')" \
-                "copy target <object-name-1> -> <object-name-2>."
+            abcli_show_usage_2 blue_geo watch targets cp
             return
         fi
 

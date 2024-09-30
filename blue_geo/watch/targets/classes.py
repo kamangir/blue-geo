@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
 import copy
 import geopandas as gpd
 from shapely.geometry import Polygon
@@ -14,6 +14,7 @@ class Target:
         collection: str = "",
         params: Dict[str, str] = {},
         query_args: Dict[str, str] = {},
+        urls: Dict[str, str] = {},
     ) -> None:
         self.name: str = name
 
@@ -22,6 +23,8 @@ class Target:
 
         self.params = copy.deepcopy(params)
         self.query_args = copy.deepcopy(query_args)
+
+        self.urls = copy.deepcopy(urls)
 
     def __repr__(self) -> str:
         return "{}: {} | {}/{} | {}".format(
@@ -44,6 +47,19 @@ class Target:
             collection=data.get("collection", ""),
             params=copy.deepcopy(data.get("params", {})),
             query_args=copy.deepcopy(data.get("query_args", {})),
+            urls=copy.deepcopy(data.get("urls", {})),
+        )
+
+    @property
+    def lat_and_lon(self) -> str:
+        lat = self.query_args["lat"]
+        lon = self.query_args["lon"]
+
+        return '`lat: {:.04f}"{}`, `lon: {:.04f}"{}`.'.format(
+            abs(lat),
+            "N" if lat > 0 else "S",
+            abs(lon),
+            "E" if lon > 0 else "W",
         )
 
     @classmethod
@@ -106,6 +122,26 @@ class Target:
             log=True,
         )
 
+    def urls_as_str(self) -> List[str]:
+        return sorted(
+            [
+                " - [{}]({}){}".format(
+                    title,
+                    url.split(",", 1)[0],
+                    (
+                        ": {}".format(
+                            self.lat_and_lon
+                            if title == "Google Map"
+                            else url.split(",", 1)[1].strip()
+                        )
+                        if "," in url or title == "Google Map"
+                        else ""
+                    ),
+                )
+                for title, url in self.urls.items()
+            ]
+        )
+
 
 class TargetList:
     def __init__(self, filename: str = "") -> None:
@@ -113,6 +149,20 @@ class TargetList:
 
         if filename:
             self.load(filename)
+
+    def get_list(
+        self,
+        catalog_name: str = "",
+        collection: str = "",
+    ) -> List[str]:
+        return sorted(
+            [
+                target.name
+                for target in self.targets.values()
+                if (target.catalog == catalog_name or not catalog_name)
+                and (target.collection == collection or not collection)
+            ]
+        )
 
     def load(self, filename: str) -> bool:
         self.targets = {}

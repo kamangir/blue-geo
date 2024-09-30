@@ -22,10 +22,26 @@ function test_blue_geo_catalog_query() {
 
             local object_name="bashtest-$catalog-$datacube_class-$(abcli_string_timestamp)"
 
+            local target=$(blue_geo_watch_targets list \
+                --catalog_name $catalog \
+                --collection $datacube_class \
+                --count 1 \
+                --log 0)
+
+            local query_args=""
+            if [[ ! -z "$target" ]]; then
+                abcli_log "🎯 target: $target"
+                query_args=$(blue_geo_watch_targets get \
+                    --what query_args \
+                    --target_name $target \
+                    --delim space \
+                    --log 0)
+            fi
+
             abcli_eval ,$options \
                 blue_geo catalog query $catalog $datacube_class \
                 ingest \
-                $object_name
+                $object_name $query_args
             [[ $? -ne 0 ]] && return 1
 
             abcli_assert \

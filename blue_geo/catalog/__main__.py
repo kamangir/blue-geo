@@ -3,6 +3,7 @@ import argparse
 from blueness import module
 from blueness.argparse.generic import sys_exit
 
+from blue_options.env import ABCUL
 from blue_geo import NAME
 from blue_geo.catalog.functions import (
     get_catalog_class,
@@ -84,7 +85,7 @@ if args.task == "get":
             args.catalog,
             args.datacube_class,
         )
-        print(as_list_of_args(datacube_class.query_args))
+        print(ABCUL.join(as_list_of_args(datacube_class.query_args)))
     else:
         print(f"unknown-{args.what}")
 elif args.task == "list":

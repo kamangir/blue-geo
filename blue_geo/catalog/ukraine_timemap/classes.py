@@ -10,7 +10,7 @@ class UkraineTimemapCatalog(GenericCatalog):
     name = "ukraine_timemap"
 
     url = {
-        "": "https://ukraine.bellingcat.com/",
+        "home": "https://ukraine.bellingcat.com/",
         "dataset": "https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json",
         "github": "https://github.com/bellingcat/ukraine-timemap",
     }

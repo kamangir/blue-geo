@@ -13,7 +13,28 @@ def target_list():
     )
 
 
-def test_load_targets(target_list):
+@pytest.mark.parametrize(
+    ["catalog_name", "collection", "expected_target"],
+    [
+        ["SkyFox", "Venus", "Leonardo"],
+        ["EarthSearch", "sentinel_2_l1c", "burning-man-2024"],
+    ],
+)
+def test_target_list(
+    catalog_name: str,
+    collection: str,
+    expected_target: str,
+    target_list: TargetList,
+):
+    list_of_targets = target_list.get_list(
+        catalog_name=catalog_name,
+        collection=collection,
+    )
+
+    assert expected_target in list_of_targets
+
+
+def test_targets_load(target_list: TargetList):
     assert target_list.targets
 
     for target in target_list.targets.values():

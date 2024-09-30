@@ -2,16 +2,20 @@
 
 the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex.org/catalogs/earth-search#/). see [datacube](../) for usage instructions.
 
-- https://registry.opendata.aws/sentinel-2/
-- https://viewer.aws.element84.com/
+ - [api](https://earth-search.aws.element84.com/v1/)
+ - [sentinel 2 on aws open data](https://registry.opendata.aws/sentinel-2/)
+ - [stac api info](https://stacindex.org/catalogs/earth-search#/)
+ - [ui](https://viewer.aws.element84.com/)
 
 ## query
 
 ```bash
- > @catalog query EarthSearch help
+@catalog query EarthSearch help
+```
+```bash
 @catalog query EarthSearch \
 	[dryrun,sentinel_2_l1c,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
+	[ingest,~copy_template,dryrun,overwrite,scope=<scope>,upload] \
 	[-|<object-name>] \
 	[--bbox <-122.88,51.73,-122.68,51.93>] \
 	[--count <10>, -1: all] \
@@ -21,20 +25,22 @@ the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex
 	[--lon <-122.78>] \
 	[--radius <0.1>]
  . EarthSearch/sentinel_2_l1c -query-> <object-name>.
+   scope: @datacube ingest help.
 ```
 
 ## case study: Chilcotin River Landslide
 
 ![image](https://github.com/kamangir/assets/blob/main/blue-geo/chilcotin-river-landslide-2.jpg?raw=true)
 
-background:
-- [Chilcotin River Landslide Information Portal](https://chilcotin-river-landslide-2024-bcgov03.hub.arcgis.com/) - source of ⬆️ image.
-- [Google Map](https://maps.app.goo.gl/WHTNCDsFNoZAAnzX8): `lat: 51°50'51.1"N`, `lon: 122°47'06.8"W`.
-- [Chilcotin River’s Landslide Lake Begins Draining](https://www.bluemarble.nasa.gov/images/153195/chilcotin-rivers-landslide-lake-begins-draining)
-- [Reddit: Before and after satellite images of the Chilcotin River landslide](https://www.reddit.com/r/britishcolumbia/comments/1eh9eql/before_and_after_satellite_images_of_the/)
+ - [Google Map](https://maps.app.goo.gl/WHTNCDsFNoZAAnzX8): `lat: 51.8472"N`, `lon: 122.7903"W`.
+ - [Nasa](https://www.bluemarble.nasa.gov/images/153195/chilcotin-rivers-landslide-lake-begins-draining): Chilcotin River’s Landslide Lake Begins Draining.
+ - [Reddit](https://www.reddit.com/r/britishcolumbia/comments/1eh9eql/before_and_after_satellite_images_of_the/): Before and after satellite images of the Chilcotin River landslide.
+ - [portal](https://chilcotin-river-landslide-2024-bcgov03.hub.arcgis.com/): Chilcotin River Landslide Information Portal, source of ⬆️ image.
 
+---
 
 details: [targets.yaml](../targets.yaml).
+
 
 using [chilcotin-river-landslide](../../watch/targets/chilcotin-river-landslide.md).
 
@@ -49,7 +55,7 @@ using [chilcotin-river-landslide](../../watch/targets/chilcotin-river-landslide.
   --lon -122.78
 
 @select $(@catalog query read - . --count 1 --offset 3)
-@datacube ingest scope=metadata+quick .
+@datacube ingest scope=metadata+rgbx .
 @publish tar .
 ```
 

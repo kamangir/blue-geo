@@ -2,19 +2,26 @@
 
 the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire Information for Resource Management System. see [datacube](../) for usage instructions.
 
+ - [area](https://firms.modaps.eosdis.nasa.gov/api/area/)
+ - [home](https://firms.modaps.eosdis.nasa.gov/)
+ - [map key](https://firms.modaps.eosdis.nasa.gov/api/map_key/)
+
 ## query
 
 ```bash
- > @catalog query firms help
+@catalog query firms help
+```
+```bash
 @catalog query firms \
 	[dryrun,area,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,what=all|metadata|quick|<suffix>] \
+	[ingest,~copy_template,dryrun,overwrite,scope=<scope>,upload] \
 	[-|<object-name>] \
-	[--area east|north|south|west|world]\
-	[--date <yyyy-mm-dd>]\
-	[--depth 1..10]\
+	[--area east|north|south|west|world] \
+	[--date <yyyy-mm-dd>] \
+	[--depth 1..10] \
 	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP]
  . firms/area -query-> <object-name>.
+   scope: @datacube ingest help.
 ```
 
 ## example use
@@ -49,3 +56,4 @@ datacube:
 map-key: https://firms.modaps.eosdis.nasa.gov/api/map_key/
 
 area api: https://firms.modaps.eosdis.nasa.gov/api/area/
+

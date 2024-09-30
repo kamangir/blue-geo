@@ -4,10 +4,7 @@ function blue_geo_watch_reduce() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local options="$(xtra dryrun,~download,)publish,suffix=<suffix>$(xtra ~upload)"
-
-        abcli_show_usage "@geo watch reduce $(xwrap $options '..|<query-object-name>' '.|<object-name>')" \
-            "@geo watch reduce <query-object-name>/<suffix> -> <object-name>."
+        abcli_show_usage_2 blue_geo watch reduce
         return
     fi
 

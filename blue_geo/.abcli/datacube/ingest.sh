@@ -1,15 +1,13 @@
 #! /usr/bin/env bash
 
 export blue_geo_scope_help=$(python3 -c "from blue_geo.catalog.generic.generic.scope import DatacubeScope; print(DatacubeScope.help)")
-export blue_geo_datacube_ingest_options="$(xtra ~copy_template,dryrun,overwrite,upload,)scope=$blue_geo_scope_help"
+export blue_geo_datacube_ingest_options="$(xtra ~copy_template,dryrun,overwrite,upload,)scope=<scope>"
 
 function blue_geo_datacube_ingest() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        options=$blue_geo_datacube_ingest_options
-        abcli_show_usage "@datacube ingest$ABCUL[$options]$ABCUL[.|<datacube-id>]$ABCUL[<args>]" \
-            "ingest <datacube-id>.${ABCUL2}all: ALL files.${ABCUL2}metadata (default): any < 1 MB.${ABCUL2}quick: around 200 MB, decided by the datacube class.${ABCUL2}suffix=<suffix>: any *<suffix>."
+        abcli_show_usage_2 blue_geo datacube ingest
         return
     fi
 

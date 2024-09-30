@@ -48,6 +48,13 @@ class GenericDatacube:
     def full_filename(self, filename: str) -> str:
         return objects.path_of(filename, self.datacube_id, create=True)
 
+    def generate(
+        self,
+        modality: str,
+        overwrite: bool = False,
+    ) -> str:
+        return ""
+
     def ingest(
         self,
         dryrun: bool = False,
@@ -78,7 +85,7 @@ class GenericDatacube:
         self,
         filename: str,
         overwrite: bool = False,
-        verbose: bool = False,
+        verbose: bool = True,
     ) -> bool:
         item_filename = self.full_filename(filename)
 
@@ -124,6 +131,16 @@ class GenericDatacube:
         logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
 
         return post_to_object(object_name, "datacube_id", [])
+
+    def raw_datacube_id(
+        self,
+        datacube_id: str = "",  # to enable upstream modifications
+    ) -> str:
+        datacube_id = self.datacube_id if not datacube_id else datacube_id
+
+        segments = datacube_id.split("-", 3)
+
+        return segments[3] if len(segments) >= 4 else ""
 
     def update_metadata(self, verbose: bool = False) -> bool:
         if verbose:

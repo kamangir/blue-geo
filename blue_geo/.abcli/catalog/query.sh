@@ -5,8 +5,7 @@ function blue_geo_catalog_query() {
 
     if [[ "$catalog" == help ]]; then
         for catalog in $(echo $blue_geo_list_of_catalogs | tr , " "); do
-            [[ "$catalog" == generic ]] &&
-                continue
+            [[ "$catalog" == generic ]] && continue
             blue_geo_catalog_query $catalog "$@"
         done
 
@@ -49,16 +48,7 @@ function blue_geo_catalog_query() {
     if [[ $(abcli_option_int "$options" help 0) == 1 ]] ||
         [[ $(abcli_option_int "$ingest_options" help 0) == 1 ]]; then
         if [[ ! -z "$datacube_class" ]]; then
-            options="dryrun,$datacube_class,select,upload"
-            ingest_options="ingest,$blue_geo_datacube_ingest_options"
-
-            local args=$(blue_geo_catalog_get \
-                list_of_args \
-                --catalog $catalog \
-                --datacube_class $datacube_class)
-
-            abcli_show_usage "@catalog query $catalog$ABCUL[$options]$ABCUL[$ingest_options]$ABCUL[-|<object-name>]$ABCUL$args" \
-                "$catalog/$datacube_class -query-> <object-name>."
+            abcli_show_usage_2 blue_geo catalog query $catalog $datacube_class
         else
             for datacube_class in $(echo $list_of_datacube_classes | tr , " "); do
                 blue_geo_catalog_query \

@@ -1,6 +1,7 @@
+from typing import Dict, List
 from argparse import ArgumentParser
+
 from blue_options.env import ABCUL
-from typing import Dict
 
 
 def add_default_arguments(
@@ -16,15 +17,13 @@ def add_default_arguments(
         )
 
 
-def as_list_of_args(default_args: Dict[str, Dict]) -> str:
-    return ABCUL.join(
-        sorted(
-            [
-                "[--{} {}]".format(
-                    arg,
-                    values["help"],
-                )
-                for arg, values in default_args.items()
-            ]
-        )
+def as_list_of_args(default_args: Dict[str, Dict]) -> List[str]:
+    return sorted(
+        [
+            "[--{} {}]".format(
+                arg,
+                values["help"],
+            )
+            for arg, values in default_args.items()
+        ]
     )

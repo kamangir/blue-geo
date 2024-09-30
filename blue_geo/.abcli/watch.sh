@@ -8,32 +8,16 @@ function blue_geo_watch() {
     local reduce_options=$5
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local list_of_targets=$(blue_geo_watch_targets get \
-            --what list \
-            --delim \|)
-
-        options="$(xtra dryrun)"
-
-        target_options="$(xtra '<query-object-name>,')target=$list_of_targets"
-
-        workflow_options="$(xtra dryrun,)to=$NBS_RUNNERS_LIST"
-
-        map_options="$(xtra dryrun)"
-
-        reduce_options="$(xtra dryrun,~gif,)publish"
-
-        abcli_show_usage "@geo watch $(xwrap $options $target_options $workflow_options $map_options $reduce_options '-|<object-name>')" \
-            "watch target -> <object-name>."
+        abcli_show_usage_2 blue_geo watch
 
         blue_geo_watch_map "$@"
         blue_geo_watch_reduce "$@"
         blue_geo_watch_targets "$@"
-
         return
     fi
 
     local task
-    for task in map reduce; do
+    for task in map reduce targets; do
         if [ $(abcli_option_int "$options" $task 0) == 1 ]; then
             blue_geo_watch_$task "${@:2}"
             return
@@ -53,8 +37,9 @@ function blue_geo_watch() {
     else
         local target_exists=$(blue_geo_watch_targets get \
             --what exists \
-            --target_name $target)
-        if [[ "$target_exists" != "True" ]]; then
+            --target_name $target \
+            --log 0)
+        if [[ "$target_exists" != 1 ]]; then
             abcli_log_error "-@geo: watch: $target: target not found."
             return 1
         fi
@@ -65,14 +50,17 @@ function blue_geo_watch() {
 
         local catalog=$(blue_geo_watch_targets get \
             --what catalog \
-            --target_name $target)
+            --target_name $target \
+            --log 0)
         local collection=$(blue_geo_watch_targets get \
             --what collection \
-            --target_name $target)
+            --target_name $target \
+            --log 0)
         local query_args=$(blue_geo_watch_targets get \
             --what query_args \
             --target_name $target \
-            --delim space)
+            --delim space \
+            --log 0)
 
         abcli_eval dryrun=$do_dryrun \
             blue_geo_catalog query $catalog \

@@ -1,23 +1,18 @@
 # 🌐 catalog
 
-`catalog`s are [lists](#listing-catalogs) of collections that can be [browsed](#browsing-a-catalog), [queried](#running-a-query-for-datacubes), and [ingested as `datacube`](../datacube/)s. 
+`catalog`s are [lists](#listing-catalogs) of collections that can be [browsed](#browsing-a-catalog), [queried](#running-a-query-for-datacubes), and [ingested as `datacube`](../datacube/)s.
+
+`catalog`s are generalized [STAC](https://stacspec.org/en/tutorials/intro-to-stac/) Catalogs.
+
+to add a new catalog follow [these instructions](../doc/adding-catalogs-and-datacubes.md).
 
 ## supported catalogs
 
 - [copernicus](./copernicus/)
 - [EarthSearch](./EarthSearch/)
 - [firms](./firms/)
+- [SkyFox](./SkyFox/)
 - [ukraine_timemap](./ukraine_timemap/)
-
-## adding a new catalog
-
-1️⃣ clone [blue_geo/catalog/generic](./generic/) similar to [blue_geo/catalog/copernicus](./copernicus/) and define `NovelCatalog`.
-
-2️⃣ [add the datacube class `NovelDatacube`](../datacube/README.md#adding-a-new-datacube-class) to represent one of the collections in `NovelCatalog`.
-
-3️⃣ add `NovelCatalog` to [blue_geo/catalog/classes.py](./classes.py).
-
-4️⃣ add the package extensions to [`setup.py`](../../setup.py).
 
 ## listing catalogs
 
@@ -56,8 +51,9 @@ to see the list of pages that can be browsed for a catalog,
 @catalog browse firms help
 ```
 ```bash
-@catalog browse firms \
-	area|map_key
+@catalog browse \
+	firms \
+	home|area|map-key
  . browse firms.
 ```
 
@@ -98,56 +94,4 @@ to see catalog-specific query args,
 
 ```bash
 @catalog query help
-```
-```bash
-@catalog query EarthSearch \
-	[dryrun,sentinel_2_l1c,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--bbox <-122.88,51.73,-122.68,51.93>] \
-	[--count <10>, -1: all] \
-	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
-	[--keyword <keyword>] \
-	[--lat <51.83>] \
-	[--lon <-122.78>] \
-	[--radius <0.1>]
- . EarthSearch/sentinel_2_l1c -query-> <object-name>.
-@catalog query copernicus \
-	[dryrun,sentinel_2,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--bbox <-122.88,51.73,-122.68,51.93>] \
-	[--count <10>, -1: all] \
-	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
-	[--keyword <keyword>] \
-	[--lat <51.83>] \
-	[--lon <-122.78>] \
-	[--radius <0.1>]
- . copernicus/sentinel_2 -query-> <object-name>.
-@catalog query firms \
-	[dryrun,area,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--area east|north|south|west|world] \
-	[--date <yyyy-mm-dd>] \
-	[--depth 1..10] \
-	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP]
- . firms/area -query-> <object-name>.
-@catalog query ukraine_timemap \
-	[dryrun,ukraine_timemap,select,upload] \
-	[ingest,~copy_template,dryrun,overwrite,upload,scope=all|metadata|quick|raster|<.jp2+.tif+.tiff>] \
-	[-|<object-name>] \
-	[--arg <value>]
- . ukraine_timemap/ukraine_timemap -query-> <object-name>.
-@catalog query read \
-	[all,download,len] \
-	[.|<object-name>] \
-	[--count <count>] \
-	[--delim <delim>] \
-	[--offset <offset>] \
-	[--prefix <prefix>] \
-	[--suffix <suffix>] \
-	[--contains <contains>] \
-	[--notcontains <not-contains>]
- . read query results in <object-name>.
 ```

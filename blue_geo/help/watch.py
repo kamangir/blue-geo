@@ -1,0 +1,187 @@
+import os
+from typing import List
+
+from blue_options.terminal import show_usage, xtra
+from blue_objects import file
+from notebooks_and_scripts.workflow.runners import list_of_runners
+
+from blue_geo.watch.targets.classes import TargetList
+from blue_geo.datacube.modalities import options as modality_options
+
+
+def help_map(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = "".join(
+        [
+            xtra("dryrun,~download,", mono),
+            "modality={},".format("|".join(modality_options)),
+            "offset=<offset>,suffix=<suffix>",
+            xtra(",~upload", mono),
+        ]
+    )
+
+    return show_usage(
+        [
+            "@geo watch map",
+            f"[{options}]",
+            "[.|<query-object-name>]",
+        ],
+        "@geo watch map <query-object-name> @ <offset> -> /<suffix>.",
+        mono=mono,
+    )
+
+
+def help_reduce(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = "".join(
+        [
+            xtra("dryrun,~download,", mono),
+            "publish,suffix=<suffix>",
+            xtra(",~upload", mono),
+        ]
+    )
+
+    return show_usage(
+        [
+            "@geo watch reduce",
+            f"[{options}]",
+            "[..|<query-object-name>]",
+            "[.|<object-name>]",
+        ],
+        "@geo watch reduce <query-object-name>/<suffix> -> <object-name>.",
+        mono=mono,
+    )
+
+
+def help_targets_cp(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = "-"
+    return show_usage(
+        [
+            "@geo watch targets cp|copy",
+            f"[{options}]",
+            "[..|<object-name-1>]",
+            "[.|<object-name-2>]",
+        ],
+        "copy <object-name-1>/target -> <object-name-2>.",
+        mono=mono,
+    )
+
+
+def help_targets_get(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    args = [
+        "[--delim space]",
+        "[--target_name <target>]",
+        "[--what <catalog|collection|exists|query_args>]",
+    ]
+    return show_usage(
+        ["@geo watch targets get"] + args,
+        "get <target> info.",
+        mono=mono,
+    )
+
+
+def help_targets_list(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    args = [
+        "[--catalog <catalog>]",
+        "[--collection <collection>]",
+        "[--count <count>]",
+        "[--delim <space>]",
+    ]
+    return show_usage(
+        ["@geo watch targets list"] + args,
+        "list targets.",
+        mono=mono,
+    )
+
+
+def help_targets_save(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    args = [
+        "[--target_name <target>]",
+        "[--object_name <object-name>]",
+    ]
+    return show_usage(
+        ["@geo watch targets save"] + args,
+        "save <target> -> <object-name>.",
+        mono=mono,
+    )
+
+
+def help(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = xtra("dryrun", mono)
+
+    target_list = TargetList(
+        os.path.join(file.path(__file__), "../watch/targets.yaml"),
+    )
+    target_options = "".join(
+        [
+            xtra("<query-object-name>,", mono),
+            "target={}".format("|".join(target_list.get_list())),
+        ]
+    )
+
+    workflow_options = "".join(
+        [
+            xtra("dryrun,", mono),
+            "to={}".format("|".join(list_of_runners())),
+        ]
+    )
+
+    map_options = "".join(
+        [
+            xtra("dryrun,", mono),
+            "modality={}".format("|".join(modality_options)),
+        ]
+    )
+
+    reduce_options = "".join(
+        [
+            xtra("dryrun,~gif,", mono),
+            "publish",
+        ]
+    )
+
+    return show_usage(
+        [
+            "@geo watch",
+            f"[{options}]",
+            f"[{target_options}]",
+            f"[{workflow_options}]",
+            f"[{map_options}]",
+            f"[{reduce_options}]",
+            "[-|<object-name>]",
+        ],
+        "watch target -> <object-name>.",
+        mono=mono,
+    )
+
+
+help_functions = {
+    "": help,
+    "map": help_map,
+    "reduce": help_reduce,
+    "targets": {
+        "cp": help_targets_cp,
+        "get": help_targets_get,
+        "list": help_targets_list,
+        "save": help_targets_save,
+    },
+}

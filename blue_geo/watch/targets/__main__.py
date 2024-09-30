@@ -12,7 +12,7 @@ from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
 
-list_of_tasks = "get|save"
+list_of_tasks = "get|list|save"
 
 parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
@@ -24,7 +24,7 @@ parser.add_argument(
     "--what",
     default="",
     type=str,
-    help="catalog|collection|exists|list|query_args",
+    help="catalog|collection|exists|query_args",
 )
 parser.add_argument(
     "--count",
@@ -34,7 +34,7 @@ parser.add_argument(
 )
 parser.add_argument(
     "--log",
-    default=0,
+    default=1,
     type=int,
     help="0|1",
 )
@@ -51,47 +51,63 @@ parser.add_argument(
     "--object_name",
     type=str,
 )
+parser.add_argument(
+    "--catalog_name",
+    type=str,
+)
+parser.add_argument(
+    "--collection",
+    type=str,
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
 
-target_list = TargetList(os.path.join(file.path(__file__), "../targets.yaml"))
+target_list = TargetList(
+    os.path.join(file.path(__file__), "../targets.yaml"),
+)
 
 target = target_list.targets.get(args.target_name, Target())
 
 success = args.task in list_of_tasks
 if args.task == "get":
-    output: Union[str, List[str]] = []
+    output: str = ""
 
-    if args.what == "query_args":
-        output = target.query_args_as_str()
-    elif args.what == "catalog":
+    if args.what == "catalog":
         output = target.catalog
     elif args.what == "collection":
         output = target.collection
     elif args.what == "exists":
-        output = str(bool(target.name))
-    elif args.what == "list":
-        output = list(target_list.targets.keys())
+        output = "1" if target.name else "0"
+    elif args.what == "query_args":
+        output = target.query_args_as_str()
     else:
         success = False
 
-    if args.count != -1 and isinstance(output, list):
+    if success:
+        if args.log:
+            logger.info(output)
+        else:
+            print(output)
+elif args.task == "list":
+    output = target_list.get_list(
+        catalog_name=args.catalog_name,
+        collection=args.collection,
+    )
+
+    if args.count != -1:
         output = output[: args.count]
 
     if success:
         if args.log:
             logger.info(
-                "{:,} {}(s): {}".format(
+                "{:,} target(s): {}".format(
                     len(output),
-                    args.what,
                     delim.join(output),
                 )
-                if isinstance(output, list)
-                else output
             )
         else:
-            print(delim.join(output) if isinstance(output, list) else output)
+            print(delim.join(output))
 elif args.task == "save":
     success = target.save(args.object_name)
 else:

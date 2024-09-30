@@ -1,12 +1,18 @@
 from typing import List
 
-from blue_options.terminal import show_usage
+from blue_options.terminal import show_usage, xtra
 from blue_options import env
 
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 
 
-ingest_options = f"{env.EOP}~copy_template,dryrun,overwrite,{env.LIGHTBLUE}scope=<scope>{env.EOP},upload{env.LIGHTBLUE}"
+ingest_options = "".join(
+    [
+        xtra("~copy_template,dryrun,overwrite,"),
+        "scope=<scope>",
+        xtra(",upload"),
+    ]
+)
 
 
 def get(

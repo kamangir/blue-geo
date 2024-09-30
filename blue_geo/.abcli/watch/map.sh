@@ -4,10 +4,7 @@ function blue_geo_watch_map() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local options="$(xtra dryrun,~download,)offset=<offset>,suffix=<suffix>$(xtra ,~upload)"
-
-        abcli_show_usage "@geo watch map $(xwrap $options '.|<query-object-name>')" \
-            "@geo watch map <query-object-name> @ <offset> -> /<suffix>."
+        abcli_show_usage_2 blue_geo watch map
         return
     fi
 

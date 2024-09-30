@@ -8,25 +8,11 @@ function blue_geo_watch() {
     local reduce_options=$5
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local list_of_targets=$(blue_geo_watch_targets list --delim \| --log 0)
-
-        options="$(xtra dryrun)"
-
-        target_options="$(xtra '<query-object-name>,')target=$list_of_targets"
-
-        workflow_options="$(xtra dryrun,)to=$NBS_RUNNERS_LIST"
-
-        map_options="$(xtra dryrun)"
-
-        reduce_options="$(xtra dryrun,~gif,)publish"
-
-        abcli_show_usage "@geo watch $(xwrap $options $target_options $workflow_options $map_options $reduce_options '-|<object-name>')" \
-            "watch target -> <object-name>."
+        abcli_show_usage_2 blue_geo watch
 
         blue_geo_watch_map "$@"
         blue_geo_watch_reduce "$@"
         blue_geo_watch_targets "$@"
-
         return
     fi
 

@@ -3,6 +3,7 @@ from blue_geo.help.catalog import get as get_catalog
 from blue_geo.help.datacube import get as get_datacube
 from blue_geo.help.gdal import get as get_gdal
 from blue_geo.help.QGIS import get as get_QGIS
+from blue_geo.help.watch import get as get_watch
 
 
 def get(
@@ -14,6 +15,7 @@ def get(
         "datacube": get_datacube,
         "gdal": get_gdal,
         "QGIS": get_QGIS,
+        "watch": get_watch,
     }.items():
         if tokens[0] == token:
             return func(tokens[1:], mono=mono)

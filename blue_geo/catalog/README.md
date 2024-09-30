@@ -4,6 +4,8 @@
 
 `catalog`s are generalized [STAC](https://stacspec.org/en/tutorials/intro-to-stac/) Catalogs.
 
+to add a new catalog follow [these instructions](../doc/adding-catalogs-and-datacubes.md).
+
 ## supported catalogs
 
 - [copernicus](./copernicus/)
@@ -11,16 +13,6 @@
 - [firms](./firms/)
 - [SkyFox](./SkyFox/)
 - [ukraine_timemap](./ukraine_timemap/)
-
-## adding a new catalog
-
-1️⃣ clone [blue_geo/catalog/generic](./generic/) similar to [blue_geo/catalog/copernicus](./copernicus/) and define `NovelCatalog`.
-
-2️⃣ [add the datacube class `NovelDatacube`](../datacube/README.md#adding-a-new-datacube-class) to represent one of the collections in `NovelCatalog`.
-
-3️⃣ add `NovelCatalog` to [blue_geo/catalog/classes.py](./classes.py).
-
-4️⃣ add the package extensions to [`setup.py`](../../setup.py).
 
 ## listing catalogs
 

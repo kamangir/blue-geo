@@ -4,15 +4,7 @@
 
 `datacube`s are generalized [STAC](https://stacspec.org/en/tutorials/intro-to-stac/) Items.
 
-## adding a new datacube class
-
-1️⃣ add the [catalog](../catalog/README.md#adding-a-new-catalog).
-
-2️⃣ clone [blue_geo/catalog/generic/generic](../catalog/generic/generic/) similar to [blue_geo/catalog/copernicus/sentinel_2](../catalog/copernicus/sentinel_2/) and define `NovelDatacube`.
-
-3️⃣ add `NovelDatacube` to [blue_geo/catalog/classes.py](../catalog/classes.py).
-
-4️⃣ add the package extensions to [`setup.py`](../../setup.py).
+to add a new datacube class follow [these instructions](../doc/adding-catalogs-and-datacubes.md).
 
 ## ingesting a datacube
 

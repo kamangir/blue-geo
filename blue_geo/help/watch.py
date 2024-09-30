@@ -6,6 +6,7 @@ from blue_objects import file
 from notebooks_and_scripts.workflow.runners import list_of_runners
 
 from blue_geo.watch.targets.classes import TargetList
+from blue_geo.datacube.modalities import options as modality_options
 
 
 def help_map(
@@ -15,6 +16,7 @@ def help_map(
     options = "".join(
         [
             xtra("dryrun,~download,", mono),
+            "modality={},".format("|".join(modality_options)),
             "offset=<offset>,suffix=<suffix>",
             xtra(",~upload", mono),
         ]
@@ -143,7 +145,12 @@ def help(
         ]
     )
 
-    map_options = xtra("dryrun", mono)
+    map_options = "".join(
+        [
+            xtra("dryrun,", mono),
+            "modality={}".format("|".join(modality_options)),
+        ]
+    )
 
     reduce_options = "".join(
         [

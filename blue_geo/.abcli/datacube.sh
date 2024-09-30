@@ -5,6 +5,7 @@ function blue_geo_datacube() {
 
     if [ "$task" == "help" ]; then
         blue_geo_datacube_crop "$@"
+        blue_geo_datacube_generate "$@"
         blue_geo_datacube_get "$@"
         blue_geo_datacube_ingest "$@"
         blue_geo_datacube_list "$@"

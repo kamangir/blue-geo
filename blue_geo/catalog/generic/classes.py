@@ -11,6 +11,12 @@ class GenericCatalog:
     def __init__(self):
         pass
 
+    def generate(
+        modality: str,
+        overwrite: bool = False,
+    ) -> str:
+        return ""
+
     def get_list_of_collections(self) -> List[str]:
         return []
 

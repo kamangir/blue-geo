@@ -7,6 +7,7 @@ from blue_objects import file
 from blue_geo import NAME
 from blue_geo.catalog import get_datacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
+from blue_geo.datacube.modalities import options as modality_options
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -15,13 +16,19 @@ parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,
-    help="get|ingest|list",
+    help="get|generate|ingest|list",
 )
 parser.add_argument(
     "--what",
     default="",
     type=str,
     help="catalog|template",
+)
+parser.add_argument(
+    "--modality",
+    default=modality_options[0],
+    type=str,
+    help="|".join(modality_options),
 )
 parser.add_argument(
     "--scope",
@@ -79,7 +86,17 @@ args = parser.parse_args()
 delim = " " if args.delim == "space" else args.delim
 
 success = False
-if args.task == "get":
+if args.task == "generate":
+    success = True
+    datacube = get_datacube(datacube_id=args.datacube_id)
+
+    print(
+        datacube.generate(
+            modality=args.modality,
+            overwrite=args.overwrite == 1,
+        )
+    )
+elif args.task == "get":
     success = True
     datacube = get_datacube(datacube_id=args.datacube_id)
 

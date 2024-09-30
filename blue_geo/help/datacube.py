@@ -4,6 +4,7 @@ from blue_options.terminal import show_usage, xtra
 from blue_options import env
 
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
+from blue_geo.datacube.modalities import options as modality_options
 
 
 def ingest_options(mono: bool) -> str:
@@ -29,6 +30,29 @@ def help_crop(
             "[.|<datacube-id>]",
         ],
         "crop <datacube-id> by <object-name>/target/shape.geojson -> <datacube-id>-DERIVED-crop-<suffix>.",
+        mono=mono,
+    )
+
+
+def help_generate(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = xtra("dryrun", mono)
+
+    args = [
+        "[--modality <{}>]".format("|".join(modality_options)),
+        "[--overwrite <1>]",
+    ]
+
+    return show_usage(
+        [
+            "@datacube generate",
+            f"[{options}]",
+            "[.|<datacube-id>]",
+        ]
+        + args,
+        "generate datacube/<modality>.",
         mono=mono,
     )
 
@@ -103,6 +127,7 @@ def help_list(
 
 help_functions = {
     "crop": help_crop,
+    "generate": help_generate,
     "get": help_get,
     "ingest": help_ingest,
     "list": help_list,

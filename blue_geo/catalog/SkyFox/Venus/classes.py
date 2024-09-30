@@ -101,7 +101,6 @@ class SkyFoxVenusDatacube(STACDatacube):
             needed_for_rgb=lambda filename: any(
                 filename.endswith(suffix) for suffix in rgb_suffixes
             ),
-            is_rgb=lambda filename: False,  # TODO
             verbose=verbose,
         )
 

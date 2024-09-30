@@ -5,6 +5,7 @@ from blue_objects import host, file, host
 from blue_geo.catalog.SkyFox.classes import SkyFoxCatalog
 from blue_geo.catalog.generic.generic.stac import STACDatacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
+from blue_geo import env
 from blue_geo.logger import logger
 
 rgb_suffixes = [f"SRE_B{band_index}.tif" for band_index in [7, 4, 3]]
@@ -16,6 +17,8 @@ class SkyFoxVenusDatacube(STACDatacube):
     collection = "venus-l2a"
 
     name = "Venus"
+
+    QGIS_template = env.BLUE_GEO_QGIS_TEMPLATE_DATACUBE_SKYFOX_VENUS
 
     def generate(
         self,

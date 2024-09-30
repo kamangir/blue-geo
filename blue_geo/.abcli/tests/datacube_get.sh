@@ -36,7 +36,7 @@ function test_blue_geo_datacube_get_template() {
         $BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2:unknown-template \
         $BLUE_GEO_TEST_DATACUBE_EARTHSEARCH_SENTINEL2_L1C:unknown-template \
         $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA:$BLUE_GEO_QGIS_TEMPLATE_FIRMS_AREA \
-        $BLUE_GEO_TEST_DATACUBE_SKYFOX_VENUS:unknown-template \
+        $BLUE_GEO_TEST_DATACUBE_SKYFOX_VENUS:$BLUE_GEO_QGIS_TEMPLATE_DATACUBE_SKYFOX_VENUS \
         $BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP:$BLUE_GEO_QGIS_TEMPLATE_UKRAINE_TIMEMAP; do
 
         datacube_id=$(python3 -c "print('$test_asset'.split(':',1)[0])")

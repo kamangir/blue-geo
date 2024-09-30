@@ -42,6 +42,11 @@ list_of_targets = {
             "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-208-7063fca1423b)",
         ]
     },
+    "Leonardo": {
+        "geo-watch-2024-09-30-Leonardo-a": [
+            "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-237-99db71023445)",
+        ]
+    },
 }
 
 

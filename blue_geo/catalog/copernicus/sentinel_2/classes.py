@@ -84,6 +84,7 @@ class CopernicusSentinel2Datacube(STACDatacube):
                 for item in bucket.objects.filter(Prefix=s3_prefix)
             ],
             needed_for_rgb=lambda filename: filename.endswith("TCI.jp2"),
+            is_rgb=lambda filename: filename.endswith("TCI.jp2"),
             verbose=verbose,
         )
 

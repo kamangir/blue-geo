@@ -46,6 +46,7 @@ class DatacubeScope:
         list_of_items: List[Dict[str, Any]],  # {"filename": filename, ["size": size]}
         verbose: bool = False,
         needed_for_rgb: Union[Callable, None] = None,
+        is_rgb: Union[Callable, None] = None,
     ) -> List[str]:
         list_of_files: List[str] = []
 
@@ -55,6 +56,7 @@ class DatacubeScope:
                 item_size=item.get("size", -1),
                 verbose=verbose,
                 needed_for_rgb=needed_for_rgb,
+                is_rgb=is_rgb,
             ):
                 list_of_files.append(item["filename"])
 
@@ -66,6 +68,7 @@ class DatacubeScope:
         item_size: int = -1,
         verbose: bool = False,
         needed_for_rgb: Union[Callable, None] = None,
+        is_rgb: Union[Callable, None] = None,
     ) -> bool:
         if self.all:
             return True
@@ -78,6 +81,9 @@ class DatacubeScope:
             return True
 
         if self.rgbx and (needed_for_rgb is not None) and needed_for_rgb(item_filename):
+            return True
+
+        if self.rgb and (is_rgb is not None) and is_rgb(item_filename):
             return True
 
         if self.raster and any(

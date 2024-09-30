@@ -46,7 +46,7 @@ function blue_geo_watch_map() {
         $datacube_id
     [[ $? -ne 0 ]] && return 1
 
-    : # TODO: build rgb
+    : # TODO: build rgb for Venus
 
     local filename=$(blue_geo_datacube_list $datacube_id \
         --scope rgb \

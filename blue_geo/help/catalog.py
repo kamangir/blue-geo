@@ -83,14 +83,18 @@ def help_query(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    if len(tokens) < 2:
-        logger.error(f"2 tokens expected: {tokens}")
+    if not tokens:
+        logger.error(f"token expected: {tokens}")
         return ""
 
     catalog_name = tokens[0]
 
     if catalog_name == "read":
         return help_query_read(tokens[1:], mono=mono)
+
+    if len(tokens) < 2:
+        logger.error(f"2 tokens expected: {tokens}")
+        return ""
 
     datacube_class_name = tokens[1]
     datacube_class = get_datacube_class_in_catalog(

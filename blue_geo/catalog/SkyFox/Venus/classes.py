@@ -48,7 +48,7 @@ class SkyFoxVenusDatacube(STACDatacube):
 
         return " ".join(
             [
-                "gdal_merge",
+                "gdal_merge.py",
                 "-separate",
                 f"-o {rgb_filename}",
             ]

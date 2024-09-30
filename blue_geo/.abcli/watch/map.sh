@@ -55,13 +55,13 @@ function blue_geo_watch_map() {
         --modality $modality
     [[ $? -ne 0 ]] && return 1
 
-    local filename=$(blue_geo_datacube_list $datacube_id \
+    local filename=$(blue_geo_datacube_list $cropped_datacube_id \
         --scope rgb \
         --log 0 \
         --count 1 \
         --exists 1)
     if [[ -z "$filename" ]]; then
-        abcli_log_error "-@geo: watch: map: offset=$offset: $datacube_id: file not found."
+        abcli_log_error "-@geo: watch: map: offset=$offset: $cropped_datacube_id: file not found."
         return 1
     fi
     cp -v \

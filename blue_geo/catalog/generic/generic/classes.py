@@ -140,7 +140,12 @@ class GenericDatacube:
 
         segments = datacube_id.split("-", 3)
 
-        return segments[3] if len(segments) >= 4 else ""
+        output = segments[3] if len(segments) >= 4 else ""
+
+        if "-DERIVED-" in output:
+            output = output.split("-DERIVED-", 1)[0]
+
+        return output
 
     def update_metadata(self, verbose: bool = False) -> bool:
         if verbose:

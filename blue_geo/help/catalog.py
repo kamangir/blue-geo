@@ -1,10 +1,11 @@
 from typing import List
 
 from blue_options.terminal import show_usage
-from blue_options import env
 
 from blue_geo.catalog import get_catalog
-from blue_geo.catalog.generic.generic.scope import DatacubeScope
+from blue_geo.help.datacube import ingest_options
+from blue_geo.catalog.functions import get_datacube_class_in_catalog
+from blue_geo.catalog.default import as_list_of_args
 
 
 def get(
@@ -68,5 +69,30 @@ def get(
         )
 
         return "\n".join([usage_1, usage_2])
+
+    if tokens[0] == "query":
+        catalog_name = tokens[1]
+        datacube_class_name = tokens[2]
+        datacube_class = get_datacube_class_in_catalog(
+            catalog_name,
+            datacube_class_name,
+        )
+        args = as_list_of_args(datacube_class.query_args)
+        options = f"dryrun,{datacube_class_name},select,upload"
+
+        return show_usage(
+            [
+                "@catalog query $catalog",
+                f"[{options}]",
+                f"ingest,{ingest_options}",
+                "[-|<object-name>]",
+            ]
+            + args,
+            f"{catalog_name}/{datacube_class_name} -query-> <object-name>.",
+            {
+                "scope: @datacube ingest help.": "",
+            },
+            mono=mono,
+        )
 
     return ""

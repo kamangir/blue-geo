@@ -50,8 +50,6 @@ using [Leonardo](../../watch/targets/Leonardo.md).
 
 ## example run
 
-🔥
-
 ```bash
 @select
 @catalog query SkyFox Venus - . \
@@ -62,12 +60,8 @@ using [Leonardo](../../watch/targets/Leonardo.md).
 
 @select $(@catalog query read - . --count 1 --offset 3)
 @datacube ingest scope=metadata+rgbx .
-
-@publish tar .
+@datacube generate - . \
+	--modality rgb
 ```
-
-![image](...)
-
-[....tar.gz](...)
 
 - [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-234-7ffa6d34230b)

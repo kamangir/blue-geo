@@ -43,7 +43,7 @@ list_of_targets = {
         ]
     },
     "Leonardo": {
-        "geo-watch-2024-09-30-Leonardo-a": [
+        "geo-watch-2024-09-30-Leonardo-d": [
             "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-237-99db71023445)",
         ]
     },

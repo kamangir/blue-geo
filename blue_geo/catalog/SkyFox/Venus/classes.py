@@ -90,7 +90,7 @@ class SkyFoxVenusDatacube(STACDatacube):
     ) -> List[str]:
         raw_datacube_id = self.raw_datacube_id()
 
-        return scope.filter(
+        output = scope.filter(
             [
                 {
                     "filename": (value.href.split(f"{raw_datacube_id}/", 1)[1]),
@@ -104,3 +104,12 @@ class SkyFoxVenusDatacube(STACDatacube):
             is_rgb=lambda filename: False,  # TODO
             verbose=verbose,
         )
+
+        if scope.rgb:
+            suffix = rgb_suffixes[0]
+            candidates = self.list_of_files(DatacubeScope(suffix))
+            if candidates:
+                rgb_filename = candidates[0].replace(suffix, "SRE_RGB.tif")
+                output += [rgb_filename]
+
+        return output

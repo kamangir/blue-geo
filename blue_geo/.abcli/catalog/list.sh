@@ -4,17 +4,7 @@ function blue_geo_catalog_list() {
     local options=$1
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        local args
-
-        options="catalogs"
-        args="[--count 1]$ABCUL[--delim ,]$ABCUL[--log 0]"
-        abcli_show_usage "@catalog list$ABCUL[$options]$ABCUL$args" \
-            "list catalogs."
-
-        options="collections|datacubes==datacube_classes"
-        args="[--catalog <catalog>]$ABCUL$args"
-        abcli_show_usage "@catalog list$ABCUL[$options]$ABCUL$args" \
-            "list $options in <catalog>."
+        abcli_show_usage_2 blue_geo catalog list
         return
     fi
 

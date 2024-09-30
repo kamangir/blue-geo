@@ -17,3 +17,5 @@ def get(
     }.items():
         if tokens[0] == token:
             return func(tokens[1:], mono=mono)
+
+    return ""

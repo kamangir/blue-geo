@@ -22,6 +22,7 @@ class SkyFoxVenusDatacube(STACDatacube):
         modality: str,
         overwrite: bool = False,
     ) -> str:
+        # TODO: clean-up in the next refactor 🤦🏽
         if modality != "rgb":
             logger.error(f"{modality}: modality is not implemented.")
             return ""

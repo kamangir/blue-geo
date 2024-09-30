@@ -49,6 +49,7 @@ class GenericDatacube:
         return objects.path_of(filename, self.datacube_id, create=True)
 
     def generate(
+        self,
         modality: str,
         overwrite: bool = False,
     ) -> str:

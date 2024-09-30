@@ -72,6 +72,30 @@ def get(
 
     if tokens[0] == "query":
         catalog_name = tokens[1]
+
+        if catalog_name == "read":
+            options = "all,download,len"
+            args = [
+                "[--count <count>]",
+                "[--delim <delim>]",
+                "[--offset <offset>]",
+                "[--prefix <prefix>]",
+                "[--suffix <suffix>]",
+                "[--contains <contains>]",
+                "[--notcontains <not-contains>]",
+            ]
+
+            return show_usage(
+                [
+                    "@catalog query read",
+                    f"[{options}]",
+                    "[.|<object-name>]",
+                ]
+                + args,
+                "read query results in <object-name>.",
+                mono=mono,
+            )
+
         datacube_class_name = tokens[2]
         datacube_class = get_datacube_class_in_catalog(
             catalog_name,
@@ -82,7 +106,7 @@ def get(
 
         return show_usage(
             [
-                "@catalog query $catalog",
+                f"@catalog query {catalog_name}",
                 f"[{options}]",
                 f"ingest,{ingest_options}",
                 "[-|<object-name>]",

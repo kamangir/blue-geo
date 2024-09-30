@@ -5,8 +5,7 @@ function blue_geo_catalog_query() {
 
     if [[ "$catalog" == help ]]; then
         for catalog in $(echo $blue_geo_list_of_catalogs | tr , " "); do
-            [[ "$catalog" == generic ]] &&
-                continue
+            [[ "$catalog" == generic ]] && continue
             blue_geo_catalog_query $catalog "$@"
         done
 

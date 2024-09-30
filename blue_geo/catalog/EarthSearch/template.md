@@ -9,7 +9,7 @@ the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex
 ```bash
 @catalog query EarthSearch help
 ```
---help-- blue_geo_catalog query EarthSearch help
+--help-- blue_geo catalog query EarthSearch sentinel_2_l1c
 
 --include-- ../../watch/targets/chilcotin-river-landslide.md case study: Chilcotin River Landslide
 

@@ -9,7 +9,7 @@ the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.i
 ```bash
 @catalog query SkyFox help
 ```
---help-- blue_geo_catalog query SkyFox help
+--help-- blue_geo catalog query SkyFox Venus
 
 --include-- ../../watch/targets/Leonardo.md case study: Leonardo da Vinci International Airport
 

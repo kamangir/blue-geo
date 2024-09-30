@@ -4,51 +4,69 @@ import os
 from blue_options.terminal import show_usage
 
 
-def get(
+def help_expressions_pull(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    if tokens[0] == "expressions":
-        if tokens[1] == "pull":
-            return show_usage(
-                "QGIS expressions pull",
-                "pull QGIS expressions.",
-                mono=mono,
-            )
+    return show_usage(
+        "QGIS expressions pull",
+        "pull QGIS expressions.",
+        mono=mono,
+    )
 
-        if tokens[1] == "push":
-            return show_usage(
-                "QGIS expressions push [push]",
-                "push QGIS expressions.",
-                {
-                    "QGIS: {}".format(
-                        os.getenv(
-                            "abcli_QGIS_path_expressions",
-                            "",
-                        )
-                    ): "",
-                    "github: {}".format(
-                        os.getenv(
-                            "abcli_QGIS_path_expressions_git",
-                            "",
-                        )
-                    ): "",
-                },
-                mono=mono,
-            )
 
-    if tokens[0] == "seed":
-        return show_usage(
-            "QGIS seed [screen]",
-            "seed 🌱 QGIS.",
-            mono=mono,
-        )
+def help_expressions_push(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        "QGIS expressions push [push]",
+        "push QGIS expressions.",
+        {
+            "QGIS: {}".format(
+                os.getenv(
+                    "abcli_QGIS_path_expressions",
+                    "",
+                )
+            ): "",
+            "github: {}".format(
+                os.getenv(
+                    "abcli_QGIS_path_expressions_git",
+                    "",
+                )
+            ): "",
+        },
+        mono=mono,
+    )
 
-    if tokens[0] == "server":
-        return show_usage(
-            "QGIS serve[r] [start]",
-            "start QGIS server.",
-            mono=mono,
-        )
 
-    return ""
+def help_seed(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        "QGIS seed [screen]",
+        "seed 🌱 QGIS.",
+        mono=mono,
+    )
+
+
+def help_server(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        "QGIS serve[r] [start]",
+        "start QGIS server.",
+        mono=mono,
+    )
+
+
+help_functions = {
+    "expressions": {
+        "push": help_expressions_push,
+        "pull": help_expressions_pull,
+    },
+    "seed": help_seed,
+    "server": help_server,
+}

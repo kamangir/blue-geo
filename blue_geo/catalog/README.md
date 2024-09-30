@@ -58,7 +58,7 @@ to see the list of pages that can be browsed for a catalog,
 ```bash
 @catalog browse firms help
 ```
---help-- blue_geo_catalog browse firms help
+--help-- blue_geo catalog browse firms
 
 ```bash
 @catalog browse firms area
@@ -98,4 +98,4 @@ to see catalog-specific query args,
 ```bash
 @catalog query help
 ```
---help-- blue_geo_catalog query help
+--help-- blue_geo catalog query

@@ -11,7 +11,16 @@ the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire I
 ```bash
 @catalog query firms help
 ```
-❗️ not found!
+@catalog query firms \
+	[dryrun,area,select,upload] \
+	ingest,[33m~copy_template,dryrun,overwrite,[96mscope=<scope>[33m,upload[96m \
+	[-|<object-name>] \
+	[--area east|north|south|west|world] \
+	[--date <yyyy-mm-dd>] \
+	[--depth 1..10] \
+	[--source LANDSAT_NRT|MODIS_NRT|MODIS_SP|VIIRS_NOAA20_NRT|VIIRS_NOAA21_NRT|VIIRS_SNPP_NRT|VIIRS_SNPP_SP]
+ . firms/area -query-> <object-name>.
+   scope: @datacube ingest help.
 
 ## example use
 

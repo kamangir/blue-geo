@@ -14,7 +14,19 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 ```bash
 @catalog query copernicus help
 ```
-❗️ not found!
+@catalog query copernicus \
+	[dryrun,sentinel_2,select,upload] \
+	ingest,[33m~copy_template,dryrun,overwrite,[96mscope=<scope>[33m,upload[96m \
+	[-|<object-name>] \
+	[--bbox <-122.88,51.73,-122.68,51.93>] \
+	[--count <10>, -1: all] \
+	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
+	[--keyword <keyword>] \
+	[--lat <51.83>] \
+	[--lon <-122.78>] \
+	[--radius <0.1>]
+ . copernicus/sentinel_2 -query-> <object-name>.
+   scope: @datacube ingest help.
 
 ## case study: Chilcotin River Landslide
 

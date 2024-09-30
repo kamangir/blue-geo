@@ -5,7 +5,6 @@ function blue_geo_watch_targets() {
     local options=$2
 
     if [[ "$task" == "help" ]]; then
-        blue_geo_watch_targets cp "$@"
         abcli_show_usage_2 blue_geo watch targets
         return
     fi

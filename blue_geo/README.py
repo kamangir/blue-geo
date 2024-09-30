@@ -1,13 +1,14 @@
 import os
 
 from blue_options import MARQUEE as default_MARQUEE
+from blue_options.help.functions import get_help
 from blue_objects import file, README
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
 from blue_geo.catalog.README import build as build_catalog
 from blue_geo.watch.README import items as watch_items
 from blue_geo.watch.targets.README import build as build_targets
-from blue_geo.help.functions import get as get_help
+from blue_geo.help.functions import help_functions
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
 
 
@@ -109,6 +110,7 @@ def build() -> bool:
                 REPO_NAME=REPO_NAME,
                 help_function=lambda tokens: get_help(
                     tokens,
+                    help_functions,
                     mono=True,
                 ),
             )

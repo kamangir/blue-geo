@@ -12,7 +12,19 @@ the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex
 ```bash
 @catalog query EarthSearch help
 ```
-❗️ not found!
+@catalog query EarthSearch \
+	[dryrun,sentinel_2_l1c,select,upload] \
+	ingest,[33m~copy_template,dryrun,overwrite,[96mscope=<scope>[33m,upload[96m \
+	[-|<object-name>] \
+	[--bbox <-122.88,51.73,-122.68,51.93>] \
+	[--count <10>, -1: all] \
+	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
+	[--keyword <keyword>] \
+	[--lat <51.83>] \
+	[--lon <-122.78>] \
+	[--radius <0.1>]
+ . EarthSearch/sentinel_2_l1c -query-> <object-name>.
+   scope: @datacube ingest help.
 
 ## case study: Chilcotin River Landslide
 

@@ -5,7 +5,7 @@ watch the planet's [story](./targets.yaml) unfold
 ```bash
 @geo watch help
 ```
---help-- blue_geo watch help
+--help-- blue_geo watch
 
 ## example run
 

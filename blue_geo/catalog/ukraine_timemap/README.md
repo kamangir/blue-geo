@@ -9,9 +9,15 @@ the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com
 ## query
 
 ```bash
-@catalog query ukraine_timemap help
+@catalog query ukraine_timemap
 ```
-❗️ not found!
+@catalog query ukraine_timemap \
+	[dryrun,ukraine_timemap,select,upload] \
+	ingest,[33m~copy_template,dryrun,overwrite,[96mscope=<scope>[33m,upload[96m \
+	[-|<object-name>] \
+	[--arg <value>]
+ . ukraine_timemap/ukraine_timemap -query-> <object-name>.
+   scope: @datacube ingest help.
 
 ## example use
 

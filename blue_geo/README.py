@@ -116,6 +116,8 @@ def build() -> bool:
             )
             for suffix, items, cols, macros, in [
                 ("..", items, 3, {}),
+                ("catalog", [], -1, {}),
+                ("datacube", [], -1, {}),
                 ("watch", watch_items, -1, {}),
                 ("QGIS", [], -1, {}),
             ]

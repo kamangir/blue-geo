@@ -13,17 +13,4 @@ run `@datacube ingest`  or use [`@catalog query <catalog> <collection> ingest`](
 ```bash
 @datacube ingest help
 ```
-```bash
-@datacube ingest \
-	[~copy_template,dryrun,overwrite,scope=<scope>,upload] \
-	[.|<datacube-id>] \
-	[<args>]
- . ingest <datacube-id>/<scope>.
-   scope=all+metadata+raster+rgb+rgbx+<.jp2>+<.tif>+<.tiff>
-      all: ALL files.
-      metadata (default): any < 1 MB.
-      raster: all raster.
-      rgb: rgb.
-      rgbx: rgb and what is needed to build rgb.
-      <suffix>: any *<suffix>.
-```
+--help-- blue_geo datacube ingest

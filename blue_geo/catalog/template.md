@@ -50,12 +50,7 @@ to see the list of pages that can be browsed for a catalog,
 ```bash
 @catalog browse firms help
 ```
-```bash
-@catalog browse \
-	firms \
-	home|area|map-key
- . browse firms.
-```
+--help-- blue_geo catalog browse firms
 
 ```bash
 @catalog browse firms area

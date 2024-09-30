@@ -4,7 +4,7 @@ from typing import List
 from blue_objects import file, README
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
 from blue_geo.watch.targets import jasper
-from blue_geo.watch.targets.classes import TargetList, Target
+from blue_geo.watch.targets.classes import TargetList
 
 
 def build() -> bool:
@@ -42,7 +42,7 @@ def build() -> bool:
                             )
                         ),
                     ],
-                    "--urls--": urls_as_str(target_list.targets[target_name]),
+                    "--urls--": target_list.targets[target_name].urls_as_str(),
                 },
             )
             for target_name in [
@@ -54,26 +54,5 @@ def build() -> bool:
                 "burning-man-2024",
                 "chilcotin-river-landslide",
             ]
-        ]
-    )
-
-
-def urls_as_str(target: Target) -> List[str]:
-    return sorted(
-        [
-            " - [{}]({}){}".format(
-                title,
-                url.split(",", 1)[0],
-                (
-                    ": {}".format(
-                        target.lat_and_lon
-                        if title == "Google Map"
-                        else url.split(",", 1)[1].strip()
-                    )
-                    if "," in url or title == "Google Map"
-                    else ""
-                ),
-            )
-            for title, url in target.urls.items()
         ]
     )

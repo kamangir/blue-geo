@@ -21,7 +21,7 @@ def build() -> bool:
             REPO_NAME=REPO_NAME,
         )
         for suffix, macros, in [
-            (catalog, {"--urls--": urls_as_str(get_catalog(catalog))})
+            (catalog, {"--urls--": get_catalog(catalog).urls_as_str()})
             for catalog in [
                 "copernicus",
                 "EarthSearch",
@@ -29,17 +29,5 @@ def build() -> bool:
                 "firms",
                 "ukraine_timemap",
             ]
-        ]
-    )
-
-
-def urls_as_str(catalog: GenericCatalog) -> List[str]:
-    return sorted(
-        [
-            " - [{}]({})".format(
-                title.replace("-", " "),
-                url,
-            )
-            for title, url in catalog.url.items()
         ]
     )

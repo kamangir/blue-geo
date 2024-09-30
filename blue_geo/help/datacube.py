@@ -6,9 +6,7 @@ from blue_options import env
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 
 
-ingest_options = (
-    f"{env.EOP}~copy_template,dryrun,overwrite,upload,{env.LIGHTBLUE}scope=<scope>"
-)
+ingest_options = f"{env.EOP}~copy_template,dryrun,overwrite,{env.LIGHTBLUE}scope=<scope>{env.EOP},upload{env.LIGHTBLUE}"
 
 
 def get(

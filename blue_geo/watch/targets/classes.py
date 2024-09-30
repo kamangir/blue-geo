@@ -122,6 +122,26 @@ class Target:
             log=True,
         )
 
+    def urls_as_str(self) -> List[str]:
+        return sorted(
+            [
+                " - [{}]({}){}".format(
+                    title,
+                    url.split(",", 1)[0],
+                    (
+                        ": {}".format(
+                            self.lat_and_lon
+                            if title == "Google Map"
+                            else url.split(",", 1)[1].strip()
+                        )
+                        if "," in url or title == "Google Map"
+                        else ""
+                    ),
+                )
+                for title, url in self.urls.items()
+            ]
+        )
+
 
 class TargetList:
     def __init__(self, filename: str = "") -> None:

@@ -23,6 +23,7 @@ setup(
         f"{NAME}.catalog.generic.generic",
         f"{NAME}.catalog.ukraine_timemap",
         f"{NAME}.catalog.ukraine_timemap.ukraine_timemap",
+        f"{NAME}.doc",
         f"{NAME}.datacube",
         f"{NAME}.help",
         f"{NAME}.QGIS",

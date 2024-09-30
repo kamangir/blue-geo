@@ -104,7 +104,7 @@ def help_query(
         [
             f"@catalog query {catalog_name}",
             f"[{options}]",
-            f"ingest,{ingest_options}",
+            f"[ingest,{ingest_options(mono)}]",
             "[-|<object-name>]",
         ]
         + args,

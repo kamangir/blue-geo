@@ -14,9 +14,9 @@ def help_map(
 ) -> str:
     options = "".join(
         [
-            xtra("dryrun,~download,"),
+            xtra("dryrun,~download,", mono),
             "offset=<offset>,suffix=<suffix>",
-            xtra(",~upload"),
+            xtra(",~upload", mono),
         ]
     )
 
@@ -37,9 +37,9 @@ def help_reduce(
 ) -> str:
     options = "".join(
         [
-            xtra("dryrun,~download,"),
+            xtra("dryrun,~download,", mono),
             "publish,suffix=<suffix>",
-            xtra(",~upload"),
+            xtra(",~upload", mono),
         ]
     )
 
@@ -124,30 +124,30 @@ def help(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = xtra("dryrun")
+    options = xtra("dryrun", mono)
 
     target_list = TargetList(
         os.path.join(file.path(__file__), "../watch/targets.yaml"),
     )
     target_options = "".join(
         [
-            xtra("<query-object-name>,"),
+            xtra("<query-object-name>,", mono),
             "target={}".format("|".join(target_list.get_list())),
         ]
     )
 
     workflow_options = "".join(
         [
-            xtra("dryrun,"),
+            xtra("dryrun,", mono),
             "to={}".format("|".join(list_of_runners())),
         ]
     )
 
-    map_options = xtra("dryrun")
+    map_options = xtra("dryrun", mono)
 
     reduce_options = "".join(
         [
-            xtra("dryrun,~gif,"),
+            xtra("dryrun,~gif,", mono),
             "publish",
         ]
     )

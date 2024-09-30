@@ -18,9 +18,10 @@ the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.i
 ```bash
 @catalog query SkyFox help
 ```
+```bash
 @catalog query SkyFox \
 	[dryrun,Venus,select,upload] \
-	ingest,[33m~copy_template,dryrun,overwrite,[96mscope=<scope>[33m,upload[96m \
+	[ingest,~copy_template,dryrun,overwrite,scope=<scope>,upload] \
 	[-|<object-name>] \
 	[--bbox <-122.88,51.73,-122.68,51.93>] \
 	[--count <10>, -1: all] \
@@ -31,6 +32,7 @@ the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.i
 	[--radius <0.1>]
  . SkyFox/Venus -query-> <object-name>.
    scope: @datacube ingest help.
+```
 
 ## case study: Leonardo da Vinci International Airport
 

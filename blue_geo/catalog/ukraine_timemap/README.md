@@ -11,13 +11,15 @@ the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com
 ```bash
 @catalog query ukraine_timemap
 ```
+```bash
 @catalog query ukraine_timemap \
 	[dryrun,ukraine_timemap,select,upload] \
-	ingest,[33m~copy_template,dryrun,overwrite,[96mscope=<scope>[33m,upload[96m \
+	[ingest,~copy_template,dryrun,overwrite,scope=<scope>,upload] \
 	[-|<object-name>] \
 	[--arg <value>]
  . ukraine_timemap/ukraine_timemap -query-> <object-name>.
    scope: @datacube ingest help.
+```
 
 ## example use
 

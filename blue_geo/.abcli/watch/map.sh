@@ -47,9 +47,11 @@ function blue_geo_watch_map() {
         $datacube_id
     [[ $? -ne 0 ]] && return 1
 
+    local cropped_datacube_id=$datacube_id-DERIVED-crop-$crop_suffix
+
     blue_geo_datacube_generate \
         dryrun=$do_dryrun \
-        $datacube_id \
+        $cropped_datacube_id \
         --modality $modality
     [[ $? -ne 0 ]] && return 1
 
@@ -63,7 +65,7 @@ function blue_geo_watch_map() {
         return 1
     fi
     cp -v \
-        $ABCLI_OBJECT_ROOT/$datacube_id-DERIVED-crop-$crop_suffix/$filename \
+        $ABCLI_OBJECT_ROOT/$cropped_datacube_id/$filename \
         $ABCLI_OBJECT_ROOT/$object_name/
 
     abcli_eval dryrun=$do_dryrun \

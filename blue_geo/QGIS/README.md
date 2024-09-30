@@ -9,7 +9,7 @@ pip install blue-geo
 ```bash
 QGIS help
 ```
---help-- QGIS help
+❗️ not found!
 
 to terraform QGIS, generate the seed 🌱,
 

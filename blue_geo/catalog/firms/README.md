@@ -11,7 +11,7 @@ the `firms` catalog covers [FIRMS](https://firms.modaps.eosdis.nasa.gov): Fire I
 ```bash
 @catalog query firms help
 ```
---help-- blue_geo_catalog query firms help
+❗️ not found!
 
 ## example use
 

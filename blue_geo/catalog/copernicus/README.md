@@ -14,7 +14,7 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 ```bash
 @catalog query copernicus help
 ```
---help-- blue_geo_catalog query copernicus help
+❗️ not found!
 
 ## case study: Chilcotin River Landslide
 

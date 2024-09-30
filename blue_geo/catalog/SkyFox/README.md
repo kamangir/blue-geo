@@ -18,7 +18,7 @@ the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.i
 ```bash
 @catalog query SkyFox help
 ```
---help-- blue_geo_catalog query SkyFox help
+❗️ not found!
 
 ## case study: Leonardo da Vinci International Airport
 

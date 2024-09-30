@@ -4,6 +4,7 @@ from typing import List
 from blue_objects import file, README
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
 from blue_geo.watch.targets import jasper
+from blue_geo.help.functions import get as get_help
 from blue_geo.watch.targets.classes import TargetList
 
 
@@ -20,6 +21,10 @@ def build() -> bool:
             NAME=NAME,
             VERSION=VERSION,
             REPO_NAME=REPO_NAME,
+            help_function=lambda tokens: get_help(
+                tokens,
+                mono=True,
+            ),
         )
         for suffix, items, cols, macros, in [
             (

@@ -11,7 +11,7 @@ the `ukraine-timemap` catalog covers the [Bellingcat](https://www.bellingcat.com
 ```bash
 @catalog query ukraine_timemap help
 ```
---help-- blue_geo_catalog query ukraine_timemap help
+❗️ not found!
 
 ## example use
 

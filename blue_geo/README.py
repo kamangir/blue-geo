@@ -7,6 +7,7 @@ from blue_objects.env import ABCLI_PUBLIC_PREFIX
 from blue_geo.catalog.README import build as build_catalog
 from blue_geo.watch.README import items as watch_items
 from blue_geo.watch.targets.README import build as build_targets
+from blue_geo.help.functions import get as get_help
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
 
 
@@ -106,6 +107,10 @@ def build() -> bool:
                 NAME=NAME,
                 VERSION=VERSION,
                 REPO_NAME=REPO_NAME,
+                help_function=lambda tokens: get_help(
+                    tokens,
+                    mono=True,
+                ),
             )
             for suffix, items, cols, macros, in [
                 ("..", items, 3, {}),

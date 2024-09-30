@@ -17,16 +17,14 @@ class SkyFoxVenusDatacube(STACDatacube):
 
     name = "Venus"
 
-    def ingest(
+    def generate(
         self,
-        dryrun: bool = False,
+        modality: str,
         overwrite: bool = False,
-        scope: str = "metadata",
-        verbose: bool = True,
-    ) -> Tuple[bool, Any]:
-        success, output = super().ingest(dryrun, overwrite, scope, verbose)
-        if not success or not DatacubeScope(scope).rgbx:
-            return success, output
+    ) -> str:
+        if modality != "rgb":
+            logger.error(f"{modality}: modality is not implemented.")
+            return ""
 
         list_of_colors = ["red", "green", "blue"]
 
@@ -35,28 +33,22 @@ class SkyFoxVenusDatacube(STACDatacube):
             candidates = self.list_of_files(DatacubeScope(suffix))
             if not candidates:
                 logger.error(f"cannot find {suffix}.")
-                return False, output
+                return ""
 
             filenames[color] = self.full_filename(candidates[0])
 
         rgb_filename = filenames["red"].replace(rgb_suffixes[0], "SRE_RGB.tif")
-        if file.exists(rgb_filename):
+        if file.exists(rgb_filename) and not overwrite:
             logger.info(f"✅ {rgb_filename}")
-            return True, output
+            return ""
 
-        return (
-            host.shell(
-                " ".join(
-                    [
-                        "gdal_merge",
-                        "-separate",
-                        f"-o {rgb_filename}",
-                    ]
-                    + [filenames[color] for color in list_of_colors]
-                ),
-                log=verbose,
-            ),
-            output,
+        return " ".join(
+            [
+                "gdal_merge",
+                "-separate",
+                f"-o {rgb_filename}",
+            ]
+            + [filenames[color] for color in list_of_colors]
         )
 
     def ingest_filename(

@@ -48,6 +48,12 @@ class GenericDatacube:
     def full_filename(self, filename: str) -> str:
         return objects.path_of(filename, self.datacube_id, create=True)
 
+    def generate(
+        modality: str,
+        overwrite: bool = False,
+    ) -> str:
+        return ""
+
     def ingest(
         self,
         dryrun: bool = False,

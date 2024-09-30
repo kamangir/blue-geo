@@ -47,6 +47,8 @@ def test_datacube_from_datacube_id(datacube_id: str):
     success, _ = datacube.ingest()
     assert success
 
+    assert isinstance(datacube.generate("rgb"), str)
+
     assert datacube.list_of_files()
 
 

@@ -90,13 +90,13 @@ Leonardo:
   catalog: SkyFox
   collection: Venus
   params:
-    height: 0.145
-    width: 0.145
+    height: 0.07
+    width: 0.07
   query_args:
     count: 30
     datetime: 2019-12-13/2020-10-28
-    lat: 41.8003
-    lon: 12.2389
+    lat: 41.81
+    lon: 12.255
     radius: 0.01
   urls:
     Wikipedia: https://en.wikipedia.org/wiki/Rome_Fiumicino_Airport, The 9th busiest airport in Europe and the world's 46th-busiest airport with over 40.5 million passengers served in 2023.
@@ -111,8 +111,8 @@ Leonardo-test:
   query_args:
     count: 3
     datetime: 2019-12-13/2020-10-28
-    lat: 41.8003
-    lon: 12.2389
+    lat: 41.81
+    lon: 12.255
     radius: 0.01
 
 Hurricane-Idalia-2023:

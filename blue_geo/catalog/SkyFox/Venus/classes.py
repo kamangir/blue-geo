@@ -1,4 +1,5 @@
 from typing import List, Tuple, Any, Dict
+import numpy as np
 
 from blue_objects import host, file, host
 
@@ -90,7 +91,7 @@ class SkyFoxVenusDatacube(STACDatacube):
     ) -> List[str]:
         raw_datacube_id = self.raw_datacube_id()
 
-        return scope.filter(
+        output = scope.filter(
             [
                 {
                     "filename": (value.href.split(f"{raw_datacube_id}/", 1)[1]),
@@ -101,6 +102,38 @@ class SkyFoxVenusDatacube(STACDatacube):
             needed_for_rgb=lambda filename: any(
                 filename.endswith(suffix) for suffix in rgb_suffixes
             ),
-            is_rgb=lambda filename: False,  # TODO
             verbose=verbose,
         )
+
+        if scope.rgb:
+            suffix = rgb_suffixes[0]
+            candidates = self.list_of_files(DatacubeScope(suffix))
+            if candidates:
+                rgb_filename = candidates[0].replace(suffix, "SRE_RGB.tif")
+                output += [rgb_filename]
+
+        return output
+
+    @staticmethod
+    def load_rgb_as_uint8(
+        filename: str,
+        ignore_error: bool = False,
+        log: bool = False,
+    ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
+        success, frame, frame_file_metadata = super(
+            SkyFoxVenusDatacube, SkyFoxVenusDatacube
+        ).load_rgb_as_uint8(
+            filename,
+            ignore_error=ignore_error,
+            log=log,
+        )
+
+        if success:
+            frame = frame[:, :, [0, 2, 4]]
+
+            frame = frame.astype(np.float32) / 5000 * 255
+            frame[frame < 0] = 0
+            frame[frame > 255] = 255
+            frame = frame.astype(np.uint8)
+
+        return success, frame, frame_file_metadata

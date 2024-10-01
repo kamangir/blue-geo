@@ -1,5 +1,6 @@
 import os
 from typing import Any, Tuple, Dict, List
+import numpy as np
 
 from blueness import module
 from blue_objects import file, objects, path
@@ -109,6 +110,22 @@ class GenericDatacube:
     ) -> List[str]:
         return []
 
+    @staticmethod
+    def load_rgb_as_uint8(
+        filename: str,
+        ignore_error: bool = False,
+        log: bool = False,
+    ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
+        success, frame, frame_file_metadata = file.load_geoimage(
+            filename,
+            ignore_error=ignore_error,
+            log=log,
+        )
+
+        frame = np.transpose(frame, (1, 2, 0))
+
+        return success, frame, frame_file_metadata
+
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[
         bool,
@@ -140,7 +157,12 @@ class GenericDatacube:
 
         segments = datacube_id.split("-", 3)
 
-        return segments[3] if len(segments) >= 4 else ""
+        output = segments[3] if len(segments) >= 4 else ""
+
+        if "-DERIVED-" in output:
+            output = output.split("-DERIVED-", 1)[0]
+
+        return output
 
     def update_metadata(self, verbose: bool = False) -> bool:
         if verbose:

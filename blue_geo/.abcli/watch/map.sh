@@ -47,23 +47,25 @@ function blue_geo_watch_map() {
         $datacube_id
     [[ $? -ne 0 ]] && return 1
 
+    local cropped_datacube_id=$datacube_id-DERIVED-crop-$crop_suffix
+
     blue_geo_datacube_generate \
         dryrun=$do_dryrun \
-        $datacube_id \
+        $cropped_datacube_id \
         --modality $modality
     [[ $? -ne 0 ]] && return 1
 
-    local filename=$(blue_geo_datacube_list $datacube_id \
+    local filename=$(blue_geo_datacube_list $cropped_datacube_id \
         --scope rgb \
         --log 0 \
         --count 1 \
         --exists 1)
     if [[ -z "$filename" ]]; then
-        abcli_log_error "-@geo: watch: map: offset=$offset: $datacube_id: file not found."
+        abcli_log_error "-@geo: watch: map: offset=$offset: $cropped_datacube_id: file not found."
         return 1
     fi
     cp -v \
-        $ABCLI_OBJECT_ROOT/$datacube_id-DERIVED-crop-$crop_suffix/$filename \
+        $ABCLI_OBJECT_ROOT/$cropped_datacube_id/$filename \
         $ABCLI_OBJECT_ROOT/$object_name/
 
     abcli_eval dryrun=$do_dryrun \

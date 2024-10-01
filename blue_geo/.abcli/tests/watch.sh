@@ -3,26 +3,37 @@
 function test_blue_geo_watch() {
     local options=$1
 
-    local object_name=test_blue_geo_watch-$(abcli_string_timestamp)
+    local list_of_targets=$(abcli_option "$options" target test+Leonardo-test)
 
-    blue_geo_watch \
-        ,$options \
-        target=test \
-        to=local \
-        - \
-        - \
-        $object_name
+    local target
+    for target in $(echo $list_of_targets | tr + " "); do
+        local object_name=test_blue_geo_watch-$target-$(abcli_string_timestamp)
 
-    abcli_clone \
-        ~download \
-        $object_name \
-        test_blue_geo_watch_v2
+        blue_geo_watch \
+            ,$options \
+            target=$target \
+            to=local \
+            - \
+            - \
+            $object_name
+        [[ $? -ne 0 ]] && return 1
 
-    abcli_publish \
-        tar \
-        test_blue_geo_watch_v2
+        local public_name=test_blue_geo_watch_v3-$target
 
-    abcli_publish \
-        suffix=.gif \
-        test_blue_geo_watch_v2
+        abcli_clone \
+            ~download \
+            $object_name \
+            $public_name
+        [[ $? -ne 0 ]] && return 1
+
+        abcli_publish \
+            tar \
+            $public_name
+        [[ $? -ne 0 ]] && return 1
+
+        abcli_publish \
+            suffix=.gif \
+            $public_name
+        [[ $? -ne 0 ]] && return 1
+    done
 }

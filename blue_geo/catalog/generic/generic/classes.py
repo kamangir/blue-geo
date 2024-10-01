@@ -1,5 +1,6 @@
 import os
 from typing import Any, Tuple, Dict, List
+import numpy as np
 
 from blueness import module
 from blue_objects import file, objects, path
@@ -108,6 +109,22 @@ class GenericDatacube:
         verbose: bool = False,
     ) -> List[str]:
         return []
+
+    @staticmethod
+    def load_rgb_as_uint8(
+        filename: str,
+        ignore_error: bool = False,
+        log: bool = False,
+    ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
+        success, frame, frame_file_metadata = file.load_geoimage(
+            filename,
+            ignore_error=ignore_error,
+            log=log,
+        )
+
+        frame = np.transpose(frame, (1, 2, 0))
+
+        return success, frame, frame_file_metadata
 
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[

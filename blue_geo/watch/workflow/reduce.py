@@ -15,6 +15,7 @@ from notebooks_and_scripts import NAME as NBS_NAME, VERSION as NBS_VERSION
 from blue_geo import NAME, VERSION
 from blue_geo import NAME as BLUE_GEO_NAME
 from blue_geo.watch.workflow.common import load_watch
+from blue_geo.catalog.functions import get_datacube_class
 from blue_geo.logger import logger
 
 
@@ -79,16 +80,26 @@ def reduce_function(
             .get("datacube_id", "unknown")
         )
 
-        success, frame = file.load_image(filename)
+        datacube_class = get_datacube_class(datacube_id)
+        success, frame, frame_file_metadata = datacube_class.load_rgb_as_uint8(
+            filename, log=True
+        )
         if not success:
             bad_frames.append(file.name_and_extension(filename))
             continue
 
-        frame_fp32 = frame.astype(np.float32).flatten() / 255.0
+        frame_range = (float(np.min(frame)), float(np.max(frame)))
+        logger.info(
+            "frame: {} : {}".format(
+                string.pretty_shape_of_matrix(frame),
+                frame_range,
+            )
+        )
+
+        frame_fp32 = frame.astype(np.float32).flatten() / 255
         frame_fp32 = frame_fp32[frame_fp32 > 0.0]
         frame_fp32 = frame_fp32[frame_fp32 < 1.0]
         frame_content_ratio = len(frame_fp32) / frame.size
-
         frame_has_content = bool(frame_content_ratio > content_threshold)
         logger.info(
             "{} {} / {} @ {}: content={:.03f} <?> {:.03f}".format(
@@ -106,6 +117,8 @@ def reduce_function(
                 "content": float(frame_content_ratio),
                 "has_content": bool(frame_has_content),
                 "shape": list(frame.shape),
+                "metadata": frame_file_metadata,
+                "range": frame_range,
             }
         )
 
@@ -142,7 +155,7 @@ def reduce_function(
         )
 
         frame_filename = file.add_extension(filename, "png")
-        if not file.save_image(frame_filename, frame):
+        if not file.save_image(frame_filename, frame, log=True):
             bad_frames.append(frame_filename)
         else:
             list_of_frames.append(frame_filename)

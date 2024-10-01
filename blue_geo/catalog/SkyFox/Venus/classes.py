@@ -1,4 +1,5 @@
 from typing import List, Tuple, Any, Dict
+import numpy as np
 
 from blue_objects import host, file, host
 
@@ -112,3 +113,27 @@ class SkyFoxVenusDatacube(STACDatacube):
                 output += [rgb_filename]
 
         return output
+
+    @staticmethod
+    def load_rgb_as_uint8(
+        filename: str,
+        ignore_error: bool = False,
+        log: bool = False,
+    ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
+        success, frame, frame_file_metadata = super(
+            SkyFoxVenusDatacube, SkyFoxVenusDatacube
+        ).load_rgb_as_uint8(
+            filename,
+            ignore_error=ignore_error,
+            log=log,
+        )
+
+        if success:
+            frame = frame[:, :, [0, 2, 4]]
+
+            frame = frame.astype(np.float32) / 5000 * 255
+            frame[frame < 0] = 0
+            frame[frame > 255] = 255
+            frame = frame.astype(np.uint8)
+
+        return success, frame, frame_file_metadata

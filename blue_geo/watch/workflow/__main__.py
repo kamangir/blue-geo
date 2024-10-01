@@ -51,6 +51,12 @@ parser.add_argument(
     "--suffix",
     type=str,
 )
+parser.add_argument(
+    "--content_threshold",
+    type=float,
+    default=0.5,
+    help="0..1",
+)
 args = parser.parse_args()
 
 success = args.task in list_of_tasks
@@ -72,6 +78,7 @@ elif args.task == "reduce":
         query_object_name=args.query_object_name,
         suffix=args.suffix,
         object_name=args.object_name,
+        content_threshold=args.content_threshold,
     )
 else:
     success = None

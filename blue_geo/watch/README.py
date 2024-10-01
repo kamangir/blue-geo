@@ -6,7 +6,7 @@ from blue_geo import REPO_NAME
 
 list_of_targets = {
     "chilcotin-river-landslide": {
-        "test_blue_geo_watch_v2": [
+        "test_blue_geo_watch_v3-Chilcotin-test": [
             f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)"
         ],
         "geo-watch-2024-08-31-chilcotin-c": [
@@ -43,9 +43,12 @@ list_of_targets = {
         ]
     },
     "Leonardo": {
-        "geo-watch-2024-09-30-Leonardo-d": [
+        "test_blue_geo_watch_v3-Leonardo-test": [
+            f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)"
+        ],
+        "geo-watch-2024-09-30-Leonardo-g": [
             "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-237-99db71023445)",
-        ]
+        ],
     },
 }
 

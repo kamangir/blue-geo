@@ -132,7 +132,7 @@ Hurricane-Idalia-2023:
     National Weather Service: https://www.weather.gov/tae/HurricaneIdalia2023, Hurricane Idalia Strikes the Florida Big Bend.
     Google Map: https://maps.app.goo.gl/CAeoKQrZQ9rTsDrGA
 
-test:
+Chilcotin-test:
   catalog: copernicus
   collection: sentinel_2
   params:

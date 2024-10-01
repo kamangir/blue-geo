@@ -7,6 +7,8 @@ function test_blue_geo_watch() {
 
     local target
     for target in $(echo $list_of_targets | tr + " "); do
+        abcli_log "🎯 $target"
+
         local object_name=test_blue_geo_watch-$target-$(abcli_string_timestamp)
 
         blue_geo_watch \
@@ -35,5 +37,9 @@ function test_blue_geo_watch() {
             suffix=.gif \
             $public_name
         [[ $? -ne 0 ]] && return 1
+
+        abcli_hr
     done
+
+    return 0
 }

@@ -5,7 +5,7 @@ from blue_geo.watch.targets.classes import Target, TargetList
 
 @pytest.fixture
 def target_list():
-    return TargetList()
+    return TargetList(download=True)
 
 
 @pytest.mark.parametrize(

@@ -74,51 +74,37 @@ def reduce_function(
     for index, filename in enumerate(list_of_files):
         frame_metadata.setdefault(file.name_and_extension(filename), {})
 
-        datacube_id = (
+        frame_content_ratio = (
             frame_metadata[file.name_and_extension(filename)]
             .get("map", {})
-            .get("datacube_id", "unknown")
+            .get("content_ratio", -1)
         )
-
-        datacube_class = get_datacube_class(datacube_id)
-        success, frame, frame_file_metadata = datacube_class.load_rgb_as_uint8(
-            filename, log=True
+        frame_is_usable = (
+            frame_metadata[file.name_and_extension(filename)]
+            .get("map", {})
+            .get("usable", False)
         )
-        if not success:
+        if not frame_is_usable:
             bad_frames.append(file.name_and_extension(filename))
             continue
 
-        frame_range = (float(np.min(frame)), float(np.max(frame)))
-        logger.info(
-            "frame: {} : {}".format(
-                string.pretty_shape_of_matrix(frame),
-                frame_range,
-            )
-        )
+        frame_filename = file.add_extension(filename, "png")
 
-        frame_fp32 = frame.astype(np.float32).flatten() / 255
-        frame_fp32 = frame_fp32[frame_fp32 > 0.0]
-        frame_fp32 = frame_fp32[frame_fp32 < 1.0]
-        frame_content_ratio = len(frame_fp32) / frame.size
         frame_has_content = bool(frame_content_ratio > content_threshold)
         logger.info(
-            "{} {} / {} @ {}: content={:.03f} <?> {:.03f}".format(
+            "{} / {} @ {}: content={:.03f} {} {:.03f}".format(
                 "✅" if frame_has_content else "🛑",
-                datacube_id,
                 file.name_and_extension(filename),
                 string.pretty_shape_of_matrix(frame),
                 frame_content_ratio,
+                ">=" if frame_has_content else "<",
                 content_threshold,
             )
         )
 
         frame_metadata[file.name_and_extension(filename)].update(
             {
-                "content": float(frame_content_ratio),
                 "has_content": bool(frame_has_content),
-                "shape": list(frame.shape),
-                "metadata": frame_file_metadata,
-                "range": frame_range,
             }
         )
 
@@ -126,39 +112,7 @@ def reduce_function(
             low_content_frames.append(file.name_and_extension(filename))
             continue
 
-        frame = add_signature(
-            frame,
-            header=[
-                " | ".join(
-                    objects.signature(
-                        "{} / {}".format(
-                            datacube_id,
-                            file.name_and_extension(filename),
-                        ),
-                        object_name,
-                    )
-                    + [
-                        "{:05.1f}%".format(frame_content_ratio * 100.0),
-                        "{:03d} / {:03d}".format(index, len(list_of_files)),
-                    ]
-                ),
-            ],
-            footer=[
-                str(target),
-                " | ".join(
-                    [f"{BLUE_GEO_NAME}.{VERSION}"]
-                    + [f"{NBS_NAME}.{NBS_VERSION}"]
-                    + host_signature()
-                ),
-            ],
-            word_wrap=False,
-        )
-
-        frame_filename = file.add_extension(filename, "png")
-        if not file.save_image(frame_filename, frame, log=True):
-            bad_frames.append(frame_filename)
-        else:
-            list_of_frames.append(frame_filename)
+        list_of_frames.append(frame_filename)
     if bad_frames:
         logger.error("{} bad frame(s).".format(len(bad_frames)))
 
@@ -191,5 +145,5 @@ def reduce_function(
             frame_duration=1000,
             scale=scale,
         )
-        for scale in [1, 2]
+        for scale in [1, 2, 4]
     )

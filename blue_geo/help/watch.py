@@ -16,7 +16,7 @@ def help_map(
     options = "".join(
         [
             xtra("dryrun,~download,", mono),
-            "modality={},".format("|".join(modality_options)),
+            "modality=<modality>,",
             "offset=<offset>,suffix=<suffix>",
             xtra(",~upload", mono),
         ]
@@ -29,6 +29,9 @@ def help_map(
             "[.|<query-object-name>]",
         ],
         "@geo watch map <query-object-name> @ <offset> -> /<suffix>.",
+        {
+            "modality: {},".format("|".join(modality_options)): [],
+        },
         mono=mono,
     )
 
@@ -131,24 +134,25 @@ def help(
     target_list = TargetList(
         os.path.join(file.path(__file__), "../watch/targets.yaml"),
     )
+
     target_options = "".join(
         [
-            xtra("<query-object-name>,", mono),
-            "target={}".format("|".join(target_list.get_list())),
+            xtra("<query-object-name> | ", mono),
+            "target=<target>",
         ]
     )
 
     workflow_options = "".join(
         [
             xtra("dryrun,", mono),
-            "to={}".format("|".join(list_of_runners())),
+            "to=<runner>",
         ]
     )
 
     map_options = "".join(
         [
             xtra("dryrun,", mono),
-            "modality={}".format("|".join(modality_options)),
+            "modality=<modality>",
         ]
     )
 
@@ -170,6 +174,11 @@ def help(
             "[-|<object-name>]",
         ],
         "watch target -> <object-name>.",
+        {
+            "modality: {}".format("|".join(modality_options)): [],
+            "runner: {}".format("|".join(list_of_runners())): [],
+            "target: {}".format("|".join(target_list.get_list())): [],
+        },
         mono=mono,
     )
 

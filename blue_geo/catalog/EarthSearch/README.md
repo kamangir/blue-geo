@@ -39,8 +39,6 @@ the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex
 
 ---
 
-details: [targets.yaml](../targets.yaml).
-
 
 using [chilcotin-river-landslide](../../watch/targets/chilcotin-river-landslide.md).
 

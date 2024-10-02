@@ -50,6 +50,12 @@ list_of_targets = {
             "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-237-99db71023445)",
         ],
     },
+    "bellingcat-2024–09–27-nagorno-karabakh": {
+        "bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b": [
+            "[background](https://www.bellingcat.com/news/mena/2024/09/27/nagorno-karabakh-satellite-imagery-shows-city-wide-ransacking/)",
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-241-3e25857747a5)",
+        ]
+    },
 }
 
 

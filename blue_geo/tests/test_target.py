@@ -5,12 +5,7 @@ from blue_geo.watch.targets.classes import Target, TargetList
 
 @pytest.fixture
 def target_list():
-    return TargetList(
-        os.path.join(
-            os.path.dirname(__file__),
-            "../watch/targets.yaml",
-        )
-    )
+    return TargetList()
 
 
 @pytest.mark.parametrize(

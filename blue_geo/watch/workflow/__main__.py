@@ -6,7 +6,6 @@ from blueness.argparse.generic import sys_exit
 from blue_objects import file
 
 from blue_geo import NAME
-from blue_geo.watch.targets.classes import TargetList
 from blue_geo.watch.workflow.generation import generate_workflow
 from blue_geo.watch.workflow.map import map_function
 from blue_geo.watch.workflow.reduce import reduce_function

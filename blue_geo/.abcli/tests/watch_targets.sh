@@ -3,6 +3,8 @@
 function test_blue_geo_watch_targets_get_catalog() {
     local options=$1
 
+    abcli_download - $BLUE_GEO_WATCH_TARGET_LIST
+
     abcli_assert \
         $(blue_geo_watch_targets get \
             --what catalog \
@@ -21,6 +23,8 @@ function test_blue_geo_watch_targets_get_catalog() {
 
 function test_blue_geo_watch_targets_get_collection() {
     local options=$1
+
+    abcli_download - $BLUE_GEO_WATCH_TARGET_LIST
 
     abcli_assert \
         $(blue_geo_watch_targets get \
@@ -41,6 +45,8 @@ function test_blue_geo_watch_targets_get_collection() {
 function test_blue_geo_watch_targets_get_exists() {
     local options=$1
 
+    abcli_download - $BLUE_GEO_WATCH_TARGET_LIST
+
     abcli_assert \
         $(blue_geo_watch_targets get \
             --what exists \
@@ -59,6 +65,8 @@ function test_blue_geo_watch_targets_get_exists() {
 
 function test_blue_geo_watch_targets_get_query_args() {
     local options=$1
+
+    abcli_download - $BLUE_GEO_WATCH_TARGET_LIST
 
     abcli_assert \
         $(blue_geo_watch_targets get \
@@ -80,6 +88,8 @@ function test_blue_geo_watch_targets_get_query_args() {
 
 function test_blue_geo_watch_targets_list() {
     local options=$1
+
+    abcli_download - $BLUE_GEO_WATCH_TARGET_LIST
 
     abcli_assert \
         $(blue_geo_watch_targets list \

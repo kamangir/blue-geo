@@ -24,6 +24,8 @@ function blue_geo_watch() {
         fi
     done
 
+    abcli_download - $BLUE_GEO_WATCH_TARGET_LIST
+
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
 
     local object_name=$(abcli_clarify_object $6 geo-watch-$(abcli_string_timestamp))

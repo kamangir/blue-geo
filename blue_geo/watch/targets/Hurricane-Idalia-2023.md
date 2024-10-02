@@ -10,6 +10,4 @@ details: [targets.yaml](../targets.yaml).
 
 ---
 
-details: [targets.yaml](../targets.yaml).
-
 used by: [`@geo watch`](../).

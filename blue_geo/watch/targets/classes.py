@@ -5,6 +5,8 @@ from shapely.geometry import Polygon
 
 from blue_objects import file, objects
 
+from blue_geo.env import BLUE_GEO_WATCH_TARGET_LIST
+
 
 class Target:
     def __init__(
@@ -144,11 +146,15 @@ class Target:
 
 
 class TargetList:
-    def __init__(self, filename: str = "") -> None:
+    def __init__(
+        self,
+        load: bool = True,
+        download: bool = False,
+    ) -> None:
         self.targets: Dict[str, Target] = {}
 
-        if filename:
-            self.load(filename)
+        if load:
+            assert self.load(download)
 
     def get_list(
         self,
@@ -164,7 +170,23 @@ class TargetList:
             ]
         )
 
-    def load(self, filename: str) -> bool:
+    def load(
+        self,
+        download: bool = False,
+    ) -> bool:
+        object_name = BLUE_GEO_WATCH_TARGET_LIST
+
+        if download and not objects.download(
+            object_name=object_name,
+            filename="metadata.yaml",
+        ):
+            return False
+
+        filename = objects.path_of(
+            object_name=object_name,
+            filename="metadata.yaml",
+        )
+
         self.targets = {}
 
         success, targets = file.load_yaml(filename, ignore_error=True)

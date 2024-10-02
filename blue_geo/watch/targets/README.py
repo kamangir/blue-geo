@@ -10,7 +10,7 @@ from blue_geo.watch.targets.classes import TargetList
 
 
 def build() -> bool:
-    target_list = TargetList(os.path.join(file.path(__file__), "../targets.yaml"))
+    target_list = TargetList()
 
     return all(
         README.build(
@@ -36,8 +36,6 @@ def build() -> bool:
                 {
                     "--footer--": [
                         "---",
-                        "",
-                        "details: [targets.yaml](../targets.yaml).",
                         "",
                         "used by: {}.".format(
                             ", ".join(

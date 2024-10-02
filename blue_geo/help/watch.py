@@ -131,9 +131,7 @@ def help(
 ) -> str:
     options = xtra("dryrun", mono)
 
-    target_list = TargetList(
-        os.path.join(file.path(__file__), "../watch/targets.yaml"),
-    )
+    target_list = TargetList()
 
     target_options = "".join(
         [

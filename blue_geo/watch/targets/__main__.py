@@ -63,9 +63,7 @@ args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
 
-target_list = TargetList(
-    os.path.join(file.path(__file__), "../targets.yaml"),
-)
+target_list = TargetList()
 
 target = target_list.targets.get(args.target_name, Target())
 

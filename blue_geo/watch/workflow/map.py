@@ -40,7 +40,7 @@ def map_function(
     )
 
     datacube_class = get_datacube_class(datacube_id)
-    success, frame, frame_metadata = datacube_class.load_modality(
+    success, frame, _ = datacube_class.load_modality(
         filename,
         modality=modality,
         log=True,
@@ -94,7 +94,6 @@ def map_function(
             "content_ratio": content_ratio,
             "datacube_id": datacube_id,
             "filename": file.name_and_extension(filename),
-            "metadata": frame_metadata,
             "target": target.__dict__,
             "usable": success,
         },

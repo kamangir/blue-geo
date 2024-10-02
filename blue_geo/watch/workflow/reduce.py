@@ -71,7 +71,7 @@ def reduce_function(
     bad_frames: List[str] = []
     low_content_frames: List[str] = []
     list_of_frames: List[str] = []
-    for index, filename in enumerate(list_of_files):
+    for _, filename in enumerate(list_of_files):
         frame_metadata.setdefault(file.name_and_extension(filename), {})
 
         frame_content_ratio = (
@@ -92,10 +92,9 @@ def reduce_function(
 
         frame_has_content = bool(frame_content_ratio > content_threshold)
         logger.info(
-            "{} / {} @ {}: content={:.03f} {} {:.03f}".format(
+            "{} / {}: content={:.03f} {} {:.03f}".format(
                 "✅" if frame_has_content else "🛑",
                 file.name_and_extension(filename),
-                string.pretty_shape_of_matrix(frame),
                 frame_content_ratio,
                 ">=" if frame_has_content else "<",
                 content_threshold,

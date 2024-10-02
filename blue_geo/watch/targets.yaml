@@ -146,8 +146,8 @@ Chilcotin-test:
     radius: 0.01
 
 bellingcat-2024-09-27-nagorno-karabakh:
-  catalog: copernicus
-  collection: sentinel_2
+  catalog: EarthSearch
+  collection: sentinel_2_l1c
   params:
     height: 0.1
     width: 0.1

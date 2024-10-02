@@ -157,3 +157,16 @@ bellingcat-2024-09-27-nagorno-karabakh:
     lat: 39.8239
     lon: 46.7612
     radius: 0.01
+
+bellingcat-2024-09-27-nagorno-karabakh-test:
+  catalog: EarthSearch
+  collection: sentinel_2_l1c
+  params:
+    height: 0.1
+    width: 0.1
+  query_args:
+    count: 2
+    datetime: 2024-05-01/2024-09-01
+    lat: 39.8239
+    lon: 46.7612
+    radius: 0.01

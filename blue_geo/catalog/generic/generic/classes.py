@@ -121,8 +121,21 @@ class GenericDatacube:
             ignore_error=ignore_error,
             log=log,
         )
+        if not success:
+            return success, frame, frame_file_metadata
 
         frame = np.transpose(frame, (1, 2, 0))
+
+        if frame.shape[2] == 6:
+            frame = frame[:, :, [0, 2, 4]]
+        elif frame.shape[2] > 3:
+            frame = frame[:, :, :3]
+
+        if frame.dtype == np.uint16:
+            frame = frame.astype(np.float32) / 5000 * 255
+            frame[frame < 0] = 0
+            frame[frame > 255] = 255
+            frame = frame.astype(np.uint8)
 
         return success, frame, frame_file_metadata
 

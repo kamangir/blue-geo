@@ -90,25 +90,6 @@ class CopernicusSentinel2Datacube(STACDatacube):
             verbose=verbose,
         )
 
-    @staticmethod
-    def load_rgb_as_uint8(
-        filename: str,
-        ignore_error: bool = False,
-        log: bool = False,
-    ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
-        success, frame, frame_file_metadata = super(
-            CopernicusSentinel2Datacube, CopernicusSentinel2Datacube
-        ).load_rgb_as_uint8(
-            filename,
-            ignore_error=ignore_error,
-            log=log,
-        )
-
-        if success:
-            frame = frame[:, :, :3]
-
-        return success, frame, frame_file_metadata
-
     def raw_datacube_id(
         self,
         datacube_id: str = "",  # to enable upstream modifications

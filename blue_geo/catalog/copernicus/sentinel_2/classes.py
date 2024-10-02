@@ -1,6 +1,5 @@
-from typing import Any, Tuple, List, Dict
+from typing import Any, Tuple, List
 import boto3
-import numpy as np
 
 from blue_geo import env
 from blue_geo.catalog.copernicus.classes import CopernicusCatalog

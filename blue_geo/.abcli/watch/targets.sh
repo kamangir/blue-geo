@@ -27,5 +27,16 @@ function blue_geo_watch_targets() {
         return
     fi
 
-    python3 -m blue_geo.watch.targets "$@"
+    if [[ ",get,list,save," == *","$task","* ]]; then
+        if [ "$2" == "help" ]; then
+            abcli_show_usage_2 blue_geo watch targets $task
+            return
+        fi
+
+        python3 -m blue_geo.watch.targets "$@"
+        return
+    fi
+
+    abcli_log_error "@geo: watch: $task: command not found."
+    return 1
 }

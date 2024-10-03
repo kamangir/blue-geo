@@ -98,12 +98,9 @@ elif args.task == "list":
 
     if success:
         if args.log:
-            logger.info(
-                "{:,} target(s): {}".format(
-                    len(output),
-                    delim.join(output),
-                )
-            )
+            logger.info("{:,} target(s).".format(len(output)))
+            for index, target_name in enumerate(output):
+                logger.info(f"#{index: 4} - {target_name}")
         else:
             print(delim.join(output))
 elif args.task == "save":

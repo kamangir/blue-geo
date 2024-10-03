@@ -176,11 +176,12 @@ class TargetList:
     ) -> bool:
         object_name = BLUE_GEO_WATCH_TARGET_LIST
 
-        if download and not objects.download(
-            object_name=object_name,
-            filename="metadata.yaml",
-        ):
-            return False
+        if download:
+            if not objects.download(
+                object_name=object_name,
+                filename="metadata.yaml",
+            ):
+                return False
 
         filename = objects.path_of(
             object_name=object_name,
@@ -189,7 +190,7 @@ class TargetList:
 
         self.targets = {}
 
-        success, targets = file.load_yaml(filename, ignore_error=True)
+        _, targets = file.load_yaml(filename, ignore_error=True)
 
         for target_name, target_info in targets.items():
             self.targets[target_name] = Target.from_dict(
@@ -197,4 +198,4 @@ class TargetList:
                 target_info,
             )
 
-        return success
+        return True

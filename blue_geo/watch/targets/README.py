@@ -10,7 +10,7 @@ from blue_geo.watch.targets.classes import TargetList
 
 
 def build() -> bool:
-    target_list = TargetList()
+    target_list = TargetList(download=True)
 
     return all(
         README.build(

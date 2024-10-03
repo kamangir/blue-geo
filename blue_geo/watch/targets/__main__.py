@@ -1,10 +1,8 @@
-import os
-from typing import List, Union
+from typing import List
 import argparse
 
 from blueness import module
 from blueness.argparse.generic import sys_exit
-from blue_objects import file
 
 from blue_geo import NAME
 from blue_geo.watch.targets.classes import TargetList, Target

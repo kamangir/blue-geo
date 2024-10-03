@@ -38,6 +38,22 @@ def help_download(
     )
 
 
+def help_edit(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        [
+            "@geo watch targets edit",
+        ],
+        "edit watch targets.",
+        {
+            f"BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
+        },
+        mono=mono,
+    )
+
+
 def help_get(
     tokens: List[str],
     mono: bool,
@@ -121,6 +137,7 @@ def help_upload(
 help_functions = {
     "cp": help_cp,
     "download": help_download,
+    "edit": help_edit,
     "get": help_get,
     "list": help_list,
     "publish": help_publish,

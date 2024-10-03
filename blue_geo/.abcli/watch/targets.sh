@@ -20,6 +20,12 @@ function blue_geo_watch_targets() {
         return
     fi
 
+    if [[ "$task" == "edit" ]]; then
+        abcli_eval - \
+            nano $ABCLI_OBJECT_ROOT/$BLUE_GEO_WATCH_TARGET_LIST/metadata.yaml
+        return
+    fi
+
     if [[ ",get,list,save," == *","$task","* ]]; then
         python3 -m blue_geo.watch.targets "$@"
         return

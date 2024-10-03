@@ -1,11 +1,13 @@
 # 🌐 `@geo watch`
 
-watch the planet's [story](./targets.yaml) unfold
+watch the planet's story unfold.
 
 ```bash
 @geo watch help
 ```
 --help-- blue_geo watch
+
+🎯 [`geo-watch-targets/metadata.yaml`](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-targets/metadata.yaml).
 
 ## example run
 

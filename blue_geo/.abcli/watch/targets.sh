@@ -30,6 +30,13 @@ function blue_geo_watch_targets() {
         return
     fi
 
+    if [[ "$task" == "publish" ]]; then
+        abcli_publish \
+            as=geo-watch-targets,suffix=.yaml \
+            $BLUE_GEO_WATCH_TARGET_LIST
+        return
+    fi
+
     abcli_log_error "@geo: watch: $task: command not found."
     return 1
 }

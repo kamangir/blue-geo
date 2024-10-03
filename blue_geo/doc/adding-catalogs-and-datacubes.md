@@ -31,7 +31,10 @@ to add a new [catalog](../catalog/) or [datacube](../datacube/) follow these ste
 
 8️⃣ copy and refactor [`tests/test_catalog_EarthSearch_sentinel_1_l1C.py`](../../blue_geo/tests/test_catalog_EarthSearch_sentinel_1_l1C.py).
 
-9️⃣ add a relevant target to [`watch/targets.yaml`](../../blue_geo/watch/targets.yaml).
+9️⃣ add a relevant target,
+```bash
+@geo watch targets edit
+```
 
 🔟 copy and refactor [`targets/Jasper-template.md`](../../blue_geo/watch/targets/Jasper-template.md).
 

@@ -6,8 +6,6 @@ paused ⏸️ - [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversa
  - [National Weather Service](https://www.weather.gov/tae/HurricaneIdalia2023): Hurricane Idalia Strikes the Florida Big Bend.
  - [Wikipedia](https://en.wikipedia.org/wiki/Hurricane_Idalia): A powerful and destructive Category 4 hurricane that caused significant damage across parts of the southeastern, in late August 2023.
 
-details: [targets.yaml](../targets.yaml).
-
 ---
 
 used by: [`@geo watch`](../).

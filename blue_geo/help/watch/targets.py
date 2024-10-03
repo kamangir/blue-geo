@@ -71,6 +71,22 @@ def help_list(
     )
 
 
+def help_publish(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        [
+            "@geo watch targets publish",
+        ],
+        "publish watch targets.",
+        {
+            f"BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
+        },
+        mono=mono,
+    )
+
+
 def help_save(
     tokens: List[str],
     mono: bool,
@@ -107,6 +123,7 @@ help_functions = {
     "download": help_download,
     "get": help_get,
     "list": help_list,
+    "publish": help_publish,
     "save": help_save,
     "upload": help_upload,
 }

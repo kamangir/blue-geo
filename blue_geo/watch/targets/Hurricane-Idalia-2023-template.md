@@ -4,6 +4,4 @@ paused ⏸️ - [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversa
 
 --urls--
 
-details: [targets.yaml](../targets.yaml).
-
 --footer--

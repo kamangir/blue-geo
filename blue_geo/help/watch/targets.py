@@ -3,6 +3,7 @@ from typing import List
 from blue_options.terminal import show_usage
 
 from blue_geo.env import BLUE_GEO_WATCH_TARGET_LIST
+from blue_geo.watch.targets import TargetList
 
 
 def help_cp(
@@ -32,7 +33,7 @@ def help_download(
         ],
         "download watch targets.",
         {
-            f"BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
+            f"$BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
         },
         mono=mono,
     )
@@ -48,7 +49,7 @@ def help_edit(
         ],
         "edit watch targets.",
         {
-            f"BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
+            TargetList.filename(): [],
         },
         mono=mono,
     )
@@ -97,7 +98,7 @@ def help_publish(
         ],
         "publish watch targets.",
         {
-            f"BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
+            f"$BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
         },
         mono=mono,
     )
@@ -128,7 +129,7 @@ def help_upload(
         ],
         "upload watch targets.",
         {
-            f"BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
+            f"$BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
         },
         mono=mono,
     )

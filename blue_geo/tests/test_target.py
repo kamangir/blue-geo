@@ -1,5 +1,7 @@
-import os
 import pytest
+
+from blue_objects import file
+
 from blue_geo.watch.targets.classes import Target, TargetList
 
 
@@ -21,6 +23,12 @@ def test_target_list(
     expected_target: str,
     target_list: TargetList,
 ):
+    assert target_list.targets
+
+    assert target_list.object_name
+
+    assert file.exists(target_list.filename())
+
     list_of_targets = target_list.get_list(
         catalog_name=catalog_name,
         collection=collection,

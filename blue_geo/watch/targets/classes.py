@@ -146,6 +146,8 @@ class Target:
 
 
 class TargetList:
+    object_name = BLUE_GEO_WATCH_TARGET_LIST
+
     def __init__(
         self,
         load: bool = True,
@@ -155,6 +157,13 @@ class TargetList:
 
         if load:
             assert self.load(download)
+
+    @classmethod
+    def filename(cls) -> str:
+        return objects.path_of(
+            filename="metadata.yaml",
+            object_name=cls.object_name,
+        )
 
     def get_list(
         self,
@@ -174,24 +183,16 @@ class TargetList:
         self,
         download: bool = False,
     ) -> bool:
-        object_name = BLUE_GEO_WATCH_TARGET_LIST
-
         if download:
             if not objects.download(
-                object_name=object_name,
+                object_name=self.object_name,
                 filename="metadata.yaml",
             ):
                 return False
 
-        filename = objects.path_of(
-            object_name=object_name,
-            filename="metadata.yaml",
-        )
+        _, targets = file.load_yaml(self.filename(), ignore_error=True)
 
         self.targets = {}
-
-        _, targets = file.load_yaml(filename, ignore_error=True)
-
         for target_name, target_info in targets.items():
             self.targets[target_name] = Target.from_dict(
                 target_name,

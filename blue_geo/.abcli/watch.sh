@@ -24,7 +24,7 @@ function blue_geo_watch() {
         fi
     done
 
-    abcli_download - $BLUE_GEO_WATCH_TARGET_LIST
+    blue_geo_watch_targets download
 
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
 

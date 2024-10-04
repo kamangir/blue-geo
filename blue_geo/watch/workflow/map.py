@@ -69,7 +69,7 @@ def map_function(
             ),
         ],
         footer=[
-            str(target),
+            target.one_liner,
             " | ".join(
                 [f"{BLUE_GEO_NAME}.{VERSION}"]
                 + [f"{NBS_NAME}.{NBS_VERSION}"]

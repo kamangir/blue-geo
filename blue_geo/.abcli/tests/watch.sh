@@ -3,7 +3,7 @@
 function test_blue_geo_watch() {
     local options=$1
 
-    local list_of_targets=$(abcli_option "$options" target Chilcotin-test+Leonardo-test)
+    local list_of_targets=$(abcli_option "$options" target chilcotin-river-landslide-test+Leonardo-test)
 
     local target
     for target in $(echo $list_of_targets | tr + " "); do
@@ -20,10 +20,10 @@ function test_blue_geo_watch() {
             $object_name
         [[ $? -ne 0 ]] && return 1
 
-        local public_name=test_blue_geo_watch_v3-$target
+        local public_name=test_blue_geo_watch_v4-$target
 
         abcli_clone \
-            ~download \
+            ~download,~relate,~tags \
             $object_name \
             $public_name
         [[ $? -ne 0 ]] && return 1

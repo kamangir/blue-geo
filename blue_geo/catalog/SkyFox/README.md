@@ -43,8 +43,6 @@ the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.i
 
 ---
 
-details: [targets.yaml](../targets.yaml).
-
 
 using [Leonardo](../../watch/targets/Leonardo.md).
 

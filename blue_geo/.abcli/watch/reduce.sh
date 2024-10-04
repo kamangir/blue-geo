@@ -48,7 +48,7 @@ function blue_geo_watch_reduce() {
         abcli_log "reducing $leaf_object_name ..."
 
         abcli_clone \
-            cp,~meta \
+            cp,~relate,~tags \
             $leaf_object_name \
             $object_name
 

@@ -73,6 +73,8 @@ function blue_geo_watch_map() {
         map \
         --datacube_id "$datacube_id" \
         --object_name "$object_name" \
+        --modality $modality \
+        --offset $offset \
         "${@:4}"
     local status="$?"
 

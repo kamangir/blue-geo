@@ -1,6 +1,5 @@
-from typing import Any, Tuple, List, Dict
+from typing import Any, Tuple, List
 import boto3
-import numpy as np
 
 from blue_geo import env
 from blue_geo.catalog.copernicus.classes import CopernicusCatalog
@@ -89,25 +88,6 @@ class CopernicusSentinel2Datacube(STACDatacube):
             is_rgb=lambda filename: filename.endswith("TCI.jp2"),
             verbose=verbose,
         )
-
-    @staticmethod
-    def load_rgb_as_uint8(
-        filename: str,
-        ignore_error: bool = False,
-        log: bool = False,
-    ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
-        success, frame, frame_file_metadata = super(
-            CopernicusSentinel2Datacube, CopernicusSentinel2Datacube
-        ).load_rgb_as_uint8(
-            filename,
-            ignore_error=ignore_error,
-            log=log,
-        )
-
-        if success:
-            frame = frame[:, :, :3]
-
-        return success, frame, frame_file_metadata
 
     def raw_datacube_id(
         self,

@@ -2,30 +2,49 @@
 
 function blue_geo_watch_targets() {
     local task=$1
-    local options=$2
+    [[ "$task" == "copy" ]] && task="cp"
 
     if [[ "$task" == "help" ]]; then
         abcli_show_usage_2 blue_geo watch targets
         return
     fi
 
-    if [[ ",cp,copy," == *",$task,"* ]]; then
-        if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-            abcli_show_usage_2 blue_geo watch targets cp
-            return
-        fi
-
-        local object_name_1=$(abcli_clarify_object $3 .)
-        local object_name_2=$(abcli_clarify_object $4 .)
-
-        local target_path=$ABCLI_OBJECT_ROOT/$object_name_2/target/
-        mkdir -pv $target_path
-        cp -v \
-            $ABCLI_OBJECT_ROOT/$object_name_1/target/* \
-            $target_path
-
+    local function_name=blue_geo_watch_targets_$task
+    if [[ $(type -t $function_name) == "function" ]]; then
+        $function_name "${@:2}"
         return
     fi
 
-    python3 -m blue_geo.watch.targets "$@"
+    if [ "$2" == "help" ]; then
+        abcli_show_usage_2 blue_geo watch targets $task
+        return
+    fi
+
+    if [[ "$task" == "edit" ]]; then
+        abcli_eval - \
+            nano $ABCLI_OBJECT_ROOT/$BLUE_GEO_WATCH_TARGET_LIST/metadata.yaml
+        return
+    fi
+
+    if [[ ",get,list,save," == *","$task","* ]]; then
+        python3 -m blue_geo.watch.targets "$@"
+        return
+    fi
+
+    if [[ ",download,upload," == *","$task","* ]]; then
+        abcli_$task - $BLUE_GEO_WATCH_TARGET_LIST
+        return
+    fi
+
+    if [[ "$task" == "publish" ]]; then
+        abcli_publish \
+            as=geo-watch-targets,suffix=.yaml \
+            $BLUE_GEO_WATCH_TARGET_LIST
+        return
+    fi
+
+    abcli_log_error "@geo: watch: $task: command not found."
+    return 1
 }
+
+abcli_source_path - caller,suffix=/targets

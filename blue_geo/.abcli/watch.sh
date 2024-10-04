@@ -24,6 +24,8 @@ function blue_geo_watch() {
         fi
     done
 
+    blue_geo_watch_targets download
+
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
 
     local object_name=$(abcli_clarify_object $6 geo-watch-$(abcli_string_timestamp))
@@ -84,7 +86,7 @@ function blue_geo_watch() {
     abcli_log "🌐 @geo: watch: $query_object_name: -[ $workflow_options @ $map_options + $reduce_options @ $job_name]-> $object_name"
 
     abcli_clone \
-        ~meta,upload \
+        upload \
         $BLUE_GEO_QGIS_TEMPLATE_WATCH \
         $object_name
 

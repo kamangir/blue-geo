@@ -1,12 +1,16 @@
 from typing import List
-from blue_objects.env import ABCLI_PUBLIC_PREFIX
+import os
+
 from blue_options import string
+from blue_objects import file
+from blue_objects.env import ABCLI_PUBLIC_PREFIX
+
 from blue_geo import REPO_NAME
 
 
 list_of_targets = {
     "chilcotin-river-landslide": {
-        "test_blue_geo_watch_v3-Chilcotin-test": [
+        "test_blue_geo_watch_v4-chilcotin-river-landslide-test": [
             f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)"
         ],
         "geo-watch-2024-08-31-chilcotin-c": [
@@ -43,22 +47,34 @@ list_of_targets = {
         ]
     },
     "Leonardo": {
-        "test_blue_geo_watch_v3-Leonardo-test": [
+        "test_blue_geo_watch_v4-Leonardo-test": [
             f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)"
         ],
         "geo-watch-2024-09-30-Leonardo-g": [
             "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-237-99db71023445)",
         ],
     },
+    "bellingcat-2024–09–27-nagorno-karabakh": {
+        "bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b": [
+            "[background](https://www.bellingcat.com/news/mena/2024/09/27/nagorno-karabakh-satellite-imagery-shows-city-wide-ransacking/)",
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-241-3e25857747a5)",
+        ]
+    },
 }
 
+targets_path = file.path(__file__)
 
 items: List[str] = []
 for target_name, list_of_objects in list_of_targets.items():
+    target_README = f"./targets/{target_name}.md"
+
+    target_title = target_name.replace("-", " ").title()
+
     items += [
-        "## [{}]({})".format(
-            target_name.replace("-", " ").title(),
-            f"./targets/{target_name}.md",
+        (
+            f"## [{target_title}]({target_README})"
+            if file.exists(os.path.join(targets_path, target_README))
+            else f"## {target_title}"
         ),
     ]
 

@@ -23,10 +23,15 @@ setup(
         f"{NAME}.catalog.generic.generic",
         f"{NAME}.catalog.ukraine_timemap",
         f"{NAME}.catalog.ukraine_timemap.ukraine_timemap",
+        #
         f"{NAME}.doc",
         f"{NAME}.datacube",
+        #
         f"{NAME}.help",
+        f"{NAME}.help.watch",
+        #
         f"{NAME}.QGIS",
+        #
         f"{NAME}.watch",
         f"{NAME}.watch.targets",
         f"{NAME}.watch.workflow",
@@ -38,7 +43,6 @@ setup(
             "sample.env",
             ".abcli/**/*.sh",
             "**/*.md",
-            "watch/targets.yaml",
         ],
     },
 )

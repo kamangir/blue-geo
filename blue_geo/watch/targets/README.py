@@ -10,7 +10,7 @@ from blue_geo.watch.targets.classes import TargetList
 
 
 def build() -> bool:
-    target_list = TargetList(os.path.join(file.path(__file__), "../targets.yaml"))
+    target_list = TargetList(download=True)
 
     return all(
         README.build(
@@ -37,8 +37,6 @@ def build() -> bool:
                     "--footer--": [
                         "---",
                         "",
-                        "details: [targets.yaml](../targets.yaml).",
-                        "",
                         "used by: {}.".format(
                             ", ".join(
                                 sorted(
@@ -49,7 +47,7 @@ def build() -> bool:
                             )
                         ),
                     ],
-                    "--urls--": target_list.targets[target_name].urls_as_str(),
+                    "--urls--": target_list.get(target_name).urls_as_str(),
                 },
             )
             for target_name in [

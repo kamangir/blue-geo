@@ -3,6 +3,7 @@ from typing import Any, Tuple, Dict, List
 import numpy as np
 
 from blueness import module
+from blue_options import string
 from blue_objects import file, objects, path
 from blue_objects.metadata import post_to_object
 
@@ -111,18 +112,42 @@ class GenericDatacube:
         return []
 
     @staticmethod
-    def load_rgb_as_uint8(
+    def load_modality(
         filename: str,
+        modality: str,
         ignore_error: bool = False,
         log: bool = False,
+        verbose: bool = False,
     ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
         success, frame, frame_file_metadata = file.load_geoimage(
             filename,
             ignore_error=ignore_error,
             log=log,
         )
+        if not success:
+            return success, frame, frame_file_metadata
 
         frame = np.transpose(frame, (1, 2, 0))
+
+        if verbose:
+            frame_range = (float(np.min(frame)), float(np.max(frame)))
+            logger.info(
+                "frame: {} : {}".format(
+                    string.pretty_shape_of_matrix(frame),
+                    frame_range,
+                )
+            )
+
+        if frame.shape[2] == 6:
+            frame = frame[:, :, [0, 2, 4]]
+        elif frame.shape[2] > 3:
+            frame = frame[:, :, :3]
+
+        if frame.dtype == np.uint16:
+            frame = frame.astype(np.float32) / 5000 * 255
+            frame[frame < 0] = 0
+            frame[frame > 255] = 255
+            frame = frame.astype(np.uint8)
 
         return success, frame, frame_file_metadata
 

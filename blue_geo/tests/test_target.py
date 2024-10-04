@@ -1,16 +1,19 @@
-import os
 import pytest
+
+from blue_objects import file
+
 from blue_geo.watch.targets.classes import Target, TargetList
 
 
 @pytest.fixture
 def target_list():
-    return TargetList(
-        os.path.join(
-            os.path.dirname(__file__),
-            "../watch/targets.yaml",
-        )
-    )
+    return TargetList(download=True)
+
+
+def test_target(target_list: TargetList):
+    target = target_list.list_of_targets["elkhema"]
+
+    assert target.one_liner
 
 
 @pytest.mark.parametrize(
@@ -26,6 +29,12 @@ def test_target_list(
     expected_target: str,
     target_list: TargetList,
 ):
+    assert target_list.list_of_targets
+
+    assert target_list.object_name
+
+    assert file.exists(target_list.filename())
+
     list_of_targets = target_list.get_list(
         catalog_name=catalog_name,
         collection=collection,
@@ -35,10 +44,32 @@ def test_target_list(
 
 
 def test_targets_load(target_list: TargetList):
-    assert target_list.targets
+    assert target_list.list_of_targets
 
-    for target in target_list.targets.values():
+    for target in target_list.list_of_targets.values():
         assert isinstance(target, Target)
 
     for target in ["chilcotin-river-landslide", "elkhema"]:
-        assert target in target_list.targets
+        assert target in target_list.list_of_targets
+
+
+def test_targets_get(
+    target_list: TargetList,
+):
+    target = target_list.get("bellingcat-2024-09-27-nagorno-karabakh")
+    assert target.query_args["datetime"] == "2024-05-01/2024-09-01"
+
+    target = target_list.get(
+        "bellingcat-2024-09-27-nagorno-karabakh-test",
+        including_versions=False,
+    )
+    assert not "count" in target.query_args
+
+    target = target_list.get("bellingcat-2024-09-27-nagorno-karabakh-void")
+    assert not "count" in target.query_args
+
+    target = target_list.get("bellingcat-2024-09-27-nagorno-karabakh")
+    assert target.query_args["count"] == 30
+
+    target = target_list.get("bellingcat-2024-09-27-nagorno-karabakh-test")
+    assert target.query_args["count"] == 2

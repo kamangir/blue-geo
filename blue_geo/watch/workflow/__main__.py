@@ -6,10 +6,10 @@ from blueness.argparse.generic import sys_exit
 from blue_objects import file
 
 from blue_geo import NAME
-from blue_geo.watch.targets.classes import TargetList
 from blue_geo.watch.workflow.generation import generate_workflow
 from blue_geo.watch.workflow.map import map_function
 from blue_geo.watch.workflow.reduce import reduce_function
+from blue_geo.datacube.modalities import options as modality_options
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -30,6 +30,11 @@ parser.add_argument(
 parser.add_argument(
     "--map_options",
     type=str,
+)
+parser.add_argument(
+    "--offset",
+    type=int,
+    default=0,
 )
 parser.add_argument(
     "--reduce_options",
@@ -57,6 +62,12 @@ parser.add_argument(
     default=0.5,
     help="0..1",
 )
+parser.add_argument(
+    "--modality",
+    default=modality_options[0],
+    type=str,
+    help="|".join(modality_options),
+)
 args = parser.parse_args()
 
 success = args.task in list_of_tasks
@@ -70,8 +81,10 @@ if args.task == "generate":
     )
 elif args.task == "map":
     success = map_function(
-        args.datacube_id,
-        args.object_name,
+        datacube_id=args.datacube_id,
+        offset=args.offset,
+        modality=args.modality,
+        object_name=args.object_name,
     )
 elif args.task == "reduce":
     success = reduce_function(

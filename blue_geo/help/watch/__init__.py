@@ -1,12 +1,11 @@
-import os
 from typing import List
 
 from blue_options.terminal import show_usage, xtra
-from blue_objects import file
 from notebooks_and_scripts.workflow.runners import list_of_runners
 
 from blue_geo.watch.targets.classes import TargetList
 from blue_geo.datacube.modalities import options as modality_options
+from blue_geo.help.watch.targets import help_functions as help_targets
 
 
 def help_map(
@@ -16,7 +15,7 @@ def help_map(
     options = "".join(
         [
             xtra("dryrun,~download,", mono),
-            "modality={},".format("|".join(modality_options)),
+            "modality=<modality>,",
             "offset=<offset>,suffix=<suffix>",
             xtra(",~upload", mono),
         ]
@@ -29,6 +28,9 @@ def help_map(
             "[.|<query-object-name>]",
         ],
         "@geo watch map <query-object-name> @ <offset> -> /<suffix>.",
+        {
+            "modality: {},".format("|".join(modality_options)): [],
+        },
         mono=mono,
     )
 
@@ -57,98 +59,32 @@ def help_reduce(
     )
 
 
-def help_targets_cp(
-    tokens: List[str],
-    mono: bool,
-) -> str:
-    options = "-"
-    return show_usage(
-        [
-            "@geo watch targets cp|copy",
-            f"[{options}]",
-            "[..|<object-name-1>]",
-            "[.|<object-name-2>]",
-        ],
-        "copy <object-name-1>/target -> <object-name-2>.",
-        mono=mono,
-    )
-
-
-def help_targets_get(
-    tokens: List[str],
-    mono: bool,
-) -> str:
-    args = [
-        "[--delim space]",
-        "[--target_name <target>]",
-        "[--what <catalog|collection|exists|query_args>]",
-    ]
-    return show_usage(
-        ["@geo watch targets get"] + args,
-        "get <target> info.",
-        mono=mono,
-    )
-
-
-def help_targets_list(
-    tokens: List[str],
-    mono: bool,
-) -> str:
-    args = [
-        "[--catalog <catalog>]",
-        "[--collection <collection>]",
-        "[--count <count>]",
-        "[--delim <space>]",
-    ]
-    return show_usage(
-        ["@geo watch targets list"] + args,
-        "list targets.",
-        mono=mono,
-    )
-
-
-def help_targets_save(
-    tokens: List[str],
-    mono: bool,
-) -> str:
-    args = [
-        "[--target_name <target>]",
-        "[--object_name <object-name>]",
-    ]
-    return show_usage(
-        ["@geo watch targets save"] + args,
-        "save <target> -> <object-name>.",
-        mono=mono,
-    )
-
-
 def help(
     tokens: List[str],
     mono: bool,
 ) -> str:
     options = xtra("dryrun", mono)
 
-    target_list = TargetList(
-        os.path.join(file.path(__file__), "../watch/targets.yaml"),
-    )
+    target_list = TargetList()
+
     target_options = "".join(
         [
-            xtra("<query-object-name>,", mono),
-            "target={}".format("|".join(target_list.get_list())),
+            xtra("<query-object-name> | ", mono),
+            "target=<target>",
         ]
     )
 
     workflow_options = "".join(
         [
             xtra("dryrun,", mono),
-            "to={}".format("|".join(list_of_runners())),
+            "to=<runner>",
         ]
     )
 
     map_options = "".join(
         [
             xtra("dryrun,", mono),
-            "modality={}".format("|".join(modality_options)),
+            "modality=<modality>",
         ]
     )
 
@@ -170,6 +106,11 @@ def help(
             "[-|<object-name>]",
         ],
         "watch target -> <object-name>.",
+        {
+            "modality: {}".format("|".join(modality_options)): [],
+            "runner: {}".format("|".join(list_of_runners())): [],
+            "target: {}".format("|".join(target_list.get_list())): [],
+        },
         mono=mono,
     )
 
@@ -178,10 +119,5 @@ help_functions = {
     "": help,
     "map": help_map,
     "reduce": help_reduce,
-    "targets": {
-        "cp": help_targets_cp,
-        "get": help_targets_get,
-        "list": help_targets_list,
-        "save": help_targets_save,
-    },
+    "targets": help_targets,
 }

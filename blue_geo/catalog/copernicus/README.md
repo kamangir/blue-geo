@@ -41,8 +41,6 @@ the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes
 
 ---
 
-details: [targets.yaml](../targets.yaml).
-
 
 using [chilcotin-river-landslide](../../watch/targets/chilcotin-river-landslide.md).
 

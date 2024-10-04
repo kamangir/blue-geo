@@ -2,8 +2,11 @@ from typing import Dict, Tuple, List
 import copy
 import geopandas as gpd
 from shapely.geometry import Polygon
+from functools import reduce
 
 from blue_objects import file, objects
+
+from blue_geo.env import BLUE_GEO_WATCH_TARGET_LIST
 
 
 class Target:
@@ -15,6 +18,7 @@ class Target:
         params: Dict[str, str] = {},
         query_args: Dict[str, str] = {},
         urls: Dict[str, str] = {},
+        versions: Dict[str, str] = {},
     ) -> None:
         self.name: str = name
 
@@ -26,14 +30,7 @@ class Target:
 
         self.urls = copy.deepcopy(urls)
 
-    def __repr__(self) -> str:
-        return "{}: {} | {}/{} | {}".format(
-            self.__class__.__name__,
-            self.name,
-            self.catalog,
-            self.collection,
-            self.query_args_as_str(" | "),
-        )
+        self.versions = copy.deepcopy(versions)
 
     @classmethod
     def from_dict(
@@ -48,6 +45,35 @@ class Target:
             params=copy.deepcopy(data.get("params", {})),
             query_args=copy.deepcopy(data.get("query_args", {})),
             urls=copy.deepcopy(data.get("urls", {})),
+            versions=copy.deepcopy(data.get("versions", {})),
+        )
+
+    def get_version(
+        self,
+        version: str,
+        is_full_name: bool = False,
+    ) -> "Target":
+        if is_full_name:
+            version = version[len(self.name) + 1 :]
+
+        if version not in self.versions:
+            return Target()
+
+        version_updates = self.versions.get(version, {})
+
+        params = copy.deepcopy(self.params)
+        params.update(version_updates.get("params", {}))
+
+        query_args = copy.deepcopy(self.query_args)
+        query_args.update(version_updates.get("query_args", {}))
+
+        return Target(
+            name=f"{self.name}-{version}",
+            catalog=self.catalog,
+            collection=self.collection,
+            params=params,
+            query_args=query_args,
+            urls=self.urls,
         )
 
     @property
@@ -74,6 +100,25 @@ class Target:
         return success, Target.from_dict(
             metadata.get("name", ""),
             metadata,
+        )
+
+    @property
+    def one_liner(self) -> str:
+        return "{}: {} | {}/{} | {} | {}{}".format(
+            self.__class__.__name__,
+            self.name,
+            self.catalog,
+            self.collection,
+            self.query_args_as_str(" | "),
+            " | ".join([f"{param}={value}" for param, value in self.params.items()]),
+            (
+                " | {} version(s): {}".format(
+                    len(self.versions),
+                    ",".join(self.versions.keys()),
+                )
+                if self.versions
+                else ""
+            ),
         )
 
     def query_args_as_str(self, delim: str = " ") -> str:
@@ -144,35 +189,91 @@ class Target:
 
 
 class TargetList:
-    def __init__(self, filename: str = "") -> None:
-        self.targets: Dict[str, Target] = {}
+    object_name = BLUE_GEO_WATCH_TARGET_LIST
 
-        if filename:
-            self.load(filename)
+    def __init__(
+        self,
+        load: bool = True,
+        download: bool = False,
+    ) -> None:
+        self.list_of_targets: Dict[str, Target] = {}
+
+        if load:
+            assert self.load(download)
+
+    @classmethod
+    def filename(cls) -> str:
+        return objects.path_of(
+            filename="metadata.yaml",
+            object_name=cls.object_name,
+        )
+
+    def get(
+        self,
+        target_name: str,
+        including_versions: bool = True,
+    ) -> Target:
+        if not target_name:
+            return Target()
+
+        if target_name in self.list_of_targets:
+            return self.list_of_targets[target_name]
+
+        if not including_versions:
+            return Target()
+
+        for existing_target in self.list_of_targets.values():
+            if target_name.startswith(existing_target.name):
+                return existing_target.get_version(
+                    target_name,
+                    is_full_name=True,
+                )
+
+        return Target()
 
     def get_list(
         self,
         catalog_name: str = "",
         collection: str = "",
+        including_versions: bool = True,
     ) -> List[str]:
         return sorted(
-            [
-                target.name
-                for target in self.targets.values()
-                if (target.catalog == catalog_name or not catalog_name)
-                and (target.collection == collection or not collection)
-            ]
+            reduce(
+                lambda x, y: x + y,
+                [
+                    [target.name]
+                    + (
+                        [f"{target.name}-{version}" for version in target.versions]
+                        if including_versions
+                        else []
+                    )
+                    for target in self.list_of_targets.values()
+                    if (target.catalog == catalog_name or not catalog_name)
+                    and (target.collection == collection or not collection)
+                ],
+                [],
+            )
         )
 
-    def load(self, filename: str) -> bool:
-        self.targets = {}
+    def load(
+        self,
+        download: bool = False,
+    ) -> bool:
+        if download:
+            if not objects.download(
+                object_name=self.object_name,
+                filename="metadata.yaml",
+            ):
+                return False
 
-        success, targets = file.load_yaml(filename, ignore_error=True)
+        _, targets = file.load_yaml(self.filename(), ignore_error=True)
 
-        for target_name, target_info in targets.items():
-            self.targets[target_name] = Target.from_dict(
+        self.list_of_targets = {
+            target_name: Target.from_dict(
                 target_name,
-                target_info,
+                target_data,
             )
+            for target_name, target_data in targets.items()
+        }
 
-        return success
+        return True

@@ -5,6 +5,8 @@ from blue_options.terminal import show_usage
 from blue_geo.env import BLUE_GEO_WATCH_TARGET_LIST
 from blue_geo.watch.targets import TargetList
 
+get_what_list = "catalog|collection|exists|one_liner|query_args"
+
 
 def help_cp(
     tokens: List[str],
@@ -61,8 +63,9 @@ def help_get(
 ) -> str:
     args = [
         "[--delim space]",
+        "[--including_versions 0]",
         "[--target_name <target>]",
-        "[--what <catalog|collection|exists|query_args>]",
+        f"[--what <{get_what_list}>]",
     ]
     return show_usage(
         ["@geo watch targets get"] + args,
@@ -80,6 +83,7 @@ def help_list(
         "[--collection <collection>]",
         "[--count <count>]",
         "[--delim <space>]",
+        "[--including_versions 0]",
     ]
     return show_usage(
         ["@geo watch targets list"] + args,

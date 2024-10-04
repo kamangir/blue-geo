@@ -47,7 +47,7 @@ def build() -> bool:
                             )
                         ),
                     ],
-                    "--urls--": target_list.targets[target_name].urls_as_str(),
+                    "--urls--": target_list.get(target_name).urls_as_str(),
                 },
             )
             for target_name in [

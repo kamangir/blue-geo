@@ -63,10 +63,10 @@ def test_targets_get(
         "bellingcat-2024-09-27-nagorno-karabakh-test",
         including_versions=False,
     )
-    assert not ("count" in target.query_args)
+    assert not "count" in target.query_args
 
     target = target_list.get("bellingcat-2024-09-27-nagorno-karabakh-void")
-    assert not ("count" in target.query_args)
+    assert not "count" in target.query_args
 
     target = target_list.get("bellingcat-2024-09-27-nagorno-karabakh")
     assert target.query_args["count"] == 30

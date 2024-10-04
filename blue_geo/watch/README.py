@@ -1,6 +1,10 @@
 from typing import List
-from blue_objects.env import ABCLI_PUBLIC_PREFIX
+import os
+
 from blue_options import string
+from blue_objects import file
+from blue_objects.env import ABCLI_PUBLIC_PREFIX
+
 from blue_geo import REPO_NAME
 
 
@@ -58,13 +62,19 @@ list_of_targets = {
     },
 }
 
+targets_path = file.path(__file__)
 
 items: List[str] = []
 for target_name, list_of_objects in list_of_targets.items():
+    target_README = f"./targets/{target_name}.md"
+
+    target_title = target_name.replace("-", " ").title()
+
     items += [
-        "## [{}]({})".format(
-            target_name.replace("-", " ").title(),
-            f"./targets/{target_name}.md",
+        (
+            f"## [{target_title}]({target_README})"
+            if file.exists(os.path.join(targets_path, target_README))
+            else f"## {target_title}"
         ),
     ]
 

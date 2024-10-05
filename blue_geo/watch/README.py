@@ -120,7 +120,7 @@ for target_name in list_of_targets:
     ]
 
     if list_of_objects:
-        thumbnail_info = list_of_targets[target_name].get("showcase", {})
+        thumbnail_info = list_of_targets[target_name].get("thumbnail", {})
         thumbnail_index = thumbnail_info.get("index", -1)
         thumbnail_scale = thumbnail_info.get("scale", 2)
 

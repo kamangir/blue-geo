@@ -1,6 +1,9 @@
 import numpy as np
+import cv2
+import math
 
 from blueness import module
+from blue_options import string
 from blue_options.host import signature as host_signature
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
@@ -22,6 +25,7 @@ def map_function(
     offset: int,
     modality: str,
     object_name: str,
+    min_width: int = 1200,
 ) -> bool:
     success, target, list_of_files = load_watch(object_name)
     if not success or not list_of_files:
@@ -45,6 +49,25 @@ def map_function(
         modality=modality,
         log=True,
     )
+
+    if min_width != -1 and frame.shape[1] < min_width and frame.shape[1] > 0:
+        scale = int(math.ceil(min_width / frame.shape[1]))
+
+        logger.info(
+            "scaling {} X {}".format(
+                string.pretty_shape_of_matrix(frame),
+                scale,
+            )
+        )
+
+        frame = cv2.resize(
+            frame,
+            (
+                scale * frame.shape[1],
+                scale * frame.shape[0],
+            ),
+            interpolation=cv2.INTER_NEAREST_EXACT,
+        )
 
     frame_fp32 = frame.astype(np.float32).flatten() / 255
     frame_fp32 = frame_fp32[frame_fp32 > 0.0]

@@ -59,11 +59,28 @@ def help_reduce(
     )
 
 
-def help(
+def help_batch(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = xtra("dryrun", mono)
+    return help(
+        tokens=tokens,
+        mono=mono,
+        help_batch=True,
+    )
+
+
+def help(
+    tokens: List[str],
+    mono: bool,
+    help_batch: bool = False,
+) -> str:
+    options = "".join(
+        [
+            "batch",
+            xtra(",dryrun", mono),
+        ]
+    )
 
     target_list = TargetList()
 
@@ -98,14 +115,14 @@ def help(
     return show_usage(
         [
             "@geo watch",
-            f"[{options}]",
+            options if help_batch else f"[{options}]",
             f"[{target_options}]",
             f"[{workflow_options}]",
             f"[{map_options}]",
             f"[{reduce_options}]",
             "[-|<object-name>]",
         ],
-        "watch target -> <object-name>.",
+        "watch target -{}> <object-name>.".format("aws-batch-" if help_batch else ""),
         {
             "modality: {}".format("|".join(modality_options)): [],
             "runner: {}".format("|".join(list_of_runners())): [],
@@ -117,6 +134,7 @@ def help(
 
 help_functions = {
     "": help,
+    "batch": help_batch,
     "map": help_map,
     "reduce": help_reduce,
     "targets": help_targets,

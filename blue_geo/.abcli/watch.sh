@@ -9,15 +9,11 @@ function blue_geo_watch() {
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         abcli_show_usage_2 blue_geo watch
-
-        blue_geo_watch_map "$@"
-        blue_geo_watch_reduce "$@"
-        blue_geo_watch_targets "$@"
         return
     fi
 
     local task
-    for task in map reduce targets; do
+    for task in batch map reduce targets; do
         if [ $(abcli_option_int "$options" $task 0) == 1 ]; then
             blue_geo_watch_$task "${@:2}"
             return

@@ -27,6 +27,7 @@ function test_blue_geo_help() {
         "blue_geo QGIS_server" \
         \
         "blue_geo watch" \
+        "blue_geo watch batch" \
         "blue_geo watch map" \
         "blue_geo watch reduce" \
         "blue_geo watch targets"; do

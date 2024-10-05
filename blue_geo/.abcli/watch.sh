@@ -20,7 +20,7 @@ function blue_geo_watch() {
         fi
     done
 
-    if [[ "$task" == "batch" ]]; then
+    if [[ $(abcli_option_int "$options" batch 0) == 1 ]]; then
         if [ $(abcli_option_int "$target_options" help 0) == 1 ]; then
             abcli_show_usage_2 blue_geo watch batch
             return

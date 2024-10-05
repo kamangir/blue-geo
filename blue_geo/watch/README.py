@@ -92,8 +92,8 @@ list_of_targets = {
 targets_path = file.path(__file__)
 
 items: List[str] = []
-for target_name in list_of_targets:
-    list_of_objects = list_of_targets[target_name]["objects"]
+for target_name, target_info in list_of_targets.items():
+    list_of_objects = target_info["objects"]
 
     target_README = f"./targets/{target_name}.md"
 
@@ -121,7 +121,7 @@ for target_name in list_of_targets:
     ]
 
     if list_of_objects:
-        thumbnail_info = list_of_targets[target_name].get("thumbnail", {})
+        thumbnail_info = target_info.get("thumbnail", {})
 
         thumbnail_index = thumbnail_info.get("index", -1)
 

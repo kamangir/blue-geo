@@ -12,7 +12,6 @@ def help_cat(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "-"
     return show_usage(
         [
             "@targets cat",

@@ -64,9 +64,12 @@ list_of_targets = {
             "geo-watch-2024-09-30-Leonardo-g": [
                 "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-237-99db71023445)",
             ],
+            "geo-watch-Leonardo-2024-10-05-a": [
+                "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-249-44ba1dcd2321)",
+            ],
         },
         "thumbnail": {
-            "scale": 2,
+            "scale": 4,
         },
     },
     "bellingcat-2024–09–27-nagorno-karabakh": {

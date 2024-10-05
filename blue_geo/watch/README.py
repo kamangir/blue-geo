@@ -66,7 +66,7 @@ list_of_targets = {
             ],
         },
         "thumbnail": {
-            "scale": 4,
+            "scale": 2,
         },
     },
     "bellingcat-2024–09–27-nagorno-karabakh": {
@@ -82,8 +82,9 @@ list_of_targets = {
                 "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-245-18f6d15e5fbd)",
             ],
         },
-        "thumnail": {
+        "thumbnail": {
             "index": 1,
+            "scale": 1,
         },
     },
 }
@@ -121,13 +122,16 @@ for target_name in list_of_targets:
 
     if list_of_objects:
         thumbnail_info = list_of_targets[target_name].get("thumbnail", {})
-        thumbnail_index = thumbnail_info.get("index", -1)
-        thumbnail_scale = thumbnail_info.get("scale", 2)
 
-        last_object_name = list(list_of_objects.keys())[thumbnail_index]
+        thumbnail_index = thumbnail_info.get("index", -1)
+
+        thumbnail_scale = thumbnail_info.get("scale", 2)
+        thumbnail_scale_str = f"-{thumbnail_scale}X" if thumbnail_scale != 1 else ""
+
+        thumbnail_object_name = list(list_of_objects.keys())[thumbnail_index]
         items += [
             "",
-            f"![image]({ABCLI_PUBLIC_PREFIX}/{last_object_name}/{last_object_name}-{thumbnail_scale}X.gif?raw=true&random={string.random()})",
+            f"![image]({ABCLI_PUBLIC_PREFIX}/{thumbnail_object_name}/{thumbnail_object_name}{thumbnail_scale_str}.gif?raw=true&random={string.random()})",
         ]
 
     items += [""]

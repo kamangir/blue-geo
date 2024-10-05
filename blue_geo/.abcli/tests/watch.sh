@@ -32,8 +32,12 @@ function test_blue_geo_watch() {
             $object_name
         [[ $? -ne 0 ]] && return 1
 
+        cp -v \
+            $object_name.gif \
+            $public_name.gif
+
         abcli_publish \
-            as=$public_name,~download,suffix=.gif \
+            as=$public_name,~download,prefix=$public_name,suffix=.gif \
             $object_name
         [[ $? -ne 0 ]] && return 1
 

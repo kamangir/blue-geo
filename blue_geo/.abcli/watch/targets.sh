@@ -47,6 +47,8 @@ function blue_geo_watch_targets() {
 
     if [[ ",download,upload," == *","$task","* ]]; then
         abcli_$task - $BLUE_GEO_WATCH_TARGET_LIST
+
+        python3 -m blue_geo.watch.targets list
         return
     fi
 

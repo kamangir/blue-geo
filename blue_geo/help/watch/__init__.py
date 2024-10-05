@@ -78,7 +78,7 @@ def help(
     options = "".join(
         [
             "batch",
-            xtra(",dryrun", mono),
+            xtra(",dryrun,name=<job-name>", mono),
         ]
     )
 

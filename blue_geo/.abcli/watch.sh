@@ -13,12 +13,25 @@ function blue_geo_watch() {
     fi
 
     local task
-    for task in batch map reduce targets; do
+    for task in map reduce targets; do
         if [ $(abcli_option_int "$options" $task 0) == 1 ]; then
             blue_geo_watch_$task "${@:2}"
             return
         fi
     done
+
+    if [[ "$task" == "batch" ]]; then
+        if [ $(abcli_option_int "$target_options" help 0) == 1 ]; then
+            abcli_show_usage_2 blue_geo watch batch
+            return
+        fi
+
+        abcli_aws_batch_eval \
+            ,$options \
+            blue_geo_watch \
+            "${@:2}"
+        return
+    fi
 
     blue_geo_watch_targets download
 

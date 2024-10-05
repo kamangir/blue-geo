@@ -20,6 +20,20 @@ function blue_geo_watch_targets() {
         return
     fi
 
+    if [[ "$task" == "cat" ]]; then
+        local target_name=$2
+        if [[ -z "$target_name" ]]; then
+            abcli_log_error "-@targets cat: <target-name> not found."
+            return 1
+        fi
+
+        python3 -m blue_geo.watch.targets \
+            get \
+            --target_name $target_name \
+            --what one_liner
+        return
+    fi
+
     if [[ "$task" == "edit" ]]; then
         abcli_eval - \
             nano $ABCLI_OBJECT_ROOT/$BLUE_GEO_WATCH_TARGET_LIST/metadata.yaml
@@ -43,7 +57,7 @@ function blue_geo_watch_targets() {
         return
     fi
 
-    abcli_log_error "@geo: watch: $task: command not found."
+    abcli_log_error "@targets: $task: command not found."
     return 1
 }
 

@@ -9,10 +9,6 @@ function blue_geo_watch() {
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         abcli_show_usage_2 blue_geo watch
-
-        blue_geo_watch_map "$@"
-        blue_geo_watch_reduce "$@"
-        blue_geo_watch_targets "$@"
         return
     fi
 
@@ -23,6 +19,20 @@ function blue_geo_watch() {
             return
         fi
     done
+
+    if [[ $(abcli_option_int "$options" batch 0) == 1 ]]; then
+        if [ $(abcli_option_int "$target_options" help 0) == 1 ]; then
+            abcli_show_usage_2 blue_geo watch batch
+            return
+        fi
+
+        abcli_aws_batch_eval \
+            name=blue-geo-watch-$(abcli_string_timestamp_short),$options,~batch \
+            blue_geo_watch \
+            - \
+            "${@:2}"
+        return
+    fi
 
     blue_geo_watch_targets download
 

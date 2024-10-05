@@ -27,9 +27,21 @@ function test_blue_geo_help() {
         "blue_geo QGIS_server" \
         \
         "blue_geo watch" \
+        "blue_geo watch batch" \
         "blue_geo watch map" \
         "blue_geo watch reduce" \
-        "blue_geo watch targets"; do
+        \
+        "blue_geo watch targets" \
+        "blue_geo watch targets cat" \
+        "blue_geo watch targets cp" \
+        "blue_geo watch targets copy" \
+        "blue_geo watch targets download" \
+        "blue_geo watch targets edit" \
+        "blue_geo watch targets get" \
+        "blue_geo watch targets list" \
+        "blue_geo watch targets publish" \
+        "blue_geo watch targets save" \
+        "blue_geo watch targets upload"; do
         abcli_eval ,$options \
             $module help
         [[ $? -ne 0 ]] && return 1

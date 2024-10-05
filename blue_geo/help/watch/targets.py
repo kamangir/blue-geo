@@ -8,6 +8,20 @@ from blue_geo.watch.targets import TargetList
 get_what_list = "catalog|collection|exists|one_liner|query_args"
 
 
+def help_cat(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        [
+            "@targets cat",
+            "<target-name>",
+        ],
+        "cat <target-name>.",
+        mono=mono,
+    )
+
+
 def help_cp(
     tokens: List[str],
     mono: bool,
@@ -15,7 +29,7 @@ def help_cp(
     options = "-"
     return show_usage(
         [
-            "@geo watch targets cp|copy",
+            "@targets cp|copy",
             f"[{options}]",
             "[..|<object-name-1>]",
             "[.|<object-name-2>]",
@@ -31,7 +45,7 @@ def help_download(
 ) -> str:
     return show_usage(
         [
-            "@geo watch targets download",
+            "@targets download",
         ],
         "download watch targets.",
         {
@@ -47,7 +61,7 @@ def help_edit(
 ) -> str:
     return show_usage(
         [
-            "@geo watch targets edit",
+            "@targets edit",
         ],
         "edit watch targets.",
         {
@@ -68,7 +82,7 @@ def help_get(
         f"[--what <{get_what_list}>]",
     ]
     return show_usage(
-        ["@geo watch targets get"] + args,
+        ["@targets get"] + args,
         "get <target> info.",
         mono=mono,
     )
@@ -86,7 +100,7 @@ def help_list(
         "[--including_versions 0]",
     ]
     return show_usage(
-        ["@geo watch targets list"] + args,
+        ["@targets list"] + args,
         "list targets.",
         mono=mono,
     )
@@ -98,7 +112,7 @@ def help_publish(
 ) -> str:
     return show_usage(
         [
-            "@geo watch targets publish",
+            "@targets publish",
         ],
         "publish watch targets.",
         {
@@ -117,7 +131,7 @@ def help_save(
         "[--object_name <object-name>]",
     ]
     return show_usage(
-        ["@geo watch targets save"] + args,
+        ["@targets save"] + args,
         "save <target> -> <object-name>.",
         mono=mono,
     )
@@ -129,7 +143,7 @@ def help_upload(
 ) -> str:
     return show_usage(
         [
-            "@geo watch targets upload",
+            "@targets upload",
         ],
         "upload watch targets.",
         {
@@ -140,6 +154,7 @@ def help_upload(
 
 
 help_functions = {
+    "cat": help_cat,
     "cp": help_cp,
     "download": help_download,
     "edit": help_edit,

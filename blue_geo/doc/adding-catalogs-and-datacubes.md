@@ -33,7 +33,7 @@ to add a new [catalog](../catalog/) or [datacube](../datacube/) follow these ste
 
 9️⃣ add a relevant target,
 ```bash
-@geo watch targets edit
+@targets edit
 ```
 
 🔟 copy and refactor [`targets/Jasper-template.md`](../../blue_geo/watch/targets/Jasper-template.md).

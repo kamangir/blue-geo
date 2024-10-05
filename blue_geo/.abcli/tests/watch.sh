@@ -32,9 +32,10 @@ function test_blue_geo_watch() {
             $object_name
         [[ $? -ne 0 ]] && return 1
 
+        local object_path=$ABCLI_OBJECT_ROOT/$object_name
         cp -v \
-            $object_name.gif \
-            $public_name.gif
+            $object_path/$object_name.gif \
+            $object_path/$public_name.gif
 
         abcli_publish \
             as=$public_name,~download,prefix=$public_name,suffix=.gif \

@@ -76,7 +76,7 @@ def map_function(
                 + host_signature()
             ),
         ],
-        word_wrap=False,
+        word_wrap=True,
     )
 
     frame_filename = file.add_extension(filename, "png")

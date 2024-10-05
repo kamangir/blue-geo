@@ -27,8 +27,9 @@ function blue_geo_watch() {
         fi
 
         abcli_aws_batch_eval \
-            ,$options \
+            name=blue-geo-watch-$(abcli_string_timestamp_short),$options,~batch \
             blue_geo_watch \
+            - \
             "${@:2}"
         return
     fi

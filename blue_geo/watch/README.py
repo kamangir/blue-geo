@@ -62,6 +62,9 @@ list_of_targets = {
         "bellingcat-2024-09-27-nagorno-karabakh-b": [
             "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-244-a5f9b7959748)",
         ],
+        "bellingcat-2024-09-27-nagorno-karabakh-6X-a": [
+            "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-245-18f6d15e5fbd)",
+        ],
     },
 }
 

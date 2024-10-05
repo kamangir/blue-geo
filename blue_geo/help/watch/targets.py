@@ -8,6 +8,21 @@ from blue_geo.watch.targets import TargetList
 get_what_list = "catalog|collection|exists|one_liner|query_args"
 
 
+def help_cat(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = "-"
+    return show_usage(
+        [
+            "@targets cat",
+            "<target-name>",
+        ],
+        "cat <target-name>.",
+        mono=mono,
+    )
+
+
 def help_cp(
     tokens: List[str],
     mono: bool,
@@ -140,6 +155,7 @@ def help_upload(
 
 
 help_functions = {
+    "cat": help_cat,
     "cp": help_cp,
     "download": help_download,
     "edit": help_edit,

@@ -53,6 +53,7 @@ class EarthSearchSentinel2L1CDatacube(STACDatacube):
                     ),
                 }
                 for asset in self.metadata["Item"].assets.values()
+                if self.s3_prefix in asset.href
             ],
             needed_for_rgb=lambda filename: filename.endswith("TCI.jp2"),
             is_rgb=lambda filename: filename.endswith("TCI.jp2"),

@@ -137,6 +137,22 @@ def help_save(
     )
 
 
+def help_test(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        [
+            "@targets test",
+        ],
+        "test watch targets.",
+        {
+            f"$BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
+        },
+        mono=mono,
+    )
+
+
 def help_upload(
     tokens: List[str],
     mono: bool,
@@ -162,5 +178,6 @@ help_functions = {
     "list": help_list,
     "publish": help_publish,
     "save": help_save,
+    "test": help_test,
     "upload": help_upload,
 }

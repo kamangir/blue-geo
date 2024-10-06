@@ -14,7 +14,7 @@ function blue_geo_watch_reduce() {
     local do_publish=$(abcli_option_int "$options" publish 0)
     local suffix=$(abcli_option "$options" suffix)
     if [[ -z "$suffix" ]]; then
-        abcli_log_error "-@geo: watch: reduce: suffix not found."
+        abcli_log_error "@geo: watch: reduce: suffix not found."
         return 1
     fi
 

@@ -13,6 +13,8 @@ def test_datacube():
 
     assert datacube.description
 
+    assert datacube.raw
+
     success, _ = datacube.ingest()
     assert success
 

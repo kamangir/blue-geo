@@ -11,7 +11,7 @@ from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
 
-list_of_tasks = "get|list|save"
+list_of_tasks = "get|list|save|test"
 
 
 parser = argparse.ArgumentParser(NAME)
@@ -117,6 +117,8 @@ elif args.task == "list":
             print(delim.join(output))
 elif args.task == "save":
     success = target.save(args.object_name)
+elif args.task == "test":
+    success = target_list.test()
 else:
     success = None
 

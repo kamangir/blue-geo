@@ -3,10 +3,12 @@ import copy
 import geopandas as gpd
 from shapely.geometry import Polygon
 from functools import reduce
+from tqdm import tqdm
 
 from blue_objects import file, objects
 
 from blue_geo.env import BLUE_GEO_WATCH_TARGET_LIST
+from blue_geo.logger import logger
 
 
 class Target:
@@ -275,5 +277,28 @@ class TargetList:
             )
             for target_name, target_data in targets.items()
         }
+
+        return True
+
+    def test(self) -> bool:
+        list_of_targets = self.get_list(
+            including_versions=True,
+        )
+        logger.info(f"testing {len(list_of_targets)} target(s).")
+
+        for target_name in tqdm(list_of_targets):
+            target = self.get(
+                target_name,
+                including_versions=True,
+            )
+            if not target.name:
+                logger.error(f"bad target: {target_name}")
+                return False
+
+            try:
+                logger.info(target.one_liner)
+            except Exception as e:
+                logger.error(f"bad target: {target_name} - {e}")
+                return False
 
         return True

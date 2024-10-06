@@ -31,6 +31,8 @@ def test_target_list(
 ):
     assert target_list.list_of_targets
 
+    assert target_list.test()
+
     assert target_list.object_name
 
     assert file.exists(target_list.filename())

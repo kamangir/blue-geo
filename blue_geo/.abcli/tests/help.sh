@@ -41,6 +41,7 @@ function test_blue_geo_help() {
         "blue_geo watch targets list" \
         "blue_geo watch targets publish" \
         "blue_geo watch targets save" \
+        "blue_geo watch targets test" \
         "blue_geo watch targets upload"; do
         abcli_eval ,$options \
             $module help

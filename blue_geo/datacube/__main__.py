@@ -22,7 +22,7 @@ parser.add_argument(
     "--what",
     default="",
     type=str,
-    help="catalog|template",
+    help="catalog|raw|template",
 )
 parser.add_argument(
     "--modality",
@@ -106,6 +106,8 @@ elif args.task == "get":
         output = datacube.catalog.name
     elif args.what == "template":
         output = datacube.QGIS_template
+    elif args.what == "raw":
+        output = datacube.raw
 
     print(output)
 elif args.task == "ingest":

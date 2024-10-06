@@ -6,7 +6,7 @@ from blue_objects import file, README
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
 from blue_geo.catalog.README import build as build_catalog
-from blue_geo.watch.README import items as watch_items
+from blue_geo.watch.README import items as watch_items, macros as watch_macros
 from blue_geo.watch.targets.README import build as build_targets
 from blue_geo.help.functions import help_functions
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
@@ -118,7 +118,7 @@ def build() -> bool:
                 ("..", items, 3, {}),
                 ("catalog", [], -1, {}),
                 ("datacube", [], -1, {}),
-                ("watch", watch_items, -1, {}),
+                ("watch", watch_items, -1, watch_macros),
                 ("QGIS", [], -1, {}),
             ]
         )

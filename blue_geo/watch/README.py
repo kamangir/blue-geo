@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 import os
 
 from blue_options import string
@@ -150,3 +150,23 @@ for target_name, target_info in list_of_targets.items():
         ]
 
     items += [""]
+
+object_name = "geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-05-b"
+macros: Dict[str, str] = {
+    "--scale-note--": [
+        "ℹ️ suffix published gif urls with `-2X` and `-4X` for different scales. example: {}.".format(
+            ", ".join(
+                [
+                    "[{}X]({}/{}/{}{}.gif)".format(
+                        scale,
+                        ABCLI_PUBLIC_PREFIX,
+                        object_name,
+                        object_name,
+                        "" if scale == 1 else f"-{scale}X",
+                    )
+                    for scale in [1, 2, 4]
+                ]
+            )
+        )
+    ]
+}

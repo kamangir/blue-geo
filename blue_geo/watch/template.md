@@ -12,14 +12,17 @@ watch the planet's story unfold.
 ## example run
 
 ```bash
-@batch eval - \
-  blue_geo watch - \
-  target=chilcotin-river-landslide \
-  to=aws_batch - \
+@geo watch \
+  batch \
+  target=elkhema-2024 \
+  to=aws_batch \
+  modality=rgb \
   publish \
-  geo-watch-2024-09-01-chilcotin-a
+  geo-watch-elkhema-2024-2024-10-05-a-b
 ```
 
-ℹ️ suffix published gif urls with `-2X` and `-4X` for different resolutions. example: [1X](https://kamangir-public.s3.ca-central-1.amazonaws.com/bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b/bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b.gif), [2X](https://kamangir-public.s3.ca-central-1.amazonaws.com/bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b/bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b-2X.gif), [4X](https://kamangir-public.s3.ca-central-1.amazonaws.com/bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b/bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b-4X.gif).
+[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-252-2118326b1de2).
+
+--scale-note--
 
 --table--

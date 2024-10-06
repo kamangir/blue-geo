@@ -72,7 +72,7 @@ list_of_targets = {
             "scale": 4,
         },
     },
-    "bellingcat-2024–09–27-nagorno-karabakh": {
+    "bellingcat-2024-09-27-nagorno-karabakh": {
         "objects": {
             "bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b": [
                 "[background](https://www.bellingcat.com/news/mena/2024/09/27/nagorno-karabakh-satellite-imagery-shows-city-wide-ransacking/)",

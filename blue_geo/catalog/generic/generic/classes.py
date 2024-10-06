@@ -151,6 +151,14 @@ class GenericDatacube:
 
         return success, frame, frame_file_metadata
 
+    @property
+    def raw(self) -> str:
+        return "{}.{}: {}".format(
+            self.catalog.name,
+            self.name,
+            self.datacube_id,
+        )
+
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[
         bool,

@@ -25,6 +25,22 @@ function test_blue_geo_datacube_get_catalog() {
     return 0
 }
 
+function test_blue_geo_datacube_get_raw() {
+    local datacube_id
+    for datacube_id in \
+        $BLUE_GEO_TEST_DATACUBE_COPERNICUS_SENTINEL_2 \
+        $BLUE_GEO_TEST_DATACUBE_EARTHSEARCH_SENTINEL2_L1C \
+        $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA \
+        $BLUE_GEO_TEST_DATACUBE_SKYFOX_VENUS \
+        $BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP; do
+
+        # raw contains special characters; hard to test.
+        blue_geo_datacube_get raw $datacube_id
+    done
+
+    return 0
+}
+
 function test_blue_geo_datacube_get_template() {
     local test_asset
     local datacube_id

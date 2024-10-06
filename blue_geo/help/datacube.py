@@ -61,7 +61,7 @@ def help_get(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "catalog|template"
+    options = "catalog|raw|template"
 
     return show_usage(
         [

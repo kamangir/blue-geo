@@ -34,6 +34,13 @@ function blue_geo_watch_targets() {
         return
     fi
 
+    if [[ "$task" == "download" ]]; then
+        abcli_$task - $BLUE_GEO_WATCH_TARGET_LIST
+
+        python3 -m blue_geo.watch.targets list
+        return
+    fi
+
     if [[ "$task" == "edit" ]]; then
         abcli_eval - \
             nano $ABCLI_OBJECT_ROOT/$BLUE_GEO_WATCH_TARGET_LIST/metadata.yaml
@@ -45,17 +52,24 @@ function blue_geo_watch_targets() {
         return
     fi
 
-    if [[ ",download,upload," == *","$task","* ]]; then
-        abcli_$task - $BLUE_GEO_WATCH_TARGET_LIST
-
-        python3 -m blue_geo.watch.targets list
-        return
-    fi
-
     if [[ "$task" == "publish" ]]; then
         abcli_publish \
             as=geo-watch-targets,suffix=.yaml \
             $BLUE_GEO_WATCH_TARGET_LIST
+        return
+    fi
+
+    if [[ ",upload,test," == *",$task,"* ]]; then
+        python3 -m blue_geo.watch.targets test
+        [[ $? -ne 0 ]] && return 1
+    fi
+
+    if [[ "$task" == "upload" ]]; then
+        abcli_$task - $BLUE_GEO_WATCH_TARGET_LIST
+        return
+    fi
+
+    if [[ "$task" == "test" ]]; then
         return
     fi
 

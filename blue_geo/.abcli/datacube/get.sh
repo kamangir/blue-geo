@@ -8,7 +8,7 @@ function blue_geo_datacube_get() {
         return
     fi
 
-    local what=$(abcli_option_choice "$options" catalog,template void)
+    local what=$(abcli_option_choice "$options" catalog,raw,template void)
 
     local datacube_id=$(abcli_clarify_object $2 .)
 

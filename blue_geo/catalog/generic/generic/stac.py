@@ -192,6 +192,13 @@ class STACDatacube(GenericDatacube):
             list_of_datacube_ids,
         )
 
+    @property
+    def raw(self) -> str:
+        return "{} @ {}".format(
+            super().raw,
+            self.metadata["Item"].to_dict(),
+        )
+
     def update_metadata(self, verbose: bool = False) -> bool:
         assert isinstance(self.catalog, STACCatalog)
 

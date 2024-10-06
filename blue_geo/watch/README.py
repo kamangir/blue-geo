@@ -3,6 +3,7 @@ import os
 
 from blue_options import string
 from blue_objects import file
+from blue_geo.watch.targets.classes import TargetList
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
 from blue_geo import REPO_NAME
@@ -75,7 +76,6 @@ list_of_targets = {
     "bellingcat-2024-09-27-nagorno-karabakh": {
         "objects": {
             "bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b": [
-                "[background](https://www.bellingcat.com/news/mena/2024/09/27/nagorno-karabakh-satellite-imagery-shows-city-wide-ransacking/)",
                 "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-241-3e25857747a5)",
             ],
             "bellingcat-2024-09-27-nagorno-karabakh-b": [
@@ -101,6 +101,7 @@ list_of_targets = {
         "thumbnail": {
             "scale": 4,
         },
+        "title": "elkhema ⛺️",
     },
 }
 
@@ -114,7 +115,7 @@ for target_name in sorted(list_of_targets.keys()):
 
     target_README = f"./targets/{target_name}.md"
 
-    target_title = f"`{target_name}`"
+    target_title = "`{}`".format(target_info.get("title", target_name))
 
     items += [
         (
@@ -124,18 +125,8 @@ for target_name in sorted(list_of_targets.keys()):
         ),
     ]
 
-    items += [
-        "- {}.".format(
-            ", ".join(
-                [
-                    f"[`{object_name}`]({ABCLI_PUBLIC_PREFIX}/{object_name}.tar.gz)",
-                    f"[gif]({ABCLI_PUBLIC_PREFIX}/{object_name}/{object_name}.gif)",
-                ]
-                + description
-            )
-        )
-        for object_name, description in list_of_objects.items()
-    ]
+    target_list = TargetList()
+    items += target_list.get(target_name).urls_as_str()
 
     if list_of_objects:
         thumbnail_info = target_info.get("thumbnail", {})
@@ -150,6 +141,19 @@ for target_name in sorted(list_of_targets.keys()):
             "",
             f"![image]({ABCLI_PUBLIC_PREFIX}/{thumbnail_object_name}/{thumbnail_object_name}{thumbnail_scale_str}.gif?raw=true&random={string.random()})",
         ]
+
+    items += [
+        "- {}.".format(
+            ", ".join(
+                [
+                    f"[`{object_name}`]({ABCLI_PUBLIC_PREFIX}/{object_name}.tar.gz)",
+                    f"[gif]({ABCLI_PUBLIC_PREFIX}/{object_name}/{object_name}.gif)",
+                ]
+                + description
+            )
+        )
+        for object_name, description in list_of_objects.items()
+    ]
 
     items += [""]
 

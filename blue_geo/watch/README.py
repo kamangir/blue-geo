@@ -88,6 +88,9 @@ list_of_targets = {
                 "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-250-847d3d5f0d6e)",
             ],
         },
+        "thumbnail": {
+            "scale": 4,
+        },
     },
 }
 

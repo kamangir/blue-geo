@@ -2,6 +2,8 @@
 
 the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes on Earth](https://dataspace.copernicus.eu/). see [datacube](../) for usage instructions.
 
+## ⚠️ issues
+
 ⚠️ "Too Many Requests" error likely.
 
  - [api](https://catalogue.dataspace.copernicus.eu/stac)

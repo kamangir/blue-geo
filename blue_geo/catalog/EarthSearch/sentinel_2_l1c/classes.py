@@ -59,3 +59,10 @@ class EarthSearchSentinel2L1CDatacube(STACDatacube):
             is_rgb=lambda filename: filename.endswith("TCI.jp2"),
             verbose=verbose,
         )
+
+    @property
+    def raw(self) -> str:
+        return "{} | {}".format(
+            super().raw,
+            self.s3_prefix,
+        )

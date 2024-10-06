@@ -92,6 +92,13 @@ list_of_targets = {
             "scale": 4,
         },
     },
+    "elkhema": {
+        "objects": {
+            "geo-watch-elkhema-2024-2024-10-05-a-b": [
+                "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-251-a68fab7f52b8)",
+            ]
+        }
+    },
 }
 
 targets_path = file.path(__file__)

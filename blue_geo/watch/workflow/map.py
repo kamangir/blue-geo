@@ -4,16 +4,14 @@ import math
 
 from blueness import module
 from blue_options import string
-from blue_options.host import signature as host_signature
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
 from blue_objects.graphics.signature import add_signature
-from notebooks_and_scripts import NAME as NBS_NAME, VERSION as NBS_VERSION
 
-from blue_geo import NAME, VERSION
-from blue_geo import NAME as BLUE_GEO_NAME
-from blue_geo.watch.workflow.common import load_watch
+from blue_geo import NAME
 from blue_geo.catalog.functions import get_datacube_class
+from blue_geo.host import signature
+from blue_geo.watch.workflow.common import load_watch
 from blue_geo.logger import logger
 
 
@@ -93,11 +91,7 @@ def map_function(
         ],
         footer=[
             target.one_liner,
-            " | ".join(
-                [f"{BLUE_GEO_NAME}.{VERSION}"]
-                + [f"{NBS_NAME}.{NBS_VERSION}"]
-                + host_signature()
-            ),
+            " | ".join([signature()]),
         ],
         word_wrap=True,
     )

@@ -2,11 +2,11 @@
 
 the `copernicus` catalog covers [Copernicus Data Space Ecosystem - Europe's eyes on Earth](https://dataspace.copernicus.eu/). see [datacube](../) for usage instructions.
 
+--urls--
+
 ## ⚠️ issues
 
 ⚠️ "Too Many Requests" error likely.
-
---urls--
 
 ## query
 

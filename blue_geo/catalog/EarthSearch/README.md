@@ -2,6 +2,11 @@
 
 the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex.org/catalogs/earth-search#/). see [datacube](../) for usage instructions.
 
+ - [api](https://earth-search.aws.element84.com/v1/)
+ - [sentinel 2 on aws open data](https://registry.opendata.aws/sentinel-2/)
+ - [stac api info](https://stacindex.org/catalogs/earth-search#/)
+ - [ui](https://viewer.aws.element84.com/)
+
 ## ⚠️ issues
 
 ⚠️ some L1C datacubes carry only L2A assets, example: `datacube-EarthSearch-sentinel_2_l1c-S2A_10UDV_20221109_0_L1C`.
@@ -15,11 +20,6 @@ to validate, type in,
 ```
 
 notice that `all` returns zero items, because no asset starts with the expected prefix `s3://sentinel-s2-l1c/tiles`. instead, there are many assets with the prefix `s3://sentinel-s2-l2a/tiles` - [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-252-2118326b1de2).
-
- - [api](https://earth-search.aws.element84.com/v1/)
- - [sentinel 2 on aws open data](https://registry.opendata.aws/sentinel-2/)
- - [stac api info](https://stacindex.org/catalogs/earth-search#/)
- - [ui](https://viewer.aws.element84.com/)
 
 ## query
 

@@ -97,7 +97,10 @@ list_of_targets = {
             "geo-watch-elkhema-2024-2024-10-05-a-b": [
                 "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-251-a68fab7f52b8)",
             ]
-        }
+        },
+        "thumbnail": {
+            "scale": 4,
+        },
     },
 }
 

@@ -24,7 +24,7 @@ function blue_geo_watch_map() {
         --count 1 \
         --offset $offset)
     if [[ -z "$datacube_id" ]]; then
-        abcli_log_error "-@geo: watch: map: offset=$offset: datacube-id not found."
+        abcli_log_error "@geo: watch: map: offset=$offset: datacube-id not found."
         return 1
     fi
 
@@ -61,8 +61,12 @@ function blue_geo_watch_map() {
         --count 1 \
         --exists 1)
     if [[ -z "$filename" ]]; then
-        abcli_log_error "-@geo: watch: map: offset=$offset: $cropped_datacube_id: file not found."
-        return 1
+        abcli_warn "@geo: watch: map: offset=$offset: $cropped_datacube_id: file not found."
+
+        [[ "$do_upload" == 1 ]] &&
+            abcli_upload - $object_name
+
+        return 0
     fi
     cp -v \
         $ABCLI_OBJECT_ROOT/$cropped_datacube_id/$filename \

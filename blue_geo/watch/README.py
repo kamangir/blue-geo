@@ -107,12 +107,14 @@ list_of_targets = {
 targets_path = file.path(__file__)
 
 items: List[str] = []
-for target_name, target_info in list_of_targets.items():
+for target_name in sorted(list_of_targets.keys()):
+    target_info = list_of_targets[target_name]
+
     list_of_objects = target_info["objects"]
 
     target_README = f"./targets/{target_name}.md"
 
-    target_title = target_name.replace("-", " ").title()
+    target_title = f"`{target_name}`"
 
     items += [
         (

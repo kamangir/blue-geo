@@ -93,6 +93,9 @@ list_of_targets = {
             "geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-06-a": [
                 "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-255-1f2a8f1ccef5)",
             ],
+            "geo-watch-Cache-Creek-2x-wider-2024-10-06-a": [
+                "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-256-c1b564c9f89e)"
+            ],
         },
         "thumbnail": {
             "scale": 4,

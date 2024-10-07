@@ -178,10 +178,10 @@ class Target:
                     (
                         ": {}".format(
                             self.lat_and_lon
-                            if title == "Google Map"
+                            if title == "Google Maps"
                             else url.split(",", 1)[1].strip()
                         )
-                        if "," in url or title == "Google Map"
+                        if "," in url or title == "Google Maps"
                         else ""
                     ),
                 )

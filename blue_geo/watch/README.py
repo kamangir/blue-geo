@@ -1,8 +1,9 @@
-from typing import List
+from typing import List, Dict
 import os
 
 from blue_options import string
 from blue_objects import file
+from blue_geo.watch.targets.classes import TargetList
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
 from blue_geo import REPO_NAME
@@ -75,7 +76,6 @@ list_of_targets = {
     "bellingcat-2024-09-27-nagorno-karabakh": {
         "objects": {
             "bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b": [
-                "[background](https://www.bellingcat.com/news/mena/2024/09/27/nagorno-karabakh-satellite-imagery-shows-city-wide-ransacking/)",
                 "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-241-3e25857747a5)",
             ],
             "bellingcat-2024-09-27-nagorno-karabakh-b": [
@@ -101,18 +101,31 @@ list_of_targets = {
         "thumbnail": {
             "scale": 4,
         },
+        "title": "elkhema ⛺️",
+    },
+    "Cache-Creek": {
+        "objects": {
+            "geo-watch-Cache-Creek-2024-10-06-a": [
+                "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-253-8f12ef5bd8fc)",
+            ]
+        },
+        "thumbnail": {
+            "scale": 4,
+        },
     },
 }
 
 targets_path = file.path(__file__)
 
 items: List[str] = []
-for target_name, target_info in list_of_targets.items():
+for target_name in sorted(list_of_targets.keys()):
+    target_info = list_of_targets[target_name]
+
     list_of_objects = target_info["objects"]
 
     target_README = f"./targets/{target_name}.md"
 
-    target_title = target_name.replace("-", " ").title()
+    target_title = "`{}`".format(target_info.get("title", target_name))
 
     items += [
         (
@@ -122,18 +135,8 @@ for target_name, target_info in list_of_targets.items():
         ),
     ]
 
-    items += [
-        "- {}.".format(
-            ", ".join(
-                [
-                    f"[`{object_name}`]({ABCLI_PUBLIC_PREFIX}/{object_name}.tar.gz)",
-                    f"[gif]({ABCLI_PUBLIC_PREFIX}/{object_name}/{object_name}.gif)",
-                ]
-                + description
-            )
-        )
-        for object_name, description in list_of_objects.items()
-    ]
+    target_list = TargetList()
+    items += target_list.get(target_name).urls_as_str()
 
     if list_of_objects:
         thumbnail_info = target_info.get("thumbnail", {})
@@ -149,4 +152,37 @@ for target_name, target_info in list_of_targets.items():
             f"![image]({ABCLI_PUBLIC_PREFIX}/{thumbnail_object_name}/{thumbnail_object_name}{thumbnail_scale_str}.gif?raw=true&random={string.random()})",
         ]
 
+    items += [
+        "- {}.".format(
+            ", ".join(
+                [
+                    f"[`{object_name}`]({ABCLI_PUBLIC_PREFIX}/{object_name}.tar.gz)",
+                    f"[gif]({ABCLI_PUBLIC_PREFIX}/{object_name}/{object_name}.gif)",
+                ]
+                + description
+            )
+        )
+        for object_name, description in list_of_objects.items()
+    ]
+
     items += [""]
+
+object_name = "geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-05-b"
+macros: Dict[str, str] = {
+    "--scale-note--": [
+        "ℹ️ suffix published gif urls with `-2X` and `-4X` for different scales. example: {}.".format(
+            ", ".join(
+                [
+                    "[{}X]({}/{}/{}{}.gif)".format(
+                        scale,
+                        ABCLI_PUBLIC_PREFIX,
+                        object_name,
+                        object_name,
+                        "" if scale == 1 else f"-{scale}X",
+                    )
+                    for scale in [1, 2, 4]
+                ]
+            )
+        )
+    ]
+}

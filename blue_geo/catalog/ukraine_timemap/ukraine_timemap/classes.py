@@ -6,14 +6,15 @@ import geopandas as gpd
 from geojson import Point
 
 from blueness import module
-from blue_options import fullname, string
+from blue_options import string
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
 
-from blue_geo import NAME, VERSION, env
+from blue_geo import NAME, env, fullname
 from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.catalog.ukraine_timemap.classes import UkraineTimemapCatalog
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
+from blue_geo.host import signature
 from blue_geo.logger import logger
 
 API_URL = "https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json"
@@ -53,7 +54,7 @@ class UkraineTimemapDatacube(GenericDatacube):
         gdf = gpd.GeoDataFrame()
         metadata: Dict[str, Any] = {
             "description": DESCRIPTION,
-            "created_by": f"{NAME}-{VERSION}.{fullname()}",
+            "created_by": "-".join(signature()),
             "creation_date": string.pretty_date(),
         }
 
@@ -131,7 +132,7 @@ class UkraineTimemapDatacube(GenericDatacube):
                     [
                         "Date",
                         self.datacube_id,
-                        f"{NAME}-{VERSION}.{fullname()}",
+                        fullname(),
                     ]
                 )
             )

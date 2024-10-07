@@ -4,6 +4,20 @@ the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex
 
 --urls--
 
+## ⚠️ issues
+
+⚠️ some L1C datacubes carry only L2A assets, example: `datacube-EarthSearch-sentinel_2_l1c-S2A_10UDV_20221109_0_L1C`.
+
+to validate, type in,
+
+```bash
+@select datacube-EarthSearch-sentinel_2_l1c-S2A_10UDV_20221109_0_L1C
+@datacube get raw .
+@datacube list . --scope all
+```
+
+notice that `all` returns zero items, because no asset starts with the expected prefix `s3://sentinel-s2-l1c/tiles`. instead, there are many assets with the prefix `s3://sentinel-s2-l2a/tiles` - [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-252-2118326b1de2).
+
 ## query
 
 ```bash

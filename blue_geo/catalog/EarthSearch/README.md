@@ -7,6 +7,20 @@ the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex
  - [stac api info](https://stacindex.org/catalogs/earth-search#/)
  - [ui](https://viewer.aws.element84.com/)
 
+## ⚠️ issues
+
+⚠️ some L1C datacubes carry only L2A assets, example: `datacube-EarthSearch-sentinel_2_l1c-S2A_10UDV_20221109_0_L1C`.
+
+to validate, type in,
+
+```bash
+@select datacube-EarthSearch-sentinel_2_l1c-S2A_10UDV_20221109_0_L1C
+@datacube get raw .
+@datacube list . --scope all
+```
+
+notice that `all` returns zero items, because no asset starts with the expected prefix `s3://sentinel-s2-l1c/tiles`. instead, there are many assets with the prefix `s3://sentinel-s2-l2a/tiles` - [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-252-2118326b1de2).
+
 ## query
 
 ```bash
@@ -32,7 +46,7 @@ the `Earth Search` catalog covers [Earth Search by Element 84](https://stacindex
 
 ![image](https://github.com/kamangir/assets/blob/main/blue-geo/chilcotin-river-landslide-2.jpg?raw=true)
 
- - [Google Map](https://maps.app.goo.gl/WHTNCDsFNoZAAnzX8): `lat: 51.8472"N`, `lon: 122.7903"W`.
+ - [Google Maps](https://maps.app.goo.gl/WHTNCDsFNoZAAnzX8): `lat: 51.8472"N`, `lon: 122.7903"W`.
  - [Nasa](https://www.bluemarble.nasa.gov/images/153195/chilcotin-rivers-landslide-lake-begins-draining): Chilcotin River’s Landslide Lake Begins Draining.
  - [Reddit](https://www.reddit.com/r/britishcolumbia/comments/1eh9eql/before_and_after_satellite_images_of_the/): Before and after satellite images of the Chilcotin River landslide.
  - [portal](https://chilcotin-river-landslide-2024-bcgov03.hub.arcgis.com/): Chilcotin River Landslide Information Portal, source of ⬆️ image.

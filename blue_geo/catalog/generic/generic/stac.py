@@ -1,7 +1,6 @@
-from typing import Tuple, Union, Any, Dict, List
+from typing import Tuple, Any, Dict, List
 from datetime import datetime, timedelta
 from tqdm import tqdm
-from pystac_client import Client
 
 from blue_objects.metadata import post_to_object
 
@@ -161,16 +160,14 @@ class STACDatacube(GenericDatacube):
                     )
                 )
 
-        list_of_datacube_ids: List[str] = sorted(
-            [
-                "datacube-{}-{}-{}".format(
-                    cls.catalog.name,
-                    cls.name,
-                    item.id.replace(".SAFE", "-SAFE"),
-                )
-                for item in items
-            ]
-        )
+        list_of_datacube_ids: List[str] = [
+            "datacube-{}-{}-{}".format(
+                cls.catalog.name,
+                cls.name,
+                item.id.replace(".SAFE", "-SAFE"),
+            )
+            for item in items
+        ][::-1]
 
         if keyword:
             list_of_datacube_ids = [

@@ -91,7 +91,7 @@ def map_function(
         ],
         footer=[
             target.one_liner,
-            " | ".join([signature()]),
+            " | ".join(signature()),
         ],
         word_wrap=True,
     )

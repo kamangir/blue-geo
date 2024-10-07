@@ -68,6 +68,9 @@ list_of_targets = {
             "geo-watch-Leonardo-2024-10-05-a": [
                 "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-249-44ba1dcd2321)",
             ],
+            "geo-watch-Leonardo-2024-10-06-a": [
+                "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-255-1f2a8f1ccef5)",
+            ],
         },
         "thumbnail": {
             "scale": 4,
@@ -86,6 +89,9 @@ list_of_targets = {
             ],
             "geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-05-b": [
                 "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-250-847d3d5f0d6e)",
+            ],
+            "geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-06-a": [
+                "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-255-1f2a8f1ccef5)",
             ],
         },
         "thumbnail": {

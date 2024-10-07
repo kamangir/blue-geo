@@ -10,7 +10,7 @@ from blue_options import string
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
 
-from blue_geo import NAME, VERSION, env
+from blue_geo import NAME, env, fullname
 from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.catalog.ukraine_timemap.classes import UkraineTimemapCatalog
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
@@ -132,7 +132,7 @@ class UkraineTimemapDatacube(GenericDatacube):
                     [
                         "Date",
                         self.datacube_id,
-                        f"{NAME}-{VERSION}.{fullname()}",
+                        fullname(),
                     ]
                 )
             )

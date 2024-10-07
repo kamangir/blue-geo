@@ -103,6 +103,16 @@ list_of_targets = {
         },
         "title": "elkhema ⛺️",
     },
+    "Cache-Creek": {
+        "objects": {
+            "geo-watch-Cache-Creek-2024-10-06-a": [
+                "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-253-8f12ef5bd8fc)",
+            ]
+        },
+        "thumbnail": {
+            "scale": 4,
+        },
+    },
 }
 
 targets_path = file.path(__file__)

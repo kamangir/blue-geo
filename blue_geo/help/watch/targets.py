@@ -126,13 +126,14 @@ def help_save(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    args = [
-        "[--target_name <target>]",
-        "[--object_name <object-name>]",
-    ]
+    options = "target=all|<target-name>"
     return show_usage(
-        ["@targets save"] + args,
-        "save <target> -> <object-name>.",
+        [
+            "@targets save",
+            f"[{options}]",
+            "[.|<object-name>]",
+        ],
+        "save target(s) -> <object-name>.",
         mono=mono,
     )
 

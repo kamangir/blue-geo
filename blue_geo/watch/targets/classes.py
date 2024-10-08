@@ -123,22 +123,8 @@ class Target:
             ),
         )
 
-    def query_args_as_str(self, delim: str = " ") -> str:
-        return delim.join(
-            [f"--{argument} {value}" for argument, value in self.query_args.items()]
-        )
-
-    def save(self, object_name: str) -> bool:
-        if not file.save_yaml(
-            objects.path_of(
-                "target/metadata.yaml",
-                object_name,
-                create=True,
-            ),
-            self.__dict__,
-        ):
-            return False
-
+    @property
+    def polygon(self) -> Polygon:
         lat = self.query_args.get("lat", 0)
         lon = self.query_args.get("lon", 0)
         width = self.params.get("width", 0.1)
@@ -152,13 +138,39 @@ class Target:
         bottom_right = (lon + half_width, lat - half_height)
         bottom_left = (lon - half_width, lat - half_height)
 
-        polygon = Polygon([top_left, top_right, bottom_right, bottom_left, top_left])
+        return Polygon(
+            [
+                top_left,
+                top_right,
+                bottom_right,
+                bottom_left,
+                top_left,
+            ]
+        )
+
+    def query_args_as_str(self, delim: str = " ") -> str:
+        return delim.join(
+            [f"--{argument} {value}" for argument, value in self.query_args.items()]
+        )
+
+    def save(self, object_name: str) -> bool:
+        logger.info(f"saving target: {self.name} -> {object_name}")
+
+        if not file.save_yaml(
+            objects.path_of(
+                "target/metadata.yaml",
+                object_name,
+                create=True,
+            ),
+            self.__dict__,
+        ):
+            return False
 
         gdf = gpd.GeoDataFrame(
             {
                 "id": ["1"],
                 "description": [self.name],
-                "geometry": [polygon],
+                "geometry": [self.polygon],
             },
             crs="EPSG:4326",
         )
@@ -279,6 +291,32 @@ class TargetList:
         }
 
         return True
+
+    def save(self, object_name: str) -> bool:
+        list_of_targets = self.get_list(including_versions=True)
+
+        logger.info(f"saving {len(list_of_targets)} target(s): {object_name}")
+
+        gdf = gpd.GeoDataFrame(
+            {
+                "id": [str(index + 1) for index in range(len(list_of_targets))],
+                "description": [
+                    self.get(target_name=target_name).name
+                    for target_name in list_of_targets
+                ],
+                "geometry": [
+                    self.get(target_name=target_name).polygon
+                    for target_name in list_of_targets
+                ],
+            },
+            crs="EPSG:4326",
+        )
+
+        return file.save_geojson(
+            objects.path_of("target/shape.geojson", object_name),
+            gdf,
+            log=True,
+        )
 
     def test(self) -> bool:
         list_of_targets = self.get_list(

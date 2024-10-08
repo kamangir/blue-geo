@@ -116,7 +116,10 @@ elif args.task == "list":
         else:
             print(delim.join(output))
 elif args.task == "save":
-    success = target.save(args.object_name)
+    if args.target_name == "all":
+        success = target_list.save(args.object_name)
+    else:
+        success = target.save(args.object_name)
 elif args.task == "test":
     success = target_list.test()
 else:

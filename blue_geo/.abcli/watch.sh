@@ -84,8 +84,8 @@ function blue_geo_watch() {
         [[ $? -ne 0 ]] && return 1
 
         blue_geo_watch_targets save \
-            --target_name $target \
-            --object_name $query_object_name
+            target=$target \
+            $query_object_name
         [[ $? -ne 0 ]] && return 1
     fi
 

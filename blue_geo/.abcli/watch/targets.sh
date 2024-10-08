@@ -47,8 +47,26 @@ function blue_geo_watch_targets() {
         return
     fi
 
-    if [[ ",get,list,save," == *","$task","* ]]; then
+    if [[ ",get,list," == *","$task","* ]]; then
         python3 -m blue_geo.watch.targets "$@"
+        return
+    fi
+
+    if [[ "$task" == "save" ]]; then
+        local options=$2
+        local target_name=$(abcli_option "$options" target all)
+
+        local object_name=$(abcli_clarify_object $3 .)
+
+        abcli_clone \
+            ~relate \
+            $BLUE_GEO_QGIS_TEMPLATE_WATCH \
+            $object_name
+
+        python3 -m blue_geo.watch.targets save \
+            --target_name $target_name \
+            --object_name $object_name \
+            "${@:4}"
         return
     fi
 
@@ -65,6 +83,12 @@ function blue_geo_watch_targets() {
     fi
 
     if [[ "$task" == "upload" ]]; then
+        blue_geo_watch_targets \
+            save \
+            target=all \
+            $BLUE_GEO_WATCH_TARGET_LIST
+        [[ $? -ne 0 ]] && return 1
+
         abcli_$task - $BLUE_GEO_WATCH_TARGET_LIST
         return
     fi

@@ -59,7 +59,7 @@ function blue_geo_watch_targets() {
         local object_name=$(abcli_clarify_object $3 .)
 
         abcli_clone \
-            - \
+            ~relate \
             $BLUE_GEO_QGIS_TEMPLATE_WATCH \
             $object_name
 

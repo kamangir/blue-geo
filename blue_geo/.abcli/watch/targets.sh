@@ -34,13 +34,6 @@ function blue_geo_watch_targets() {
         return
     fi
 
-    if [[ "$task" == "download" ]]; then
-        abcli_$task - $BLUE_GEO_WATCH_TARGET_LIST
-
-        python3 -m blue_geo.watch.targets list
-        return
-    fi
-
     if [[ "$task" == "edit" ]]; then
         abcli_eval - \
             nano $ABCLI_OBJECT_ROOT/$BLUE_GEO_WATCH_TARGET_LIST/metadata.yaml

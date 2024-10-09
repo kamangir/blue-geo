@@ -25,7 +25,7 @@ notice that `all` returns zero items, because no asset starts with the expected 
 ```
 --help-- blue_geo catalog query EarthSearch sentinel_2_l1c
 
---include-- ../../watch/targets/chilcotin-river-landslide.md case study: Chilcotin River Landslide
+--include-- ../../watch/targets/md/chilcotin-river-landslide.md case study: Chilcotin River Landslide
 
 ## example run
 

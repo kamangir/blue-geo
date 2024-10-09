@@ -11,7 +11,7 @@ the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.i
 ```
 --help-- blue_geo catalog query SkyFox Venus
 
---include-- ../../watch/targets/Leonardo.md case study: Leonardo da Vinci International Airport
+--include-- ../../watch/targets/md/Leonardo.md case study: Leonardo da Vinci International Airport
 
 ## example run
 

@@ -3,7 +3,7 @@ import os
 
 from blue_options import string
 from blue_objects import file
-from blue_geo.watch.targets.classes import TargetList
+from blue_geo.watch.targets.target_list import TargetList
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
 from blue_geo import REPO_NAME
@@ -132,7 +132,7 @@ for target_name in sorted(list_of_targets.keys()):
 
     list_of_objects = target_info["objects"]
 
-    target_README = f"./targets/{target_name}.md"
+    target_README = f"./targets/md/{target_name}.md"
 
     target_title = "`{}`".format(target_info.get("title", target_name))
 

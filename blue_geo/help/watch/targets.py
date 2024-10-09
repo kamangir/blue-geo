@@ -3,7 +3,7 @@ from typing import List
 from blue_options.terminal import show_usage
 
 from blue_geo.env import BLUE_GEO_WATCH_TARGET_LIST
-from blue_geo.watch.targets import TargetList
+from blue_geo.watch.targets.target_list import TargetList
 
 get_what_list = "catalog|collection|exists|one_liner|query_args"
 

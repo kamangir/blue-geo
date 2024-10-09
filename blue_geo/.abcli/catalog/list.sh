@@ -29,7 +29,7 @@ function blue_geo_catalog_load_all() {
     local catalog
     local list_of_collections
     for catalog in $(echo $blue_geo_list_of_catalogs | tr , " "); do
-        abcli_source_path - caller,civilized,suffix=/$catalog
+        abcli_source_path - caller,ignore_error,suffix=/$catalog
 
         list_of_datacube_classes=$(blue_geo_catalog list \
             datacube_classes \

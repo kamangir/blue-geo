@@ -3,7 +3,7 @@ from typing import List
 from blue_options.terminal import show_usage, xtra
 from notebooks_and_scripts.workflow.runners import list_of_runners
 
-from blue_geo.watch.targets.classes import TargetList
+from blue_geo.watch.targets.target_list import TargetList
 from blue_geo.datacube.modalities import options as modality_options
 from blue_geo.help.watch.targets import help_functions as help_targets
 

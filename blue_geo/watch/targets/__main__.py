@@ -5,7 +5,7 @@ from blueness import module
 from blueness.argparse.generic import sys_exit
 
 from blue_geo import NAME
-from blue_geo.watch.targets.classes import TargetList, Target
+from blue_geo.watch.targets.target_list import TargetList
 from blue_geo.help.watch.targets import get_what_list
 from blue_geo.logger import logger
 

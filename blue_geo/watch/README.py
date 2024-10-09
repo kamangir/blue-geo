@@ -3,7 +3,7 @@ import os
 
 from blue_options import string
 from blue_objects import file
-from blue_geo.watch.targets.classes import TargetList
+from blue_geo.watch.targets.target_list import TargetList
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
 from blue_geo import REPO_NAME

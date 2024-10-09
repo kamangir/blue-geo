@@ -4,7 +4,7 @@ from blue_objects.metadata import get_from_object
 from notebooks_and_scripts.workflow.generic import Workflow
 
 from blue_geo import NAME
-from blue_geo.watch.targets import Target
+from blue_geo.watch.targets.target import Target
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)

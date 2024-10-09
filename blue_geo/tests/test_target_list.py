@@ -1,7 +1,8 @@
 import pytest
 
 from blue_objects import file, objects
-from blue_geo.watch.targets.classes import Target, TargetList
+from blue_geo.watch.targets.target import Target
+from blue_geo.watch.targets.target_list import TargetList
 
 
 @pytest.fixture

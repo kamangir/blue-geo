@@ -6,7 +6,7 @@ from blue_objects import file, README
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
 from blue_geo.watch.targets import jasper
 from blue_geo.help.functions import help_functions
-from blue_geo.watch.targets.classes import TargetList
+from blue_geo.watch.targets.target_list import TargetList
 
 
 def build() -> bool:

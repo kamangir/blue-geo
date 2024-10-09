@@ -12,8 +12,8 @@ QGIS help
 ```bash
 QGIS expressions push [push]
  . push QGIS expressions.
-   QGIS: /home/codespace/Library/Application Support/QGIS/QGIS3/profiles/default/python/expressions
-   github: /workspaces/blue-geo/blue_geo/QGIS/expressions
+   QGIS: /Users/kamangir/Library/Application Support/QGIS/QGIS3/profiles/default/python/expressions
+   github: /Users/kamangir/git/blue-geo/blue_geo/QGIS/expressions
 QGIS expressions pull
  . pull QGIS expressions.
 QGIS seed [screen]

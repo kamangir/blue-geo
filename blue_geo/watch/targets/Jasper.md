@@ -11,6 +11,9 @@ The 2024 Jasper wildfire.
 
 The fire originates in the bottom right, crosses the river, and causes the colors to shift from green to brown.
 
+ - [Google Maps](https://maps.app.goo.gl/o5tGW4tH5S6j4vso9): `lat: 52.8734"N`, `lon: 118.0814"W`.
+ - [Parks Canada](https://parks.canada.ca/pn-np/ab/jasper/visit/feu-alert-fire/feudeforet-wildfire): Wildfire status, Jasper Wildfire Complex.
+ - [Wikipedia](https://en.wikipedia.org/wiki/2024_Jasper_wildfire)
 
 ---
 

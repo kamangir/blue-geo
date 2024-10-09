@@ -23,6 +23,12 @@ class TargetList:
         if load:
             assert self.load(download)
 
+    def download(self) -> bool:
+        return objects.download(
+            object_name=self.object_name,
+            filename="metadata.yaml",
+        )
+
     @classmethod
     def filename(cls) -> str:
         return objects.path_of(
@@ -81,12 +87,8 @@ class TargetList:
         self,
         download: bool = False,
     ) -> bool:
-        if download:
-            if not objects.download(
-                object_name=self.object_name,
-                filename="metadata.yaml",
-            ):
-                return False
+        if download and not self.download():
+            return False
 
         _, targets = file.load_yaml(self.filename(), ignore_error=True)
 

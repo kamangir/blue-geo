@@ -44,7 +44,7 @@ the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.i
 ---
 
 
-using [Leonardo](../../watch/targets/Leonardo.md).
+using [Leonardo](../../watch/targets/md/Leonardo.md).
 
 ## example run
 

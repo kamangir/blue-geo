@@ -16,7 +16,10 @@ def build() -> bool:
         README.build(
             items=items,
             cols=cols,
-            path=os.path.join(file.path(__file__), suffix),
+            path=os.path.join(
+                file.path(__file__),
+                f"md/{suffix}",
+            ),
             macros=macros,
             ICON=ICON,
             NAME=NAME,
@@ -41,7 +44,7 @@ def build() -> bool:
                             ", ".join(
                                 sorted(
                                     [
-                                        "[`@geo watch`](../)",
+                                        "[`@geo watch`](../../)",
                                     ]
                                 )
                             )

@@ -132,7 +132,7 @@ for target_name in sorted(list_of_targets.keys()):
 
     list_of_objects = target_info["objects"]
 
-    target_README = f"./targets/{target_name}.md"
+    target_README = f"./targets/md/{target_name}.md"
 
     target_title = "`{}`".format(target_info.get("title", target_name))
 

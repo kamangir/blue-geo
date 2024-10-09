@@ -54,7 +54,7 @@ notice that `all` returns zero items, because no asset starts with the expected 
 ---
 
 
-using [chilcotin-river-landslide](../../watch/targets/chilcotin-river-landslide.md).
+using [chilcotin-river-landslide](../../watch/targets/md/chilcotin-river-landslide.md).
 
 ## example run
 

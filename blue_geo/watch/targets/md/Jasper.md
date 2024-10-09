@@ -17,4 +17,4 @@ The fire originates in the bottom right, crosses the river, and causes the color
 
 ---
 
-used by: [`@geo watch`](../).
+used by: [`@geo watch`](../../).

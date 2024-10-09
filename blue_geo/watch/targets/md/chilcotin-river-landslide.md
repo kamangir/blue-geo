@@ -9,4 +9,4 @@
 
 ---
 
-used by: [`@geo watch`](../).
+used by: [`@geo watch`](../../).

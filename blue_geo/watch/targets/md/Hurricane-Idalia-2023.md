@@ -8,4 +8,4 @@ paused ⏸️ - [dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversa
 
 ---
 
-used by: [`@geo watch`](../).
+used by: [`@geo watch`](../../).

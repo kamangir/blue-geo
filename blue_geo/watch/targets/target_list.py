@@ -110,8 +110,20 @@ class TargetList:
         gdf = gpd.GeoDataFrame(
             {
                 "id": [str(index + 1) for index in range(len(list_of_targets))],
-                "description": [
+                "name": [
                     self.get(target_name=target_name).name
+                    for target_name in list_of_targets
+                ],
+                "description": [
+                    self.get(target_name=target_name).description
+                    for target_name in list_of_targets
+                ],
+                "catalog": [
+                    self.get(target_name=target_name).catalog
+                    for target_name in list_of_targets
+                ],
+                "collection": [
+                    self.get(target_name=target_name).collection
                     for target_name in list_of_targets
                 ],
                 "geometry": [

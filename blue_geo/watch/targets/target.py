@@ -12,6 +12,7 @@ class Target:
     def __init__(
         self,
         name: str = "",
+        description: str = "",
         catalog: str = "",
         collection: str = "",
         params: Dict[str, str] = {},
@@ -20,6 +21,7 @@ class Target:
         versions: Dict[str, str] = {},
     ) -> None:
         self.name: str = name
+        self.description: str = description
 
         self.catalog = catalog
         self.collection = collection
@@ -39,6 +41,7 @@ class Target:
     ) -> "Target":
         return cls(
             name=name,
+            description=data.get("description", ""),
             catalog=data.get("catalog", ""),
             collection=data.get("collection", ""),
             params=copy.deepcopy(data.get("params", {})),
@@ -68,6 +71,7 @@ class Target:
 
         return Target(
             name=f"{self.name}-{version}",
+            description=f"{self.description} [{version}]",
             catalog=self.catalog,
             collection=self.collection,
             params=params,
@@ -103,9 +107,10 @@ class Target:
 
     @property
     def one_liner(self) -> str:
-        return "{}: {} | {}/{} | {} | {}{}".format(
+        return "{}: {} - {} | {}/{} | {} | {}{}".format(
             self.__class__.__name__,
             self.name,
+            self.description,
             self.catalog,
             self.collection,
             self.query_args_as_str(" | "),
@@ -166,7 +171,10 @@ class Target:
         gdf = gpd.GeoDataFrame(
             {
                 "id": ["1"],
-                "description": [self.name],
+                "name": [self.name],
+                "description": [self.description],
+                "catalog": [self.catalog],
+                "collection": [self.collection],
                 "geometry": [self.polygon],
             },
             crs="EPSG:4326",

@@ -43,9 +43,11 @@ def help_download(
     tokens: List[str],
     mono: bool,
 ) -> str:
+    options = "open,QGIS"
     return show_usage(
         [
             "@targets download",
+            f"[{options}]",
         ],
         "download watch targets.",
         {
@@ -102,6 +104,21 @@ def help_list(
     return show_usage(
         ["@targets list"] + args,
         "list targets.",
+        mono=mono,
+    )
+
+
+def help_open(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = "QGIS"
+    return show_usage(
+        [
+            "@targets open",
+            f"[{options}]",
+        ],
+        "open targets.",
         mono=mono,
     )
 
@@ -177,6 +194,7 @@ help_functions = {
     "edit": help_edit,
     "get": help_get,
     "list": help_list,
+    "open": help_open,
     "publish": help_publish,
     "save": help_save,
     "test": help_test,

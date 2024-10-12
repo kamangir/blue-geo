@@ -3,11 +3,6 @@
 function blue_geo_watch_targets_cp() {
     local options=$1
 
-    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        abcli_show_usage_2 blue_geo watch targets cp
-        return
-    fi
-
     local object_name_1=$(abcli_clarify_object $2 .)
     local object_name_2=$(abcli_clarify_object $3 .)
 

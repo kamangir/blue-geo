@@ -9,28 +9,14 @@ function blue_geo_watch_targets() {
         return
     fi
 
-    local function_name=blue_geo_watch_targets_$task
-    if [[ $(type -t $function_name) == "function" ]]; then
-        $function_name "${@:2}"
-        return
-    fi
-
     if [ "$2" == "help" ]; then
         abcli_show_usage_2 blue_geo watch targets $task
         return
     fi
 
-    if [[ "$task" == "cat" ]]; then
-        local target_name=$2
-        if [[ -z "$target_name" ]]; then
-            abcli_log_error "-@targets cat: <target-name> not found."
-            return 1
-        fi
-
-        python3 -m blue_geo.watch.targets \
-            get \
-            --target_name $target_name \
-            --what one_liner
+    local function_name=blue_geo_watch_targets_$task
+    if [[ $(type -t $function_name) == "function" ]]; then
+        $function_name "${@:2}"
         return
     fi
 
@@ -45,21 +31,10 @@ function blue_geo_watch_targets() {
         return
     fi
 
-    if [[ "$task" == "save" ]]; then
-        local options=$2
-        local target_name=$(abcli_option "$options" target all)
-
-        local object_name=$(abcli_clarify_object $3 .)
-
-        abcli_clone \
-            ~relate \
-            $BLUE_GEO_QGIS_TEMPLATE_WATCH \
-            $object_name
-
-        python3 -m blue_geo.watch.targets save \
-            --target_name $target_name \
-            --object_name $object_name \
-            "${@:4}"
+    if [[ "$task" == "open" ]]; then
+        abcli_open \
+            ,$2 \
+            $BLUE_GEO_WATCH_TARGET_LIST
         return
     fi
 
@@ -70,23 +45,8 @@ function blue_geo_watch_targets() {
         return
     fi
 
-    if [[ ",upload,test," == *",$task,"* ]]; then
-        python3 -m blue_geo.watch.targets test
-        [[ $? -ne 0 ]] && return 1
-    fi
-
-    if [[ "$task" == "upload" ]]; then
-        blue_geo_watch_targets \
-            save \
-            target=all \
-            $BLUE_GEO_WATCH_TARGET_LIST
-        [[ $? -ne 0 ]] && return 1
-
-        abcli_$task - $BLUE_GEO_WATCH_TARGET_LIST
-        return
-    fi
-
     if [[ "$task" == "test" ]]; then
+        python3 -m blue_geo.watch.targets test
         return
     fi
 

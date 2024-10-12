@@ -7,7 +7,11 @@ watch the planet's story unfold.
 ```
 --help-- blue_geo watch
 
-🎯 [`geo-watch-targets/`](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-targets.tar.gz): [geojson](./targets.geojson).
+## targets 🎯
+
+- [`targets.geojson`](./targets.geojson)
+- list of targets: [blue-geo-target-list-v1.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/blue-geo-target-list-v1.tar.gz)
+- template: [blue_geo_watch_template_v1.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/blue_geo_watch_template_v1.tar.gz)
 
 ## example run
 

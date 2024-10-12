@@ -2,7 +2,6 @@ from typing import List
 
 from blue_options.terminal import show_usage, xtra
 
-from blue_geo.env import BLUE_GEO_WATCH_TARGET_LIST
 from blue_geo.watch.targets.target_list import TargetList
 
 get_what_list = "catalog|collection|exists|one_liner|query_args"
@@ -50,9 +49,6 @@ def help_download(
             f"[{options}]",
         ],
         "download watch targets.",
-        {
-            f"$BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
-        },
         mono=mono,
     )
 
@@ -132,14 +128,13 @@ def help_publish(
     tokens: List[str],
     mono: bool,
 ) -> str:
+    options = "template"
     return show_usage(
         [
             "@targets publish",
+            f"[{options}]",
         ],
         "publish watch targets.",
-        {
-            f"$BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
-        },
         mono=mono,
     )
 
@@ -169,9 +164,6 @@ def help_test(
             "@targets test",
         ],
         "test watch targets.",
-        {
-            f"$BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
-        },
         mono=mono,
     )
 
@@ -200,9 +192,6 @@ def help_upload(
             "@targets upload",
         ],
         "upload watch targets.",
-        {
-            f"$BLUE_GEO_WATCH_TARGET_LIST: {BLUE_GEO_WATCH_TARGET_LIST}": [],
-        },
         mono=mono,
     )
 

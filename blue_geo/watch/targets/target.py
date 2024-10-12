@@ -81,7 +81,7 @@ class Target:
 
         return Target(
             name=f"{self.name}-{version}",
-            description=f"{self.description} [{version}]",
+            description=self.description,
             catalog=self.catalog,
             collection=self.collection,
             params=params,

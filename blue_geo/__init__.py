@@ -9,7 +9,7 @@ ICON = "🌐"
 
 DESCRIPTION = f"{ICON} AI for a Blue Planet."
 
-VERSION = "4.657.1"
+VERSION = "4.658.1"
 
 REPO_NAME = "blue-geo"
 

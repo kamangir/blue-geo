@@ -114,7 +114,7 @@ def help_open(
 ) -> str:
     options = "".join(
         [
-            xtra("~QGIS,"),
+            xtra("~QGIS,", mono=mono),
             "template",
         ]
     )

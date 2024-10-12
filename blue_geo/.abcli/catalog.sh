@@ -21,4 +21,4 @@ function blue_geo_catalog() {
     return 1
 }
 
-abcli_source_path - caller,suffix=/catalog
+abcli_source_caller_suffix_path /catalog

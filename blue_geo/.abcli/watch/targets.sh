@@ -54,4 +54,4 @@ function blue_geo_watch_targets() {
     return 1
 }
 
-abcli_source_path - caller,suffix=/targets
+abcli_source_caller_suffix_path /targets

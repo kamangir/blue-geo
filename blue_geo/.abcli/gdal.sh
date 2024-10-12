@@ -18,4 +18,4 @@ function blue_geo_gdal() {
     return 1
 }
 
-abcli_source_path - caller,suffix=/gdal
+abcli_source_caller_suffix_path /gdal

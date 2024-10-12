@@ -115,4 +115,4 @@ function blue_geo_catalog_query() {
     return $status
 }
 
-abcli_source_path - caller,suffix=/query
+abcli_source_caller_suffix_path /query

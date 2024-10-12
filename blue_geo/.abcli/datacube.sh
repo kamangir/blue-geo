@@ -22,4 +22,4 @@ function blue_geo_datacube() {
     return 1
 }
 
-abcli_source_path - caller,suffix=/datacube
+abcli_source_caller_suffix_path /datacube

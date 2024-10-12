@@ -45,4 +45,4 @@ function blue_geo_QGIS() {
     return 1
 }
 
-abcli_source_path - caller,suffix=/QGIS
+abcli_source_caller_suffix_path /QGIS

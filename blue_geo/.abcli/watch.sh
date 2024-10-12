@@ -117,4 +117,4 @@ function blue_geo_watch() {
         $job_name
 }
 
-abcli_source_path - caller,suffix=/watch
+abcli_source_caller_suffix_path /watch

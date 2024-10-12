@@ -21,8 +21,7 @@ function blue_geo_watch_targets() {
     fi
 
     if [[ "$task" == "edit" ]]; then
-        abcli_eval - \
-            nano $ABCLI_OBJECT_ROOT/$BLUE_GEO_WATCH_TARGET_LIST/metadata.yaml
+        abcli_code $ABCLI_OBJECT_ROOT/$BLUE_GEO_WATCH_TARGET_LIST/metadata.yaml
         return
     fi
 

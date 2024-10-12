@@ -39,9 +39,19 @@ class Target:
         name: str,
         data: Dict,
     ) -> "Target":
+        description = data.get("description", "")
+        if not description:
+            candidate_description = [
+                url.split(",", 1)[1]
+                for url in data.get("urls", {}).values()
+                if "," in url
+            ]
+            if candidate_description:
+                description = candidate_description[0].strip()
+
         return cls(
             name=name,
-            description=data.get("description", ""),
+            description=description,
             catalog=data.get("catalog", ""),
             collection=data.get("collection", ""),
             params=copy.deepcopy(data.get("params", {})),
@@ -107,10 +117,10 @@ class Target:
 
     @property
     def one_liner(self) -> str:
-        return "{}: {} - {} | {}/{} | {} | {}{}".format(
+        return "{}: {}{} | {}/{} | {} | {}{}".format(
             self.__class__.__name__,
             self.name,
-            self.description,
+            " - {}".format(self.description) if self.description else "",
             self.catalog,
             self.collection,
             self.query_args_as_str(" | "),

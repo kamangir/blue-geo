@@ -40,7 +40,7 @@ function blue_geo_watch_targets() {
 
     if [[ "$task" == "publish" ]]; then
         abcli_publish \
-            as=geo-watch-targets,suffix=.yaml \
+            as=geo-watch-targets,tar \
             $BLUE_GEO_WATCH_TARGET_LIST
         return
     fi

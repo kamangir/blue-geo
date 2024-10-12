@@ -7,7 +7,7 @@ watch the planet's story unfold.
 ```
 --help-- blue_geo watch
 
-🎯 [`geo-watch-targets/metadata.yaml`](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-targets/metadata.yaml): [geojson](./targets.geojson).
+🎯 [`geo-watch-targets/`](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-targets.tar.gz): [geojson](./targets.geojson).
 
 ## example run
 

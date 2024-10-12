@@ -1,6 +1,6 @@
 from typing import List
 
-from blue_options.terminal import show_usage
+from blue_options.terminal import show_usage, xtra
 
 from blue_geo.env import BLUE_GEO_WATCH_TARGET_LIST
 from blue_geo.watch.targets.target_list import TargetList
@@ -112,7 +112,12 @@ def help_open(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "QGIS"
+    options = "".join(
+        [
+            xtra("~QGIS,"),
+            "template",
+        ]
+    )
     return show_usage(
         [
             "@targets open",
@@ -171,6 +176,21 @@ def help_test(
     )
 
 
+def help_update_template(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = xtra("~download,target=all|<target-name>,~upload", mono=mono)
+    return show_usage(
+        [
+            "@targets update_template",
+            f"[{options}]",
+        ],
+        "update target template.",
+        mono=mono,
+    )
+
+
 def help_upload(
     tokens: List[str],
     mono: bool,
@@ -198,5 +218,6 @@ help_functions = {
     "publish": help_publish,
     "save": help_save,
     "test": help_test,
+    "update_template": help_update_template,
     "upload": help_upload,
 }

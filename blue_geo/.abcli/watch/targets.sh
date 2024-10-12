@@ -31,13 +31,6 @@ function blue_geo_watch_targets() {
         return
     fi
 
-    if [[ "$task" == "open" ]]; then
-        abcli_open \
-            ,$2 \
-            $BLUE_GEO_WATCH_TARGET_LIST
-        return
-    fi
-
     if [[ "$task" == "publish" ]]; then
         abcli_publish \
             as=geo-watch-targets,tar \

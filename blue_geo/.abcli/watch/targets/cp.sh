@@ -11,4 +11,6 @@ function blue_geo_watch_targets_cp() {
     cp -v \
         $ABCLI_OBJECT_ROOT/$object_name_1/target/* \
         $target_path
+    # because there may be no such ^ file, and its ok. :)
+    return 0
 }

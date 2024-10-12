@@ -122,6 +122,16 @@ list_of_targets = {
             "scale": 4,
         },
     },
+    "Silver-Peak": {
+        "objects": {
+            "geo-watch-Silver-Peak-2024-10-12-a": [
+                "[dev notes](https://medium.com/@arash-kamangir/%EF%B8%8F-conversations-with-ai-267-8720fd3460d0)",
+            ],
+        },
+        "thumbnail": {
+            "scale": 4,
+        },
+    },
 }
 
 targets_path = file.path(__file__)

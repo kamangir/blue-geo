@@ -17,6 +17,8 @@ function blue_geo_action_git_before_push() {
     blue_geo_watch_targets_publish template
     [[ $? -ne 0 ]] && return 1
 
-    [[ "$(abcli_git get_branch)" == "main" ]] &&
-        blue_geo pypi build
+    [[ "$(abcli_git get_branch)" != "main" ]] &&
+        return 0
+
+    blue_geo pypi build
 }

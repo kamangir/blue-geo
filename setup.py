@@ -35,6 +35,7 @@ setup(
         #
         f"{NAME}.watch",
         f"{NAME}.watch.targets",
+        f"{NAME}.watch.targets.md",
         f"{NAME}.watch.workflow",
     ],
     include_package_data=True,

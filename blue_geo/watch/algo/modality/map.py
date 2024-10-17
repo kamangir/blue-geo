@@ -104,6 +104,7 @@ def map_function(
         object_name,
         "map",
         {
+            "algo": "modality",
             "inputs": {
                 "offset": offset,
                 "modality": modality,

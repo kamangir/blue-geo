@@ -3,8 +3,9 @@ from typing import List
 from blue_options.terminal import show_usage, xtra
 from notebooks_and_scripts.workflow.runners import list_of_runners
 
-from blue_geo.watch.targets.target_list import TargetList
 from blue_geo.datacube.modalities import options as modality_options
+from blue_geo.watch.targets.target_list import TargetList
+from blue_geo.watch.algo import list_of_algo
 from blue_geo.help.watch.targets import help_functions as help_targets
 
 
@@ -14,7 +15,8 @@ def help_map(
 ) -> str:
     options = "".join(
         [
-            xtra("dryrun,~download,", mono),
+            "algo=<algo>",
+            xtra(",dryrun,~download,", mono),
             "modality=<modality>,",
             "offset=<offset>,suffix=<suffix>",
             xtra(",~upload", mono),
@@ -28,9 +30,6 @@ def help_map(
             "[.|<query-object-name>]",
         ],
         "@geo watch map <query-object-name> @ <offset> -> /<suffix>.",
-        {
-            "modality: {},".format("|".join(modality_options)): [],
-        },
         mono=mono,
     )
 
@@ -41,6 +40,7 @@ def help_reduce(
 ) -> str:
     options = "".join(
         [
+            "algo=<algo>",
             xtra("dryrun,~download,", mono),
             "publish,suffix=<suffix>",
             xtra(",~upload", mono),
@@ -91,17 +91,18 @@ def help(
         ]
     )
 
+    algo_options = "".join(["algo=<algo>,modality=<modality>"])
+
     workflow_options = "".join(
         [
-            xtra("dryrun,", mono),
+            xtra("dryrun,~submit,", mono),
             "to=<runner>",
         ]
     )
 
     map_options = "".join(
         [
-            xtra("dryrun,", mono),
-            "modality=<modality>",
+            xtra("dryrun", mono),
         ]
     )
 
@@ -117,6 +118,7 @@ def help(
             "@geo watch",
             options if help_batch else f"[{options}]",
             f"[{target_options}]",
+            f"[{algo_options}]",
             f"[{workflow_options}]",
             f"[{map_options}]",
             f"[{reduce_options}]",
@@ -124,9 +126,10 @@ def help(
         ],
         "watch target -{}> <object-name>.".format("aws-batch-" if help_batch else ""),
         {
-            "modality: {}".format("|".join(modality_options)): [],
-            "runner: {}".format("|".join(list_of_runners())): [],
-            "target: {}".format("|".join(target_list.get_list())): [],
+            "algo: {}".format(" | ".join(list_of_algo)): [],
+            "modality: {}".format(" | ".join(modality_options)): [],
+            "runner: {}".format(" | ".join(list_of_runners())): [],
+            "target: {}".format(" | ".join(target_list.get_list())): [],
         },
         mono=mono,
     )

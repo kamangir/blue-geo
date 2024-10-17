@@ -18,9 +18,8 @@ watch the planet's story unfold.
 ```bash
 @geo watch \
   batch \
-  target=elkhema-2024 \
-  to=aws_batch \
-  modality=rgb \
+  target=elkhema-2024 - \
+  to=aws_batch - \
   publish \
   geo-watch-elkhema-2024-2024-10-05-a-b
 ```

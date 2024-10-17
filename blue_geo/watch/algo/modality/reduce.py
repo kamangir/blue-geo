@@ -4,18 +4,13 @@ from tqdm import tqdm
 import numpy as np
 
 from blueness import module
-from blue_options import string
-from blue_options.host import signature as host_signature
 from blue_objects import file, objects
 from blue_objects.graphics.gif import generate_animated_gif
-from blue_objects.graphics.signature import add_signature
 from blue_objects.metadata import post_to_object
-from notebooks_and_scripts import NAME as NBS_NAME, VERSION as NBS_VERSION
 
 from blue_geo import NAME, VERSION
 from blue_geo import NAME as BLUE_GEO_NAME
 from blue_geo.watch.workflow.common import load_watch
-from blue_geo.catalog.functions import get_datacube_class
 from blue_geo.logger import logger
 
 
@@ -119,6 +114,7 @@ def reduce_function(
         object_name,
         "reduce",
         {
+            "algo": "modality",
             "bad_frames": bad_frames,
             "bad_metadata": bad_metadata,
             "frames": frame_metadata,

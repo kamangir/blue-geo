@@ -15,6 +15,7 @@ function test_blue_geo_watch() {
         blue_geo_watch \
             ,$options \
             target=$target \
+            - \
             to=local \
             - \
             - \

@@ -57,7 +57,7 @@ def generate_workflow(
             "node=reduce",
             job_name,
             "blue_geo_watch_reduce",
-            f"{algo_options},suffix={suffix},{reduce_options}",
+            f",{algo_options},suffix={suffix},{reduce_options}",
             query_object_name,
             object_name,
         ]
@@ -74,7 +74,7 @@ def generate_workflow(
                 f"node={node}",
                 job_name,
                 "blue_geo_watch_map",
-                f"{algo_options},offset={offset:03d},suffix={suffix},{map_options}",
+                f",{algo_options},offset={offset:03d},suffix={suffix},{map_options}",
                 query_object_name,
             ]
         )

@@ -11,6 +11,7 @@ NAME = module.name(__file__, NAME)
 
 
 def generate_workflow(
+    algo_options: str,
     query_object_name: str,
     job_name: str,
     object_name: str,
@@ -33,8 +34,9 @@ def generate_workflow(
     )
 
     logger.info(
-        "{}.generate_workflow: {}[{} X {} datacube(s)]/{}: -[{} @ {} + {}]-> {}".format(
+        "{}.generate_workflow @ {}: {}[{} X {} datacube(s)]/{}: -[{} @ {} + {}]-> {}".format(
             NAME,
+            algo_options,
             target,
             query_object_name,
             len(list_of_datacube_id),
@@ -55,7 +57,7 @@ def generate_workflow(
             "node=reduce",
             job_name,
             "blue_geo_watch_reduce",
-            f"suffix={suffix},{reduce_options}",
+            f"{algo_options},suffix={suffix},{reduce_options}",
             query_object_name,
             object_name,
         ]
@@ -72,7 +74,7 @@ def generate_workflow(
                 f"node={node}",
                 job_name,
                 "blue_geo_watch_map",
-                f"offset={offset:03d},suffix={suffix},{map_options}",
+                f"{algo_options},offset={offset:03d},suffix={suffix},{map_options}",
                 query_object_name,
             ]
         )

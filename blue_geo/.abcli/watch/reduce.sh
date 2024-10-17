@@ -8,6 +8,7 @@ function blue_geo_watch_reduce() {
         return
     fi
 
+    local algo=$(abcli_option "$options" algo modality)
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
     local do_download=$(abcli_option_int "$options" download $(abcli_not do_dryrun))
     local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
@@ -55,13 +56,7 @@ function blue_geo_watch_reduce() {
         offset=$((offset + 1))
     done
 
-    abcli_eval dryrun=$do_dryrun \
-        python3 -m blue_geo.watch.workflow \
-        reduce \
-        --query_object_name $query_object_name \
-        --suffix $suffix \
-        --object_name $object_name \
-        "${@:4}"
+    blue_geo_watch_algo_${algo}_reduce "$@"
     local status="$?"
 
     [[ "$do_upload" == 1 ]] &&

@@ -3,9 +3,10 @@
 function blue_geo_watch() {
     local options=$1
     local target_options=$2
-    local workflow_options=$3
-    local map_options=$4
-    local reduce_options=$5
+    local algo_options=$3
+    local workflow_options=$4
+    local map_options=$5
+    local reduce_options=$6
 
     if [ $(abcli_option_int "$options" help 0) == 1 ]; then
         abcli_show_usage_2 blue_geo watch
@@ -38,7 +39,9 @@ function blue_geo_watch() {
 
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
 
-    local object_name=$(abcli_clarify_object $6 geo-watch-$(abcli_string_timestamp))
+    local algo=$(abcli_option "$algo_options" algo modality)
+
+    local object_name=$(abcli_clarify_object $7 geo-watch-$(abcli_string_timestamp))
 
     local target=$(abcli_option "$target_options" target)
     local query_object_name
@@ -103,13 +106,20 @@ function blue_geo_watch() {
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.workflow \
         generate \
+        --algo_options $algo_options \
         --query_object_name $query_object_name \
         --job_name $job_name \
         --object_name $object_name \
         --map_options "$map_options" \
         --reduce_options "$reduce_options" \
-        "${@:7}"
+        "${@:8}"
     [[ $? -ne 0 ]] && return 1
+
+    blue_geo_watch_algo_${algo}_generate "$@"
+    [[ $? -ne 0 ]] && return 1
+
+    local do_submit=$(abcli_option_int "$workflow_options" submit 1)
+    [[ "$do_submit" == 0 ]] && return 0
 
     abcli_eval dryrun=$do_dryrun \
         workflow submit \

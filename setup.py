@@ -34,6 +34,8 @@ setup(
         f"{NAME}.QGIS",
         #
         f"{NAME}.watch",
+        f"{NAME}.watch.algo",
+        f"{NAME}.watch.algo.modality",
         f"{NAME}.watch.targets",
         f"{NAME}.watch.targets.md",
         f"{NAME}.watch.workflow",

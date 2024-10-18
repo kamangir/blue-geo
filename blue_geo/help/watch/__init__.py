@@ -91,7 +91,7 @@ def help(
         ]
     )
 
-    algo_options = "".join(["algo=<algo>,modality=<modality>"])
+    algo_options = "algo=<algo>,<algo-options>"
 
     workflow_options = "".join(
         [
@@ -126,7 +126,9 @@ def help(
         ],
         "watch target -{}> <object-name>.".format("aws-batch-" if help_batch else ""),
         {
-            "algo: {}".format(" | ".join(list_of_algo)): [],
+            "<algo-options>:": [
+                "modality: modality=<modality>",
+            ],
             "modality: {}".format(" | ".join(modality_options)): [],
             "runner: {}".format(" | ".join(list_of_runners())): [],
             "target: {}".format(" | ".join(target_list.get_list())): [],

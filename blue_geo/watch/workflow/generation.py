@@ -23,10 +23,6 @@ def generate_workflow(
         "datacube_id",
     )
 
-    success, target = Target.load(query_object_name)
-    if not success:
-        return success
-
     suffix = string.pretty_date(
         include_date=False,
         as_filename=True,
@@ -34,10 +30,9 @@ def generate_workflow(
     )
 
     logger.info(
-        "{}.generate_workflow @ {}: {}[{} X {} datacube(s)]/{}: -[{} @ {} + {}]-> {}".format(
+        "{}.generate_workflow @ {}: [{} X {} datacube(s)]/{}: -[{} @ {} + {}]-> {}".format(
             NAME,
             algo_options,
-            target,
             query_object_name,
             len(list_of_datacube_id),
             suffix,

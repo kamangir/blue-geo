@@ -1,4 +1,6 @@
 from typing import List, Type
+
+from blue_geo import env
 from blue_geo.catalog.generic import (
     GenericCatalog,
     VoidCatalog,
@@ -29,7 +31,13 @@ list_of_catalog_classes: List[Type[GenericCatalog]] = [
 ]
 
 list_of_catalogs: List[str] = sorted(
-    [catalog_class.name for catalog_class in list_of_catalog_classes]
+    [
+        catalog_name
+        for catalog_name in [
+            catalog_class.name for catalog_class in list_of_catalog_classes
+        ]
+        if catalog_name not in env.BLUE_GEO_DISABLED_CATALOGS.split(",")
+    ]
 )
 
 list_of_datacube_classes: List[Type[GenericDatacube]] = [

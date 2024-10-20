@@ -1,8 +1,6 @@
 from typing import Dict, List
 from argparse import ArgumentParser
 
-from blue_options.env import ABCUL
-
 
 def add_default_arguments(
     default_args: Dict[str, Dict],

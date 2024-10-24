@@ -51,7 +51,7 @@ function blue_geo_watch_algo_modality_map() {
         --count 1 \
         --exists 1)
     if [[ -z "$filename" ]]; then
-        abcli_warn "offset=$offset: $cropped_datacube_id: file not found."
+        abcli_log_warning "offset=$offset: $cropped_datacube_id: file not found."
 
         [[ "$do_upload" == 1 ]] &&
             abcli_upload - $object_name

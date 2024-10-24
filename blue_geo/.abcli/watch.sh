@@ -110,8 +110,8 @@ function blue_geo_watch() {
         --query_object_name $query_object_name \
         --job_name $job_name \
         --object_name $object_name \
-        --map_options "$map_options" \
-        --reduce_options "$reduce_options" \
+        --map_options ",$map_options" \
+        --reduce_options ",$reduce_options" \
         "${@:8}"
     [[ $? -ne 0 ]] && return 1
 

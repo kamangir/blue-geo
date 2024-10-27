@@ -1,15 +1,13 @@
 from typing import List, Dict
 import glob
 from tqdm import tqdm
-import numpy as np
 
 from blueness import module
 from blue_objects import file, objects
 from blue_objects.graphics.gif import generate_animated_gif
 from blue_objects.metadata import post_to_object
 
-from blue_geo import NAME, VERSION
-from blue_geo import NAME as BLUE_GEO_NAME
+from blue_geo import NAME
 from blue_geo.watch.workflow.common import load_watch
 from blue_geo.logger import logger
 

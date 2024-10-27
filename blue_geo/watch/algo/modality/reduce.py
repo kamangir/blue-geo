@@ -30,7 +30,7 @@ def reduce_function(
             NAME,
             query_object_name,
             suffix,
-            target,
+            target.one_liner,
             len(list_of_files),
             object_name,
         )

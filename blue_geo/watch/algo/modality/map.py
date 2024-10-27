@@ -47,7 +47,7 @@ def map_function(
     logger.info(
         "{}.map: {} #{} @ {} -{}-> {}".format(
             NAME,
-            target,
+            target.one_liner,
             offset,
             datacube_id,
             modality,

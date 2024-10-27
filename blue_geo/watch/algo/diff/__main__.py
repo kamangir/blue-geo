@@ -36,6 +36,11 @@ parser.add_argument(
     "--suffix",
     type=str,
 )
+parser.add_argument(
+    "--depth",
+    type=int,
+    default=2,
+)
 args = parser.parse_args()
 
 success = args.task in list_of_tasks
@@ -44,6 +49,7 @@ if args.task == "map":
         query_object_name=args.query_object_name,
         suffix=args.suffix,
         offset=args.offset,
+        depth=args.depth,
     )
 elif args.task == "reduce":
     success = reduce_function(

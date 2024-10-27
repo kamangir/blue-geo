@@ -127,6 +127,7 @@ def help(
         "watch target -{}> <object-name>.".format("aws-batch-" if help_batch else ""),
         {
             "<algo-options>:": [
+                "diff: -",
                 "modality: modality=<modality>",
             ],
             "modality: {}".format(" | ".join(modality_options)): [],

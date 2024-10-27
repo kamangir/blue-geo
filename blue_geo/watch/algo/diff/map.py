@@ -2,14 +2,15 @@ from typing import Dict
 from tqdm import trange
 import numpy as np
 import matplotlib.pyplot as plt
+import cv2
 
 from blueness import module
-from blue_options.host import signature as host_signature
 from blue_objects import file, objects
-from blue_objects.metadata import post_to_object, get_from_object
-from blue_objects.graphics.signature import justify_text
+from blue_objects.metadata import post_to_object
+from blue_objects.graphics.signature import justify_text, add_signature
 
-from blue_geo import NAME, fullname
+from blue_geo import NAME
+from blue_geo.host import signature
 from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.watch.workflow.common import load_watch
 from blue_geo.logger import logger
@@ -34,27 +35,16 @@ def map_function(
 
     object_name = f"{query_object_name}-{suffix}-{offset}"
 
-    list_of_datacube_id = get_from_object(
-        query_object_name,
-        "datacube_id",
-        [],
-    )
-    if len(list_of_datacube_id) < offset_int + 1:
-        logger.warning(f"offset={offset}: datacube-id not found.")
-        return True
-    datacube_id = list_of_datacube_id[offset_int]
-
     success, target, _ = load_watch(object_name, log=False)
     if not success:
         return success
 
     logger.info(
-        "{}.map: {} #{}+D={} @ {} -> {}".format(
+        "{}.map: {} #{}+D={} -> {}".format(
             NAME,
             target.one_liner,
             offset,
             depth,
-            datacube_id,
             object_name,
         )
     )
@@ -139,14 +129,7 @@ def map_function(
     )
     plt.xlabel(
         justify_text(
-            " | ".join(
-                [
-                    "DN diff",
-                    object_name,
-                    fullname(),
-                ]
-                + host_signature()
-            ),
+            " | ".join(["DN diff"] + signature()),
             line_width=line_width,
             return_str=True,
         )
@@ -159,11 +142,39 @@ def map_function(
     ):
         return False
 
-    # import ipdb
-
-    # ipdb.set_trace()
-
-    logger.info("🪄")
+    colored_diff = cv2.applyColorMap(
+        ((diff_image / diff_range + 1) / 2 * 255).astype(np.uint8), cv2.COLORMAP_JET
+    )
+    colored_diff_signed = add_signature(
+        colored_diff,
+        header=[
+            " | ".join(
+                objects.signature(
+                    " | ".join(
+                        [
+                            suffix,
+                            f"@{offset}+{depth}",
+                            f"+-{diff_range:.2f}",
+                            file.name_and_extension(baseline_filename),
+                            file.name_and_extension(target_filename),
+                        ]
+                    ),
+                    query_object_name,
+                )
+            ),
+        ],
+        footer=[
+            target.one_liner,
+            " | ".join(signature()),
+        ],
+        word_wrap=True,
+    )
+    if not file.save_image(
+        objects.path_of("diff.png", object_name),
+        colored_diff_signed,
+        log=True,
+    ):
+        return False
 
     return post_to_object(
         object_name,
@@ -175,7 +186,6 @@ def map_function(
                 "depth": depth,
                 "acquisitions": acquisition_metadata,
             },
-            "datacube_id": datacube_id,
             "target": target.__dict__,
             "usable": success,
         },

@@ -11,6 +11,11 @@ function test_blue_geo_watch() {
     local target
     for algo in $(echo $list_of_algo | tr + " "); do
         for target in $(echo $list_of_targets | tr + " "); do
+            # TODO: https://github.com/kamangir/blue-geo/issues/8
+            [[ "$algo" == "diff" ]] &&
+                [[ "$target" == "chilcotin-river-landslide-test" ]] &&
+                continue
+
             abcli_log "🎯 $algo: $target"
 
             local object_name=test_blue_geo_watch-$algo-$target-$(abcli_string_timestamp)

@@ -26,6 +26,7 @@ def map_function(
     depth: int,
     diff_range: float = 100,
     line_width: int = 80,
+    colorbar_width: int = 20,
 ) -> bool:
     if depth < 2:
         logger.error(f"depth={depth} < 2!")
@@ -145,8 +146,25 @@ def map_function(
     colored_diff = cv2.applyColorMap(
         ((diff_image / diff_range + 1) / 2 * 255).astype(np.uint8), cv2.COLORMAP_JET
     )
+
+    gradient = (
+        255
+        * np.linspace(0, 1, colored_diff.shape[0]).reshape(-1, 1)
+        * np.ones((1, colorbar_width))
+    ).astype(np.uint8)
+    colorbar = cv2.applyColorMap(gradient, cv2.COLORMAP_JET)
+    concatenated_image = np.hstack(
+        (
+            colored_diff,
+            np.zeros(
+                (colored_diff.shape[0], colorbar_width // 2, 3),
+                dtype=np.uint8,
+            ),
+            colorbar,
+        )
+    )
     colored_diff_signed = add_signature(
-        colored_diff,
+        concatenated_image,
         header=[
             " | ".join(
                 objects.signature(

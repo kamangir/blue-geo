@@ -21,6 +21,10 @@ function blue_geo_watch_algo_diff_map() {
 
     local object_name=$query_object_name-$suffix-$offset
 
+    blue_geo_watch_targets copy - \
+        $query_object_name \
+        $object_name
+
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.algo.$algo \
         map \

@@ -12,6 +12,7 @@ from blue_geo.logger import logger
 def load_watch(
     object_name: str,
     log: bool = True,
+    list_of_suffix: List[str] = raster_suffix,
 ) -> Tuple[bool, Target, List[str]]:
     success, target = Target.load(object_name)
 
@@ -25,7 +26,7 @@ def load_watch(
                         object_name,
                     )
                 )
-                for suffix in raster_suffix
+                for suffix in list_of_suffix
             ],
         )
     )

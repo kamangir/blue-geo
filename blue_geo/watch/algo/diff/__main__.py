@@ -57,6 +57,7 @@ elif args.task == "reduce":
         suffix=args.suffix,
         object_name=args.object_name,
         content_threshold=-1,
+        list_of_suffix=["-diff.png"],
     )
 else:
     success = None

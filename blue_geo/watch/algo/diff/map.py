@@ -28,6 +28,7 @@ def map_function(
     line_width: int = 80,
     colorbar_width: int = 20,
 ) -> bool:
+    diff_filename: str = ""
     if depth < 2:
         logger.error(f"depth={depth} < 2!")
         return False

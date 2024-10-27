@@ -115,7 +115,8 @@ function blue_geo_watch() {
         "${@:8}"
     [[ $? -ne 0 ]] && return 1
 
-    blue_geo_watch_algo_${algo}_generate "$@"
+    abcli_eval - \
+        blue_geo_watch_algo_${algo}_generate "$@"
     [[ $? -ne 0 ]] && return 1
 
     local do_submit=$(abcli_option_int "$workflow_options" submit 1)

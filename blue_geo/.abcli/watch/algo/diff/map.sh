@@ -12,9 +12,12 @@ function blue_geo_watch_algo_diff_map() {
     local query_object_name=$2
 
     local index
+    local index_000
     for ((index = offset; index < offset + depth; index++)); do
+        index_000=$(python3 -c "print(f'{$index:03d}')")
+
         blue_geo_watch_algo_modality_map \
-            ,$options,algo=modality,offset=$index,suffix=$suffix-map-$index,~upload \
+            ,$options,algo=modality,offset=$index_000,suffix=$suffix-depth,~upload \
             "${@:2}"
         [[ $? -ne 0 ]] && return 1
     done

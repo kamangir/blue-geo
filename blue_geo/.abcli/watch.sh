@@ -129,4 +129,6 @@ function blue_geo_watch() {
 }
 
 abcli_source_caller_suffix_path /watch
+
+abcli_source_caller_suffix_path /watch/algo/diff
 abcli_source_caller_suffix_path /watch/algo/modality

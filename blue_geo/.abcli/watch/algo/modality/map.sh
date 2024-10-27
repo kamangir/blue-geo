@@ -9,13 +9,15 @@ function blue_geo_watch_algo_modality_map() {
     local suffix=$(abcli_option "$options" suffix $(abcli_string_timestamp_short))
     local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
 
+    local query_object_name=$2
+
     local datacube_id=$(blue_geo_catalog_query_read - \
         $query_object_name \
         --count 1 \
         --offset $offset)
     if [[ -z "$datacube_id" ]]; then
-        abcli_log_error "offset=$offset: datacube-id not found."
-        return 1
+        abcli_log_warning "offset=$offset: datacube-id not found."
+        return 0
     fi
 
     abcli_log "🌐 @geo watch $algo map $query_object_name @ $offset==$datacube_id -> /$suffix"
@@ -65,11 +67,11 @@ function blue_geo_watch_algo_modality_map() {
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.algo.$algo \
         map \
-        --datacube_id "$datacube_id" \
-        --object_name "$object_name" \
-        --modality $modality \
+        --query_object_name $query_object_name \
+        --suffix $suffix \
         --offset $offset \
-        "${@:4}"
+        --modality $modality \
+        "${@:3}"
     local status="$?"
 
     [[ "$do_upload" == 1 ]] &&

@@ -5,7 +5,7 @@ import math
 from blueness import module
 from blue_options import string
 from blue_objects import file, objects
-from blue_objects.metadata import post_to_object
+from blue_objects.metadata import post_to_object, get_from_object
 from blue_objects.graphics.signature import add_signature
 
 from blue_geo import NAME
@@ -19,12 +19,26 @@ NAME = module.name(__file__, NAME)
 
 
 def map_function(
-    datacube_id: str,
-    offset: int,
+    query_object_name: str,
+    suffix: str,
+    offset: str,
     modality: str,
-    object_name: str,
     min_width: int = 1200,
 ) -> bool:
+    offset_int = int(offset)
+
+    object_name = f"{query_object_name}-{suffix}-{offset}"
+
+    list_of_datacube_id = get_from_object(
+        query_object_name,
+        "datacube_id",
+        [],
+    )
+    if len(list_of_datacube_id) < offset_int + 1:
+        logger.warning(f"offset={offset}: datacube-id not found.")
+        return True
+    datacube_id = list_of_datacube_id[offset_int]
+
     success, target, list_of_files = load_watch(object_name)
     if not success or not list_of_files:
         return success
@@ -85,7 +99,7 @@ def map_function(
                 )
                 + [
                     "{:05.1f}%".format(content_ratio * 100.0),
-                    "#{:03d}".format(offset),
+                    f"#{offset}",
                 ]
             ),
         ],

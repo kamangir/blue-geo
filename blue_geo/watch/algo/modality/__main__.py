@@ -22,12 +22,8 @@ parser.add_argument(
 )
 parser.add_argument(
     "--offset",
-    type=int,
-    default=0,
-)
-parser.add_argument(
-    "--datacube_id",
     type=str,
+    default="000",
 )
 parser.add_argument(
     "--object_name",
@@ -58,10 +54,10 @@ args = parser.parse_args()
 success = args.task in list_of_tasks
 if args.task == "map":
     success = map_function(
-        datacube_id=args.datacube_id,
+        query_object_name=args.query_object_name,
+        suffix=args.suffix,
         offset=args.offset,
         modality=args.modality,
-        object_name=args.object_name,
     )
 elif args.task == "reduce":
     success = reduce_function(

@@ -5,7 +5,7 @@ from blueness.argparse.generic import sys_exit
 
 from blue_geo import NAME
 from blue_geo.watch.algo.diff.map import map_function
-from blue_geo.watch.algo.diff.reduce import reduce_function
+from blue_geo.watch.algo.modality.reduce import reduce_function
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -56,6 +56,7 @@ elif args.task == "reduce":
         query_object_name=args.query_object_name,
         suffix=args.suffix,
         object_name=args.object_name,
+        content_threshold=-1,
     )
 else:
     success = None

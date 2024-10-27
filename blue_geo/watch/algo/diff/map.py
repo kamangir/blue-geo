@@ -139,7 +139,10 @@ def map_function(
         plt.ylabel("frequency")
         plt.grid(True)
         success = file.save_fig(
-            objects.path_of("diff-histogram.png", object_name),
+            objects.path_of(
+                "{}-diff-histogram.png".format(file.name(target_filename)),
+                object_name,
+            ),
             log=True,
         )
 
@@ -188,8 +191,12 @@ def map_function(
             ],
             word_wrap=True,
         )
+        diff_filename = objects.path_of(
+            "{}-diff.png".format(file.name(target_filename)),
+            object_name,
+        )
         success = file.save_image(
-            objects.path_of("diff.png", object_name),
+            diff_filename,
             colored_diff_signed,
             log=True,
         )
@@ -207,6 +214,7 @@ def map_function(
                 "depth": depth,
                 "acquisitions": acquisition_metadata,
             },
+            "filename": file.name_and_extension(diff_filename),
             "target": target.__dict__,
             "usable": success,
         },

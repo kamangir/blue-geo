@@ -35,6 +35,7 @@ setup(
         #
         f"{NAME}.watch",
         f"{NAME}.watch.algo",
+        f"{NAME}.watch.algo.diff",
         f"{NAME}.watch.algo.modality",
         f"{NAME}.watch.targets",
         f"{NAME}.watch.targets.md",

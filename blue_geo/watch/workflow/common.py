@@ -9,7 +9,11 @@ from blue_geo.catalog.generic.generic.scope import raster_suffix
 from blue_geo.logger import logger
 
 
-def load_watch(object_name: str) -> Tuple[bool, Target, List[str]]:
+def load_watch(
+    object_name: str,
+    log: bool = True,
+    list_of_suffix: List[str] = raster_suffix,
+) -> Tuple[bool, Target, List[str]]:
     success, target = Target.load(object_name)
 
     list_of_files = sorted(
@@ -22,10 +26,12 @@ def load_watch(object_name: str) -> Tuple[bool, Target, List[str]]:
                         object_name,
                     )
                 )
-                for suffix in raster_suffix
+                for suffix in list_of_suffix
             ],
         )
     )
-    logger.info("{} file(s) to process.".format(len(list_of_files)))
+
+    if log:
+        logger.info("{} file(s) to process.".format(len(list_of_files)))
 
     return success, target, list_of_files

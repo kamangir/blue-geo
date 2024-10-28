@@ -56,7 +56,8 @@ function blue_geo_watch_reduce() {
         offset=$((offset + 1))
     done
 
-    blue_geo_watch_algo_${algo}_reduce "$@"
+    abcli_eval - \
+        blue_geo_watch_algo_${algo}_reduce "$@"
     local status="$?"
 
     [[ "$do_upload" == 1 ]] &&

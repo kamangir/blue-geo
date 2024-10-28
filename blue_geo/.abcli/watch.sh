@@ -110,12 +110,13 @@ function blue_geo_watch() {
         --query_object_name $query_object_name \
         --job_name $job_name \
         --object_name $object_name \
-        --map_options "$map_options" \
-        --reduce_options "$reduce_options" \
+        --map_options ",$map_options" \
+        --reduce_options ",$reduce_options" \
         "${@:8}"
     [[ $? -ne 0 ]] && return 1
 
-    blue_geo_watch_algo_${algo}_generate "$@"
+    abcli_eval - \
+        blue_geo_watch_algo_${algo}_generate "$@"
     [[ $? -ne 0 ]] && return 1
 
     local do_submit=$(abcli_option_int "$workflow_options" submit 1)
@@ -128,4 +129,6 @@ function blue_geo_watch() {
 }
 
 abcli_source_caller_suffix_path /watch
+
+abcli_source_caller_suffix_path /watch/algo/diff
 abcli_source_caller_suffix_path /watch/algo/modality

@@ -18,5 +18,6 @@ function blue_geo_watch_map() {
 
     abcli_log "🌐 @geo watch map $query_object_name: $options -> @algo"
 
-    blue_geo_watch_algo_${algo}_map "$@"
+    abcli_eval - \
+        blue_geo_watch_algo_${algo}_map "$@"
 }

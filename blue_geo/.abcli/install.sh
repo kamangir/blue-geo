@@ -4,7 +4,8 @@ function abcli_install_blue_geo() {
     if [[ "$abcli_is_mac" == true ]]; then
         brew install gdal
     elif [[ "$abcli_is_ubuntu" == true ]] &&
-        [[ "$abcli_is_github_workflow" == false ]]; then
+        [[ "$abcli_is_github_workflow" == false ]] &&
+        [[ "$abcli_is_docker" == false ]]; then
         apt-get install -y gdal-bin
     fi
 }

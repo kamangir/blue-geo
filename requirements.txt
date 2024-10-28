@@ -1,11 +1,11 @@
 blueness
 abcli
+blueflow
 boto3
 folium
 geojson
 geopandas
 matplotlib
-notebooks-and-scripts
 numpy
 opencv-python
 pymysql

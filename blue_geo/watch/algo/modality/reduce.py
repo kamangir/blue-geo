@@ -1,15 +1,14 @@
 from typing import List, Dict
 import glob
 from tqdm import tqdm
-import numpy as np
 
 from blueness import module
 from blue_objects import file, objects
 from blue_objects.graphics.gif import generate_animated_gif
 from blue_objects.metadata import post_to_object
 
-from blue_geo import NAME, VERSION
-from blue_geo import NAME as BLUE_GEO_NAME
+from blue_geo import NAME
+from blue_geo.catalog.generic.generic.scope import raster_suffix
 from blue_geo.watch.workflow.common import load_watch
 from blue_geo.logger import logger
 
@@ -22,8 +21,12 @@ def reduce_function(
     suffix: str,
     object_name: str,
     content_threshold: float = 0.5,
+    list_of_suffix: List[str] = raster_suffix,
 ) -> bool:
-    success, target, list_of_files = load_watch(object_name)
+    success, target, list_of_files = load_watch(
+        object_name,
+        list_of_suffix=list_of_suffix,
+    )
     if not success:
         return success
 
@@ -32,7 +35,7 @@ def reduce_function(
             NAME,
             query_object_name,
             suffix,
-            target,
+            target.one_liner,
             len(list_of_files),
             object_name,
         )
@@ -85,7 +88,7 @@ def reduce_function(
 
         frame_filename = file.add_extension(filename, "png")
 
-        frame_has_content = bool(frame_content_ratio > content_threshold)
+        frame_has_content = bool(frame_content_ratio >= content_threshold)
         logger.info(
             "{} / {}: content={:.03f} {} {:.03f}".format(
                 "✅" if frame_has_content else "🛑",

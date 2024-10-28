@@ -4,8 +4,7 @@ from blueness import module
 from blueness.argparse.generic import sys_exit
 
 from blue_geo import NAME
-from blue_geo.datacube.modalities import options as modality_options
-from blue_geo.watch.algo.modality.map import map_function
+from blue_geo.watch.algo.diff.map import map_function
 from blue_geo.watch.algo.modality.reduce import reduce_function
 from blue_geo.logger import logger
 
@@ -38,16 +37,9 @@ parser.add_argument(
     type=str,
 )
 parser.add_argument(
-    "--content_threshold",
-    type=float,
-    default=0.5,
-    help="0..1",
-)
-parser.add_argument(
-    "--modality",
-    default=modality_options[0],
-    type=str,
-    help="|".join(modality_options),
+    "--depth",
+    type=int,
+    default=2,
 )
 args = parser.parse_args()
 
@@ -57,14 +49,15 @@ if args.task == "map":
         query_object_name=args.query_object_name,
         suffix=args.suffix,
         offset=args.offset,
-        modality=args.modality,
+        depth=args.depth,
     )
 elif args.task == "reduce":
     success = reduce_function(
         query_object_name=args.query_object_name,
         suffix=args.suffix,
         object_name=args.object_name,
-        content_threshold=args.content_threshold,
+        content_threshold=-1,
+        list_of_suffix=["-diff.png"],
     )
 else:
     success = None

@@ -4,6 +4,7 @@ from blue_options.env import load_config, load_env
 load_env(__name__)
 load_config(__name__)
 
+
 # secrets
 FIRMS_MAP_KEY = os.getenv(
     "FIRMS_MAP_KEY",
@@ -20,10 +21,33 @@ COPERNICUS_AWS_SECRET_ACCESS_KEY = os.getenv(
     "",
 )
 
-BLUE_GEO_DISABLED_CATALOGS = os.getenv("BLUE_GEO_DISABLED_CATALOGS", "")
+SKYFOX_ACCESS_TOKEN_URL = os.getenv(
+    "SKYFOX_ACCESS_TOKEN_URL",
+    "",
+)
+SKYFOX_CLIENT_ID = os.getenv(
+    "SKYFOX_CLIENT_ID",
+    "",
+)
+SKYFOX_CLIENT_SECRET = os.getenv(
+    "SKYFOX_CLIENT_SECRET",
+    "",
+)
+
+# config
+
+BLUE_GEO_DISABLED_CATALOGS = os.getenv(
+    "BLUE_GEO_DISABLED_CATALOGS",
+    "",
+)
 
 BLUE_GEO_WATCH_TARGET_LIST = os.getenv(
     "BLUE_GEO_WATCH_TARGET_LIST",
+    "",
+)
+
+BLUE_GEO_SKYFOXCATALOG_API_URL = os.getenv(
+    "BLUE_GEO_SKYFOXCATALOG_API_URL",
     "",
 )
 
@@ -86,19 +110,5 @@ BLUE_GEO_TEST_DATACUBE_SKYFOX_VENUS = os.getenv(
 
 BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP = os.getenv(
     "BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP",
-    "",
-)
-
-
-SKYFOX_ACCESS_TOKEN_URL = os.getenv(
-    "SKYFOX_ACCESS_TOKEN_URL",
-    "",
-)
-SKYFOX_CLIENT_ID = os.getenv(
-    "SKYFOX_CLIENT_ID",
-    "",
-)
-SKYFOX_CLIENT_SECRET = os.getenv(
-    "SKYFOX_CLIENT_SECRET",
     "",
 )

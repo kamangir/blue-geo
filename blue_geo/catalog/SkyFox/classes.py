@@ -9,12 +9,10 @@ from blueness import module
 from blue_geo import NAME
 from blue_geo.env import SKYFOX_ACCESS_TOKEN_URL, SKYFOX_CLIENT_ID, SKYFOX_CLIENT_SECRET
 from blue_geo.catalog.generic.stac.classes import STACCatalog
+from blue_geo import env
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
-
-# https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
-urllib3.disable_warnings()
 
 
 class SkyFoxCatalog(STACCatalog):
@@ -22,7 +20,7 @@ class SkyFoxCatalog(STACCatalog):
 
     url = {
         "account": "https://console.earthdaily.com/account",
-        "api": "https://api.earthdaily.com/platform/v1/stac",
+        "api": env.BLUE_GEO_SKYFOXCATALOG_API_URL,
         "api-use-example": "https://github.com/earthdaily/EDA-Documentation/blob/gh-pages/API/APIUsage/earthplatform_stac_api_examples.py",
         "doc": "https://earthdaily.github.io/EDA-Documentation/",
         "platform": "https://console.earthdaily.com/platform",
@@ -60,7 +58,7 @@ class SkyFoxCatalog(STACCatalog):
         response = requests.post(
             SKYFOX_ACCESS_TOKEN_URL,
             data=token_req_payload,
-            verify=False,
+            verify=True,
             allow_redirects=False,
             auth=(SKYFOX_CLIENT_ID, SKYFOX_CLIENT_SECRET),
         )

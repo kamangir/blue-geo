@@ -33,17 +33,22 @@ class SkyFoxCatalog(STACCatalog):
 
     @classmethod
     def get_client(cls) -> Tuple[bool, Union[Client, None]]:
-        success, token = cls.get_new_token()
-        if not success:
-            return False, None
+        token: str = "not-needed"
+        if env.BLUE_GEO_SKYFOXCATALOG_API_GET_TOKEN == "true":
+            success, token = cls.get_new_token()
+            if not success:
+                return False, None
 
         try:
             # https://earthdaily.github.io/EDA-Documentation/API/APIUsage/Python/#getting-the-authentication-token-for-pystac-client
+
             client = Client.open(
                 cls.url["api"],
-                headers={
-                    "Authorization": f"Bearer {token}",
-                },
+                headers=(
+                    {"Authorization": f"Bearer {token}"}
+                    if env.BLUE_GEO_SKYFOXCATALOG_API_GET_TOKEN == "true"
+                    else {}
+                ),
             )
         except Exception as e:
             logger.error(e)

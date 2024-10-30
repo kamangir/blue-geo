@@ -14,11 +14,5 @@ function blue_geo_action_git_before_push() {
         $abcli_path_git/blue-geo/blue_geo/watch/targets.geojson
     [[ $? -ne 0 ]] && return 1
 
-    blue_geo_watch_targets_publish
-    [[ $? -ne 0 ]] && return 1
-
-    blue_geo_watch_targets_publish template
-    [[ $? -ne 0 ]] && return 1
-
     blue_geo pypi build
 }

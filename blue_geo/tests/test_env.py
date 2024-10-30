@@ -12,6 +12,9 @@ def test_required_env():
 def test_blue_geo_env():
     assert env.FIRMS_MAP_KEY
 
+    assert env.BLUE_GEO_SKYFOXCATALOG_API_URL
+    assert env.BLUE_GEO_SKYFOXCATALOG_API_GET_TOKEN
+
     assert env.COPERNICUS_AWS_ACCESS_KEY_ID
     assert env.COPERNICUS_AWS_SECRET_ACCESS_KEY
 

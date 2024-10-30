@@ -23,3 +23,5 @@ function blue_geo() {
 }
 
 abcli_log $(blue_geo version --show_icon 1)
+
+gdalinfo --version

@@ -123,7 +123,7 @@ function blue_geo_watch() {
     [[ "$do_submit" == 0 ]] && return 0
 
     abcli_eval dryrun=$do_dryrun \
-        workflow submit \
+        notebooks_and_scripts_workflow_submit \
         ~download,$workflow_options \
         $job_name
 }

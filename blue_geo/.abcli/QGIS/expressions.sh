@@ -3,12 +3,6 @@
 function blue_geo_QGIS_expressions() {
     local task=$1
 
-    if [ "$task" == help ]; then
-        abcli_show_usage_2 blue_geo QGIS expressions pull
-        abcli_show_usage_2 blue_geo QGIS expressions push
-        return
-    fi
-
     if [[ "$task" == pull ]]; then
         rsync -av \
             "$abcli_QGIS_path_expressions_git/" \
@@ -37,6 +31,6 @@ function blue_geo_QGIS_expressions() {
         return
     fi
 
-    abcli_log_error "-QGIS: expressions: $task: command not found."
+    abcli_log_error "QGIS: expressions: $task: command not found."
     return 1
 }

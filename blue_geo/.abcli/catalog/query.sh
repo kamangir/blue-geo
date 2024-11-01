@@ -42,26 +42,10 @@ function blue_geo_catalog_query() {
         --log 0)
 
     local datacube_class=$(abcli_option_choice "$options" $list_of_datacube_classes)
-
-    local ingest_options=$3
-
-    if [[ $(abcli_option_int "$options" help 0) == 1 ]] ||
-        [[ $(abcli_option_int "$ingest_options" help 0) == 1 ]]; then
-        if [[ ! -z "$datacube_class" ]]; then
-            abcli_show_usage_2 blue_geo catalog query $catalog $datacube_class
-        else
-            for datacube_class in $(echo $list_of_datacube_classes | tr , " "); do
-                blue_geo_catalog_query \
-                    $catalog \
-                    $datacube_class \
-                    help
-            done
-        fi
-        return
-    fi
-
     [[ -z "$datacube_class" ]] &&
         datacube_class=$default_datacube_class
+
+    local ingest_options=$3
 
     local object_name=$(abcli_clarify_object $4 query-$catalog-$datacube_class-$(abcli_string_timestamp))
 

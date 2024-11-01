@@ -5,12 +5,6 @@ export blue_geo_datacube_ingest_options="$(xtra ~copy_template,dryrun,overwrite,
 
 function blue_geo_datacube_ingest() {
     local options=$1
-
-    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        abcli_show_usage_2 blue_geo datacube ingest
-        return
-    fi
-
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
     local scope=$(abcli_option "$options" scope metadata)
     local do_overwrite=$(abcli_option_int "$options" overwrite 0)

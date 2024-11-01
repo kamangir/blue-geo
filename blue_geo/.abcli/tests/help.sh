@@ -49,8 +49,10 @@ function test_blue_geo_help() {
         "blue_geo watch targets update_template" \
         "blue_geo watch targets upload"; do
         abcli_eval ,$options \
-            $module help
+            abcli_help $module
         [[ $? -ne 0 ]] && return 1
+
+        abcli_hr
     done
 
     return 0

@@ -3,16 +3,6 @@
 function blue_geo_catalog_query() {
     local catalog=$1
 
-    if [[ "$catalog" == help ]]; then
-        for catalog in $(echo $blue_geo_list_of_catalogs | tr , " "); do
-            [[ "$catalog" == generic ]] && continue
-            blue_geo_catalog_query $catalog "$@"
-        done
-
-        blue_geo_catalog_query_read "$@"
-        return
-    fi
-
     if [[ ",$blue_geo_list_of_catalogs," != *",$catalog,"* ]]; then
         local function_name=blue_geo_catalog_query_$catalog
         if [[ $(type -t $function_name) == "function" ]]; then
@@ -20,7 +10,7 @@ function blue_geo_catalog_query() {
             return
         fi
 
-        abcli_log_error "-@catalog: query: $catalog: catalog not found."
+        abcli_log_error "@catalog: query: $catalog: catalog not found."
         return 1
     fi
 

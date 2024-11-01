@@ -6,6 +6,8 @@ from blue_geo.catalog import get_catalog
 from blue_geo.help.datacube import ingest_options
 from blue_geo.catalog.functions import get_datacube_class_in_catalog
 from blue_geo.catalog.default import as_list_of_args
+from blue_geo.catalog.classes import list_of_catalogs
+from blue_geo.catalog.functions import get_list_of_datacube_classes
 from blue_geo.logger import logger
 
 
@@ -13,18 +15,21 @@ def help_browse(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    catalog_name = tokens[0]
-    catalog = get_catalog(catalog_name)
+    if tokens:
+        catalog_name = tokens[0]
+        catalog = get_catalog(catalog_name)
 
-    return show_usage(
-        [
-            "@catalog browse",
-            catalog_name,
-            "|".join(catalog.url.keys()),
-        ],
-        f"browse {catalog_name}.",
-        mono=mono,
-    )
+        return show_usage(
+            [
+                "@catalog browse",
+                catalog_name,
+                "|".join(catalog.url.keys()),
+            ],
+            f"browse {catalog_name}.",
+            mono=mono,
+        )
+
+    return "\n".join([help_browse([catalog], mono) for catalog in list_of_catalogs])
 
 
 def help_get(
@@ -84,17 +89,27 @@ def help_query(
     mono: bool,
 ) -> str:
     if not tokens:
-        logger.error(f"token expected: {tokens}")
-        return ""
+        return "\n".join(
+            [help_query([token], mono) for token in ["read"] + list_of_catalogs]
+        )
+
+    if tokens[0] == "read":
+        return help_query_read(tokens[1:], mono=mono)
 
     catalog_name = tokens[0]
 
-    if catalog_name == "read":
-        return help_query_read(tokens[1:], mono=mono)
-
     if len(tokens) < 2:
-        logger.error(f"2 tokens expected: {tokens}")
-        return ""
+        return "\n".join(
+            [
+                help_query([catalog_name, collection_name], mono)
+                for collection_name in [
+                    datacube_class.name
+                    for datacube_class in get_list_of_datacube_classes(
+                        catalog_class=catalog_name
+                    )
+                ]
+            ]
+        )
 
     datacube_class_name = tokens[1]
     datacube_class = get_datacube_class_in_catalog(

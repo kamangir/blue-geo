@@ -101,8 +101,9 @@ def map_function(
         )
 
     if success:
-        diff_image = np.squeeze(target_image[:, :, 0] - baseline_image[:, :, 0]).astype(
-            np.float32
+        diff_image = np.squeeze(
+            target_image[:, :, 0].astype(np.float32)
+            - baseline_image[:, :, 0].astype(np.float32)
         )
         diff_image[diff_image < -diff_range] = -diff_range
         diff_image[diff_image > diff_range] = diff_range

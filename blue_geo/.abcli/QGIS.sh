@@ -9,10 +9,6 @@ export abcli_QGIS_path_server=$abcli_QGIS_path_shared/server
 
 mkdir -p $abcli_QGIS_path_server
 
-function QGIS() {
-    blue_geo_QGIS "$@"
-}
-
 # internal function to abcli_seed.
 function abcli_seed_QGIS() {
     # seed is NOT local
@@ -21,14 +17,6 @@ function abcli_seed_QGIS() {
 
 function blue_geo_QGIS() {
     local task=$(abcli_unpack_keyword $1 help)
-
-    if [ $task == "help" ]; then
-        abcli_show_usage_2 blue_geo QGIS seed
-
-        blue_geo_QGIS_expressions "$@"
-        blue_geo_QGIS_server "$@"
-        return
-    fi
 
     local function_name=blue_geo_QGIS_$task
     if [[ $(type -t $function_name) == "function" ]]; then

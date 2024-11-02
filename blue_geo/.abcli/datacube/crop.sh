@@ -2,12 +2,6 @@
 
 function blue_geo_datacube_crop() {
     local options=$1
-
-    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        abcli_show_usage_2 blue_geo datacube crop
-        return
-    fi
-
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
     local do_download=$(abcli_option_int "$options" download $(abcli_not do_dryrun))
     local suffix=$(abcli_option "$options" suffix $(abcli_string_timestamp_short))
@@ -18,7 +12,7 @@ function blue_geo_datacube_crop() {
 
     local cutline=$ABCLI_OBJECT_ROOT/$object_name/target/shape.geojson
     if [[ ! -f "$cutline" ]]; then
-        abcli_log_error "-@datacube: crop: $cutline: file not found."
+        abcli_log_error "@datacube: crop: $cutline: file not found."
         return 1
     fi
 

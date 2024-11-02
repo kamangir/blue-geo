@@ -1,15 +1,7 @@
 #! /usr/bin/env bash
 
 function blue_geo() {
-    local task=$(abcli_unpack_keyword $1 help)
-
-    if [ $task == "help" ]; then
-        blue_geo_catalog "$@"
-        blue_geo_datacube "$@"
-        blue_geo_QGIS "$@"
-        blue_geo_watch "$@"
-        return
-    fi
+    local task=$(abcli_unpack_keyword $1 version)
 
     if [ "$task" == "pylint" ]; then
         abcli_${task} ignore=blue_geo/QGIS,plugin=blue_geo,$2 \

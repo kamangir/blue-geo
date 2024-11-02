@@ -3,16 +3,6 @@
 function blue_geo_catalog_query() {
     local catalog=$1
 
-    if [[ "$catalog" == help ]]; then
-        for catalog in $(echo $blue_geo_list_of_catalogs | tr , " "); do
-            [[ "$catalog" == generic ]] && continue
-            blue_geo_catalog_query $catalog "$@"
-        done
-
-        blue_geo_catalog_query_read "$@"
-        return
-    fi
-
     if [[ ",$blue_geo_list_of_catalogs," != *",$catalog,"* ]]; then
         local function_name=blue_geo_catalog_query_$catalog
         if [[ $(type -t $function_name) == "function" ]]; then
@@ -20,7 +10,7 @@ function blue_geo_catalog_query() {
             return
         fi
 
-        abcli_log_error "-@catalog: query: $catalog: catalog not found."
+        abcli_log_error "@catalog: query: $catalog: catalog not found."
         return 1
     fi
 
@@ -42,26 +32,10 @@ function blue_geo_catalog_query() {
         --log 0)
 
     local datacube_class=$(abcli_option_choice "$options" $list_of_datacube_classes)
-
-    local ingest_options=$3
-
-    if [[ $(abcli_option_int "$options" help 0) == 1 ]] ||
-        [[ $(abcli_option_int "$ingest_options" help 0) == 1 ]]; then
-        if [[ ! -z "$datacube_class" ]]; then
-            abcli_show_usage_2 blue_geo catalog query $catalog $datacube_class
-        else
-            for datacube_class in $(echo $list_of_datacube_classes | tr , " "); do
-                blue_geo_catalog_query \
-                    $catalog \
-                    $datacube_class \
-                    help
-            done
-        fi
-        return
-    fi
-
     [[ -z "$datacube_class" ]] &&
         datacube_class=$default_datacube_class
+
+    local ingest_options=$3
 
     local object_name=$(abcli_clarify_object $4 query-$catalog-$datacube_class-$(abcli_string_timestamp))
 

@@ -2,12 +2,6 @@
 
 function blue_geo_catalog_list() {
     local options=$1
-
-    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        abcli_show_usage_2 blue_geo catalog list
-        return
-    fi
-
     local what=$(abcli_option_choice "$options" catalogs,collections,datacubes,datacube_classes catalogs)
 
     python3 -m blue_geo.catalog \

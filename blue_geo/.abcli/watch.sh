@@ -8,11 +8,6 @@ function blue_geo_watch() {
     local map_options=$5
     local reduce_options=$6
 
-    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        abcli_show_usage_2 blue_geo watch
-        return
-    fi
-
     local task
     for task in map reduce targets; do
         if [ $(abcli_option_int "$options" $task 0) == 1 ]; then
@@ -22,11 +17,6 @@ function blue_geo_watch() {
     done
 
     if [[ $(abcli_option_int "$options" batch 0) == 1 ]]; then
-        if [ $(abcli_option_int "$target_options" help 0) == 1 ]; then
-            abcli_show_usage_2 blue_geo watch batch
-            return
-        fi
-
         abcli_aws_batch_eval \
             name=blue-geo-watch-$(abcli_string_timestamp_short),$options,~batch \
             blue_geo_watch \

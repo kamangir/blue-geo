@@ -2,12 +2,6 @@
 
 function blue_geo_catalog_query_read() {
     local options=$1
-
-    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        abcli_show_usage_2 blue_geo catalog query read
-        return
-    fi
-
     local do_download=$(abcli_option_int "$options" download 0)
     local show_len=$(abcli_option_int "$options" len 0)
     local do_all=$(abcli_option_int "$options" all 0)

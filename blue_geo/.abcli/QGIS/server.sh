@@ -5,12 +5,6 @@ function blue_geo_QGIS_serve() {
 }
 
 function blue_geo_QGIS_server() {
-    local options=$1
-    if [ $(abcli_option_int "$options" help 0) == 1 ]; then
-        abcli_show_usage_2 blue_geo QGIS server
-        return
-    fi
-
     local prompt="🌐 $(blue_geo version).QGIS server ... (^C to stop)"
     abcli_log $prompt
 

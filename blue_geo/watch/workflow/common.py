@@ -16,19 +16,17 @@ def load_watch(
 ) -> Tuple[bool, Target, List[str]]:
     success, target = Target.load(object_name)
 
-    list_of_files = sorted(
-        reduce(
-            lambda x, y: x + y,
-            [
-                glob.glob(
-                    objects.path_of(
-                        f"*{suffix}",
-                        object_name,
-                    )
+    list_of_files = reduce(
+        lambda x, y: x + y,
+        [
+            glob.glob(
+                objects.path_of(
+                    f"*{suffix}",
+                    object_name,
                 )
-                for suffix in list_of_suffix
-            ],
-        )
+            )
+            for suffix in list_of_suffix
+        ],
     )
 
     if log:

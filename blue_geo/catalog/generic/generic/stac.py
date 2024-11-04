@@ -141,6 +141,12 @@ class STACDatacube(GenericDatacube):
             "collections": [cls.collection],
             "bbox": bbox,
             "datetime": datetime,
+            "sortby": [
+                {
+                    "field": "properties.datetime",
+                    "direction": "desc",
+                }
+            ],
         }
         for param, value in search_parameters.items():
             logger.info(f"🔎 {param}: {value}")

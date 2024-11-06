@@ -30,6 +30,9 @@ list_of_targets = {
                 "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-202-d59ba811398b)",
                 "[on reddit](https://www.reddit.com/r/bash/comments/1f9cvyx/a_bash_python_tool_to_watch_a_target_in_satellite/).",
             ],
+            "geo-watch-Chilcotin-2024-11-03": [
+                "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-307-b4ed600efc16)",
+            ],
         },
     },
     "burning-man-2024": {
@@ -57,7 +60,10 @@ list_of_targets = {
         "objects": {
             "geo-watch-2024-09-06-Jasper-a": [
                 "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-208-7063fca1423b)",
-            ]
+            ],
+            "geo-watch-Jasper-2024-11-03": [
+                "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-307-b4ed600efc16)",
+            ],
         },
     },
     "Leonardo": {

@@ -135,6 +135,9 @@ list_of_targets = {
             "geo-watch-Cache-Creek-2024-11-05": [
                 "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-308-2d1de0179db1)",
             ],
+            "geo-watch-Cache-Creek-2x-wider-2024-11-05": [
+                "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-309-ee21dd00730c)",
+            ],
         },
         "thumbnail": {
             "scale": 4,

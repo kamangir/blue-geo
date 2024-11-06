@@ -16,7 +16,7 @@ function test_blue_geo_watch() {
                 [[ "$target" == "chilcotin-river-landslide-test" ]] &&
                 continue
 
-            abcli_log "🎯 $algo: $target"
+            abcli_log "🎯 $algo on $target ..."
 
             local object_name=test_blue_geo_watch-$algo-$target-$(abcli_string_timestamp)
 

@@ -9,7 +9,7 @@ from blue_objects.metadata import post_to_object
 
 from blue_geo import NAME
 from blue_geo.catalog.generic.generic.scope import raster_suffix
-from blue_geo.watch.workflow.common import load_watch
+from blue_geo.watch.targets.target import Target
 from blue_geo.logger import logger
 
 
@@ -21,34 +21,34 @@ def reduce_function(
     suffix: str,
     object_name: str,
     content_threshold: float = 0.5,
-    list_of_suffix: List[str] = raster_suffix,
+    list_of_suffix: List[str] = [],
 ) -> bool:
-    success, target, list_of_files = load_watch(
-        object_name,
-        list_of_suffix=list_of_suffix,
-    )
+    success, target = Target.load(object_name)
     if not success:
         return success
 
     logger.info(
-        "{}.reduce {}/{} @ {} -{} file(s)-> {}".format(
+        "{}.reduce {}/{} @ {} -> {}{}".format(
             NAME,
             query_object_name,
             suffix,
             target.one_liner,
-            len(list_of_files),
             object_name,
+            " +{}".format(",".join(list_of_suffix)) if list_of_suffix else "",
         )
     )
 
     logger.info("loading metadata ...")
     frame_metadata: Dict[str, Dict] = {}
+    list_of_files: List[str] = []
     bad_metadata: List[str] = []
     for filename in tqdm(
-        glob.glob(
-            objects.path_of(
-                "metadata-*.yaml",
-                object_name,
+        sorted(
+            glob.glob(
+                objects.path_of(
+                    "metadata-*.yaml",
+                    object_name,
+                )
             )
         )
     ):
@@ -62,7 +62,10 @@ def reduce_function(
             bad_metadata.append(file.name_and_extension(filename))
             continue
 
-        frame_metadata[metadata_["map"]["filename"]] = metadata_
+        map_filename = metadata_["map"]["filename"]
+        list_of_files += [map_filename]
+        frame_metadata[map_filename] = metadata_
+
     if bad_metadata:
         logger.info("bad metadata: {}.".format(", ".join(bad_metadata)))
 
@@ -86,7 +89,10 @@ def reduce_function(
             bad_frames.append(file.name_and_extension(filename))
             continue
 
-        frame_filename = file.add_extension(filename, "png")
+        frame_filename = objects.path_of(
+            file.add_extension(filename, "png"),
+            object_name,
+        )
 
         frame_has_content = bool(frame_content_ratio >= content_threshold)
         logger.info(
@@ -130,7 +136,7 @@ def reduce_function(
     ):
         return False
 
-    return all(
+    if not all(
         generate_animated_gif(
             list_of_frames,
             objects.path_of(
@@ -144,4 +150,20 @@ def reduce_function(
             scale=scale,
         )
         for scale in [1, 2, 4]
-    )
+    ):
+        return False
+
+    if list_of_suffix and not all(
+        generate_animated_gif(
+            [file.add_suffix(filename, frame_suffix) for filename in list_of_frames],
+            objects.path_of(
+                f"{object_name}-{frame_suffix}.gif",
+                object_name,
+            ),
+            frame_duration=1000,
+        )
+        for frame_suffix in list_of_suffix
+    ):
+        return False
+
+    return True

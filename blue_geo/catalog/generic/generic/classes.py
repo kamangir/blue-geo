@@ -118,6 +118,7 @@ class GenericDatacube:
         ignore_error: bool = False,
         log: bool = False,
         verbose: bool = False,
+        normalized: bool = True,
     ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
         success, frame, frame_file_metadata = file.load_geoimage(
             filename,
@@ -143,7 +144,7 @@ class GenericDatacube:
         elif frame.shape[2] > 3:
             frame = frame[:, :, :3]
 
-        if frame.dtype == np.uint16:
+        if normalized and frame.dtype == np.uint16:
             frame = frame.astype(np.float32) / 5000 * 255
             frame[frame < 0] = 0
             frame[frame > 255] = 255

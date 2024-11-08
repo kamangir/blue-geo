@@ -22,9 +22,14 @@ function blue_geo_watch_algo_modality_map() {
 
     abcli_log "🌐 @geo watch $algo map $query_object_name @ $offset==$datacube_id -> /$suffix"
 
-    blue_geo_datacube_ingest \
-        dryrun=$do_dryrun,scope=rgbx \
-        $datacube_id
+    if [[ "$datacube_id" == *"DERIVED"* ]]; then
+        abcli_download - \
+            $datacube_id
+    else
+        blue_geo_datacube_ingest \
+            dryrun=$do_dryrun,scope=rgbx \
+            $datacube_id
+    fi
 
     local object_name=$query_object_name-$suffix-$offset
 

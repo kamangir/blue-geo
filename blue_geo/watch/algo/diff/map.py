@@ -91,6 +91,7 @@ def map_function(
             filename=baseline_filename,
             modality="rgb",
             log=True,
+            normalized=False,
         )
 
     if success:
@@ -98,6 +99,7 @@ def map_function(
             filename=target_filename,
             modality="rgb",
             log=True,
+            normalized=False,
         )
 
     if success:

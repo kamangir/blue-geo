@@ -34,6 +34,9 @@ list_of_targets = {
                 "[dev notes](https://arash-kamangir.medium.com/%EF%B8%8F-conversations-with-ai-307-b4ed600efc16)",
             ],
         },
+        "thumbnail": {
+            "scale": 4,
+        },
     },
     "burning-man-2024": {
         "objects": {

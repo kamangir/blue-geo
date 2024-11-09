@@ -2,13 +2,13 @@ import os
 import glob
 
 if not QGIS_is_live:
-    from application import ROOFAI_QGIS_APPLICATION
+    from application import BLUE_GEO_QGIS_APPLICATION
     from log import log
     from project import project
     from QGIS import QGIS
 
 
-class ROOFAI_QGIS_APPLICATION_VANWATCH(ROOFAI_QGIS_APPLICATION):
+class BLUE_GEO_QGIS_APPLICATION_VANWATCH(BLUE_GEO_QGIS_APPLICATION):
     def __init__(self):
         super().__init__("vanwatch", "🌈")
 
@@ -85,3 +85,7 @@ class ROOFAI_QGIS_APPLICATION_VANWATCH(ROOFAI_QGIS_APPLICATION):
 
         if refresh:
             QGIS.refresh()
+
+
+vanwatch = BLUE_GEO_QGIS_APPLICATION_VANWATCH()
+QGIS.add_application(vanwatch)

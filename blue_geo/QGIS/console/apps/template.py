@@ -1,8 +1,9 @@
 if not QGIS_is_live:
-    from application import ROOFAI_QGIS_APPLICATION
+    from application import BLUE_GEO_QGIS_APPLICATION
+    from QGIS import QGIS
 
 
-class ROOFAI_QGIS_APPLICATION_TEMPLATE(ROOFAI_QGIS_APPLICATION):
+class BLUE_GEO_QGIS_APPLICATION_TEMPLATE(BLUE_GEO_QGIS_APPLICATION):
     def __init__(self):
         super().__init__("template", "🌀")
 
@@ -15,3 +16,6 @@ class ROOFAI_QGIS_APPLICATION_TEMPLATE(ROOFAI_QGIS_APPLICATION):
     def func(self, var: str = "🪄"):
         self.log(var)
 
+
+template = BLUE_GEO_QGIS_APPLICATION_TEMPLATE()
+QGIS.add_application(template)

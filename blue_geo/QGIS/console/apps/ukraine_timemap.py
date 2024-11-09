@@ -1,10 +1,11 @@
 if not QGIS_is_live:
-    from application import ROOFAI_QGIS_APPLICATION
+    from application import BLUE_GEO_QGIS_APPLICATION
     from project import project
     from seed import seed
+    from QGIS import QGIS
 
 
-class ROOFAI_QGIS_APPLICATION_UKRAINE_TIMEMAP(ROOFAI_QGIS_APPLICATION):
+class BLUE_GEO_QGIS_APPLICATION_UKRAINE_TIMEMAP(BLUE_GEO_QGIS_APPLICATION):
     def __init__(self):
         super().__init__("ukraine_timemap", "🇺🇦")
 
@@ -25,3 +26,8 @@ class ROOFAI_QGIS_APPLICATION_UKRAINE_TIMEMAP(ROOFAI_QGIS_APPLICATION):
                 project.name,
             ]
         )
+
+
+ukraine_timemap = BLUE_GEO_QGIS_APPLICATION_UKRAINE_TIMEMAP()
+ukraine = ukraine_timemap
+QGIS.add_application(ukraine_timemap)

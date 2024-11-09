@@ -10,14 +10,9 @@ if not QGIS_is_live:
     from project import project
     from seed import seed
 
+    BLUE_GEO_VERSION = "1.1.1"
+
 NAME = "blue_geo.QGIS"
-
-VERSION = "5.14.1"
-
-ABCLI_OBJECT_ROOT = os.path.join(
-    os.getenv("HOME", ""),
-    "storage/abcli",
-)
 
 
 class ABCLI_QGIS(object):
@@ -31,7 +26,7 @@ class ABCLI_QGIS(object):
         log(
             "{}-{}: {}".format(
                 NAME,
-                VERSION,
+                BLUE_GEO_VERSION,
                 ", ".join(
                     [
                         "{} {}".format(
@@ -238,7 +233,11 @@ class ABCLI_QGIS(object):
                     else (
                         layer.object_name
                         if object_name in ["layer", layer]
-                        else object_name if object_name else project.name
+                        else (
+                            object_name
+                            if (isinstance(object_name, str) and object_name)
+                            else project.name
+                        )
                     )
                 ),
             ]

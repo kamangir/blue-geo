@@ -8,7 +8,6 @@ from blue_geo.catalog.functions import get_datacube_class_in_catalog
 from blue_geo.catalog.default import as_list_of_args
 from blue_geo.catalog.classes import list_of_catalogs
 from blue_geo.catalog.functions import get_list_of_datacube_classes
-from blue_geo.logger import logger
 
 
 def help_browse(

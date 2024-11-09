@@ -27,9 +27,11 @@ function test_@geo_help() {
         \
         "@geo gdal" \
         \
-        "@geo QGIS" \
-        "@geo QGIS_expressions" \
-        "@geo QGIS_server" \
+        "QGIS" \
+        "QGIS expressions" \
+        "QGIS expressions pull" \
+        "QGIS expressions push" \
+        "QGIS server" \
         \
         "@geo watch" \
         "@geo watch batch" \

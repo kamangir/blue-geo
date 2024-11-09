@@ -1,5 +1,4 @@
 from typing import List
-import os
 
 from blue_options.terminal import show_usage
 
@@ -9,8 +8,16 @@ def help_expressions_pull(
     mono: bool,
 ) -> str:
     return show_usage(
-        "QGIS expressions pull",
+        [
+            "QGIS",
+            "expressions",
+            "pull",
+        ],
         "pull QGIS expressions.",
+        {
+            "from: $abcli_QGIS_path_expressions_git": "",
+            "to: $abcli_QGIS_path_expressions": "",
+        },
         mono=mono,
     )
 
@@ -20,21 +27,16 @@ def help_expressions_push(
     mono: bool,
 ) -> str:
     return show_usage(
-        "QGIS expressions push [push]",
+        [
+            "QGIS",
+            "expressions",
+            "push",
+            "[push]",
+        ],
         "push QGIS expressions.",
         {
-            "QGIS: {}".format(
-                os.getenv(
-                    "abcli_QGIS_path_expressions",
-                    "",
-                )
-            ): "",
-            "github: {}".format(
-                os.getenv(
-                    "abcli_QGIS_path_expressions_git",
-                    "",
-                )
-            ): "",
+            "from: $abcli_QGIS_path_expressions": "",
+            "to: $abcli_QGIS_path_expressions_git": "",
         },
         mono=mono,
     )
@@ -45,7 +47,11 @@ def help_seed(
     mono: bool,
 ) -> str:
     return show_usage(
-        "QGIS seed [screen]",
+        [
+            "QGIS",
+            "seed",
+            "[screen]",
+        ],
         "seed 🌱 QGIS.",
         mono=mono,
     )
@@ -56,7 +62,11 @@ def help_server(
     mono: bool,
 ) -> str:
     return show_usage(
-        "QGIS serve[r] [start]",
+        [
+            "QGIS",
+            "serve[r]",
+            "[start]",
+        ],
         "start QGIS server.",
         mono=mono,
     )

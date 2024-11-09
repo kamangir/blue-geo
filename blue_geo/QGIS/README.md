@@ -10,15 +10,26 @@ pip install blue-geo
 QGIS help
 ```
 ```bash
-QGIS expressions push [push]
+QGIS \
+	expressions \
+	push \
+	[push]
  . push QGIS expressions.
-   QGIS: /Users/kamangir/Library/Application Support/QGIS/QGIS3/profiles/default/python/expressions
-   github: /Users/kamangir/git/blue-geo/blue_geo/QGIS/expressions
-QGIS expressions pull
+   from: $abcli_QGIS_path_expressions
+   to: $abcli_QGIS_path_expressions_git
+QGIS \
+	expressions \
+	pull
  . pull QGIS expressions.
-QGIS seed [screen]
+   from: $abcli_QGIS_path_expressions_git
+   to: $abcli_QGIS_path_expressions
+QGIS \
+	seed \
+	[screen]
  . seed 🌱 QGIS.
-QGIS serve[r] [start]
+QGIS \
+	serve[r] \
+	[start]
  . start QGIS server.
 ```
 

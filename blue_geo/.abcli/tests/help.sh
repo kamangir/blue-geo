@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function test_blue_geo_help() {
+function test_@geo_help() {
     # TODO: enable
     return 0
 
@@ -8,46 +8,48 @@ function test_blue_geo_help() {
 
     local module
     for module in \
-        "blue_geo" \
+        "@geo" \
         \
-        "blue_geo catalog" \
-        "blue_geo catalog browse" \
-        "blue_geo catalog get" \
-        "blue_geo catalog list" \
-        "blue_geo catalog query" \
+        "@geo pytest" \
         \
-        "blue_geo datacube" \
-        "blue_geo datacube crop" \
-        "blue_geo datacube generate" \
-        "blue_geo datacube get" \
-        "blue_geo datacube ingest" \
-        "blue_geo datacube list" \
+        "@geo catalog" \
+        "@geo catalog browse" \
+        "@geo catalog get" \
+        "@geo catalog list" \
+        "@geo catalog query" \
         \
-        "blue_geo gdal" \
+        "@geo datacube" \
+        "@geo datacube crop" \
+        "@geo datacube generate" \
+        "@geo datacube get" \
+        "@geo datacube ingest" \
+        "@geo datacube list" \
         \
-        "blue_geo QGIS" \
-        "blue_geo QGIS_expressions" \
-        "blue_geo QGIS_server" \
+        "@geo gdal" \
         \
-        "blue_geo watch" \
-        "blue_geo watch batch" \
-        "blue_geo watch map" \
-        "blue_geo watch reduce" \
+        "@geo QGIS" \
+        "@geo QGIS_expressions" \
+        "@geo QGIS_server" \
         \
-        "blue_geo watch targets" \
-        "blue_geo watch targets cat" \
-        "blue_geo watch targets cp" \
-        "blue_geo watch targets copy" \
-        "blue_geo watch targets download" \
-        "blue_geo watch targets edit" \
-        "blue_geo watch targets get" \
-        "blue_geo watch targets list" \
-        "blue_geo watch targets open" \
-        "blue_geo watch targets publish" \
-        "blue_geo watch targets save" \
-        "blue_geo watch targets test" \
-        "blue_geo watch targets update_template" \
-        "blue_geo watch targets upload"; do
+        "@geo watch" \
+        "@geo watch batch" \
+        "@geo watch map" \
+        "@geo watch reduce" \
+        \
+        "@geo watch targets" \
+        "@geo watch targets cat" \
+        "@geo watch targets cp" \
+        "@geo watch targets copy" \
+        "@geo watch targets download" \
+        "@geo watch targets edit" \
+        "@geo watch targets get" \
+        "@geo watch targets list" \
+        "@geo watch targets open" \
+        "@geo watch targets publish" \
+        "@geo watch targets save" \
+        "@geo watch targets test" \
+        "@geo watch targets update_template" \
+        "@geo watch targets upload"; do
         abcli_eval ,$options \
             abcli_help $module
         [[ $? -ne 0 ]] && return 1

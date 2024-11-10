@@ -10,23 +10,23 @@ pip install blue-geo
 QGIS help
 ```
 ```bash
-@download \
+QGIS \
+	download \
 	[.|<object-name>] \
 	[open,~QGIS]
  . download object and its QGIS dependencies.
 QGIS \
 	expressions \
-	push \
-	[push]
+	push
  . push QGIS expressions.
-   from: $abcli_QGIS_path_expressions
-   to: $abcli_QGIS_path_expressions_git
+   from: $BLUE_GEO_QGIS_PATH_EXPRESSIONS
+   to: $BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT
 QGIS \
 	expressions \
 	pull
  . pull QGIS expressions.
-   from: $abcli_QGIS_path_expressions_git
-   to: $abcli_QGIS_path_expressions
+   from: $BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT
+   to: $BLUE_GEO_QGIS_PATH_EXPRESSIONS
 QGIS \
 	seed \
 	[screen]
@@ -35,6 +35,22 @@ QGIS \
 	server \
 	[start]
  . start QGIS server.
+QGIS \
+	templates \
+	download
+ . download QGIS templates.
+   from: $BLUE_GEO_QGIS_TEMPLATES_OBJECT_NAME
+   to: $BLUE_GEO_QGIS_PATH_TEMPLATES
+QGIS \
+	templates \
+	upload
+ . upload QGIS templates.
+   from: $BLUE_GEO_QGIS_PATH_TEMPLATES
+   to: $BLUE_GEO_QGIS_TEMPLATES_OBJECT_NAME
+QGIS \
+	upload \
+	[.|<object-name>]
+ . upload object and its QGIS dependencies.
 ```
 
 to terraform QGIS, generate the seed 🌱,

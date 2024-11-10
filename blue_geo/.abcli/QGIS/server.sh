@@ -7,7 +7,7 @@ function blue_geo_QGIS_server() {
     abcli_badge "🌐"
 
     local filename
-    cd $abcli_QGIS_path_server
+    cd $BLUE_GEO_QGIS_PATH_SERVER
     while true; do
         sleep 1
         for filename in *.command; do

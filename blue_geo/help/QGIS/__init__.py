@@ -2,6 +2,9 @@ from typing import List
 
 from blue_options.terminal import show_usage, xtra
 
+from blue_geo.help.QGIS.expressions import help_functions as help_expressions
+from blue_geo.help.QGIS.templates import help_functions as help_templates
+
 
 def help_download(
     tokens: List[str],
@@ -16,50 +19,12 @@ def help_download(
 
     return show_usage(
         [
-            "@download",
+            "QGIS",
+            "download",
             "[.|<object-name>]",
             f"[{open_options}]",
         ],
         "download object and its QGIS dependencies.",
-        mono=mono,
-    )
-
-
-def help_expressions_pull(
-    tokens: List[str],
-    mono: bool,
-) -> str:
-    return show_usage(
-        [
-            "QGIS",
-            "expressions",
-            "pull",
-        ],
-        "pull QGIS expressions.",
-        {
-            "from: $abcli_QGIS_path_expressions_git": "",
-            "to: $abcli_QGIS_path_expressions": "",
-        },
-        mono=mono,
-    )
-
-
-def help_expressions_push(
-    tokens: List[str],
-    mono: bool,
-) -> str:
-    return show_usage(
-        [
-            "QGIS",
-            "expressions",
-            "push",
-            "[push]",
-        ],
-        "push QGIS expressions.",
-        {
-            "from: $abcli_QGIS_path_expressions": "",
-            "to: $abcli_QGIS_path_expressions_git": "",
-        },
         mono=mono,
     )
 
@@ -94,12 +59,26 @@ def help_server(
     )
 
 
+def help_upload(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        [
+            "QGIS",
+            "upload",
+            "[.|<object-name>]",
+        ],
+        "upload object and its QGIS dependencies.",
+        mono=mono,
+    )
+
+
 help_functions = {
     "download": help_download,
-    "expressions": {
-        "push": help_expressions_push,
-        "pull": help_expressions_pull,
-    },
+    "expressions": help_expressions,
     "seed": help_seed,
     "server": help_server,
+    "templates": help_templates,
+    "upload": help_upload,
 }

@@ -33,10 +33,15 @@ function test_@geo_help() {
         "@geo gdal" \
         \
         "QGIS" \
+        "QGIS download" \
         "QGIS expressions" \
         "QGIS expressions pull" \
         "QGIS expressions push" \
         "QGIS server" \
+        "QGIS templates" \
+        "QGIS templates download" \
+        "QGIS templates upload" \
+        "QGIS upload" \
         \
         "@geo watch" \
         "@geo watch batch" \

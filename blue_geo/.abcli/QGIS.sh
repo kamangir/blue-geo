@@ -1,13 +1,15 @@
 #! /usr/bin/env bash
 
-export abcli_QGIS_path_profile="$HOME/Library/Application Support/QGIS/QGIS3/profiles/default"
-export abcli_QGIS_path_expressions=$abcli_QGIS_path_profile/python/expressions
-export abcli_QGIS_path_expressions_git=$abcli_path_git/blue-geo/blue_geo/QGIS/expressions
-export abcli_QGIS_path_templates=$abcli_QGIS_path_profile/project_templates
-export abcli_QGIS_path_shared=$HOME/Downloads/QGIS
-export abcli_QGIS_path_server=$abcli_QGIS_path_shared/server
+export BLUE_GEO_QGIS_PATH_PROFILE="$HOME/Library/Application Support/QGIS/QGIS3/profiles/default"
+export BLUE_GEO_QGIS_PATH_EXPRESSIONS=$BLUE_GEO_QGIS_PATH_PROFILE/python/expressions
+export BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT=$abcli_path_git/blue-geo/blue_geo/QGIS/expressions
+export BLUE_GEO_QGIS_PATH_SHARED=$HOME/Downloads/QGIS
+export BLUE_GEO_QGIS_PATH_SERVER=$BLUE_GEO_QGIS_PATH_SHARED/server
+export BLUE_GEO_QGIS_PATH_TEMPLATES=$BLUE_GEO_QGIS_PATH_PROFILE/project_templates
 
-mkdir -p $abcli_QGIS_path_server
+export BLUE_GEO_QGIS_TEMPLATES_OBJECT_NAME=QGIS-templates-v1
+
+mkdir -p $BLUE_GEO_QGIS_PATH_SERVER
 
 # internal function to abcli_seed.
 function abcli_seed_QGIS() {

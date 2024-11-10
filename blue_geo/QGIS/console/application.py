@@ -9,5 +9,8 @@ class BLUE_GEO_QGIS_APPLICATION(object):
 
         log(self.name, "", icon=self.icon)
 
+    def help(self):
+        pass
+
     def log(self, message, note=""):
         log(message, note, icon=self.icon)

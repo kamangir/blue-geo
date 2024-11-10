@@ -1,4 +1,4 @@
-from abcli.help.generic import generic_help_functions
+from abcli.help.generic import help_functions as generic_help_functions
 
 from blue_geo import ALIAS
 from blue_geo.help.catalog import help_functions as help_catalog

@@ -86,7 +86,7 @@ def help_server(
     return show_usage(
         [
             "QGIS",
-            "serve[r]",
+            "server",
             "[start]",
         ],
         "start QGIS server.",

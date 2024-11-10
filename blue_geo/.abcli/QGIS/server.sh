@@ -1,9 +1,5 @@
 #! /usr/bin/env bash
 
-function blue_geo_QGIS_serve() {
-    blue_geo_QGIS_server "$@"
-}
-
 function blue_geo_QGIS_server() {
     local prompt="🌐 $(blue_geo version).QGIS server ... (^C to stop)"
     abcli_log $prompt

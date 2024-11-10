@@ -32,7 +32,7 @@ QGIS \
 	[screen]
  . seed 🌱 QGIS.
 QGIS \
-	serve[r] \
+	server \
 	[start]
  . start QGIS server.
 ```

@@ -19,9 +19,9 @@ function blue_geo_QGIS_download() {
     local dependency_name
     for dependency_name in $(echo $list_of_dependencies | tr + " "); do
         [[ "$dependency_name" == "$object_name" ]] && continue
-        abcli_download \
-            - $dependency_name
+        abcli_download - $dependency_name
     done
 
-    abcli_download - $object_name "${@:2}"
+    abcli_download - $object_name \
+        QGIS,"${@:2}"
 }

@@ -25,6 +25,5 @@ def test_parse_datacube_id(
     )
 
     assert isinstance(output, list)
-    assert len(output)
-
+    assert output
     assert object_name in output

@@ -290,8 +290,7 @@ class ABCLI_QGIS(object):
     def upload(self, object_name=""):
         seed(
             [
-                "abcli",
-                "upload",
+                "abcli_upload",
                 f"filename={project.name}.qgz" if object_name == "qgz" else "-",
                 (
                     project.name

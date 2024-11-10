@@ -1,6 +1,28 @@
 from typing import List
 
-from blue_options.terminal import show_usage
+from blue_options.terminal import show_usage, xtra
+
+
+def help_download(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    open_options = "".join(
+        [
+            "open",
+            xtra(",~QGIS", mono=mono),
+        ]
+    )
+
+    return show_usage(
+        [
+            "@download",
+            "[.|<object-name>]",
+            f"[{open_options}]",
+        ],
+        "download object and its QGIS dependencies.",
+        mono=mono,
+    )
 
 
 def help_expressions_pull(
@@ -73,6 +95,7 @@ def help_server(
 
 
 help_functions = {
+    "download": help_download,
     "expressions": {
         "push": help_expressions_push,
         "pull": help_expressions_pull,

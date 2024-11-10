@@ -8,28 +8,29 @@ from blue_geo import VERSION
 
 
 def generate_seed() -> str:
-    path = os.path.join(file.path(__file__), "console")
+    path = file.path(__file__)
 
     apps_path = os.getenv(
         "BLUE_GEO_QGIS_APPS_PATH",
-        os.path.join(path, "apps"),
+        os.path.join(path, "console/apps"),
     )
 
     list_of_files = (
         [
             os.path.join(path, f"{module}.py")
             for module in [
-                "log",
-                "project",
-                "layer",
-                "application",
-                "seed",
-                "QGIS",
-                "alias",
+                "dependency",
+                "console/log",
+                "console/project",
+                "console/layer",
+                "console/application",
+                "console/seed",
+                "console/QGIS",
+                "console/alias",
             ]
         ]
         + sorted(glob(f"{apps_path}/*.py"))
-        + [os.path.join(path, "main.py")]
+        + [os.path.join(path, "console/main.py")]
     )
 
     seed = "; ".join(

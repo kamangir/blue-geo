@@ -10,6 +10,10 @@ pip install blue-geo
 QGIS help
 ```
 ```bash
+@download \
+	[.|<object-name>] \
+	[open,~QGIS]
+ . download object and its QGIS dependencies.
 QGIS \
 	expressions \
 	push \

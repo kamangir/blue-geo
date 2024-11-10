@@ -23,6 +23,7 @@ def generate_seed() -> str:
                 "console/log",
                 "console/project",
                 "console/layer",
+                "console/fileio",
                 "console/application",
                 "console/seed",
                 "console/QGIS",

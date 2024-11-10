@@ -1,4 +1,6 @@
 import os
+import re
+import yaml
 import time
 import random
 from tqdm import tqdm
@@ -9,8 +11,10 @@ if not QGIS_is_live:
     from layer import layer
     from project import project
     from seed import seed
+    from dependency import list_of_dependencies
 
     BLUE_GEO_VERSION = "1.1.1"
+    ABCLI_OBJECT_ROOT = ""
 
 NAME = "blue_geo.QGIS"
 
@@ -80,6 +84,11 @@ class ABCLI_QGIS(object):
     def find_layer(self, layer_name):
         return QgsProject.instance().mapLayersByName(layer_name)
 
+    def get_layer(self, layer_name: str):
+        candidate_layers = QgsProject.instance().mapLayersByName(layer_name)
+
+        return candidate_layers[0] if len(candidate_layers) else None
+
     def help(self, clear=False):
         if clear:
             self.clear()
@@ -103,6 +112,22 @@ class ABCLI_QGIS(object):
 
         for app in self.app_list:
             app.help()
+
+    def layer_exists(
+        self,
+        layer_name,
+        do_log: bool = False,
+    ):
+        for layer_name_ in project.list_of_layers:
+            if layer_name_.startswith(layer_name):
+                if do_log:
+                    log(
+                        layer_name,
+                        layer_name_ if verbose else "",
+                        icon="✅",
+                    )
+                return True
+        return False
 
     def list_of_layers(self, aux=False):
         output = [
@@ -193,6 +218,35 @@ class ABCLI_QGIS(object):
         log(path)
         os.system(f"open {path}")
 
+    # https://qgis.org/pyqgis/master/core/QgsSettings.html#qgis.core.QgsSettings.allKeys
+    # https://docs.qgis.org/3.28/en/docs/pyqgis_developer_cookbook/settings.html
+    def recent(self):
+        settings = QgsSettings()
+
+        list_of_filenames = [
+            settings.value(key)
+            for key in settings.allKeys()
+            if re.match(r"UI/recentProjects/(\d+)/path", key)
+        ]
+
+        output = [
+            filename.split(f"{ABCLI_OBJECT_ROOT}/", 1)[1].split("/")[0]
+            for filename in list_of_filenames
+            if ABCLI_OBJECT_ROOT in filename
+        ]
+
+        for filename in list_of_filenames:
+            output += list_of_dependencies(filename, ABCLI_OBJECT_ROOT, verbose)
+
+        output = list(set(output))
+
+        filename = os.path.join(ABCLI_OBJECT_ROOT, "QGIS-recent.yaml")
+        with open(filename, "w") as file:
+            yaml.dump(output, file)
+        log(f"-> {filename}")
+
+        return ",".join(output)
+
     def refresh(self, deep=False):
         log("{}refresh.".format("deep" if deep else ""))
         if deep:
@@ -205,6 +259,18 @@ class ABCLI_QGIS(object):
         # https://gis.stackexchange.com/a/449101/210095
         for layer_ in tqdm(QgsProject.instance().mapLayers().values()):
             layer_.dataProvider().reloadData()
+
+    def remove_layer(
+        self,
+        layer_name: str,
+        refresh: bool = True,
+    ):
+        for layer_ in QgsProject.instance().mapLayersByName(layer_name):
+            QgsProject.instance().removeMapLayer(layer_.id())
+            log(layer_name, icon="➖")
+
+        if refresh:
+            self.refresh()
 
     def timestamp(self):
         return time.strftime(

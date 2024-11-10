@@ -41,7 +41,7 @@ delim = " " if args.delim == "space" else args.delim
 success = args.task in list_of_tasks.split("|")
 if args.task == "generate_seed":
     print(generate_seed())
-if args.task == "list_dependencies":
+elif args.task == "list_dependencies":
     output = list_of_dependencies(
         filename=args.filename,
         ABCLI_OBJECT_ROOT=ABCLI_OBJECT_ROOT,

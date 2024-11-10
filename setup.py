@@ -33,6 +33,9 @@ setup(
         f"{NAME}.help.QGIS",
         #
         f"{NAME}.QGIS",
+        f"{NAME}.QGIS.console",
+        f"{NAME}.QGIS.console.apps",
+        f"{NAME}.QGIS.expressions",
         #
         f"{NAME}.watch",
         f"{NAME}.watch.algo",

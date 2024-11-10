@@ -30,6 +30,7 @@ setup(
         #
         f"{NAME}.help",
         f"{NAME}.help.watch",
+        f"{NAME}.help.QGIS",
         #
         f"{NAME}.QGIS",
         #

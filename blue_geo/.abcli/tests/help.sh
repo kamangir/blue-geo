@@ -10,6 +10,11 @@ function test_@geo_help() {
     for module in \
         "@geo" \
         \
+        "@geo pypi" \
+        "@geo pypi browse" \
+        "@geo pypi build" \
+        "@geo pypi install" \
+        \
         "@geo pytest" \
         \
         "@geo catalog" \

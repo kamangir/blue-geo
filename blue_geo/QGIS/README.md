@@ -21,12 +21,14 @@ QGIS \
  . push QGIS expressions.
    from: $BLUE_GEO_QGIS_PATH_EXPRESSIONS
    to: $BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT
+   https://docs.qgis.org/3.34/en/docs/user_manual/expressions
 QGIS \
 	expressions \
 	pull
  . pull QGIS expressions.
    from: $BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT
    to: $BLUE_GEO_QGIS_PATH_EXPRESSIONS
+   https://docs.qgis.org/3.34/en/docs/user_manual/expressions
 QGIS \
 	seed \
 	[screen]

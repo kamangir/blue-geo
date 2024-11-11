@@ -17,6 +17,7 @@ def help_pull(
         {
             "from: $BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT": "",
             "to: $BLUE_GEO_QGIS_PATH_EXPRESSIONS": "",
+            "https://docs.qgis.org/3.34/en/docs/user_manual/expressions": "",
         },
         mono=mono,
     )
@@ -36,6 +37,7 @@ def help_push(
         {
             "from: $BLUE_GEO_QGIS_PATH_EXPRESSIONS": "",
             "to: $BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT": "",
+            "https://docs.qgis.org/3.34/en/docs/user_manual/expressions": "",
         },
         mono=mono,
     )

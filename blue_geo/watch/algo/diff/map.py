@@ -1,13 +1,13 @@
 from typing import Dict
 from tqdm import trange
 import numpy as np
-import matplotlib.pyplot as plt
 import cv2
 
 from blueness import module
+from blue_objects.logger.image import log_image_hist
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
-from blue_objects.graphics.signature import justify_text, add_signature
+from blue_objects.graphics.signature import add_signature
 
 from blue_geo import NAME
 from blue_geo.host import signature
@@ -24,7 +24,7 @@ def map_function(
     suffix: str,
     offset: str,
     depth: int,
-    diff_range: float = 100,
+    range: float = 100.0,
     line_width: int = 80,
     colorbar_width: int = 20,
 ) -> bool:
@@ -107,52 +107,32 @@ def map_function(
             target_image[:, :, 0].astype(np.float32)
             - baseline_image[:, :, 0].astype(np.float32)
         )
-        diff_image[diff_image < -diff_range] = -diff_range
-        diff_image[diff_image > diff_range] = diff_range
+        diff_image[diff_image < -range] = -range
+        diff_image[diff_image > range] = range
 
-        plt.figure(figsize=(10, 6))
-        plt.hist(
-            diff_image.ravel(),
-            bins=256,
-            range=(-diff_range, diff_range),
-        )
-        plt.title(
-            justify_text(
-                " | ".join(
-                    [
-                        "diff histogram",
-                        query_object_name,
-                        f"/{suffix}",
-                        f"@{offset}+{depth}",
-                        f"+-{diff_range:.2f}",
-                        file.name_and_extension(baseline_filename),
-                        file.name_and_extension(target_filename),
-                    ]
-                ),
-                line_width=line_width,
-                return_str=True,
-            )
-        )
-        plt.xlabel(
-            justify_text(
-                " | ".join(["DN diff"] + signature()),
-                line_width=line_width,
-                return_str=True,
-            )
-        )
-        plt.ylabel("frequency")
-        plt.grid(True)
-        success = file.save_fig(
-            objects.path_of(
+        log_image_hist(
+            image=diff_image,
+            range=(-range, range),
+            header=[
+                "diff histogram",
+                query_object_name,
+                f"/{suffix}",
+                f"@{offset}+{depth}",
+                f"+-{range:.2f}",
+                file.name_and_extension(baseline_filename),
+                file.name_and_extension(target_filename),
+            ],
+            footer=["DN diff"] + signature(),
+            filename=objects.path_of(
                 "{}-diff-histogram.png".format(file.name(target_filename)),
                 object_name,
             ),
-            log=True,
+            line_width=line_width,
         )
 
     if success:
         colored_diff = cv2.applyColorMap(
-            ((diff_image / diff_range + 1) / 2 * 255).astype(np.uint8), cv2.COLORMAP_JET
+            ((diff_image / range + 1) / 2 * 255).astype(np.uint8), cv2.COLORMAP_JET
         )
 
         gradient = (
@@ -180,7 +160,7 @@ def map_function(
                             [
                                 suffix,
                                 f"@{offset}+{depth}",
-                                f"+-{diff_range:.2f}",
+                                f"+-{range:.2f}",
                                 file.name_and_extension(baseline_filename),
                                 file.name_and_extension(target_filename),
                             ]

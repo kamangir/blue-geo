@@ -6,6 +6,7 @@ function blue_geo_watch_algo_diff_map() {
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
     local depth=$(abcli_option "$options" depth 2)
     local offset=$(abcli_option "$options" offset 0)
+    local range=$(abcli_option "$options" range 100)
     local suffix=$(abcli_option "$options" suffix $(abcli_string_timestamp_short))
     local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
 
@@ -36,6 +37,7 @@ function blue_geo_watch_algo_diff_map() {
         --suffix $suffix \
         --offset $offset \
         --depth $depth \
+        --range $range \
         "${@:3}"
     local status="$?"
 

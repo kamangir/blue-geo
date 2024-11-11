@@ -9,7 +9,7 @@ function blue_geo_watch() {
     local reduce_options=$6
 
     local task
-    for task in map reduce targets; do
+    for task in map reduce targets query; do
         if [ $(abcli_option_int "$options" $task 0) == 1 ]; then
             blue_geo_watch_$task "${@:2}"
             return
@@ -40,49 +40,13 @@ function blue_geo_watch() {
 
         abcli_download - $query_object_name
     else
-        local target_exists=$(blue_geo_watch_targets get \
-            --what exists \
-            --target_name $target \
-            --log 0)
-        if [[ "$target_exists" != 1 ]]; then
-            abcli_log_error "@geo: watch: $target: target not found."
-            return 1
-        fi
-
-        local do_dryrun_targetting=$(abcli_option_int "$target_options" dryrun 0)
-
         query_object_name=$object_name-query-$(abcli_string_timestamp_short)
 
-        local catalog=$(blue_geo_watch_targets get \
-            --what catalog \
-            --target_name $target \
-            --log 0)
-        local collection=$(blue_geo_watch_targets get \
-            --what collection \
-            --target_name $target \
-            --log 0)
-        local query_args=$(blue_geo_watch_targets get \
-            --what query_args \
-            --target_name $target \
-            --delim space \
-            --log 0)
-
-        abcli_eval dryrun=$do_dryrun \
-            blue_geo_catalog query $catalog \
-            dryrun=$do_dryrun_targetting,$collection \
-            - \
-            $query_object_name \
-            --count -1 \
-            $query_args
-        [[ $? -ne 0 ]] && return 1
-
-        blue_geo_watch_targets save \
-            target=$target \
+        blue_geo_watch_query \
+            $target_options \
             $query_object_name
         [[ $? -ne 0 ]] && return 1
     fi
-
-    abcli_upload - $query_object_name
 
     local job_name="$object_name-job-$(abcli_string_timestamp_short)"
 

@@ -9,68 +9,7 @@ from blue_geo.watch.algo import list_of_algo
 from blue_geo.help.watch.targets import help_functions as help_targets
 
 
-def help_map(
-    tokens: List[str],
-    mono: bool,
-) -> str:
-    options = "".join(
-        [
-            "algo=<algo>",
-            xtra(",dryrun,~download,", mono),
-            "modality=<modality>,",
-            "offset=<offset>,suffix=<suffix>",
-            xtra(",~upload", mono),
-        ]
-    )
-
-    return show_usage(
-        [
-            "@geo watch map",
-            f"[{options}]",
-            "[.|<query-object-name>]",
-        ],
-        "@geo watch map <query-object-name> @ <offset> -> /<suffix>.",
-        mono=mono,
-    )
-
-
-def help_reduce(
-    tokens: List[str],
-    mono: bool,
-) -> str:
-    options = "".join(
-        [
-            "algo=<algo>",
-            xtra("dryrun,~download,", mono),
-            "publish,suffix=<suffix>",
-            xtra(",~upload", mono),
-        ]
-    )
-
-    return show_usage(
-        [
-            "@geo watch reduce",
-            f"[{options}]",
-            "[..|<query-object-name>]",
-            "[.|<object-name>]",
-        ],
-        "@geo watch reduce <query-object-name>/<suffix> -> <object-name>.",
-        mono=mono,
-    )
-
-
-def help_batch(
-    tokens: List[str],
-    mono: bool,
-) -> str:
-    return help(
-        tokens=tokens,
-        mono=mono,
-        help_batch=True,
-    )
-
-
-def help(
+def help_(
     tokens: List[str],
     mono: bool,
     help_batch: bool = False,
@@ -115,7 +54,8 @@ def help(
 
     return show_usage(
         [
-            "@geo watch",
+            "@geo",
+            "watch",
             options if help_batch else f"[{options}]",
             f"[{target_options}]",
             f"[{algo_options}]",
@@ -138,10 +78,101 @@ def help(
     )
 
 
+def help_batch(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return help_(
+        tokens=tokens,
+        mono=mono,
+        help_batch=True,
+    )
+
+
+def help_map(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = "".join(
+        [
+            "algo=<algo>",
+            xtra(",dryrun,~download,", mono),
+            "modality=<modality>,",
+            "offset=<offset>,suffix=<suffix>",
+            xtra(",~upload", mono),
+        ]
+    )
+
+    return show_usage(
+        [
+            "@geo",
+            "watch",
+            "map",
+            f"[{options}]",
+            "[.|<query-object-name>]",
+        ],
+        "@geo watch map <query-object-name> @ <offset> -> /<suffix>.",
+        mono=mono,
+    )
+
+
+def help_query(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = "".join(
+        [
+            xtra("dryrun,", mono=mono),
+            "target=<target>",
+            xtra(",~upload", mono=mono),
+        ]
+    )
+
+    return show_usage(
+        [
+            "@geo",
+            "watch",
+            "query",
+            f"[{options}]",
+            "[.|<object-name>]",
+        ],
+        "query target -> <object-name>.",
+        mono=mono,
+    )
+
+
+def help_reduce(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = "".join(
+        [
+            "algo=<algo>",
+            xtra("dryrun,~download,", mono),
+            "publish,suffix=<suffix>",
+            xtra(",~upload", mono),
+        ]
+    )
+
+    return show_usage(
+        [
+            "@geo",
+            "watch",
+            "reduce",
+            f"[{options}]",
+            "[..|<query-object-name>]",
+            "[.|<object-name>]",
+        ],
+        "@geo watch reduce <query-object-name>/<suffix> -> <object-name>.",
+        mono=mono,
+    )
+
+
 help_functions = {
-    "": help,
+    "": help_,
     "batch": help_batch,
     "map": help_map,
+    "query": help_query,
     "reduce": help_reduce,
     "targets": help_targets,
 }

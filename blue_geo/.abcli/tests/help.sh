@@ -46,8 +46,8 @@ function test_@geo_help() {
         "@geo watch" \
         "@geo watch batch" \
         "@geo watch map" \
+        "@geo watch query" \
         "@geo watch reduce" \
-        \
         "@geo watch targets" \
         "@geo watch targets cat" \
         "@geo watch targets cp" \

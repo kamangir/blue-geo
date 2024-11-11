@@ -6,6 +6,8 @@ from blueness import module
 from blue_options import string
 from blue_objects import file, objects, path
 from blue_objects.metadata import post_to_object
+from blue_objects.logger.image import log_image_hist
+from blue_objects.env import ABCLI_OBJECT_ROOT
 
 from blue_geo import NAME
 from blue_geo.catalog.generic.classes import GenericCatalog, VoidCatalog
@@ -130,19 +132,35 @@ class GenericDatacube:
 
         frame = np.transpose(frame, (1, 2, 0))
 
-        if verbose:
-            frame_range = (float(np.min(frame)), float(np.max(frame)))
-            logger.info(
-                "frame: {} : {}".format(
-                    string.pretty_shape_of_matrix(frame),
-                    frame_range,
-                )
+        frame_range = (float(np.min(frame)), float(np.max(frame)))
+        logger.info(
+            "frame: {} : {}".format(
+                string.pretty_shape_of_matrix(frame),
+                frame_range,
             )
+        )
 
         if frame.shape[2] == 6:
             frame = frame[:, :, [0, 2, 4]]
         elif frame.shape[2] > 3:
             frame = frame[:, :, :3]
+
+        if log:
+            log_image_hist(
+                image=frame,
+                range=frame_range,
+                header=[
+                    f"{frame_range[0]:.2f} .. {frame_range[1]:.2f}",
+                ],
+                footer=(
+                    filename.split(f"{ABCLI_OBJECT_ROOT}/", 1)[1].split(os.sep)
+                    if ABCLI_OBJECT_ROOT in filename
+                    else [file.name_and_extension(filename)]
+                ),
+                filename=file.add_suffix(
+                    file.add_extension(filename, "png"), "histogram"
+                ),
+            )
 
         if normalized and frame.dtype == np.uint16:
             frame = frame.astype(np.float32) / 5000 * 255

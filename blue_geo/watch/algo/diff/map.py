@@ -1,13 +1,13 @@
 from typing import Dict
 from tqdm import trange
 import numpy as np
-import matplotlib.pyplot as plt
 import cv2
 
 from blueness import module
+from blue_objects.logger.image import log_image_hist
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
-from blue_objects.graphics.signature import justify_text, add_signature
+from blue_objects.graphics.signature import add_signature
 
 from blue_geo import NAME
 from blue_geo.host import signature
@@ -110,44 +110,24 @@ def map_function(
         diff_image[diff_image < -diff_range] = -diff_range
         diff_image[diff_image > diff_range] = diff_range
 
-        plt.figure(figsize=(10, 6))
-        plt.hist(
-            diff_image.ravel(),
-            bins=256,
+        log_image_hist(
+            image=diff_image,
             range=(-diff_range, diff_range),
-        )
-        plt.title(
-            justify_text(
-                " | ".join(
-                    [
-                        "diff histogram",
-                        query_object_name,
-                        f"/{suffix}",
-                        f"@{offset}+{depth}",
-                        f"+-{diff_range:.2f}",
-                        file.name_and_extension(baseline_filename),
-                        file.name_and_extension(target_filename),
-                    ]
-                ),
-                line_width=line_width,
-                return_str=True,
-            )
-        )
-        plt.xlabel(
-            justify_text(
-                " | ".join(["DN diff"] + signature()),
-                line_width=line_width,
-                return_str=True,
-            )
-        )
-        plt.ylabel("frequency")
-        plt.grid(True)
-        success = file.save_fig(
-            objects.path_of(
+            header=[
+                "diff histogram",
+                query_object_name,
+                f"/{suffix}",
+                f"@{offset}+{depth}",
+                f"+-{diff_range:.2f}",
+                file.name_and_extension(baseline_filename),
+                file.name_and_extension(target_filename),
+            ],
+            footer=["DN diff"] + signature(),
+            filename=objects.path_of(
                 "{}-diff-histogram.png".format(file.name(target_filename)),
                 object_name,
             ),
-            log=True,
+            line_width=line_width,
         )
 
     if success:

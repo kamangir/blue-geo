@@ -24,7 +24,7 @@ def map_function(
     suffix: str,
     offset: str,
     depth: int,
-    diff_range: float = 100,
+    range: float = 100.0,
     line_width: int = 80,
     colorbar_width: int = 20,
 ) -> bool:
@@ -107,18 +107,18 @@ def map_function(
             target_image[:, :, 0].astype(np.float32)
             - baseline_image[:, :, 0].astype(np.float32)
         )
-        diff_image[diff_image < -diff_range] = -diff_range
-        diff_image[diff_image > diff_range] = diff_range
+        diff_image[diff_image < -range] = -range
+        diff_image[diff_image > range] = range
 
         log_image_hist(
             image=diff_image,
-            range=(-diff_range, diff_range),
+            range=(-range, range),
             header=[
                 "diff histogram",
                 query_object_name,
                 f"/{suffix}",
                 f"@{offset}+{depth}",
-                f"+-{diff_range:.2f}",
+                f"+-{range:.2f}",
                 file.name_and_extension(baseline_filename),
                 file.name_and_extension(target_filename),
             ],
@@ -132,7 +132,7 @@ def map_function(
 
     if success:
         colored_diff = cv2.applyColorMap(
-            ((diff_image / diff_range + 1) / 2 * 255).astype(np.uint8), cv2.COLORMAP_JET
+            ((diff_image / range + 1) / 2 * 255).astype(np.uint8), cv2.COLORMAP_JET
         )
 
         gradient = (
@@ -160,7 +160,7 @@ def map_function(
                             [
                                 suffix,
                                 f"@{offset}+{depth}",
-                                f"+-{diff_range:.2f}",
+                                f"+-{range:.2f}",
                                 file.name_and_extension(baseline_filename),
                                 file.name_and_extension(target_filename),
                             ]

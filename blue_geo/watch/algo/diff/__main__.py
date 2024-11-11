@@ -41,6 +41,11 @@ parser.add_argument(
     type=int,
     default=2,
 )
+parser.add_argument(
+    "--range",
+    type=float,
+    default=100.0,
+)
 args = parser.parse_args()
 
 success = args.task in list_of_tasks
@@ -50,6 +55,7 @@ if args.task == "map":
         suffix=args.suffix,
         offset=args.offset,
         depth=args.depth,
+        range=args.range,
     )
 elif args.task == "reduce":
     success = reduce_function(

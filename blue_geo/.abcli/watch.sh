@@ -8,6 +8,8 @@ function blue_geo_watch() {
     local map_options=$5
     local reduce_options=$6
 
+    blue_geo_watch_targets_download
+
     local task
     for task in map reduce targets query; do
         if [ $(abcli_option_int "$options" $task 0) == 1 ]; then
@@ -24,8 +26,6 @@ function blue_geo_watch() {
             "${@:2}"
         return
     fi
-
-    blue_geo_watch_targets download
 
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
 

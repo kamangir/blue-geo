@@ -8,7 +8,7 @@ function test_blue_geo_watch_targets_cat() {
 }
 
 function test_blue_geo_watch_targets_download() {
-    blue_geo_watch_targets download
+    blue_geo_watch_targets_download
 }
 
 function test_blue_geo_watch_targets_test() {

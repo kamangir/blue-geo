@@ -5,7 +5,7 @@ function test_blue_geo_catalog_query() {
     local list_of_catalogs=$(echo $blue_geo_list_of_catalogs | tr , +)
     list_of_catalogs=$(abcli_option "$options" catalog $list_of_catalogs)
 
-    blue_geo_watch_targets download
+    blue_geo_watch_targets_download
 
     local catalog
     local datacube_class

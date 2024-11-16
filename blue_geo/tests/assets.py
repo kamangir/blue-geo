@@ -23,7 +23,7 @@ datacubes = {
     "datacube-firms_area-void-void-void-void": VoidDatacube,
     "datacube-firms-area-void-void-void-void": VoidDatacube,
     "datacube-firms-area-world-void-2024-07-20-1": VoidDatacube,
-    "datacube-firms-area-void-MODIS_NRT-2024-07-20-1": VoidDatacube,
+    "datacube-firms-area-void-MODIS_NRT-2024-09-20-1": VoidDatacube,
     env.BLUE_GEO_TEST_DATACUBE_FIRMS_AREA: FirmsAreaDatacube,
     #
     env.BLUE_GEO_TEST_DATACUBE_SKYFOX_VENUS: SkyFoxVenusDatacube,

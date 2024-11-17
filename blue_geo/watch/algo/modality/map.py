@@ -64,6 +64,7 @@ def map_function(
 
     frame_pretty_shape = string.pretty_shape_of_matrix(frame)
 
+    scale = 1
     if min_width != -1 and frame.shape[1] < min_width and frame.shape[1] > 0:
         scale = int(math.ceil(min_width / frame.shape[1]))
 

@@ -98,7 +98,9 @@ def map_function(
                     object_name,
                 )
                 + [
-                    "{:05.1f}%".format(content_ratio * 100.0),
+                    string.pretty_shape_of_matrix(frame),
+                    f"scale: {scale}X",
+                    "content: {:05.1f}%".format(content_ratio * 100.0),
                     f"#{offset}",
                 ]
             ),

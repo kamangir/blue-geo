@@ -56,12 +56,15 @@ def map_function(
     )
 
     datacube_class = get_datacube_class(datacube_id)
-    success, frame, _ = datacube_class.load_modality(
+    success, frame, frame_file_metadata = datacube_class.load_modality(
         filename,
         modality=modality,
         log=True,
     )
 
+    frame_pretty_shape = string.pretty_shape_of_matrix(frame)
+
+    scale = 1
     if min_width != -1 and frame.shape[1] < min_width and frame.shape[1] > 0:
         scale = int(math.ceil(min_width / frame.shape[1]))
 
@@ -98,7 +101,12 @@ def map_function(
                     object_name,
                 )
                 + [
-                    "{:05.1f}%".format(content_ratio * 100.0),
+                    frame_pretty_shape,
+                    "pixel_size: {} m".format(
+                        frame_file_metadata.get("pixel_size", -1.0)
+                    ),
+                    f"scale: {scale}X",
+                    "content: {:05.1f}%".format(content_ratio * 100.0),
                     f"#{offset}",
                 ]
             ),
@@ -112,7 +120,8 @@ def map_function(
 
     frame_filename = file.add_extension(filename, "png")
 
-    success = file.save_image(frame_filename, frame, log=True)
+    if not file.save_image(frame_filename, frame, log=True):
+        success = False
 
     return post_to_object(
         object_name,

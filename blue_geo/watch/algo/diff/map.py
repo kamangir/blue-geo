@@ -2,8 +2,10 @@ from typing import Dict
 from tqdm import trange
 import numpy as np
 import cv2
+import math
 
 from blueness import module
+from blue_options import string
 from blue_objects.logger.image import log_image_hist
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
@@ -27,6 +29,7 @@ def map_function(
     range: float = 100.0,
     line_width: int = 80,
     colorbar_width: int = 20,
+    min_width: int = 1200,
 ) -> bool:
     diff_filename: str = ""
     if depth < 2:
@@ -86,15 +89,19 @@ def map_function(
             else:
                 target_filename = filename
 
+    baseline_metadata = {}
     if success:
-        success, baseline_image, _ = GenericDatacube.load_modality(
+        success, baseline_image, baseline_metadata = GenericDatacube.load_modality(
             filename=baseline_filename,
             modality="rgb",
             log=True,
             normalized=False,
         )
 
+    frame_pretty_shape = ""
     if success:
+        frame_pretty_shape = string.pretty_shape_of_matrix(baseline_image)
+
         success, target_image, _ = GenericDatacube.load_modality(
             filename=target_filename,
             modality="rgb",
@@ -117,10 +124,13 @@ def map_function(
                 "diff histogram",
                 query_object_name,
                 f"/{suffix}",
-                f"@{offset}+{depth}",
-                f"+-{range:.2f}",
+                f"offset: {offset}",
+                f"depth: {depth}",
+                f"range: +-{range:.2f}",
                 file.name_and_extension(baseline_filename),
                 file.name_and_extension(target_filename),
+                frame_pretty_shape,
+                "pixel_size: {} m".format(baseline_metadata.get("pixel_size", -1.0)),
             ],
             footer=["DN diff"] + signature(),
             filename=objects.path_of(
@@ -128,6 +138,26 @@ def map_function(
                 object_name,
             ),
             line_width=line_width,
+        )
+
+    scale = 1
+    if success and min_width != -1 and diff_image.shape[1] < min_width:
+        scale = int(math.ceil(min_width / diff_image.shape[1]))
+
+        logger.info(
+            "scaling {} X {}".format(
+                string.pretty_shape_of_matrix(diff_image),
+                scale,
+            )
+        )
+
+        diff_image = cv2.resize(
+            diff_image,
+            (
+                scale * diff_image.shape[1],
+                scale * diff_image.shape[0],
+            ),
+            interpolation=cv2.INTER_NEAREST_EXACT,
         )
 
     if success:
@@ -159,10 +189,16 @@ def map_function(
                         " | ".join(
                             [
                                 suffix,
-                                f"@{offset}+{depth}",
-                                f"+-{range:.2f}",
+                                f"offset: {offset}",
+                                f"depth: {depth}",
+                                f"range: +-{range:.2f}",
                                 file.name_and_extension(baseline_filename),
                                 file.name_and_extension(target_filename),
+                                frame_pretty_shape,
+                                "pixel_size: {} m".format(
+                                    baseline_metadata.get("pixel_size", -1.0)
+                                ),
+                                f"scale: {scale}X",
                             ]
                         ),
                         query_object_name,

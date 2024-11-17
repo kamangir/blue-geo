@@ -101,7 +101,7 @@ def map_function(
                 )
                 + [
                     frame_pretty_shape,
-                    "pixel_size: {:.2f} m".format(
+                    "pixel_size: {} m".format(
                         frame_file_metadata.get("pixel_size", -1.0)
                     ),
                     f"scale: {scale}X",

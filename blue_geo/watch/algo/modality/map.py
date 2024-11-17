@@ -56,7 +56,7 @@ def map_function(
     )
 
     datacube_class = get_datacube_class(datacube_id)
-    success, frame, _ = datacube_class.load_modality(
+    success, frame, frame_file_metadata = datacube_class.load_modality(
         filename,
         modality=modality,
         log=True,
@@ -101,6 +101,9 @@ def map_function(
                 )
                 + [
                     frame_pretty_shape,
+                    "pixel_size: {:.2f} m".format(
+                        frame_file_metadata.get("pixel_size", -1.0)
+                    ),
                     f"scale: {scale}X",
                     "content: {:05.1f}%".format(content_ratio * 100.0),
                     f"#{offset}",

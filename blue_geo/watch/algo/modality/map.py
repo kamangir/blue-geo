@@ -62,6 +62,8 @@ def map_function(
         log=True,
     )
 
+    frame_pretty_shape = string.pretty_shape_of_matrix(frame)
+
     if min_width != -1 and frame.shape[1] < min_width and frame.shape[1] > 0:
         scale = int(math.ceil(min_width / frame.shape[1]))
 
@@ -98,7 +100,7 @@ def map_function(
                     object_name,
                 )
                 + [
-                    string.pretty_shape_of_matrix(frame),
+                    frame_pretty_shape,
                     f"scale: {scale}X",
                     "content: {:05.1f}%".format(content_ratio * 100.0),
                     f"#{offset}",
@@ -114,7 +116,8 @@ def map_function(
 
     frame_filename = file.add_extension(filename, "png")
 
-    success = file.save_image(frame_filename, frame, log=True)
+    if not file.save_image(frame_filename, frame, log=True):
+        success = False
 
     return post_to_object(
         object_name,

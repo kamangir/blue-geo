@@ -95,18 +95,13 @@ def map_function(
             filename=baseline_filename,
             modality="rgb",
             log=True,
-            normalized=False,
         )
 
-    frame_pretty_shape = ""
     if success:
-        frame_pretty_shape = string.pretty_shape_of_matrix(baseline_image)
-
         success, target_image, _ = GenericDatacube.load_modality(
             filename=target_filename,
             modality="rgb",
             log=True,
-            normalized=False,
         )
 
     if success:
@@ -117,6 +112,17 @@ def map_function(
         diff_image[diff_image < -range] = -range
         diff_image[diff_image > range] = range
 
+        diff_image_pretty_shape = string.pretty_shape_of_matrix(diff_image)
+
+        success = file.save_matrix(
+            objects.path_of(
+                "{}-diff.npy".format(file.name(target_filename)),
+                object_name,
+            ),
+            diff_image,
+        )
+
+    if success:
         log_image_hist(
             image=diff_image,
             range=(-range, range),
@@ -129,7 +135,7 @@ def map_function(
                 f"range: +-{range:.2f}",
                 file.name_and_extension(baseline_filename),
                 file.name_and_extension(target_filename),
-                frame_pretty_shape,
+                diff_image_pretty_shape,
                 "pixel_size: {} m".format(baseline_metadata.get("pixel_size", -1.0)),
             ],
             footer=["DN diff"] + signature(),
@@ -144,12 +150,7 @@ def map_function(
     if success and min_width != -1 and diff_image.shape[1] < min_width:
         scale = int(math.ceil(min_width / diff_image.shape[1]))
 
-        logger.info(
-            "scaling {} X {}".format(
-                string.pretty_shape_of_matrix(diff_image),
-                scale,
-            )
-        )
+        logger.info(f"scaling {diff_image_pretty_shape} X {scale} ...")
 
         diff_image = cv2.resize(
             diff_image,
@@ -194,7 +195,7 @@ def map_function(
                                 f"range: +-{range:.2f}",
                                 file.name_and_extension(baseline_filename),
                                 file.name_and_extension(target_filename),
-                                frame_pretty_shape,
+                                diff_image_pretty_shape,
                                 "pixel_size: {} m".format(
                                     baseline_metadata.get("pixel_size", -1.0)
                                 ),

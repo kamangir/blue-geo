@@ -64,6 +64,18 @@ def map_function(
 
     frame_pretty_shape = string.pretty_shape_of_matrix(frame)
 
+    if not file.save_matrix(
+        file.add_extension(filename, "npy"),
+        frame,
+    ):
+        success = False
+
+    if frame.dtype == np.uint16:
+        frame = frame.astype(np.float32) / 5000 * 255
+        frame[frame < 0] = 0
+        frame[frame > 255] = 255
+        frame = frame.astype(np.uint8)
+
     scale = 1
     if min_width != -1 and frame.shape[1] < min_width and frame.shape[1] > 0:
         scale = int(math.ceil(min_width / frame.shape[1]))

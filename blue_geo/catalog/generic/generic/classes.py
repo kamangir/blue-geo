@@ -120,7 +120,6 @@ class GenericDatacube:
         ignore_error: bool = False,
         log: bool = False,
         verbose: bool = False,
-        normalized: bool = True,
     ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
         success, frame, frame_file_metadata = file.load_geoimage(
             filename,
@@ -146,7 +145,7 @@ class GenericDatacube:
             frame = frame[:, :, :3]
 
         if log:
-            log_image_hist(
+            if not log_image_hist(
                 image=frame,
                 range=frame_range,
                 header=[
@@ -160,13 +159,8 @@ class GenericDatacube:
                 filename=file.add_suffix(
                     file.add_extension(filename, "png"), "histogram"
                 ),
-            )
-
-        if normalized and frame.dtype == np.uint16:
-            frame = frame.astype(np.float32) / 5000 * 255
-            frame[frame < 0] = 0
-            frame[frame > 255] = 255
-            frame = frame.astype(np.uint8)
+            ):
+                success = False
 
         return success, frame, frame_file_metadata
 

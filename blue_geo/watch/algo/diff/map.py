@@ -26,7 +26,7 @@ def map_function(
     suffix: str,
     offset: str,
     depth: int,
-    range: float = 100.0,
+    dynamic_range: float = 100.0,
     line_width: int = 80,
     colorbar_width: int = 20,
     min_width: int = 1200,
@@ -108,8 +108,8 @@ def map_function(
         diff_image = np.squeeze(
             target_image.astype(np.float32) - baseline_image.astype(np.float32)
         )
-        diff_image[diff_image < -range] = -range
-        diff_image[diff_image > range] = range
+        diff_image[diff_image < -dynamic_range] = -dynamic_range
+        diff_image[diff_image > dynamic_range] = dynamic_range
 
         diff_image_pretty_shape = string.pretty_shape_of_matrix(diff_image)
 
@@ -124,14 +124,14 @@ def map_function(
     if success:
         log_matrix_hist(
             matrix=diff_image,
-            dynamic_range=(-range, range),
+            dynamic_range=(-dynamic_range, dynamic_range),
             header=[
                 "diff histogram",
                 query_object_name,
                 f"/{suffix}",
                 f"offset: {offset}",
                 f"depth: {depth}",
-                f"range: +-{range:.2f}",
+                f"dynamic-range: +-{dynamic_range:.2f}",
                 file.name_and_extension(baseline_filename),
                 file.name_and_extension(target_filename),
                 diff_image_pretty_shape,
@@ -166,7 +166,8 @@ def map_function(
 
     if success:
         colored_diff = cv2.applyColorMap(
-            ((diff_image / range + 1) / 2 * 255).astype(np.uint8), cv2.COLORMAP_JET
+            ((diff_image / dynamic_range + 1) / 2 * 255).astype(np.uint8),
+            cv2.COLORMAP_JET,
         )
 
         gradient = (
@@ -195,7 +196,7 @@ def map_function(
                                 suffix,
                                 f"offset: {offset}",
                                 f"depth: {depth}",
-                                f"range: +-{range:.2f}",
+                                f"dynamic-range: +-{dynamic_range:.2f}",
                                 file.name_and_extension(baseline_filename),
                                 file.name_and_extension(target_filename),
                                 diff_image_pretty_shape,

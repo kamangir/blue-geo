@@ -31,7 +31,6 @@ def map_function(
     colorbar_width: int = 20,
     min_width: int = 1200,
 ) -> bool:
-    diff_filename: str = ""
     if depth < 2:
         logger.error(f"depth={depth} < 2!")
         return False
@@ -144,6 +143,10 @@ def map_function(
             line_width=line_width,
         )
 
+    diff_filename = objects.path_of(
+        "{}-diff.png".format(file.name(target_filename)),
+        object_name,
+    )
     if success:
         if not log_matrix(
             matrix=diff_image[:, :, 0],
@@ -168,10 +171,7 @@ def map_function(
                 ),
             ],
             footer=[target.one_liner],
-            filename=objects.path_of(
-                "{}-diff.png".format(file.name(target_filename)),
-                object_name,
-            ),
+            filename=diff_filename,
             dynamic_range=(-dynamic_range, dynamic_range),
             line_width=line_width,
             min_width=min_width,

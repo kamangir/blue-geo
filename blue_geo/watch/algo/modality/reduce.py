@@ -86,6 +86,7 @@ def reduce_function(
             .get("usable", False)
         )
         if not frame_is_usable:
+            logger.warning(f"frame is not usable: {filename}")
             bad_frames.append(file.name_and_extension(filename))
             continue
 

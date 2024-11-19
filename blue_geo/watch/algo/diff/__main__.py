@@ -42,7 +42,7 @@ parser.add_argument(
     default=2,
 )
 parser.add_argument(
-    "--range",
+    "--dynamic_range",
     type=float,
     default=100.0,
 )
@@ -55,7 +55,7 @@ if args.task == "map":
         suffix=args.suffix,
         offset=args.offset,
         depth=args.depth,
-        range=args.range,
+        dynamic_range=args.dynamic_range,
     )
 elif args.task == "reduce":
     success = reduce_function(

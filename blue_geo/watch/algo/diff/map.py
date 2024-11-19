@@ -131,7 +131,6 @@ def map_function(
                 f"/{suffix}",
                 f"offset: {offset}",
                 f"depth: {depth}",
-                f"dynamic-range: +-{dynamic_range:.2f}",
                 file.name_and_extension(baseline_filename),
                 file.name_and_extension(target_filename),
                 diff_image_pretty_shape,

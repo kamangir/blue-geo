@@ -6,7 +6,7 @@ import math
 
 from blueness import module
 from blue_options import string
-from blue_objects.logger.matrix import log_matrix_hist
+from blue_objects.logger.matrix import log_matrix, log_matrix_hist
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
 from blue_objects.graphics.signature import add_signature
@@ -137,7 +137,7 @@ def map_function(
                 diff_image_pretty_shape,
                 "pixel_size: {} m".format(baseline_metadata.get("pixel_size", -1.0)),
             ],
-            footer=["DN diff"] + signature(),
+            footer=["DN diff"],
             filename=objects.path_of(
                 "{}-diff-histogram.png".format(file.name(target_filename)),
                 object_name,
@@ -145,49 +145,9 @@ def map_function(
             line_width=line_width,
         )
 
-    scale = 1
     if success:
-        diff_image = diff_image[:, :, 0]
-
-        if min_width != -1 and diff_image.shape[1] < min_width:
-
-            scale = int(math.ceil(min_width / diff_image.shape[1]))
-
-            logger.info(f"scaling {diff_image_pretty_shape} X {scale} ...")
-
-            diff_image = cv2.resize(
-                diff_image,
-                (
-                    scale * diff_image.shape[1],
-                    scale * diff_image.shape[0],
-                ),
-                interpolation=cv2.INTER_NEAREST_EXACT,
-            )
-
-    if success:
-        colored_diff = cv2.applyColorMap(
-            ((diff_image / dynamic_range + 1) / 2 * 255).astype(np.uint8),
-            cv2.COLORMAP_JET,
-        )
-
-        gradient = (
-            255
-            * np.linspace(0, 1, colored_diff.shape[0]).reshape(-1, 1)
-            * np.ones((1, colorbar_width))
-        ).astype(np.uint8)
-        colorbar = cv2.applyColorMap(gradient, cv2.COLORMAP_JET)
-        concatenated_image = np.hstack(
-            (
-                colored_diff,
-                np.zeros(
-                    (colored_diff.shape[0], colorbar_width // 2, 3),
-                    dtype=np.uint8,
-                ),
-                colorbar,
-            )
-        )
-        colored_diff_signed = add_signature(
-            concatenated_image,
+        if not log_matrix(
+            matrix=diff_image[:, :, 0],
             header=[
                 " | ".join(
                     objects.signature(
@@ -196,35 +156,30 @@ def map_function(
                                 suffix,
                                 f"offset: {offset}",
                                 f"depth: {depth}",
-                                f"dynamic-range: +-{dynamic_range:.2f}",
                                 file.name_and_extension(baseline_filename),
                                 file.name_and_extension(target_filename),
                                 diff_image_pretty_shape,
                                 "pixel_size: {} m".format(
                                     baseline_metadata.get("pixel_size", -1.0)
                                 ),
-                                f"scale: {scale}X",
                             ]
                         ),
                         query_object_name,
                     )
                 ),
             ],
-            footer=[
-                target.one_liner,
-                " | ".join(signature()),
-            ],
-            word_wrap=True,
-        )
-        diff_filename = objects.path_of(
-            "{}-diff.png".format(file.name(target_filename)),
-            object_name,
-        )
-        success = file.save_image(
-            diff_filename,
-            colored_diff_signed,
-            log=True,
-        )
+            footer=[target.one_liner],
+            filename=objects.path_of(
+                "{}-diff.png".format(file.name(target_filename)),
+                object_name,
+            ),
+            dynamic_range=(-dynamic_range, dynamic_range),
+            line_width=line_width,
+            min_width=min_width,
+            colorbar_width=colorbar_width,
+            colormap=cv2.COLORMAP_JET,
+        ):
+            success = False
 
     if not success:
         logger.warning("not usable.")

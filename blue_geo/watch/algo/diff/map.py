@@ -106,8 +106,7 @@ def map_function(
 
     if success:
         diff_image = np.squeeze(
-            target_image[:, :, 0].astype(np.float32)
-            - baseline_image[:, :, 0].astype(np.float32)
+            target_image.astype(np.float32) - baseline_image.astype(np.float32)
         )
         diff_image[diff_image < -range] = -range
         diff_image[diff_image > range] = range
@@ -147,19 +146,23 @@ def map_function(
         )
 
     scale = 1
-    if success and min_width != -1 and diff_image.shape[1] < min_width:
-        scale = int(math.ceil(min_width / diff_image.shape[1]))
+    if success:
+        diff_image = diff_image[:, :, 0]
 
-        logger.info(f"scaling {diff_image_pretty_shape} X {scale} ...")
+        if min_width != -1 and diff_image.shape[1] < min_width:
 
-        diff_image = cv2.resize(
-            diff_image,
-            (
-                scale * diff_image.shape[1],
-                scale * diff_image.shape[0],
-            ),
-            interpolation=cv2.INTER_NEAREST_EXACT,
-        )
+            scale = int(math.ceil(min_width / diff_image.shape[1]))
+
+            logger.info(f"scaling {diff_image_pretty_shape} X {scale} ...")
+
+            diff_image = cv2.resize(
+                diff_image,
+                (
+                    scale * diff_image.shape[1],
+                    scale * diff_image.shape[0],
+                ),
+                interpolation=cv2.INTER_NEAREST_EXACT,
+            )
 
     if success:
         colored_diff = cv2.applyColorMap(

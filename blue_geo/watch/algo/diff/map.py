@@ -6,7 +6,7 @@ import math
 
 from blueness import module
 from blue_options import string
-from blue_objects.logger.image import log_image_hist
+from blue_objects.logger.matrix import log_matrix_hist
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
 from blue_objects.graphics.signature import add_signature
@@ -122,9 +122,9 @@ def map_function(
         )
 
     if success:
-        log_image_hist(
-            image=diff_image,
-            range=(-range, range),
+        log_matrix_hist(
+            matrix=diff_image,
+            dynamic_range=(-range, range),
             header=[
                 "diff histogram",
                 query_object_name,

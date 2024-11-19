@@ -6,7 +6,7 @@ from blueness import module
 from blue_options import string
 from blue_objects import file, objects, path
 from blue_objects.metadata import post_to_object
-from blue_objects.logger.image import log_image_hist
+from blue_objects.logger.matrix import log_matrix_hist
 from blue_objects.env import ABCLI_OBJECT_ROOT
 
 from blue_geo import NAME
@@ -145,9 +145,9 @@ class GenericDatacube:
             frame = frame[:, :, :3]
 
         if log:
-            if not log_image_hist(
-                image=frame,
-                range=frame_range,
+            if not log_matrix_hist(
+                matrix=frame,
+                dynamic_range=frame_range,
                 header=[
                     f"{frame_range[0]:.2f} .. {frame_range[1]:.2f}",
                 ],

@@ -148,10 +148,7 @@ class GenericDatacube:
             if not log_matrix_hist(
                 matrix=frame,
                 dynamic_range=frame_range,
-                header=[
-                    f"{frame_range[0]:.2f} .. {frame_range[1]:.2f}",
-                ],
-                footer=(
+                header=(
                     filename.split(f"{ABCLI_OBJECT_ROOT}/", 1)[1].split(os.sep)
                     if ABCLI_OBJECT_ROOT in filename
                     else [file.name_and_extension(filename)]

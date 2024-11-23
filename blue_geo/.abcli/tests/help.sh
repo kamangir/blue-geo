@@ -10,13 +10,6 @@ function test_@geo_help() {
     for module in \
         "@geo" \
         \
-        "@geo pypi" \
-        "@geo pypi browse" \
-        "@geo pypi build" \
-        "@geo pypi install" \
-        \
-        "@geo pytest" \
-        \
         "@geo catalog" \
         "@geo catalog browse" \
         "@geo catalog get" \
@@ -32,16 +25,15 @@ function test_@geo_help() {
         \
         "@geo gdal" \
         \
-        "QGIS" \
-        "QGIS download" \
-        "QGIS expressions" \
-        "QGIS expressions pull" \
-        "QGIS expressions push" \
-        "QGIS server" \
-        "QGIS templates" \
-        "QGIS templates download" \
-        "QGIS templates upload" \
-        "QGIS upload" \
+        "@geo pypi" \
+        "@geo pypi browse" \
+        "@geo pypi build" \
+        "@geo pypi install" \
+        \
+        "@geo pytest" \
+        \
+        "@geo test" \
+        "@geo test list" \
         \
         "@geo watch" \
         "@geo watch batch" \
@@ -61,7 +53,20 @@ function test_@geo_help() {
         "@geo watch targets save" \
         "@geo watch targets test" \
         "@geo watch targets update_template" \
-        "@geo watch targets upload"; do
+        "@geo watch targets upload" \
+        \
+        "QGIS" \
+        "QGIS download" \
+        "QGIS expressions" \
+        "QGIS expressions pull" \
+        "QGIS expressions push" \
+        "QGIS server" \
+        "QGIS templates" \
+        "QGIS templates download" \
+        "QGIS templates upload" \
+        "QGIS upload" \
+        \
+        "blue_geo"; do
         abcli_eval ,$options \
             abcli_help $module
         [[ $? -ne 0 ]] && return 1

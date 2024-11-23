@@ -43,7 +43,17 @@ def generate_workflow(
         )
     )
 
-    workflow = Workflow(job_name)
+    workflow = Workflow(
+        job_name,
+        name=NAME,
+        args={
+            "algo_options": algo_options,
+            "query_object_name": query_object_name,
+            "object_name": object_name,
+            "map_options": map_options,
+            "reduce_options": reduce_options,
+        },
+    )
 
     workflow.G.add_node("reduce")
     workflow.G.nodes["reduce"]["command_line"] = " ".join(

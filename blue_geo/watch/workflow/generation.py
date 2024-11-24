@@ -45,7 +45,7 @@ def generate_workflow(
 
     workflow = Workflow(
         job_name,
-        name=NAME,
+        name="blue_geo.watch",
         args={
             "algo_options": algo_options,
             "query_object_name": query_object_name,

@@ -1,16 +1,14 @@
 import numpy as np
-import cv2
-import math
 
 from blueness import module
-from blue_options import string
 from blue_objects import file, objects
 from blue_objects.logger.matrix import log_matrix
 from blue_objects.metadata import post_to_object, get_from_object
+from blueflow import fullname as blueflow_fullname
 
+from blue_geo import fullname
 from blue_geo import NAME
 from blue_geo.catalog.functions import get_datacube_class
-from blue_geo.host import signature
 from blue_geo.watch.workflow.common import load_watch
 from blue_geo.logger import logger
 
@@ -69,8 +67,6 @@ def map_function(
     ):
         success = False
 
-    frame_pretty_shape = string.pretty_shape_of_matrix(frame)
-
     if frame.dtype == np.uint16:
         frame = frame.astype(np.float32) / 5000 * 255
         frame[frame < 0] = 0
@@ -94,7 +90,6 @@ def map_function(
                     object_name,
                 )
                 + [
-                    frame_pretty_shape,
                     "pixel_size: {} m".format(
                         frame_file_metadata.get("pixel_size", -1.0)
                     ),
@@ -103,7 +98,11 @@ def map_function(
                 ]
             ),
         ],
-        footer=[target.one_liner],
+        footer=[
+            target.one_liner,
+            fullname(),
+            blueflow_fullname(),
+        ],
         filename=file.add_extension(filename, "png"),
         line_width=line_width,
         min_width=min_width,

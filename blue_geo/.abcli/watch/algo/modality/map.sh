@@ -26,8 +26,14 @@ function blue_geo_watch_algo_modality_map() {
         abcli_download - \
             $datacube_id
     else
+        local scope="rgbx"
+        local product=$(python3 -c "print('$modality'.split('@',1)[1] if '@' in '$modality' else '')")
+        [[ ! -z "$product" ]] &&
+            scope=$scope+_${product}_
+        abcli_log "scope: $scope"
+
         blue_geo_datacube_ingest \
-            dryrun=$do_dryrun,scope=$modality \
+            dryrun=$do_dryrun,scope=$scope \
             $datacube_id
     fi
 

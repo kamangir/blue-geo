@@ -10,7 +10,7 @@ function blue_geo_QGIS_templates() {
         abcli_download - $object_name
 
         rsync \
-            -avv --progress \
+            -avv \
             $object_path/ \
             "$BLUE_GEO_QGIS_PATH_TEMPLATES/"
         return
@@ -18,7 +18,7 @@ function blue_geo_QGIS_templates() {
 
     if [ "$task" == "upload" ]; then
         rsync \
-            -avv --progress \
+            -avv \
             "$BLUE_GEO_QGIS_PATH_TEMPLATES/" \
             $object_path/
 

@@ -22,12 +22,19 @@ function blue_geo_watch_algo_modality_map() {
 
     abcli_log "🌐 @geo watch $algo map $query_object_name @ $offset==$datacube_id -> /$suffix"
 
+    local product=$(python3 -c "print('$modality'.split('@',1)[1] if '@' in '$modality' else '')")
+    [[ ! -z "$product" ]] &&
+        abcli_log "product: $product"
+
     if [[ "$datacube_id" == *"DERIVED"* ]]; then
         abcli_download - \
             $datacube_id
     else
+        local scope="rgbx"
+        [[ ! -z "$product" ]] && scope=$scope+_${product}_
+
         blue_geo_datacube_ingest \
-            dryrun=$do_dryrun,scope=rgbx \
+            dryrun=$do_dryrun,scope=$scope \
             $datacube_id
     fi
 
@@ -52,8 +59,10 @@ function blue_geo_watch_algo_modality_map() {
         --modality $modality
     [[ $? -ne 0 ]] && return 1
 
+    local scope="rgb"
+    [[ ! -z "$product" ]] && scope=$scope+_${product}_
     local filename=$(blue_geo_datacube_list $cropped_datacube_id \
-        --scope rgb \
+        --scope $scope \
         --log 0 \
         --count 1 \
         --exists 1)

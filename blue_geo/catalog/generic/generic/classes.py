@@ -114,12 +114,10 @@ class GenericDatacube:
         return []
 
     @staticmethod
-    def load_modality(
+    def load_geoimage(
         filename: str,
-        modality: str,
         ignore_error: bool = False,
         log: bool = False,
-        verbose: bool = False,
     ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
         success, frame, frame_file_metadata = file.load_geoimage(
             filename,

@@ -3,7 +3,7 @@
 function blue_geo_watch_targets_download() {
     local options=$1
 
-    abcli_download overwrite \
+    abcli_download - \
         $BLUE_GEO_WATCH_TARGET_LIST \
         "$@"
 

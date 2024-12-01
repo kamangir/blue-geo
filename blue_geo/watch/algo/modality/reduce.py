@@ -8,7 +8,6 @@ from blue_objects.graphics.gif import generate_animated_gif
 from blue_objects.metadata import post_to_object
 
 from blue_geo import NAME
-from blue_geo.catalog.generic.generic.scope import raster_suffix
 from blue_geo.watch.targets.target import Target
 from blue_geo.logger import logger
 

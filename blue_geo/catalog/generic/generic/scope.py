@@ -37,7 +37,7 @@ class DatacubeScope:
 
         self.raster = "raster" in list_of_what
 
-        self.suffix = [
+        self.contains = [
             item for item in list_of_what if item not in self.special_options
         ]
 
@@ -91,8 +91,8 @@ class DatacubeScope:
         ):
             return True
 
-        if self.suffix and any(
-            item_filename.endswith(suffix) for suffix in self.suffix
+        if self.contains and any(
+            item_filename.endswith(item) for item in self.contains
         ):
             return True
 

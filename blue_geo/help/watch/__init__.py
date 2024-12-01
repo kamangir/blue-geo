@@ -41,7 +41,7 @@ def help_(
 
     map_options = "".join(
         [
-            xtra("dryrun", mono),
+            xtra("dryrun,<map-options>", mono),
         ]
     )
 
@@ -49,6 +49,7 @@ def help_(
         [
             xtra("dryrun,~gif,", mono),
             "publish",
+            xtra(",<reduce-options>", mono=mono),
         ]
     )
 
@@ -67,7 +68,7 @@ def help_(
         "watch target -{}> <object-name>.".format("aws-batch-" if help_batch else ""),
         {
             "<algo-options>:": [
-                "diff: range=<100.0>",
+                "diff: modality=<modality>,range=<100.0>",
                 "modality: modality=<modality>",
             ],
             "modality: {}".format(" | ".join(modality_options)): [],

@@ -55,9 +55,8 @@ def map_function(
     )
 
     datacube_class = get_datacube_class(datacube_id)
-    success, frame, frame_file_metadata = datacube_class.load_modality(
+    success, frame, frame_file_metadata = datacube_class.load_geoimage(
         filename,
-        modality=modality,
         log=True,
     )
 

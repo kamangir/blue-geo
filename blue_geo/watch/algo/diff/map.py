@@ -90,16 +90,14 @@ def map_function(
 
     baseline_metadata = {}
     if success:
-        success, baseline_image, baseline_metadata = GenericDatacube.load_modality(
+        success, baseline_image, baseline_metadata = GenericDatacube.load_geoimage(
             filename=baseline_filename,
-            modality="rgb",
             log=True,
         )
 
     if success:
-        success, target_image, _ = GenericDatacube.load_modality(
+        success, target_image, _ = GenericDatacube.load_geoimage(
             filename=target_filename,
-            modality="rgb",
             log=True,
         )
 

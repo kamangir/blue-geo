@@ -7,6 +7,7 @@ function test_blue_geo_datacube_crop() {
     blue_geo_datacube_ingest \
         scope=rgbx,$options \
         $datacube_id
+    [[ $? -ne 0 ]] && return 1
 
     local suffix=test_blue_geo_datacube_crop-$(abcli_string_timestamp_short)
 

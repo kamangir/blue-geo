@@ -27,7 +27,7 @@ function blue_geo_watch_algo_modality_map() {
             $datacube_id
     else
         blue_geo_datacube_ingest \
-            dryrun=$do_dryrun,scope=rgbx \
+            dryrun=$do_dryrun,scope=$modality \
             $datacube_id
     fi
 

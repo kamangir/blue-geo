@@ -5,7 +5,7 @@ function blue_geo_QGIS_expressions() {
 
     if [[ "$task" == pull ]]; then
         rsync \
-            -avv --progress \
+            -avv \
             "$BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT/" \
             "$BLUE_GEO_QGIS_PATH_EXPRESSIONS/"
         return
@@ -16,7 +16,7 @@ function blue_geo_QGIS_expressions() {
         local do_push=$(abcli_option_int "$options" push 0)
 
         rsync \
-            -avv --progress \
+            -avv \
             --exclude='__pycache__' \
             --exclude='default.py' \
             --exclude='__init__.py' \

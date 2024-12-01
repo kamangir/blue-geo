@@ -18,7 +18,7 @@ function test_blue_geo_datacube_generate() {
         blue_geo_datacube_generate \
             ,$options \
             $datacube_id \
-            --modality rgb:$product
+            --modality rgb@$product
         [[ $? -ne 0 ]] && return 1
 
         abcli_hr

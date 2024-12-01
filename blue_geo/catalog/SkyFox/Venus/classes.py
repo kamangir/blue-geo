@@ -43,8 +43,8 @@ class SkyFoxVenusDatacube(STACDatacube):
         overwrite: bool = False,
     ) -> str:
         product = ""
-        if modality.startswith("rgb:"):
-            modality, product = modality.split(":", 1)
+        if modality.startswith("rgb@"):
+            modality, product = modality.split("@", 1)
         if not product:
             product = "SRE"
 

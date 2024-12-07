@@ -2,17 +2,17 @@ from typing import Dict
 from tqdm import trange
 import numpy as np
 import cv2
-import math
 
 from blueness import module
 from blue_options import string
 from blue_objects.logger.matrix import log_matrix, log_matrix_hist
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
-from blue_objects.graphics.signature import add_signature
+from blueflow import fullname as blueflow_fullname
 
+from blue_geo import fullname
 from blue_geo import NAME
-from blue_geo.host import signature
+from blue_geo.env import BLUE_GEO_WATCH_ALGO_DIFF_MAP_DYNAMIC_RANGE
 from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.watch.workflow.common import load_watch
 from blue_geo.logger import logger
@@ -26,7 +26,7 @@ def map_function(
     suffix: str,
     offset: str,
     depth: int,
-    dynamic_range: float = 100.0,
+    dynamic_range: float = float(BLUE_GEO_WATCH_ALGO_DIFF_MAP_DYNAMIC_RANGE),
     line_width: int = 80,
     colorbar_width: int = 20,
     min_width: int = 1200,
@@ -88,6 +88,16 @@ def map_function(
             else:
                 target_filename = filename
 
+            if not file.copy(
+                filename,
+                objects.path_of(
+                    file.name_and_extension(filename),
+                    object_name,
+                ),
+            ):
+                success = False
+                break
+
     baseline_metadata = {}
     if success:
         success, baseline_image, baseline_metadata = GenericDatacube.load_geoimage(
@@ -105,8 +115,6 @@ def map_function(
         diff_image = np.squeeze(
             target_image.astype(np.float32) - baseline_image.astype(np.float32)
         )
-        diff_image[diff_image < -dynamic_range] = -dynamic_range
-        diff_image[diff_image > dynamic_range] = dynamic_range
 
         diff_image_pretty_shape = string.pretty_shape_of_matrix(diff_image)
 
@@ -168,7 +176,11 @@ def map_function(
                     )
                 ),
             ],
-            footer=[target.one_liner],
+            footer=[
+                target.one_liner,
+                fullname(),
+                blueflow_fullname(),
+            ],
             filename=diff_filename,
             dynamic_range=(-dynamic_range, dynamic_range),
             line_width=line_width,

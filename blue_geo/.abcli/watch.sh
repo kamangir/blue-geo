@@ -50,6 +50,8 @@ function blue_geo_watch() {
 
     local job_name="$object_name-job-$(abcli_string_timestamp_short)"
 
+    abcli_mlflow_tags_set $object_name job=$job_name
+
     abcli_log "🌐 @geo: watch: $query_object_name: -[ $workflow_options @ $map_options + $reduce_options @ $job_name]-> $object_name"
 
     abcli_clone \

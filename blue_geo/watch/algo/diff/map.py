@@ -2,17 +2,16 @@ from typing import Dict
 from tqdm import trange
 import numpy as np
 import cv2
-import math
 
 from blueness import module
 from blue_options import string
 from blue_objects.logger.matrix import log_matrix, log_matrix_hist
 from blue_objects import file, objects
 from blue_objects.metadata import post_to_object
-from blue_objects.graphics.signature import add_signature
+from blueflow import fullname as blueflow_fullname
 
+from blue_geo import fullname
 from blue_geo import NAME
-from blue_geo.host import signature
 from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.watch.workflow.common import load_watch
 from blue_geo.logger import logger
@@ -176,7 +175,11 @@ def map_function(
                     )
                 ),
             ],
-            footer=[target.one_liner],
+            footer=[
+                target.one_liner,
+                fullname(),
+                blueflow_fullname(),
+            ],
             filename=diff_filename,
             dynamic_range=(-dynamic_range, dynamic_range),
             line_width=line_width,

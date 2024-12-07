@@ -37,3 +37,5 @@ def test_blue_geo_env():
     assert env.SKYFOX_ACCESS_TOKEN_URL
     assert env.SKYFOX_CLIENT_ID
     assert env.SKYFOX_CLIENT_SECRET
+
+    assert env.BLUE_GEO_WATCH_ALGO_DIFF_MAP_DYNAMIC_RANGE

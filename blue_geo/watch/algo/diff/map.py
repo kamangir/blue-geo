@@ -12,6 +12,7 @@ from blueflow import fullname as blueflow_fullname
 
 from blue_geo import fullname
 from blue_geo import NAME
+from blue_geo.env import BLUE_GEO_WATCH_ALGO_DIFF_MAP_DYNAMIC_RANGE
 from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.watch.workflow.common import load_watch
 from blue_geo.logger import logger
@@ -25,7 +26,7 @@ def map_function(
     suffix: str,
     offset: str,
     depth: int,
-    dynamic_range: float = 100.0,
+    dynamic_range: float = float(BLUE_GEO_WATCH_ALGO_DIFF_MAP_DYNAMIC_RANGE),
     line_width: int = 80,
     colorbar_width: int = 20,
     min_width: int = 1200,

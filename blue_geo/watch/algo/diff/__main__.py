@@ -4,6 +4,7 @@ from blueness import module
 from blueness.argparse.generic import sys_exit
 
 from blue_geo import NAME
+from blue_geo.env import BLUE_GEO_WATCH_ALGO_DIFF_MAP_DYNAMIC_RANGE
 from blue_geo.watch.algo.diff.map import map_function
 from blue_geo.watch.algo.modality.reduce import reduce_function
 from blue_geo.logger import logger
@@ -44,7 +45,7 @@ parser.add_argument(
 parser.add_argument(
     "--dynamic_range",
     type=float,
-    default=100.0,
+    default=float(BLUE_GEO_WATCH_ALGO_DIFF_MAP_DYNAMIC_RANGE),
 )
 args = parser.parse_args()
 

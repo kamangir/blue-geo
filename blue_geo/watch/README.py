@@ -4,112 +4,36 @@ import os
 from blue_options import string
 from blue_objects import file
 from blue_geo.watch.targets.target_list import TargetList
+from blue_geo.watch.targets.bellingcat_2024_09_27_nagorno_karabakh import (
+    README as bellingcat_2024_09_27_nagorno_karabakh,
+)
+from blue_geo.watch.targets.burning_man_2024 import README as burning_man_2024
+from blue_geo.watch.targets.Cache_Creek import README as Cache_Creek
+from blue_geo.watch.targets.chilcotin_river_landslide import (
+    README as chilcotin_river_landslide,
+)
+from blue_geo.watch.targets.DrugSuperLab import README as DrugSuperLab
+from blue_geo.watch.targets.elkhema import README as elkhema
+from blue_geo.watch.targets.jasper import README as jasper
+from blue_geo.watch.targets.Fagradalsfjall import README as Fagradalsfjall
+from blue_geo.watch.targets.Leonardo import README as Leonardo
+from blue_geo.watch.targets.Mount_Etna import README as Mount_Etna
+from blue_geo.watch.targets.Silver_Peak import README as Silver_Peak
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
-
-from blue_geo import REPO_NAME
 
 
 list_of_targets = {
-    "DrugSuperLab": {
-        "objects": {
-            "geo-watch-DrugSuperLab-2024-11-19-13954": [],
-        },
-        "thumbnail": {
-            "scale": 4,
-        },
-    },
-    "chilcotin-river-landslide": {
-        "objects": {
-            #            "test_blue_geo_watch_v4-diff-chilcotin-river-landslide-test": [
-            #                f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)"
-            #            ],
-            "test_blue_geo_watch_v4-modality-chilcotin-river-landslide-test": [
-                f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)"
-            ],
-            "geo-watch-2024-08-31-chilcotin-c": [
-                "L1C and L2A mixed",
-                "`2024-07-30/2024-08-09`",
-            ],
-            "geo-watch-2024-09-01-chilcotin-a": [],
-            "geo-watch-2024-09-01-chilcotin-c": [
-                "[on reddit](https://www.reddit.com/r/bash/comments/1f9cvyx/a_bash_python_tool_to_watch_a_target_in_satellite/).",
-            ],
-            "geo-watch-Chilcotin-2024-11-03": [],
-        },
-        "thumbnail": {
-            "scale": 4,
-        },
-    },
-    "burning-man-2024": {
-        "objects": {"geo-watch-2024-09-04-burning-man-2024-a": []},
-    },
-    "Mount-Etna": {
-        "objects": {"geo-watch-2024-09-04-Mount-Etna-a": []},
-    },
-    "Fagradalsfjall": {
-        "objects": {"geo-watch-2024-09-04-Fagradalsfjall-a": []},
-    },
-    "Jasper": {
-        "objects": {
-            "geo-watch-2024-09-06-Jasper-a": [],
-            "geo-watch-Jasper-2024-11-03": [],
-        },
-    },
-    "Leonardo": {
-        "objects": {
-            "test_blue_geo_watch_v4-diff-Leonardo-test": [
-                f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)"
-            ],
-            "test_blue_geo_watch_v4-modality-Leonardo-test": [
-                f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)"
-            ],
-            "geo-watch-2024-09-30-Leonardo-g": [],
-            "geo-watch-Leonardo-2024-10-05-a": [],
-            "geo-watch-Leonardo-2024-10-06-a": [],
-            "geo-watch-2024-10-27-16-17-36-12059": [],
-        },
-        "thumbnail": {
-            "scale": 4,
-        },
-    },
-    "bellingcat-2024-09-27-nagorno-karabakh": {
-        "objects": {
-            "bellingcat-2024-09-27-nagorno-karabakh-2024-10-01-c-b": [],
-            "bellingcat-2024-09-27-nagorno-karabakh-b": [],
-            "bellingcat-2024-09-27-nagorno-karabakh-6X-a": [],
-            "geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-05-b": [],
-            "geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-06-a": [],
-        },
-        "thumbnail": {
-            "scale": 4,
-        },
-    },
-    "elkhema": {
-        "objects": {"geo-watch-elkhema-2024-2024-10-05-a-b": []},
-        "thumbnail": {
-            "scale": 4,
-        },
-        "title": "elkhema ⛺️",
-    },
-    "Cache-Creek": {
-        "objects": {
-            "geo-watch-Cache-Creek-2024-10-06-a": [],
-            "geo-watch-Cache-Creek-2x-wider-2024-10-06-a": [],
-            "geo-watch-Cache-Creek-2024-11-05": [],
-            "geo-watch-Cache-Creek-2x-wider-2024-11-05": [],
-        },
-        "thumbnail": {
-            "scale": 4,
-        },
-    },
-    "Silver-Peak": {
-        "objects": {
-            "geo-watch-Silver-Peak-2024-10-12-a": [],
-        },
-        "thumbnail": {
-            "scale": 4,
-        },
-    },
+    "DrugSuperLab": DrugSuperLab,
+    "chilcotin-river-landslide": chilcotin_river_landslide,
+    "burning-man-2024": burning_man_2024,
+    "Mount-Etna": Mount_Etna,
+    "Fagradalsfjall": Fagradalsfjall,
+    "Jasper": jasper,
+    "Leonardo": Leonardo,
+    "bellingcat-2024-09-27-nagorno-karabakh": bellingcat_2024_09_27_nagorno_karabakh,
+    "elkhema": elkhema,
+    "Cache-Creek": Cache_Creek,
+    "Silver-Peak": Silver_Peak,
 }
 
 targets_path = file.path(__file__)
@@ -119,6 +43,7 @@ for target_name in sorted(list_of_targets.keys()):
     target_info = list_of_targets[target_name]
 
     list_of_objects = target_info["objects"]
+    assert isinstance(list_of_objects, dict)
 
     target_README = f"./targets/md/{target_name}.md"
 
@@ -137,6 +62,7 @@ for target_name in sorted(list_of_targets.keys()):
 
     if list_of_objects:
         thumbnail_info = target_info.get("thumbnail", {})
+        assert isinstance(thumbnail_info, dict)
 
         thumbnail_index = thumbnail_info.get("index", -1)
 

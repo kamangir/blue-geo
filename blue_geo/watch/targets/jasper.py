@@ -20,3 +20,10 @@ items: List[str] = [
     for index in range(len(date_items[list_of_dates[0]]))
     for date in list_of_dates
 ]
+
+README = {
+    "objects": {
+        "geo-watch-2024-09-06-Jasper-a": [],
+        "geo-watch-Jasper-2024-11-03": [],
+    },
+}

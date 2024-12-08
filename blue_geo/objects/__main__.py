@@ -1,4 +1,5 @@
 import argparse
+from types import ModuleType
 
 from blueness import module
 from blueness.argparse.generic import sys_exit
@@ -14,7 +15,7 @@ parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,
-    help="ingest",
+    help="get | ingest",
 )
 parser.add_argument(
     "--object_name",
@@ -25,7 +26,19 @@ parser.add_argument(
 parser.add_argument(
     "--version",
     type=str,
-    default="v1",
+    default="",
+    help="defaults to <object_name>.version",
+)
+parser.add_argument(
+    "--what",
+    default="template_name",
+    type=str,
+    help="template_name | version",
+)
+parser.add_argument(
+    "--default",
+    default="void",
+    type=str,
 )
 parser.add_argument(
     "--overwrite",
@@ -37,11 +50,30 @@ parser.add_argument(
 args = parser.parse_args()
 
 success = False
-if args.task == "ingest":
+if args.task == "get":
+    success = True
+    output = args.default
+
     if args.object_name in special_objects:
-        success = special_objects[args.object_name].ingest(
+        object_module: ModuleType = special_objects[args.object_name]
+
+        if args.what == "template_name":
+            output = object_module.template_name
+        elif args.what == "version":
+            output = object_module.version
+
+    print(output)
+elif args.task == "ingest":
+    if args.object_name in special_objects:
+        object_module: ModuleType = special_objects[args.object_name]
+
+        version = args.version
+        if not version:
+            version = object_module.version
+
+        success = object_module.ingest(
             object_name=args.object_name,
-            version=args.version,
+            version=version,
             overwrite=args.overwrite == 1,
         )
     else:

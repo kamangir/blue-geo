@@ -12,10 +12,15 @@ from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
 
+template_name = "global-power-plant-database-template-v1"
+
+
 url: Dict[str, str] = {
     "home": "https://datasets.wri.org/datasets/global-power-plant-database",
     "metadata": "https://datasets.wri.org/api/3/action/resource_show?id=66bcdacc-3d0e-46ad-9271-a5a76b1853d2",
 }
+
+version = "v2"
 
 
 def ingest(

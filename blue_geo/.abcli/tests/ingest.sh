@@ -8,7 +8,7 @@ function test_blue_geo_ingest() {
     for object_name in $(echo $list_of_objects | tr + " "); do
 
         blue_geo_ingest \
-            version=$(abcli_string_timestamp_short),$options \
+            upload,publish,$options \
             $object_name
         [[ $? -ne 0 ]] && return 1
 

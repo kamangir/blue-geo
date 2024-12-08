@@ -52,6 +52,7 @@ def ingest(
     zip_filename = objects.path_of(
         download_url.split("/")[-1],
         full_object_name,
+        create=True,
     )
     if not file.download(
         url=download_url,

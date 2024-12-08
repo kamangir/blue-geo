@@ -7,7 +7,7 @@ function blue_geo_ingest() {
 
     local object_name=${2:-void}
 
-    local object_name_full=$object_name-$version
+    local full_object_name=$object_name-$version
 
     python3 -m blue_geo.objects ingest \
         --object_name $object_name \
@@ -16,5 +16,5 @@ function blue_geo_ingest() {
     [[ $? -ne 0 ]] && return 1
 
     [[ "$do_upload" == 1 ]] &&
-        abcli_upload - $object_name_full
+        abcli_upload - $full_object_name
 }

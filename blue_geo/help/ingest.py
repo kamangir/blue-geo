@@ -17,7 +17,6 @@ def help_ingest(
     )
 
     args = [
-        "[--dryrun 1]",
         "[--overwrite 1]",
     ]
 

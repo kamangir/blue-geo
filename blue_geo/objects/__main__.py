@@ -28,12 +28,6 @@ parser.add_argument(
     default="v1",
 )
 parser.add_argument(
-    "--dryrun",
-    default=0,
-    type=int,
-    help="0|1",
-)
-parser.add_argument(
     "--overwrite",
     default=0,
     type=int,
@@ -48,7 +42,6 @@ if args.task == "ingest":
         success = special_objects[args.object_name].ingest(
             object_name=args.object_name,
             version=args.version,
-            dryrun=args.dryrun == 1,
             overwrite=args.overwrite == 1,
         )
     else:

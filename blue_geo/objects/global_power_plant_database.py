@@ -43,14 +43,14 @@ def ingest(
     # https://chat.openai.com/c/6deb94d0-826a-48de-b5ef-f7d8da416c82
     # response.raise_for_status()
     if response.status_code // 100 != 2:
-        logger.error(f"failed to access metadata.")
+        logger.error("failed to access metadata.")
         return False
     if verbose:
         logger.info(response.json())
 
     download_url = response.json().get("result", {}).get("url", "")
     if not download_url:
-        logger.error(f"failed to get download_url.")
+        logger.error("failed to get download_url.")
         return False
 
     zip_filename = objects.path_of(

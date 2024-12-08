@@ -26,10 +26,6 @@ def ingest(
     verbose: bool = False,
 ) -> bool:
     full_object_name = f"{object_name}-{version}"
-    full_object_path = objects.object_path(
-        full_object_name,
-        create=True,
-    )
 
     logger.info(
         "{}.ingest({}) {}".format(

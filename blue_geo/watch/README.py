@@ -58,7 +58,6 @@ for target_name in sorted(list_of_targets.keys()):
     ]
 
     target_list = TargetList()
-    items += target_list.get(target_name).urls_as_str()
 
     if list_of_objects:
         thumbnail_info = target_info.get("thumbnail", {})
@@ -72,8 +71,16 @@ for target_name in sorted(list_of_targets.keys()):
         thumbnail_object_name = list(list_of_objects.keys())[thumbnail_index]
         items += [
             "",
+            "<details>",
+            "<summary>🌐</summary>",
+            "",
             f"![image]({ABCLI_PUBLIC_PREFIX}/{thumbnail_object_name}/{thumbnail_object_name}{thumbnail_scale_str}.gif?raw=true&random={string.random()})",
+            "",
+            "</details>",
+            "",
         ]
+
+    items += target_list.get(target_name).urls_as_str()
 
     items += [
         "- {}.".format(

@@ -1,6 +1,6 @@
 # Global Power Plant Database
 
-The Global Power Plant Database is a comprehensive, open source database of power plants around the world [source](https://datasets.wri.org/datasets/global-power-plant-database).
+The Global Power Plant Database is a comprehensive, open source database of power plants around the world [datasets.wri.org](https://datasets.wri.org/datasets/global-power-plant-database).
 
 💾 [global-power-plant-database-v2](https://kamangir-public.s3.ca-central-1.amazonaws.com/global-power-plant-database-v2.tar.gz)
 

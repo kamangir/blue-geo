@@ -57,7 +57,7 @@ features = {
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
     },
     "global-power-plant-database": {
-        "description": "The Global Power Plant Database is a comprehensive, open source database of power plants around the world [source](https://datasets.wri.org/datasets/global-power-plant-database).",
+        "description": "The Global Power Plant Database is a comprehensive, open source database of power plants around the world [datasets.wri.org](https://datasets.wri.org/datasets/global-power-plant-database).",
         "icon": ICON,
         "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/global_power_plant_database-cover.png?raw=true",
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/objects/md/global_power_plant_database.md",

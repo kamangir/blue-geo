@@ -139,7 +139,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Cache-Creek-2x-wider-2024-11-05/geo-watch-Cache-Creek-2x-wider-2024-11-05-4X.gif?raw=true&random=YQ37PziFtT7JWxYh)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Cache-Creek-2x-wider-2024-11-05/geo-watch-Cache-Creek-2x-wider-2024-11-05-4X.gif?raw=true&random=NqbAaWBvxXHKdwAF)
 
 </details>
 
@@ -155,7 +155,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-DrugSuperLab-2024-11-19-13954/geo-watch-DrugSuperLab-2024-11-19-13954-4X.gif?raw=true&random=6exEs4P7eahSIQRG)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-DrugSuperLab-2024-11-19-13954/geo-watch-DrugSuperLab-2024-11-19-13954-4X.gif?raw=true&random=bhwfGlWYmXfa3Oij)
 
 </details>
 
@@ -170,7 +170,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Fagradalsfjall-a/geo-watch-2024-09-04-Fagradalsfjall-a-2X.gif?raw=true&random=3vOCpG6dKG3yJIiw)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Fagradalsfjall-a/geo-watch-2024-09-04-Fagradalsfjall-a-2X.gif?raw=true&random=HYYt1lmiSVgLT9FS)
 
 </details>
 
@@ -183,7 +183,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Jasper-2024-11-03/geo-watch-Jasper-2024-11-03-2X.gif?raw=true&random=ClP9R8JSWGtGMcZn)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Jasper-2024-11-03/geo-watch-Jasper-2024-11-03-2X.gif?raw=true&random=KwC8NoDe9IaJAfpJ)
 
 </details>
 
@@ -198,7 +198,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-10-27-16-17-36-12059/geo-watch-2024-10-27-16-17-36-12059-4X.gif?raw=true&random=dVdXO043PElaGhED)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-10-27-16-17-36-12059/geo-watch-2024-10-27-16-17-36-12059-4X.gif?raw=true&random=9gF7FrOTkdtTuOl9)
 
 </details>
 
@@ -216,7 +216,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Mount-Etna-a/geo-watch-2024-09-04-Mount-Etna-a-2X.gif?raw=true&random=iRuho2tIcoBAxwJP)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Mount-Etna-a/geo-watch-2024-09-04-Mount-Etna-a-2X.gif?raw=true&random=2cPoPalecHMWzg3G)
 
 </details>
 
@@ -229,7 +229,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Silver-Peak-2024-10-12-a/geo-watch-Silver-Peak-2024-10-12-a-4X.gif?raw=true&random=wCCddUudxEBU3PoM)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Silver-Peak-2024-10-12-a/geo-watch-Silver-Peak-2024-10-12-a-4X.gif?raw=true&random=kUbNB9GNFPoyE14G)
 
 </details>
 
@@ -243,7 +243,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-06-a/geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-06-a-4X.gif?raw=true&random=R9prA7Z6dTUCyWYj)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-06-a/geo-watch-bellingcat-2024-09-27-nagorno-karabakh-6X-2024-10-06-a-4X.gif?raw=true&random=tDviIkexMTf7Wlhh)
 
 </details>
 
@@ -259,7 +259,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-burning-man-2024-a/geo-watch-2024-09-04-burning-man-2024-a-2X.gif?raw=true&random=LXnn2MdurRzzDvyK)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-burning-man-2024-a/geo-watch-2024-09-04-burning-man-2024-a-2X.gif?raw=true&random=3hRG3VEI06duJ0GU)
 
 </details>
 
@@ -271,7 +271,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Chilcotin-2024-11-03/geo-watch-Chilcotin-2024-11-03-4X.gif?raw=true&random=3i1Qpddrq8shOh7Y)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Chilcotin-2024-11-03/geo-watch-Chilcotin-2024-11-03-4X.gif?raw=true&random=NwxM9Wyr49h4xQ02)
 
 </details>
 
@@ -290,7 +290,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-elkhema-2024-2024-10-05-a-b/geo-watch-elkhema-2024-2024-10-05-a-b-4X.gif?raw=true&random=scrjuPcVBQx5XJpc)
+![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-elkhema-2024-2024-10-05-a-b/geo-watch-elkhema-2024-2024-10-05-a-b-4X.gif?raw=true&random=RPJfRYrbG9qjyLhM)
 
 </details>
 

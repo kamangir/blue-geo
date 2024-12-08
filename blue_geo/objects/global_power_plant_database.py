@@ -18,7 +18,8 @@ template_name = f"{name}-template-v1"
 
 
 url: Dict[str, str] = {
-    "home": "https://datasets.wri.org/datasets/global-power-plant-database",
+    "dataset": "https://datasets.wri.org/datasets/global-power-plant-database",
+    "research": "https://www.wri.org/research/global-database-power-plants",
     "metadata": "https://datasets.wri.org/api/3/action/resource_show?id=66bcdacc-3d0e-46ad-9271-a5a76b1853d2",
 }
 

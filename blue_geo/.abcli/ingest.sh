@@ -13,8 +13,10 @@ function blue_geo_ingest() {
         --object_name $object_name \
         --version $version \
         "${@:3}"
-    [[ $? -ne 0 ]] && return 1
+    local status="$?"
 
     [[ "$do_upload" == 1 ]] &&
         abcli_upload - $full_object_name
+
+    return $status
 }

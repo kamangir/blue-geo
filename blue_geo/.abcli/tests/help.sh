@@ -25,6 +25,8 @@ function test_@geo_help() {
         \
         "@geo gdal" \
         \
+        "@geo ingest" \
+        \
         "@geo pypi" \
         "@geo pypi browse" \
         "@geo pypi build" \

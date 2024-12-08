@@ -37,6 +37,8 @@ setup(
         f"{NAME}.QGIS.console.apps",
         f"{NAME}.QGIS.expressions",
         #
+        f"{NAME}.objects",
+        #
         f"{NAME}.watch",
         f"{NAME}.watch.algo",
         f"{NAME}.watch.algo.diff",

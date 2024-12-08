@@ -30,7 +30,12 @@ def help_ingest(
         + args,
         "ingest <object-name>.",
         {
-            "object-name: {}".format(" | ".join(special_objects.keys())): [],
+            "object-name: {}".format(
+                " | ".join(
+                    "{}[-{}]".format(key, special_objects[key].version)
+                    for key in special_objects.keys()
+                )
+            ): [],
         },
         mono=mono,
     )

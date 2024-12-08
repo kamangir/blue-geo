@@ -32,8 +32,8 @@ def help_ingest(
         {
             "object-name: {}".format(
                 " | ".join(
-                    "{}[-{}]".format(key, special_objects[key].version)
-                    for key in special_objects.keys()
+                    "{}[-{}]".format(key, object_module.version)
+                    for key, object_module in special_objects.items()
                 )
             ): [],
         },

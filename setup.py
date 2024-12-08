@@ -38,7 +38,6 @@ setup(
         f"{NAME}.QGIS.expressions",
         #
         f"{NAME}.objects",
-        f"{NAME}.objects.global_power_plant_database",
         #
         f"{NAME}.watch",
         f"{NAME}.watch.algo",

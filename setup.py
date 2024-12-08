@@ -38,6 +38,7 @@ setup(
         f"{NAME}.QGIS.expressions",
         #
         f"{NAME}.objects",
+        f"{NAME}.objects.md",
         #
         f"{NAME}.watch",
         f"{NAME}.watch.algo",

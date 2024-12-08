@@ -12,7 +12,9 @@ from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
 
-template_name = "global-power-plant-database-template-v1"
+name = "global-power-plant-database"
+
+template_name = f"{name}-template-v1"
 
 
 url: Dict[str, str] = {

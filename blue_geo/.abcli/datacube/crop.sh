@@ -24,7 +24,7 @@ function blue_geo_datacube_crop() {
         $object_name \
         $cropped_datacube_id
 
-    local crs=$(gdalsrsinfo -o epsg $cutline)
+    local crs=$(blue_geo_gdal_get_crs $cutline)
     abcli_log "cutline crs: $crs"
 
     local list_of_files=$(blue_geo_datacube_list $datacube_id \
@@ -38,7 +38,7 @@ function blue_geo_datacube_crop() {
     for filename in $list_of_files; do
         source_filename=$ABCLI_OBJECT_ROOT/$datacube_id/$filename
 
-        local source_filename_crs=$(gdalsrsinfo -o epsg $source_filename)
+        local source_filename_crs=$(blue_geo_gdal_get_crs $source_filename)
         abcli_log "cropping $filename @ $source_filename_crs ..."
 
         destination_filename=$ABCLI_OBJECT_ROOT/$cropped_datacube_id/$filename
@@ -53,8 +53,8 @@ function blue_geo_datacube_crop() {
             $source_filename \
             $destination_filename
 
-        local destination_filename_crs=$(gdalsrsinfo -o epsg $destination_filename)
-        abcli_log "output crs: $destination_filename - expected $crs."
+        local destination_filename_crs=$(blue_geo_gdal_get_crs $destination_filename)
+        abcli_log "output crs: $destination_filename_crs - expected $crs."
     done
 
     return 0

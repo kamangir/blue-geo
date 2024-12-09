@@ -2,10 +2,18 @@
 
 watch the planet's story unfold.
 
+
 ```bash
 @geo watch help
 ```
+<details>
+<summary></summary>
+
 --help-- blue_geo watch
+
+</details>
+
+
 
 ## targets 🎯
 

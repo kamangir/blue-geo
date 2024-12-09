@@ -7,6 +7,7 @@ from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
 from blue_geo.catalog.README import build as build_catalog
 from blue_geo.watch.README import items as watch_items, macros as watch_macros
+from blue_geo.objects.README import build as build_objects
 from blue_geo.watch.targets.README import build as build_targets
 from blue_geo.help.functions import help_functions
 from blue_geo import NAME, VERSION, ICON, REPO_NAME
@@ -55,6 +56,18 @@ features = {
         "thumbnail": f"{ABCLI_PUBLIC_PREFIX}/geo-watch-2024-09-06-Jasper-a/geo-watch-2024-09-06-Jasper-a-2X.gif",
         "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/watch",
     },
+    "global-power-plant-database": {
+        "description": "The Global Power Plant Database is a comprehensive, open source database of power plants around the world [datasets.wri.org](https://datasets.wri.org/datasets/global-power-plant-database).",
+        "icon": ICON,
+        "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/global_power_plant_database-cover.png?raw=true",
+        "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/objects/md/global_power_plant_database.md",
+    },
+    "QGIS": {
+        "description": "an AI terraform for [QGIS](https://www.qgis.org/).",
+        "icon": ICON,
+        "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/QGIS.jpg",
+        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/QGIS/README.md",
+    },
     "catalog": {
         "description": "generalized STAC Catalogs.",
         "icon": ICON,
@@ -67,15 +80,9 @@ features = {
         "thumbnail": default_MARQUEE,
         "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/datacube",
     },
-    "QGIS": {
-        "description": "an AI terraform for [QGIS](https://www.qgis.org/).",
-        "icon": ICON,
-        "thumbnail": "https://raw.githubusercontent.com/kamangir/assets/main/blue-geo/QGIS.jpg",
-        "url": "https://github.com/kamangir/blue-geo/blob/main/blue_geo/QGIS/README.md",
-    },
     "template": {
         "description": "",
-        "icon": "",
+        "icon": ICON,
         "thumbnail": default_MARQUEE,
         "url": "",
     },
@@ -124,4 +131,5 @@ def build() -> bool:
         )
         and build_catalog()
         and build_targets()
+        and build_objects()
     )

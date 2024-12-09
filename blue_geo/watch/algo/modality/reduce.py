@@ -176,7 +176,7 @@ def reduce_function(
     plt.stem(
         range(len(list_of_files)),
         [
-            frame_metadata[file.name_and_extension(filename)]["content_ratio"]
+            frame_metadata[file.name_and_extension(filename)].get("content_ratio", 0)
             for filename in list_of_files
         ],
     )

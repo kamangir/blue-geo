@@ -5,7 +5,3 @@
 --urls--
 
 --footer--
-
-known issues:
-- order of the frames may be incorrect.
-- successive frames may have different projections.

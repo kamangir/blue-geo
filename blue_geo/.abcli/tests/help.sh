@@ -24,6 +24,9 @@ function test_@geo_help() {
         "@geo datacube list" \
         \
         "@geo gdal" \
+        "@geo gdal get_crs" \
+        "@geo gdal install" \
+        "@geo gdal version" \
         \
         "@geo ingest" \
         \

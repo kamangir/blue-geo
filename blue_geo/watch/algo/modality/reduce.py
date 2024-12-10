@@ -1,13 +1,16 @@
 from typing import List, Dict
 import glob
 from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 from blueness import module
 from blue_objects import file, objects
 from blue_objects.graphics.gif import generate_animated_gif
 from blue_objects.metadata import post_to_object
+from blue_objects.graphics.signature import add_signature, justify_text
 
 from blue_geo import NAME
+from blue_geo.host import signature
 from blue_geo.watch.targets.target import Target
 from blue_geo.logger import logger
 
@@ -21,6 +24,8 @@ def reduce_function(
     object_name: str,
     content_threshold: float = 0.5,
     list_of_suffix: List[str] = [],
+    line_width: int = 80,
+    log: bool = True,
 ) -> bool:
     success, target = Target.load(object_name)
     if not success:
@@ -107,6 +112,7 @@ def reduce_function(
 
         frame_metadata[file.name_and_extension(filename)].update(
             {
+                "content_ratio": float(frame_content_ratio),
                 "has_content": bool(frame_has_content),
             }
         )
@@ -166,4 +172,43 @@ def reduce_function(
     ):
         return False
 
-    return True
+    plt.figure(figsize=(10, 5))
+    plt.stem(
+        range(len(list_of_files)),
+        [
+            frame_metadata[file.name_and_extension(filename)].get("content_ratio", 0)
+            for filename in list_of_files
+        ],
+    )
+    plt.title("content")
+    plt.xticks(
+        range(len(list_of_files)),
+        [file.name_and_extension(filename) for filename in list_of_files],
+        rotation=90,
+    )
+    plt.plot(
+        [0, len(list_of_files) - 1],
+        2 * [content_threshold],
+        "g--",
+    )
+
+    plt.title(
+        justify_text(
+            " | ".join(objects.signature(object_name=object_name)),
+            line_width=line_width,
+            return_str=True,
+        )
+    )
+    plt.xlabel(
+        justify_text(
+            " | ".join(["acquisition"] + signature()),
+            line_width=line_width,
+            return_str=True,
+        )
+    )
+    plt.ylabel("content ratio")
+    plt.grid(True)
+    return file.save_fig(
+        objects.path_of("content.png", object_name),
+        log=log,
+    )

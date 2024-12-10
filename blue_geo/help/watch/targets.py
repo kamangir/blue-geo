@@ -49,6 +49,9 @@ def help_download(
             f"[{options}]",
         ],
         "download watch targets.",
+        {
+            "object: $BLUE_GEO_WATCH_TARGET_LIST": "",
+        },
         mono=mono,
     )
 
@@ -64,6 +67,7 @@ def help_edit(
         "edit watch targets.",
         {
             TargetList.filename(): [],
+            "object: $BLUE_GEO_WATCH_TARGET_LIST": "",
         },
         mono=mono,
     )
@@ -151,6 +155,9 @@ def help_save(
             "[.|<object-name>]",
         ],
         "save target(s) -> <object-name>.",
+        {
+            "template: $BLUE_GEO_QGIS_TEMPLATE_WATCH": "",
+        },
         mono=mono,
     )
 
@@ -192,6 +199,9 @@ def help_upload(
             "@targets upload",
         ],
         "upload watch targets.",
+        {
+            "object: $BLUE_GEO_WATCH_TARGET_LIST": "",
+        },
         mono=mono,
     )
 

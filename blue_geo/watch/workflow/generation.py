@@ -1,3 +1,5 @@
+from typing import List
+
 from blueness import module
 from blue_options import string
 from blue_objects.metadata import get_from_object
@@ -52,6 +54,7 @@ def generate_workflow(
             "object_name": object_name,
             "map_options": map_options,
             "reduce_options": reduce_options,
+            "suffix": suffix,
         },
     )
 
@@ -68,7 +71,10 @@ def generate_workflow(
         ]
     )
 
+    list_of_offset: List[str] = ""
     for offset in range(len(list_of_datacube_id)):
+        list_of_offset += [f"{offset:03d}"]
+
         node = f"map-{offset:03d}"
 
         workflow.G.add_node(node)
@@ -85,5 +91,7 @@ def generate_workflow(
         )
 
         workflow.G.add_edge("reduce", node)
+
+    workflow.args["offset"] = list_of_offset
 
     return workflow.save()

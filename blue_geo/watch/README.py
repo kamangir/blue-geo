@@ -18,6 +18,7 @@ from blue_geo.watch.targets.jasper import README as jasper
 from blue_geo.watch.targets.Fagradalsfjall import README as Fagradalsfjall
 from blue_geo.watch.targets.Leonardo import README as Leonardo
 from blue_geo.watch.targets.Mount_Etna import README as Mount_Etna
+from blue_geo.watch.targets.Sheerness import README as Sheerness
 from blue_geo.watch.targets.Silver_Peak import README as Silver_Peak
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
 
@@ -33,6 +34,7 @@ list_of_targets = {
     "bellingcat-2024-09-27-nagorno-karabakh": bellingcat_2024_09_27_nagorno_karabakh,
     "elkhema": elkhema,
     "Cache-Creek": Cache_Creek,
+    "Sheerness": Sheerness,
     "Silver-Peak": Silver_Peak,
 }
 
@@ -69,12 +71,19 @@ for target_name in sorted(list_of_targets.keys()):
         thumbnail_scale_str = f"-{thumbnail_scale}X" if thumbnail_scale != 1 else ""
 
         thumbnail_object_name = list(list_of_objects.keys())[thumbnail_index]
+
+        thumbnail_url = (
+            f"{ABCLI_PUBLIC_PREFIX}/{thumbnail_object_name}/{thumbnail_object_name}.gif"
+        )
+
+        thumbnail_scale_url = f"{ABCLI_PUBLIC_PREFIX}/{thumbnail_object_name}/{thumbnail_object_name}{thumbnail_scale_str}.gif"
+
         items += [
             "",
             "<details>",
             "<summary>🌐</summary>",
             "",
-            f"![image]({ABCLI_PUBLIC_PREFIX}/{thumbnail_object_name}/{thumbnail_object_name}{thumbnail_scale_str}.gif?raw=true&random={string.random()})",
+            f"[![image]({thumbnail_scale_url}?raw=true&random={string.random()})]({thumbnail_url})",
             "",
             "</details>",
             "",

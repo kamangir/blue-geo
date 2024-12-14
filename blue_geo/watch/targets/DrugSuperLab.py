@@ -4,6 +4,7 @@ README = {
             "known issues: successive frames may have different projections."
         ],
         "DrugSuperLab-2024-12-08-pGErp2": [],
+        "DrugSuperLab-2024-12-09-ZnmC5L": [],
     },
     "thumbnail": {
         "scale": 4,

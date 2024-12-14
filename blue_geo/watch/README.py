@@ -69,12 +69,19 @@ for target_name in sorted(list_of_targets.keys()):
         thumbnail_scale_str = f"-{thumbnail_scale}X" if thumbnail_scale != 1 else ""
 
         thumbnail_object_name = list(list_of_objects.keys())[thumbnail_index]
+
+        thumbnail_url = (
+            f"{ABCLI_PUBLIC_PREFIX}/{thumbnail_object_name}/{thumbnail_object_name}.gif"
+        )
+
+        thumbnail_scale_url = f"{ABCLI_PUBLIC_PREFIX}/{thumbnail_object_name}/{thumbnail_object_name}{thumbnail_scale_str}.gif"
+
         items += [
             "",
             "<details>",
             "<summary>🌐</summary>",
             "",
-            f"![image]({ABCLI_PUBLIC_PREFIX}/{thumbnail_object_name}/{thumbnail_object_name}{thumbnail_scale_str}.gif?raw=true&random={string.random()})",
+            f"[![image]({thumbnail_scale_url}?raw=true&random={string.random()})]({thumbnail_url})",
             "",
             "</details>",
             "",

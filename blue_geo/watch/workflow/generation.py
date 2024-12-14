@@ -71,7 +71,7 @@ def generate_workflow(
         ]
     )
 
-    list_of_offset: List[str] = ""
+    list_of_offset: List[str] = []
     for offset in range(len(list_of_datacube_id)):
         list_of_offset += [f"{offset:03d}"]
 

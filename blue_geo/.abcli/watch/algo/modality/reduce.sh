@@ -3,6 +3,7 @@
 function blue_geo_watch_algo_modality_reduce() {
     local options=$1
     local algo=$(abcli_option "$options" algo modality)
+    local content_threshold=$(abcli_option "$options" content 0.5)
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
     local suffix=$(abcli_option "$options" suffix)
 
@@ -15,6 +16,7 @@ function blue_geo_watch_algo_modality_reduce() {
     abcli_eval dryrun=$do_dryrun \
         python3 -m blue_geo.watch.algo.$algo \
         reduce \
+        --content_threshold $content_threshold \
         --query_object_name $query_object_name \
         --suffix $suffix \
         --object_name $object_name \

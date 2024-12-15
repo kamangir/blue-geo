@@ -47,6 +47,12 @@ parser.add_argument(
     type=float,
     default=float(BLUE_GEO_WATCH_ALGO_DIFF_MAP_DYNAMIC_RANGE),
 )
+parser.add_argument(
+    "--content_threshold",
+    type=float,
+    default=0.5,
+    help="0..1",
+)
 args = parser.parse_args()
 
 success = args.task in list_of_tasks
@@ -63,7 +69,7 @@ elif args.task == "reduce":
         query_object_name=args.query_object_name,
         suffix=args.suffix,
         object_name=args.object_name,
-        content_threshold=-1,
+        content_threshold=args.content_threshold,
         list_of_suffix=["histogram"],
     )
 else:

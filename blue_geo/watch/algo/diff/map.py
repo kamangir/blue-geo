@@ -178,6 +178,7 @@ def map_function(
                                 "pixel_size: {} m".format(
                                     baseline_metadata.get("pixel_size", -1.0)
                                 ),
+                                "content: {:05.1f}%".format(content_ratio * 100.0),
                             ]
                         ),
                         query_object_name,

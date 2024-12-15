@@ -56,6 +56,7 @@ def map_function(
     acquisition_metadata: Dict[str, Dict] = {}
     baseline_filename: str = ""
     target_filename: str = ""
+    content_ratio: float = 1.0
     for index in trange(depth):
         logger.info(f"processing metadata: index={index} ...")
 
@@ -72,6 +73,12 @@ def map_function(
         )
         if not success:
             break
+
+        content_ratio = min(
+            content_ratio,
+            acquisition_metadata[index].get("map", {}).get("content_ratio", -1),
+        )
+        logger.info(f"content: {content_ratio:.2f}")
 
         if index in [0, 1]:
             filename = objects.path_of(
@@ -140,6 +147,7 @@ def map_function(
                 file.name_and_extension(target_filename),
                 diff_image_pretty_shape,
                 "pixel_size: {} m".format(baseline_metadata.get("pixel_size", -1.0)),
+                "content: {:05.1f}%".format(content_ratio * 100.0),
             ],
             footer=["DN diff"],
             filename=objects.path_of(
@@ -198,6 +206,7 @@ def map_function(
         "map",
         {
             "algo": "diff",
+            "content_ratio": content_ratio,
             "inputs": {
                 "offset": offset,
                 "depth": depth,

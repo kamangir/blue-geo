@@ -146,7 +146,7 @@ def map_function(
                 file.name_and_extension(baseline_filename),
                 file.name_and_extension(target_filename),
                 diff_image_pretty_shape,
-                "pixel_size: {}".format(baseline_metadata.get("pixel_size", -1.0)),
+                "pixel size: {}".format(baseline_metadata.get("pixel_size", -1.0)),
                 "content: {:05.1f}%".format(content_ratio * 100.0),
             ],
             footer=["DN diff"],
@@ -175,7 +175,7 @@ def map_function(
                                 file.name_and_extension(baseline_filename),
                                 file.name_and_extension(target_filename),
                                 diff_image_pretty_shape,
-                                "pixel_size: {}".format(
+                                "pixel size: {}".format(
                                     baseline_metadata.get("pixel_size", -1.0)
                                 ),
                                 "content: {:05.1f}%".format(content_ratio * 100.0),

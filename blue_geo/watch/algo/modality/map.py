@@ -90,7 +90,7 @@ def map_function(
                 )
                 + [
                     "crs: {}".format(frame_file_metadata.get("crs", "?")),
-                    "pixel_size: {}".format(
+                    "pixel size: {}".format(
                         frame_file_metadata.get("pixel_size", -1.0)
                     ),
                     "content: {:05.1f}%".format(content_ratio * 100.0),

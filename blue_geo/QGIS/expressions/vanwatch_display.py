@@ -1,11 +1,11 @@
+import os
+
 from qgis.core import *
 from qgis.gui import *
 
-# version 2.1.1
-
 
 @qgsfunction(args="auto", group="Custom", referenced_columns=[])
-def vanwatch_display(object_name, cameras, feature, parent):
+def vanwatch_display(layer_path, cameras, feature, parent):
     """
     Produce display text for a vanwatch mapid.
 
@@ -14,7 +14,9 @@ def vanwatch_display(object_name, cameras, feature, parent):
         "cameras"
     )
     """
-    object_name = object_name.split(" ")[0]
+    version = "5.1.1"
+
+    object_name = layer_path.split(os.sep)[-2]
 
     url_prefix = "https://kamangir-public.s3.ca-central-1.amazonaws.com"
 
@@ -43,5 +45,13 @@ def vanwatch_display(object_name, cameras, feature, parent):
             "    </tr>",
             "</table>",
             object_name,
+        ]
+        + [
+            " | ".join(
+                [
+                    object_name,
+                    f"template version {version}",
+                ]
+            )
         ]
     )

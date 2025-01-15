@@ -1,7 +1,7 @@
 import pytest
 import datetime
 
-from blue_geo.maxar_open_data.classes import MaxarOpenDataClient
+from blue_geo.catalog.maxar_open_data.client import MaxarOpenDataClient
 
 
 @pytest.mark.parametrize(

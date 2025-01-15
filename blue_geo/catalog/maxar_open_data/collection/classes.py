@@ -23,7 +23,7 @@ class MaxarOpenDataDatacube(GenericDatacube):
     query_args = {
         "collection_id": {
             "default": "WildFires-LosAngeles-Jan-2025",
-            "help": "<@maxar list>",
+            "help": "WildFires-LosAngeles-Jan-2025 | ...",
         },
         "start_date": {
             "default": (datetime.datetime.now() - datetime.timedelta(days=14)).strftime(

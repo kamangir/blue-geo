@@ -62,9 +62,6 @@ function test_@geo_help() {
         \
         "@geo log" \
         \
-        "@maxar" \
-        "@maxar list" \
-        \
         "QGIS" \
         "QGIS download" \
         "QGIS expressions" \

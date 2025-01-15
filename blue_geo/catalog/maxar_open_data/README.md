@@ -4,15 +4,6 @@ The `maxar_open_data` catalog covers [Maxar's Open Data program](https://www.max
 
  - [home](https://www.maxar.com/open-data)
 
-## list of collections
-
-```bash
-@maxar list
-```
-```bash
-🌐  45 collection(s): BayofBengal-Cyclone-Mocha-May-23, Belize-Wildfires-June24, Brazil-Flooding-May24, Cyclone-Chido-Dec15, Emilia-Romagna-Italy-flooding-may23, ...
-```
-
 ## query
 
 ```bash
@@ -23,7 +14,7 @@ The `maxar_open_data` catalog covers [Maxar's Open Data program](https://www.max
 	[dryrun,collection,select,upload] \
 	[ingest,~copy_template,dryrun,overwrite,scope=<scope>,upload] \
 	[-|<object-name>] \
-	[--collection_id <@maxar list>] \
+	[--collection_id WildFires-LosAngeles-Jan-2025 | ...] \
 	[--end_date <yyyy-mm-dd>] \
 	[--start_date <yyyy-mm-dd>]
  . maxar_open_data/collection -query-> <object-name>.

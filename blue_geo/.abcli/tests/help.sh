@@ -60,6 +60,12 @@ function test_@geo_help() {
         "@geo watch targets update_template" \
         "@geo watch targets upload" \
         \
+        "@geo log" \
+        \
+        "@maxar" \
+        "@maxar ingest" \
+        "@maxar list" \
+        \
         "QGIS" \
         "QGIS download" \
         "QGIS expressions" \

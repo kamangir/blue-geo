@@ -32,6 +32,10 @@ setup(
         f"{NAME}.help.watch",
         f"{NAME}.help.QGIS",
         #
+        f"{NAME}.logger",
+        #
+        f"{NAME}.maxar_open_data",
+        #
         f"{NAME}.QGIS",
         f"{NAME}.QGIS.console",
         f"{NAME}.QGIS.console.apps",

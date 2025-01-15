@@ -8,7 +8,7 @@ function blue_geo_watch_algo_diff_map() {
     local offset=$(abcli_option "$options" offset 0)
     local dynamic_range=$(abcli_option "$options" range $BLUE_GEO_WATCH_ALGO_DIFF_MAP_DYNAMIC_RANGE)
     local suffix=$(abcli_option "$options" suffix $(abcli_string_timestamp_short))
-    local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
+    local do_upload=$(abcli_option_int "$options" upload $(abcli_not $do_dryrun))
 
     local query_object_name=$2
 

@@ -22,6 +22,8 @@ setup(
         f"{NAME}.catalog.generic",
         f"{NAME}.catalog.generic.stac",
         f"{NAME}.catalog.generic.generic",
+        f"{NAME}.catalog.maxar_open_data",
+        f"{NAME}.catalog.maxar_open_data.collection",
         f"{NAME}.catalog.ukraine_timemap",
         f"{NAME}.catalog.ukraine_timemap.ukraine_timemap",
         #

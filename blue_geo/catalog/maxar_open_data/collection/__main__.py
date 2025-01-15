@@ -33,6 +33,7 @@ if args.task == "query":
         collection_id=args.collection_id,
         start_date=args.start_date,
         end_date=args.end_date,
+        count=args.count,
     )
 else:
     success = None

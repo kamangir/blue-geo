@@ -19,6 +19,7 @@ def test_query():
         collection_id="WildFires-LosAngeles-Jan-2025",
         start_date="2025-01-10",
         end_date="2025-01-13",
+        count=3,
     )
     assert success
 

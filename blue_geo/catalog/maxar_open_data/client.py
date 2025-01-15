@@ -247,6 +247,7 @@ class MaxarOpenDataClient:
         collection_id: str,
         start_date: datetime.datetime,
         end_date: datetime.datetime,
+        count: int = -1,
         log: bool = False,
         verbose: bool = False,
     ) -> List[Any]:
@@ -268,6 +269,12 @@ class MaxarOpenDataClient:
                     logger.info(f"{item.id} - {item_date}")
 
                     list_of_items += [item]
+
+                if count != -1 and len(list_of_items) >= count:
+                    break
+
+            if count != -1 and len(list_of_items) >= count:
+                break
 
         if self.verbose or log:
             logger.info(f"{len(list_of_items):,} item(s).")

@@ -63,6 +63,7 @@ function test_@geo_help() {
         "@geo log" \
         \
         "@maxar" \
+        "@maxar ingest" \
         "@maxar list" \
         \
         "QGIS" \

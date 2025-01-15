@@ -1,11 +1,6 @@
 from typing import Tuple, Dict, Any, List
 import datetime
-import pandas as pd
-import geopandas as gpd
-from shapely.geometry import Point
 
-from blue_objects import file, objects
-from blue_objects import metadata
 from blue_objects.metadata import post_to_object
 
 from blue_geo.catalog.maxar_open_data.classes import MaxarOpenDataCatalog
@@ -23,7 +18,7 @@ class MaxarOpenDataDatacube(GenericDatacube):
     query_args = {
         "collection_id": {
             "default": "WildFires-LosAngeles-Jan-2025",
-            "help": "<@maxar list>",
+            "help": "WildFires-LosAngeles-Jan-2025 | ...",
         },
         "start_date": {
             "default": (datetime.datetime.now() - datetime.timedelta(days=14)).strftime(
@@ -52,6 +47,30 @@ class MaxarOpenDataDatacube(GenericDatacube):
         return (
             self.catalog.client.ingest(datacube_id=self.datacube_id),
             {},
+        )
+
+    def list_of_files(
+        self,
+        scope: DatacubeScope = DatacubeScope("all"),
+        verbose: bool = False,
+    ) -> List[str]:
+        success, item = self.catalog.client.get_item(
+            datacube_id=self.datacube_id,
+            log=verbose,
+        )
+        if not success:
+            return []
+
+        return scope.filter(
+            [
+                {
+                    "filename": asset.href,
+                }
+                for asset in item.assets.values()
+            ],
+            needed_for_rgb=lambda filename: filename.endswith("-visual.tif"),
+            is_rgb=lambda filename: filename.endswith("-visual.tif"),
+            verbose=verbose,
         )
 
     @classmethod

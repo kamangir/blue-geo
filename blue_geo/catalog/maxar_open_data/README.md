@@ -14,7 +14,7 @@ The `maxar_open_data` catalog covers [Maxar's Open Data program](https://www.max
 	[dryrun,collection,select,upload] \
 	[ingest,~copy_template,dryrun,overwrite,scope=<scope>,upload] \
 	[-|<object-name>] \
-	[--collection_id <@maxar list>] \
+	[--collection_id WildFires-LosAngeles-Jan-2025 | ...] \
 	[--end_date <yyyy-mm-dd>] \
 	[--start_date <yyyy-mm-dd>]
  . maxar_open_data/collection -query-> <object-name>.

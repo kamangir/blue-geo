@@ -1,7 +1,7 @@
 from typing import List, Dict
 
 from blue_geo.catalog.generic import GenericCatalog
-from blue_geo.maxar_open_data import MaxarOpenDataClient
+from blue_geo.catalog.maxar_open_data.client import MaxarOpenDataClient
 
 
 class MaxarOpenDataCatalog(GenericCatalog):

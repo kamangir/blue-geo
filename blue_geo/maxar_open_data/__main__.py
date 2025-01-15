@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,
-    help="ingest | list",
+    help="list",
 )
 parser.add_argument(
     "--datacube_id",
@@ -55,13 +55,7 @@ client = MaxarOpenDataClient(
 
 
 success = False
-if args.task == "ingest":
-    success = client.ingest(
-        datacube_id=args.datacube_id,
-        log=args.log == 1,
-        verbose=args.verbose == 1,
-    )
-elif args.task == "list":
+if args.task == "list":
     success = True
 
     list_of_collections = client.get_list_of_collections(

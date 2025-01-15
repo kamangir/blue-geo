@@ -54,6 +54,30 @@ class MaxarOpenDataDatacube(GenericDatacube):
             {},
         )
 
+    def list_of_files(
+        self,
+        scope: DatacubeScope = DatacubeScope("all"),
+        verbose: bool = False,
+    ) -> List[str]:
+        success, item = self.catalog.client.get_item(
+            datacube_id=self.datacube_id,
+            log=verbose,
+        )
+        if not success:
+            return []
+
+        return scope.filter(
+            [
+                {
+                    "filename": asset.href,
+                }
+                for asset in item.assets.values()
+            ],
+            needed_for_rgb=lambda filename: filename.endswith("-visual.tif"),
+            is_rgb=lambda filename: filename.endswith("-visual.tif"),
+            verbose=verbose,
+        )
+
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[
         bool,

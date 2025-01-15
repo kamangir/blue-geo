@@ -135,6 +135,44 @@ class MaxarOpenDataClient:
 
         return True, collection_id, item_id
 
+    def get_item(
+        self,
+        datacube_id: str,
+        log: bool = False,
+    ) -> Tuple[bool, Any]:
+        success, collection_id, item_id = self.parse_datacube_id(
+            datacube_id=datacube_id,
+            log=log,
+            verbose=log,
+        )
+        if not success:
+            return success, None
+
+        collection = self.get_collection(
+            collection_id=collection_id,
+            log=log,
+        )
+        if collection is None:
+            return False, None
+
+        list_of_items = []
+        for child in collection.get_children():
+            list_of_items += [item for item in child.get_items() if item.id == item_id]
+        if not list_of_items:
+            logger.error(f"item not found: {item_id}.")
+            return False, None
+        if len(list_of_items) > 1:
+            logger.warning(
+                "{} possible item(s): {}".format(
+                    len(list_of_items), ", ".join(list_of_items)
+                )
+            )
+        item = list_of_items[0]
+        if log:
+            logger.info(f"item: {item}.")
+
+        return True, item
+
     def ingest(
         self,
         datacube_id: str,
@@ -143,35 +181,12 @@ class MaxarOpenDataClient:
         verbose: bool = False,
         overwrite: bool = False,
     ) -> bool:
-        success, collection_id, item_id = self.parse_datacube_id(
+        success, item = self.get_item(
             datacube_id=datacube_id,
-            log=verbose,
-            verbose=verbose,
+            log=log,
         )
         if not success:
             return success
-
-        collection = self.get_collection(
-            collection_id=collection_id,
-            log=verbose,
-        )
-        if collection is None:
-            return False
-
-        list_of_items = []
-        for child in collection.get_children():
-            list_of_items += [item for item in child.get_items() if item.id == item_id]
-        if not list_of_items:
-            logger.error(f"item not found: {item_id}.")
-            return False
-        if len(list_of_items) > 1:
-            logger.warning(
-                "{} possible item(s): {}".format(
-                    len(list_of_items), ", ".join(list_of_items)
-                )
-            )
-        item = list_of_items[0]
-        logger.info(f"item: {item}.")
 
         if asset_name not in item.assets:
             logger.error(

@@ -34,6 +34,8 @@ setup(
         #
         f"{NAME}.help.logger",
         #
+        f"{NAME}.logger",
+        #
         f"{NAME}.maxar_open_data",
         #
         f"{NAME}.QGIS",

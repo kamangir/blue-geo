@@ -39,6 +39,39 @@ class MaxarOpenDataDatacube(GenericDatacube):
 
     QGIS_template = env.BLUE_GEO_QGIS_TEMPLATE_MAXAR_OPEN_DATA
 
+    def ingest(
+        self,
+        dryrun: bool = False,
+        overwrite: bool = False,
+        scope: str = "metadata",
+    ) -> Tuple[bool, Any]:
+        success, output = super().ingest(dryrun, overwrite, scope)
+        if not success:
+            return success, output
+
+        return (
+            self.catalog.client.ingest(datacube_id=self.datacube_id),
+            {},
+        )
+
+    @classmethod
+    def parse_datacube_id(cls, datacube_id: str) -> Tuple[
+        bool,
+        Dict[str, Any],
+    ]:
+        success, _ = super().parse_datacube_id(datacube_id)
+        if not success:
+            return False, {}
+
+        success, item_id, collection_id = cls.catalog.client.parse_datacube_id(
+            datacube_id=datacube_id,
+            log=False,
+        )
+        return success, {
+            "item_id": item_id,
+            "collection_id": collection_id,
+        }
+
     @classmethod
     def query(
         cls,

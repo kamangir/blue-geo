@@ -23,17 +23,6 @@ The `maxar_open_data` catalog covers [Maxar's Open Data program](https://www.max
 @publish tar .
 ```
 
-🔥
+![image](https://github.com/kamangir/assets/blob/main/blue-geo/Maxar-Open-Datacube.png?raw=true)
 
-
-```yaml
-🚧
-```
-
-🚧 🖼️
-
-🚧 🖼️
-
-[.tar.gz](https://kamangir-public.....tar.gz)
-
-🚧 🖼️
+[datacube-maxar_open_data-WildFires-LosAngeles-Jan-2025-11-031311103030-1050010040277300.tar.gz](https://kamangir-public.s3.ca-central-1.amazonaws.com/datacube-maxar_open_data-WildFires-LosAngeles-Jan-2025-11-031311103030-1050010040277300.tar.gz)

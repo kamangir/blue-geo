@@ -14,5 +14,16 @@ class MaxarOpenDataCatalog(GenericCatalog):
     def __init__(self):
         self.client = MaxarOpenDataClient()
 
-    def get_list_of_collections(self) -> List[str]:
-        return self.client.get_list_of_collections()
+        self.list_of_collections: List[str] = []
+
+    def get_list_of_collections(
+        self,
+        use_cache: bool = True,
+    ) -> List[str]:
+        if not use_cache:
+            self.list_of_collections = []
+
+        if not list_of_collections:
+            list_of_collections = self.client.get_list_of_collections()
+
+        return list_of_collections

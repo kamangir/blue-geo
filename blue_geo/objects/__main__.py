@@ -5,7 +5,6 @@ from blueness import module
 from blueness.argparse.generic import sys_exit
 
 from blue_geo import NAME
-from blue_geo.logger.geoimage import log_geoimage
 from blue_geo.objects import special_objects
 from blue_geo.logger import logger
 

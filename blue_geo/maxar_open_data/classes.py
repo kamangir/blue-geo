@@ -1,7 +1,8 @@
-from typing import Any, List
+from typing import Any, List, Tuple
 import pystac
 import datetime
 import pathlib
+from tqdm import tqdm
 
 from blue_objects import objects, file
 
@@ -76,7 +77,7 @@ class MaxarOpenDataClient:
         verbose: bool = False,
     ) -> str:
         datacube_id = (
-            f"datacube-Maxar-Open-Data-{collection_id}-{item.id.replace('/','-')}"
+            f"datacube-maxar_open_data-{collection_id}-{item.id.replace('/','-')}"
         )
 
         if log or self.verbose:
@@ -89,6 +90,51 @@ class MaxarOpenDataClient:
 
         return datacube_id
 
+    def parse_datacube_id(
+        self,
+        datacube_id: str,
+        log: bool = True,
+        verbose: bool = False,
+    ) -> Tuple[bool, str, str]:
+        collection_id: str = ""
+        item_id: str = ""
+
+        if not datacube_id.startswith("datacube-maxar_open_data-"):
+            if log:
+                logger.error(f"Invalid datacube-id: {datacube_id}")
+            return False, collection_id, item_id
+
+        list_of_collections = self.get_list_of_collections(log=verbose)
+
+        candidate_collections = [
+            collection_id
+            for collection_id in list_of_collections
+            if datacube_id.startswith(f"datacube-maxar_open_data-{collection_id}-")
+        ]
+        if not candidate_collections:
+            if log:
+                logger.error(f"collection not found: {datacube_id}.")
+            return False, collection_id, item_id
+        if len(candidate_collections) > 1:
+            if log:
+                logger.warning(
+                    "{} possible collection(s): {}".format(
+                        len(candidate_collections), ", ".join(candidate_collections)
+                    )
+                )
+
+        collection_id = candidate_collections[0]
+        if log:
+            logger.info(f"collection_id: {collection_id}")
+
+        item_id = datacube_id.split(f"datacube-maxar_open_data-{collection_id}-", 1)[
+            1
+        ].replace("-", "/")
+        if log:
+            logger.info(f"item_id: {item_id}")
+
+        return True, collection_id, item_id
+
     def ingest(
         self,
         datacube_id: str,
@@ -97,29 +143,13 @@ class MaxarOpenDataClient:
         verbose: bool = False,
         overwrite: bool = False,
     ) -> bool:
-        if not datacube_id.startswith("datacube-Maxar-Open-Data-"):
-            logger.error(f"Invalid datacube-id: {datacube_id}")
-            return False
-
-        list_of_collections = self.get_list_of_collections(log=verbose)
-
-        candidate_collections = [
-            collection_id
-            for collection_id in list_of_collections
-            if datacube_id.startswith(f"datacube-Maxar-Open-Data-{collection_id}-")
-        ]
-        if not candidate_collections:
-            logger.error(f"collection not found: {datacube_id}.")
-            return False
-        if len(candidate_collections) > 1:
-            logger.warning(
-                "{} possible collection(s): {}".format(
-                    len(candidate_collections), ", ".join(candidate_collections)
-                )
-            )
-
-        collection_id = candidate_collections[0]
-        logger.info(f"collection_id: {collection_id}")
+        success, collection_id, item_id = self.parse_datacube_id(
+            datacube_id=datacube_id,
+            log=verbose,
+            verbose=verbose,
+        )
+        if not success:
+            return success
 
         collection = self.get_collection(
             collection_id=collection_id,
@@ -127,11 +157,6 @@ class MaxarOpenDataClient:
         )
         if collection is None:
             return False
-
-        item_id = datacube_id.split(f"datacube-Maxar-Open-Data-{collection_id}-", 1)[
-            1
-        ].replace("-", "/")
-        logger.info(f"item_id: {item_id}")
 
         list_of_items = []
         for child in collection.get_children():
@@ -198,7 +223,7 @@ class MaxarOpenDataClient:
             return False
 
         return log_geoimage(
-            filename=filename,
+            filename=asset_relative_href,
             object_name=datacube_id,
         )
 
@@ -219,7 +244,7 @@ class MaxarOpenDataClient:
         if collection is None:
             return list_of_items
 
-        for child in collection.get_children():
+        for child in tqdm(collection.get_children()):
             for item in child.get_items():
                 item_date = datetime.datetime.strptime(
                     item.properties["datetime"], "%Y-%m-%d %H:%M:%SZ"

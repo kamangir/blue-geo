@@ -31,8 +31,8 @@ if args.task == "query":
     success = MaxarOpenDataDatacube.query(
         object_name=args.object_name,
         collection_id=args.collection_id,
-        start_date=datetime.datetime.strptime(args.start_date, "%Y-%m-%d"),
-        end_date=datetime.datetime.strptime(args.end_date, "%Y-%m-%d"),
+        start_date=args.start_date,
+        end_date=args.end_date,
     )
 else:
     success = None

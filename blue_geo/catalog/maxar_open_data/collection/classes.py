@@ -77,15 +77,16 @@ class MaxarOpenDataDatacube(GenericDatacube):
         cls,
         object_name: str,
         collection_id: str,
-        start_date: datetime.datetime,
-        end_date: datetime.datetime,
+        start_date: str,
+        end_date: str,
     ) -> bool:
         logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
 
         list_of_items = cls.catalog.client.query(
             collection_id=collection_id,
-            start_date=start_date,
-            end_date=end_date,
+            start_date=datetime.datetime.strptime(start_date, "%Y-%m-%d"),
+            end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d"),
+            log=True,
         )
 
         list_of_datacube_ids: List[str] = [

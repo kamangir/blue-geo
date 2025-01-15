@@ -23,7 +23,7 @@ class MaxarOpenDataCatalog(GenericCatalog):
         if not use_cache:
             self.list_of_collections = []
 
-        if not list_of_collections:
-            list_of_collections = self.client.get_list_of_collections()
+        if not self.list_of_collections:
+            self.list_of_collections = self.client.get_list_of_collections()
 
-        return list_of_collections
+        return self.list_of_collections

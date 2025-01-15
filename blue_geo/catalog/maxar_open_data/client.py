@@ -3,6 +3,7 @@ import pystac
 import datetime
 import pathlib
 from tqdm import tqdm
+from shapely.geometry import Point, Polygon
 
 from blue_objects import objects, file
 
@@ -191,7 +192,7 @@ class MaxarOpenDataClient:
     ) -> bool:
         success, item = self.get_item(
             datacube_id=datacube_id,
-            log=log,
+            log=verbose,
         )
         if not success:
             return success
@@ -259,6 +260,9 @@ class MaxarOpenDataClient:
         collection_id: str,
         start_date: datetime.datetime,
         end_date: datetime.datetime,
+        lat: float = -1,
+        lon: float = -1,
+        radius: float = 0.1,
         count: int = -1,
         log: bool = False,
         verbose: bool = False,
@@ -275,12 +279,20 @@ class MaxarOpenDataClient:
         for child in tqdm(collection.get_children()):
             for item in child.get_items():
                 item_date = datetime.datetime.strptime(
-                    item.properties["datetime"], "%Y-%m-%d %H:%M:%SZ"
+                    item.properties["datetime"],
+                    "%Y-%m-%d %H:%M:%SZ",
                 )
-                if start_date <= item_date <= end_date:
-                    logger.info(f"{item.id} - {item_date}")
+                if start_date > item_date or item_date > end_date:
+                    continue
 
-                    list_of_items += [item]
+                if lat != -1 and lon != -1:
+                    polygon = Polygon(item.geometry["coordinates"][0])
+                    point = Point(lon, lat)
+                    if not point.within(polygon.buffer(radius)):
+                        continue
+
+                logger.info(f"{item.id} - {item_date}")
+                list_of_items += [item]
 
                 if count != -1 and len(list_of_items) >= count:
                     break

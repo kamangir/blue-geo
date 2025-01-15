@@ -26,7 +26,7 @@ class MaxarOpenDataClient:
     def get_list_of_collections(
         self,
         log: bool = False,
-    ) -> List[Any]:
+    ) -> List[str]:
         list_of_collections = [
             collection.id for collection in self.catalog.get_children()
         ]

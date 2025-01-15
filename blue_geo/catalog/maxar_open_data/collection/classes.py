@@ -30,6 +30,11 @@ class MaxarOpenDataDatacube(GenericDatacube):
             "default": (datetime.datetime.now()).strftime("%Y-%m-%d"),
             "help": "<yyyy-mm-dd>",
         },
+        "count": {
+            "default": -1,
+            "type": int,
+            "help": "-1 | <value>",
+        },
     }
 
     QGIS_template = env.BLUE_GEO_QGIS_TEMPLATE_MAXAR_OPEN_DATA
@@ -64,7 +69,10 @@ class MaxarOpenDataDatacube(GenericDatacube):
         return scope.filter(
             [
                 {
-                    "filename": asset.href,
+                    "filename": self.catalog.client.get_filename(
+                        item=item,
+                        filename=asset.href,
+                    ),
                 }
                 for asset in item.assets.values()
             ],
@@ -98,6 +106,7 @@ class MaxarOpenDataDatacube(GenericDatacube):
         collection_id: str,
         start_date: str,
         end_date: str,
+        count: int,
     ) -> bool:
         logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
 
@@ -105,6 +114,7 @@ class MaxarOpenDataDatacube(GenericDatacube):
             collection_id=collection_id,
             start_date=datetime.datetime.strptime(start_date, "%Y-%m-%d"),
             end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d"),
+            count=count,
             log=True,
         )
 

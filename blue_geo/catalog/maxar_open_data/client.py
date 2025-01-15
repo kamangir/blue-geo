@@ -127,13 +127,21 @@ class MaxarOpenDataClient:
         if log:
             logger.info(f"collection_id: {collection_id}")
 
-        item_id = datacube_id.split(f"datacube-maxar_open_data-{collection_id}-", 1)[
-            1
-        ].replace("-", "/")
+        suffix = datacube_id.split(f"datacube-maxar_open_data-{collection_id}-", 1)[1]
+        if "-DERIVED-" in suffix:
+            suffix = suffix.split("-DERIVED-", 1)[0]
+
+        item_id = suffix.replace("-", "/")
         if log:
             logger.info(f"item_id: {item_id}")
 
         return True, collection_id, item_id
+
+    def get_filename(self, item, filename: str) -> str:
+        return "{}-{}".format(
+            item.id.replace("/", "-"),
+            (filename.split("./", 1)[1] if filename.startswith("./") else filename),
+        )
 
     def get_item(
         self,
@@ -219,26 +227,30 @@ class MaxarOpenDataClient:
         asset_href = f"{root_href}/{asset_relative_href}"
         logger.info(f"asset_href: {asset_href}")
 
-        filename = str(
+        suffixed_filename = self.get_filename(
+            item=item,
+            filename=asset_relative_href,
+        )
+        full_filename = str(
             pathlib.Path(
                 objects.path_of(
-                    filename=asset_relative_href,
+                    filename=suffixed_filename,
                     object_name=datacube_id,
                     create=True,
                 )
             ).resolve()
         )
-        logger.info(f"filename: {filename}")
+        logger.info(f"filename: {full_filename}")
 
         if not file.download(
             asset_href,
-            filename=filename,
+            filename=full_filename,
             overwrite=overwrite,
         ):
             return False
 
         return log_geoimage(
-            filename=asset_relative_href,
+            filename=suffixed_filename,
             object_name=datacube_id,
         )
 
@@ -247,6 +259,7 @@ class MaxarOpenDataClient:
         collection_id: str,
         start_date: datetime.datetime,
         end_date: datetime.datetime,
+        count: int = -1,
         log: bool = False,
         verbose: bool = False,
     ) -> List[Any]:
@@ -268,6 +281,12 @@ class MaxarOpenDataClient:
                     logger.info(f"{item.id} - {item_date}")
 
                     list_of_items += [item]
+
+                if count != -1 and len(list_of_items) >= count:
+                    break
+
+            if count != -1 and len(list_of_items) >= count:
+                break
 
         if self.verbose or log:
             logger.info(f"{len(list_of_items):,} item(s).")

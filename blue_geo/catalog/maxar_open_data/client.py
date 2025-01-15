@@ -127,9 +127,11 @@ class MaxarOpenDataClient:
         if log:
             logger.info(f"collection_id: {collection_id}")
 
-        item_id = datacube_id.split(f"datacube-maxar_open_data-{collection_id}-", 1)[
-            1
-        ].replace("-", "/")
+        suffix = datacube_id.split(f"datacube-maxar_open_data-{collection_id}-", 1)[1]
+        if "-DERIVED-" in suffix:
+            suffix = suffix.split("-DERIVED-", 1)[0]
+
+        item_id = suffix.replace("-", "/")
         if log:
             logger.info(f"item_id: {item_id}")
 

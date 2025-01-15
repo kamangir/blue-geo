@@ -14,6 +14,7 @@ from blue_geo.catalog.EarthSearch import (
 )
 from blue_geo.catalog.firms import FirmsCatalog
 from blue_geo.catalog.firms.area import FirmsAreaDatacube
+from blue_geo.catalog.maxar_open_data import MaxarOpenDataCatalog, MaxarOpenDataDatacube
 from blue_geo.catalog.SkyFox import SkyFoxCatalog
 from blue_geo.catalog.SkyFox.Venus import SkyFoxVenusDatacube
 from blue_geo.catalog.ukraine_timemap import (
@@ -26,6 +27,7 @@ list_of_catalog_classes: List[Type[GenericCatalog]] = [
     CopernicusCatalog,
     EarthSearchCatalog,
     FirmsCatalog,
+    MaxarOpenDataCatalog,
     SkyFoxCatalog,
     UkraineTimemapCatalog,
 ]
@@ -46,5 +48,6 @@ list_of_datacube_classes: List[Type[GenericDatacube]] = [
     UkraineTimemapDatacube,
     CopernicusSentinel2Datacube,
     EarthSearchSentinel2L1CDatacube,
+    MaxarOpenDataDatacube,
     SkyFoxVenusDatacube,
 ]

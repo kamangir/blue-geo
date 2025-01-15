@@ -14,6 +14,12 @@ from blue_geo import NAME, VERSION, ICON, REPO_NAME
 
 
 features = {
+    "Maxar Open Data": {
+        "description": "catalog: [Maxar's Open Data program](https://www.maxar.com/open-data/)",
+        "icon": "🧊",
+        "thumbnail": "https://github.com/kamangir/assets/blob/main/blue-geo/MaxarOpenData.png?raw=true",
+        "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/catalog/maxar_open_data",
+    },
     "copernicus": {
         "description": "catalog: [Copernicus Data Space Ecosystem - Europe's eyes on Earth](https://dataspace.copernicus.eu/)",
         "icon": "🧊",

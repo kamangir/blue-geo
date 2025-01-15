@@ -30,6 +30,7 @@ def build() -> bool:
             for catalog in [
                 "copernicus",
                 "EarthSearch",
+                "maxar_open_data",
                 "SkyFox",
                 "firms",
                 "ukraine_timemap",

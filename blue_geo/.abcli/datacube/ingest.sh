@@ -26,7 +26,8 @@ function blue_geo_datacube_ingest() {
             $template_object_name \
             $datacube_id
 
-    python3 -m blue_geo.datacube \
+    abcli_eval - \
+        python3 -m blue_geo.datacube \
         ingest \
         --datacube_id $datacube_id \
         --dryrun $do_dryrun \

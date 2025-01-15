@@ -137,6 +137,12 @@ class MaxarOpenDataClient:
 
         return True, collection_id, item_id
 
+    def get_filename(self, item, filename: str) -> str:
+        return "{}-{}".format(
+            item.id.replace("/", "-"),
+            (filename.split("./", 1)[1] if filename.startswith("./") else filename),
+        )
+
     def get_item(
         self,
         datacube_id: str,
@@ -221,26 +227,30 @@ class MaxarOpenDataClient:
         asset_href = f"{root_href}/{asset_relative_href}"
         logger.info(f"asset_href: {asset_href}")
 
-        filename = str(
+        suffixed_filename = self.get_filename(
+            item=item,
+            filename=asset_relative_href,
+        )
+        full_filename = str(
             pathlib.Path(
                 objects.path_of(
-                    filename=asset_relative_href,
+                    filename=suffixed_filename,
                     object_name=datacube_id,
                     create=True,
                 )
             ).resolve()
         )
-        logger.info(f"filename: {filename}")
+        logger.info(f"filename: {full_filename}")
 
         if not file.download(
             asset_href,
-            filename=filename,
+            filename=full_filename,
             overwrite=overwrite,
         ):
             return False
 
         return log_geoimage(
-            filename=asset_relative_href,
+            filename=suffixed_filename,
             object_name=datacube_id,
         )
 

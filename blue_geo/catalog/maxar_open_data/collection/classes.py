@@ -69,7 +69,10 @@ class MaxarOpenDataDatacube(GenericDatacube):
         return scope.filter(
             [
                 {
-                    "filename": asset.href,
+                    "filename": self.catalog.client.get_filename(
+                        item=item,
+                        filename=asset.href,
+                    ),
                 }
                 for asset in item.assets.values()
             ],

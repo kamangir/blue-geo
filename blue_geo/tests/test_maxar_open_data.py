@@ -39,8 +39,10 @@ def test_maxar_open_data(
     assert len(list_of_items) > 0
     assert len(list_of_items) <= count
 
+    item = list_of_items[0]
+
     datacube_id = client.get_datacube_id(
-        list_of_items[0],
+        item=item,
         collection_id=collection_id,
         log=True,
     )
@@ -50,4 +52,9 @@ def test_maxar_open_data(
     assert client.ingest(
         datacube_id=datacube_id,
         log=True,
+    )
+
+    assert client.get_filename(
+        item=item,
+        filename="103001010B9A1B00-visual.tif",
     )

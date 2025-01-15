@@ -44,7 +44,7 @@ def log_geoimage(
                 metadata_as_str += [f"{keyword}={json.dumps(value)}"]
             except Exception as e:
                 metadata_as_str += [f"{keyword}=..."]
-    except Exception as e:
+    except Exception:
         pass
 
     return log_matrix(

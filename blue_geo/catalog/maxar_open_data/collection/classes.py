@@ -32,6 +32,7 @@ class MaxarOpenDataDatacube(GenericDatacube):
         },
         "count": {
             "default": -1,
+            "type": int,
             "help": "-1 | <value>",
         },
     }

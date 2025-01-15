@@ -23,6 +23,11 @@ parser.add_argument(
     type=str,
     default="",
 )
+
+# for compatibility
+parser.add_argument("--lat", type=str)
+parser.add_argument("--lon", type=str)
+
 args = parser.parse_args()
 
 

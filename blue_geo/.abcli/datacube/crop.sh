@@ -3,7 +3,7 @@
 function blue_geo_datacube_crop() {
     local options=$1
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
-    local do_download=$(abcli_option_int "$options" download $(abcli_not do_dryrun))
+    local do_download=$(abcli_option_int "$options" download $(abcli_not $do_dryrun))
     local suffix=$(abcli_option "$options" suffix $(abcli_string_timestamp_short))
 
     local object_name=$(abcli_clarify_object $2 ..)

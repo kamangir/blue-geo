@@ -5,6 +5,7 @@ from blue_geo.help.catalog import help_functions as help_catalog
 from blue_geo.help.datacube import help_functions as help_datacube
 from blue_geo.help.gdal import help_functions as help_gdal
 from blue_geo.help.ingest import help_ingest
+from blue_geo.help.logger import help_log
 from blue_geo.help.maxar_open_data import help_functions as help_maxar_open_data
 from blue_geo.help.QGIS import help_functions as help_QGIS
 from blue_geo.help.watch import help_functions as help_watch
@@ -17,6 +18,7 @@ help_functions.update(
         "datacube": help_datacube,
         "gdal": help_gdal,
         "ingest": help_ingest,
+        "log": help_log,
         "maxar_open_data": help_maxar_open_data,
         "QGIS": help_QGIS,
         "watch": help_watch,

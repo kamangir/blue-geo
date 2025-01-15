@@ -32,6 +32,8 @@ setup(
         f"{NAME}.help.watch",
         f"{NAME}.help.QGIS",
         #
+        f"{NAME}.help.logger",
+        #
         f"{NAME}.QGIS",
         f"{NAME}.QGIS.console",
         f"{NAME}.QGIS.console.apps",

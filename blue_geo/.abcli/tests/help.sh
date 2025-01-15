@@ -60,6 +60,8 @@ function test_@geo_help() {
         "@geo watch targets update_template" \
         "@geo watch targets upload" \
         \
+        "@geo log" \
+        \
         "@maxar" \
         "@maxar list" \
         \

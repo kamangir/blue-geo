@@ -4,8 +4,8 @@ function blue_geo_watch_reduce() {
     local options=$1
     local algo=$(abcli_option "$options" algo modality)
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
-    local do_download=$(abcli_option_int "$options" download $(abcli_not do_dryrun))
-    local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
+    local do_download=$(abcli_option_int "$options" download $(abcli_not $do_dryrun))
+    local do_upload=$(abcli_option_int "$options" upload $(abcli_not $do_dryrun))
     local do_publish=$(abcli_option_int "$options" publish 0)
     local suffix=$(abcli_option "$options" suffix)
     if [[ -z "$suffix" ]]; then

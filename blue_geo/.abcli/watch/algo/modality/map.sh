@@ -7,7 +7,7 @@ function blue_geo_watch_algo_modality_map() {
     local modality=$(abcli_option "$options" modality rgb)
     local offset=$(abcli_option "$options" offset 0)
     local suffix=$(abcli_option "$options" suffix $(abcli_string_timestamp_short))
-    local do_upload=$(abcli_option_int "$options" upload $(abcli_not do_dryrun))
+    local do_upload=$(abcli_option_int "$options" upload $(abcli_not $do_dryrun))
 
     local query_object_name=$2
 

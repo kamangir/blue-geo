@@ -1,11 +1,6 @@
 from typing import Tuple, Dict, Any, List
 import datetime
-import pandas as pd
-import geopandas as gpd
-from shapely.geometry import Point
 
-from blue_objects import file, objects
-from blue_objects import metadata
 from blue_objects.metadata import post_to_object
 
 from blue_geo.catalog.maxar_open_data.classes import MaxarOpenDataCatalog

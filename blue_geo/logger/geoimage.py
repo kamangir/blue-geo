@@ -42,7 +42,7 @@ def log_geoimage(
         for keyword, value in metadata.items():
             try:
                 metadata_as_str += [f"{keyword}={json.dumps(value)}"]
-            except Exception as e:
+            except Exception:
                 metadata_as_str += [f"{keyword}=..."]
     except Exception:
         pass

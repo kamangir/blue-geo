@@ -18,6 +18,7 @@ from blue_geo.watch.targets.jasper import README as jasper
 from blue_geo.watch.targets.Fagradalsfjall import README as Fagradalsfjall
 from blue_geo.watch.targets.Leonardo import README as Leonardo
 from blue_geo.watch.targets.Mount_Etna import README as Mount_Etna
+from blue_geo.watch.targets.Palisades import README as Palisades
 from blue_geo.watch.targets.Sheerness import README as Sheerness
 from blue_geo.watch.targets.Silver_Peak import README as Silver_Peak
 from blue_objects.env import ABCLI_PUBLIC_PREFIX
@@ -28,6 +29,7 @@ list_of_targets = {
     "chilcotin-river-landslide": chilcotin_river_landslide,
     "burning-man-2024": burning_man_2024,
     "Mount-Etna": Mount_Etna,
+    "Palisades": Palisades,
     "Fagradalsfjall": Fagradalsfjall,
     "Jasper": jasper,
     "Leonardo": Leonardo,

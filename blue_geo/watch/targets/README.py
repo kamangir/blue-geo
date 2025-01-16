@@ -60,6 +60,7 @@ def build() -> bool:
                 "Jasper",
                 "Leonardo",
                 "Mount-Etna",
+                "Palisades",
                 "burning-man-2024",
                 "chilcotin-river-landslide",
             ]

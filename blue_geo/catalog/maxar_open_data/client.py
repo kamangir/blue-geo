@@ -5,10 +5,11 @@ import pathlib
 from tqdm import tqdm
 from shapely.geometry import Point, Polygon
 
-from blue_objects import objects, file
+from blue_objects import objects, file, metadata
 
 from blue_geo import env
 from blue_geo.logger.geoimage import log_geoimage
+from blue_geo.catalog.generic.generic.scope import raster_suffix
 from blue_geo.logger import logger
 
 URL = "https://maxar-opendata.s3.amazonaws.com/events/catalog.json"
@@ -186,7 +187,7 @@ class MaxarOpenDataClient:
     def ingest(
         self,
         datacube_id: str,
-        asset_name: str = "visual",
+        list_of_assets: List[str] = ["visual"],
         log: bool = True,
         verbose: bool = False,
         overwrite: bool = False,
@@ -198,63 +199,84 @@ class MaxarOpenDataClient:
         if not success:
             return success
 
-        if asset_name not in item.assets:
-            logger.error(
-                "{} not found in item.assets: {}".format(
-                    asset_name,
-                    ", ".join(list(item.assets.keys())),
+        for asset_name in tqdm(list_of_assets):
+            if asset_name not in item.assets:
+                logger.error(
+                    "{} not found in item.assets: {}".format(
+                        asset_name,
+                        ", ".join(list(item.assets.keys())),
+                    )
                 )
+                success = False
+                continue
+
+            logger.info(f"ingesting {asset_name} ...")
+
+            asset_relative_href = item.assets[asset_name].href
+            logger.info(f"asset_relative_href= {asset_relative_href}")
+
+            if verbose:
+                for link in item.links:
+                    logger.info("{}: {}".format(link.rel, link.href))
+
+            root_href_candidates = [
+                link.href for link in item.links if link.rel == "self"
+            ]
+            if not root_href_candidates:
+                logger.error(
+                    'cannot find "self" in {}.'.format(
+                        ", ".join([link.rel for link in item.links])
+                    )
+                )
+                success = False
+                continue
+
+            root_href = "/".join(root_href_candidates[0].split("/")[:-1])
+            logger.info("root href: {}".format(root_href))
+
+            asset_href = f"{root_href}/{asset_relative_href}"
+            logger.info(f"asset_href: {asset_href}")
+
+            suffixed_filename = self.get_filename(
+                item=item,
+                filename=asset_relative_href,
             )
-            return False
-
-        asset_relative_href = item.assets["visual"].href
-        logger.info(f"asset_relative_href= {asset_relative_href}")
-
-        if verbose:
-            for link in item.links:
-                logger.info("{}: {}".format(link.rel, link.href))
-
-        root_href_candidates = [link.href for link in item.links if link.rel == "self"]
-        if not root_href_candidates:
-            logger.error(
-                'cannot find "self" in {}.'.format(
-                    ", ".join([link.rel for link in item.links])
-                )
+            full_filename = str(
+                pathlib.Path(
+                    objects.path_of(
+                        filename=suffixed_filename,
+                        object_name=datacube_id,
+                        create=True,
+                    )
+                ).resolve()
             )
-            return False
+            logger.info(f"filename: {full_filename}")
 
-        root_href = "/".join(root_href_candidates[0].split("/")[:-1])
-        logger.info("root href: {}".format(root_href))
+            if not file.download(
+                asset_href,
+                filename=full_filename,
+                overwrite=overwrite,
+            ):
+                success = False
+                continue
 
-        asset_href = f"{root_href}/{asset_relative_href}"
-        logger.info(f"asset_href: {asset_href}")
+            if any(
+                suffixed_filename.endswith(suffix) for suffix in raster_suffix
+            ) and not log_geoimage(
+                filename=suffixed_filename,
+                object_name=datacube_id,
+            ):
+                success = False
+                continue
 
-        suffixed_filename = self.get_filename(
-            item=item,
-            filename=asset_relative_href,
-        )
-        full_filename = str(
-            pathlib.Path(
-                objects.path_of(
-                    filename=suffixed_filename,
-                    object_name=datacube_id,
-                    create=True,
-                )
-            ).resolve()
-        )
-        logger.info(f"filename: {full_filename}")
-
-        if not file.download(
-            asset_href,
-            filename=full_filename,
-            overwrite=overwrite,
+        if not metadata.post_to_object(
+            datacube_id,
+            "item_info",
+            item.to_dict(),
         ):
-            return False
+            success = False
 
-        return log_geoimage(
-            filename=suffixed_filename,
-            object_name=datacube_id,
-        )
+        return success
 
     def query(
         self,
@@ -281,7 +303,11 @@ class MaxarOpenDataClient:
             for item in child.get_items():
                 item_date = datetime.datetime.strptime(
                     item.properties["datetime"],
-                    "%Y-%m-%d %H:%M:%SZ",
+                    (
+                        "%Y-%m-%dT%H:%M:%SZ"
+                        if "T" in item.properties["datetime"]
+                        else "%Y-%m-%d %H:%M:%SZ"
+                    ),
                 )
                 if start_date > item_date or item_date > end_date:
                     continue

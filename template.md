@@ -9,6 +9,7 @@ pip install blue-geo
 ```mermaid
 graph LR
     catalog_browse["@catalog browse <catalog-name> <resource>"]
+    catalog_get["@catalog get <thing> --catalog <catalog>"]
 
     catalog["🌐 catalog"]:::folder
     datacube_id["🧊 datacube"]:::folder
@@ -16,6 +17,9 @@ graph LR
 
     catalog --> catalog_browse
     catalog_browse --> UI
+
+    catalog --> catalog_get
+    catalog_get --> UI
 
     classDef folder fill:#999,stroke:#333,stroke-width:2px;
 ```

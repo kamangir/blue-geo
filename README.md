@@ -9,6 +9,7 @@ pip install blue-geo
 ```mermaid
 graph LR
     catalog_browse["@catalog<br>browse<br>&lt;catalog-name&gt;<br>&lt;resource&gt;"]
+    catalog_get["@catalog<br>get<br>&lt;thing&gt;<br>--catalog<br>&lt;catalog&gt;"]
 
     catalog["🌐 catalog"]:::folder
     datacube_id["🧊 datacube"]:::folder
@@ -16,6 +17,9 @@ graph LR
 
     catalog --> catalog_browse
     catalog_browse --> UI
+
+    catalog --> catalog_get
+    catalog_get --> UI
 
     classDef folder fill:#999,stroke:#333,stroke-width:2px;
 ```
@@ -36,4 +40,4 @@ graph LR
 
 [![pylint](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/blue-geo)](https://pypistats.org/packages/blue-geo)
 
-built by 🌀 [`blue_options-4.189.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.921.1`](https://github.com/kamangir/blue-geo).
+built by 🌀 [`blue_options-4.189.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.922.1`](https://github.com/kamangir/blue-geo).

@@ -11,12 +11,24 @@ def test_get_list_of_collections():
     assert catalog.get_list_of_collections()
 
 
-def test_query():
+@pytest.mark.parametrize(
+    ["lat", "lon"],
+    [
+        [-1, -1],
+        [34.2160393, -118.1509575],
+    ],
+)
+def test_query(
+    lat: float,
+    lon: float,
+):
     object_name = unique_object()
 
     success = MaxarOpenDataDatacube.query(
         object_name=object_name,
         collection_id="WildFires-LosAngeles-Jan-2025",
+        lat=lat,
+        lon=lon,
         start_date="2025-01-10",
         end_date="2025-01-13",
         count=3,

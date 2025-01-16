@@ -20,6 +20,21 @@ class MaxarOpenDataDatacube(GenericDatacube):
             "default": "WildFires-LosAngeles-Jan-2025",
             "help": "WildFires-LosAngeles-Jan-2025 | ...",
         },
+        "lat": {
+            "type": float,
+            "default": -1,
+            "help": "<51.83>",
+        },
+        "lon": {
+            "type": float,
+            "default": -1,
+            "help": "<-122.78>",
+        },
+        "radius": {
+            "type": float,
+            "default": env.MAXAR_OPEN_DATA_CLIENT_QUERY_RADIUS,
+            "help": f"<{env.MAXAR_OPEN_DATA_CLIENT_QUERY_RADIUS}>",
+        },
         "start_date": {
             "default": (datetime.datetime.now() - datetime.timedelta(days=14)).strftime(
                 "%Y-%m-%d"
@@ -106,7 +121,10 @@ class MaxarOpenDataDatacube(GenericDatacube):
         collection_id: str,
         start_date: str,
         end_date: str,
-        count: int,
+        lat: float = -1,
+        lon: float = -1,
+        radius: float = env.MAXAR_OPEN_DATA_CLIENT_QUERY_RADIUS,
+        count: int = -1,
     ) -> bool:
         logger.info(f"🔎 {cls.__name__}.query -> {object_name}")
 
@@ -114,6 +132,9 @@ class MaxarOpenDataDatacube(GenericDatacube):
             collection_id=collection_id,
             start_date=datetime.datetime.strptime(start_date, "%Y-%m-%d"),
             end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d"),
+            lat=lat,
+            lon=lon,
+            radius=radius,
             count=count,
             log=True,
         )

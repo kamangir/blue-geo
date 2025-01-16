@@ -21,8 +21,7 @@ graph LR
     datacube_list["@datacube<br>list<br>&lt;datacube-id&gt;<br>--scope &lt;scope&gt;"]
 
     catalog["🌐 catalog"]:::folder
-    datacube_id["🧊 datacube_id"]:::folder
-    datacube["📂 datacube"]:::folder
+    datacube["🧊 datacube"]:::folder
     UI["🖥️ UI"]:::folder
     query_object["📂 query object"]:::folder
     target["🎯 target"]:::folder
@@ -42,19 +41,18 @@ graph LR
     catalog_query --> query_object
 
     query_object --> catalog_query_read
-    catalog_query_read --> datacube_id
+    catalog_query_read --> datacube
 
-    datacube_id --> datacube_crop
+    datacube --> datacube_crop
     target --> datacube_crop
-    datacube_crop --> datacube
 
-    datacube_id --> datacube_get
+    datacube --> datacube_get
     datacube_get --> UI
 
-    datacube_id --> datacube_ingest
+    datacube --> datacube_ingest
     datacube_ingest --> datacube
 
-    datacube_id --> datacube_list
+    datacube --> datacube_list
     datacube_list --> UI
 
     classDef folder fill:#999,stroke:#333,stroke-width:2px;
@@ -76,4 +74,4 @@ graph LR
 
 [![pylint](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/blue-geo)](https://pypistats.org/packages/blue-geo)
 
-built by 🌀 [`blue_options-4.189.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.929.1`](https://github.com/kamangir/blue-geo).
+built by 🌀 [`blue_options-4.189.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.930.1`](https://github.com/kamangir/blue-geo).

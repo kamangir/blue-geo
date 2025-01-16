@@ -21,8 +21,7 @@ graph LR
     datacube_list["@datacube list <datacube-id> --scope~<scope>"]
 
     catalog["🌐 catalog"]:::folder
-    datacube_id["🧊 datacube_id"]:::folder
-    datacube["📂 datacube"]:::folder
+    datacube["🧊 datacube"]:::folder
     UI["🖥️ UI"]:::folder
     query_object["📂 query object"]:::folder
     target["🎯 target"]:::folder
@@ -42,19 +41,18 @@ graph LR
     catalog_query --> query_object
 
     query_object --> catalog_query_read
-    catalog_query_read --> datacube_id
+    catalog_query_read --> datacube
 
-    datacube_id --> datacube_crop
+    datacube --> datacube_crop
     target --> datacube_crop
-    datacube_crop --> datacube
 
-    datacube_id --> datacube_get
+    datacube --> datacube_get
     datacube_get --> UI
 
-    datacube_id --> datacube_ingest
+    datacube --> datacube_ingest
     datacube_ingest --> datacube
 
-    datacube_id --> datacube_list
+    datacube --> datacube_list
     datacube_list --> UI
 
     classDef folder fill:#999,stroke:#333,stroke-width:2px;

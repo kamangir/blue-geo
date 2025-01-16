@@ -12,7 +12,7 @@ graph LR
 
     catalog["🌐 catalog"]:::folder
     datacube_id["🧊 datacube"]:::folder
-    ui["🖥️ UI"]:::folder
+    UI["🖥️ UI"]:::folder
 
     catalog --> catalog_browse
     catalog_browse --> UI

@@ -91,7 +91,12 @@ for target_name in sorted(list_of_targets.keys()):
             "",
         ]
 
-    items += target_list.get(target_name).urls_as_str()
+    items += target_list.get(
+        target_info.get(
+            "target_name",
+            target_name,
+        )
+    ).urls_as_str()
 
     items += [
         "- {}.".format(

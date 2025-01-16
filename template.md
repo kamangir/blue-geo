@@ -45,6 +45,7 @@ graph LR
 
     datacube --> datacube_crop
     target --> datacube_crop
+    datacube_crop --> datacube
 
     datacube --> datacube_get
     datacube_get --> UI

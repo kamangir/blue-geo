@@ -150,7 +150,19 @@ class MaxarOpenDataClient:
         self,
         datacube_id: str,
         log: bool = False,
+        read_from_cache: bool = env.MAXAR_OPEN_DATA_CLIENT_CACHE_ITEMS,
+        write_to_cache: bool = env.MAXAR_OPEN_DATA_CLIENT_CACHE_ITEMS,
     ) -> Tuple[bool, Any]:
+        cache_filename = objects.path_of(
+            object_name=datacube_id,
+            filename="item.bin",
+        )
+
+        if read_from_cache and file.exists(cache_filename):
+            success, item = file.load(cache_filename, ignore_error=True)
+            if success:
+                return success, item
+
         success, collection_id, item_id = self.parse_datacube_id(
             datacube_id=datacube_id,
             log=log,
@@ -181,6 +193,9 @@ class MaxarOpenDataClient:
         item = list_of_items[0]
         if log:
             logger.info(f"item: {item}.")
+
+        if write_to_cache:
+            file.save(cache_filename, item)
 
         return True, item
 

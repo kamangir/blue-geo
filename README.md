@@ -15,10 +15,16 @@ graph LR
     catalog_query["@catalog<br>query<br>&lt;catalog-name&gt;<br>&lt;collection-name&gt;<br>scope=&lt;scope&gt;<br>&lt;query-object-name&gt;"]
     catalog_query_read["@catalog<br>query<br>read -<br>&lt;query-object-name&gt;"]
 
+    datacube_crop["@datacube<br>crop -<br>&lt;object-name&gt;<br>&lt;datacube-id&gt;"]
+    datacube_get["@datacube<br>get<br>catalog<br>&lt;datacube-id&gt;"]
+    datacube_ingest["@datacube<br>ingest<br>scope=&lt;scope&gt;<br>&lt;datacube-id&gt;"]
+    datacube_list["@datacube<br>list<br>&lt;datacube-id&gt;<br>--scope &lt;scope&gt;"]
+
     catalog["🌐 catalog"]:::folder
-    datacube_id["🧊 datacube"]:::folder
+    datacube_id["🧊 datacube_id"]:::folder
     UI["🖥️ UI"]:::folder
     query_object["query object"]:::folder
+    target["🎯 target"]:::folder
 
     catalog --> catalog_browse
     catalog_browse --> UI
@@ -35,6 +41,19 @@ graph LR
     catalog_query --> query_object
 
     query_object --> catalog_query_read
+    catalog_query_read --> datacube_id
+
+    datacube_id --> datacube_crop
+    target --> datacube_crop
+    datacube_crop --> datacube_id
+
+    datacube_id --> datacube_get
+    datacube_get --> UI
+
+    datacube_id --> datacube_ingest
+
+    datacube_id --> datacube_list
+    datacube_list --> UI
 
     classDef folder fill:#999,stroke:#333,stroke-width:2px;
 ```
@@ -55,4 +74,4 @@ graph LR
 
 [![pylint](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/blue-geo)](https://pypistats.org/packages/blue-geo)
 
-built by 🌀 [`blue_options-4.189.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.927.1`](https://github.com/kamangir/blue-geo).
+built by 🌀 [`blue_options-4.189.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.928.1`](https://github.com/kamangir/blue-geo).

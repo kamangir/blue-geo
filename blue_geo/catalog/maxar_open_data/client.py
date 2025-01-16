@@ -5,7 +5,7 @@ import pathlib
 from tqdm import tqdm
 from shapely.geometry import Point, Polygon
 
-from blue_objects import objects, file
+from blue_objects import objects, file, metadata
 
 from blue_geo import env
 from blue_geo.logger.geoimage import log_geoimage
@@ -268,6 +268,13 @@ class MaxarOpenDataClient:
             ):
                 success = False
                 continue
+
+        if not metadata.post_to_object(
+            datacube_id,
+            "item_info",
+            item.to_dict(),
+        ):
+            success = False
 
         return success
 

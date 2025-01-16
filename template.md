@@ -9,7 +9,7 @@ pip install blue-geo
 ```mermaid
 graph LR
     catalog_browse["@catalog browse <catalog-name> <resource>"]
-    catalog_get["@catalog get <thing> --catalog~<catalog>"]
+    catalog_get["@catalog get~<thing> --catalog~<catalog>"]
     catalog_list_catalogs["@catalog list catalogs"]
     catalog_list["@catalog list collections|datacube_classes --catalog~<catalog>"]
     catalog_query["@catalog query <catalog-name> <collection-name> scope=<scope> <query-object-name>"]
@@ -32,7 +32,7 @@ graph LR
     catalog_list --> UI
 
     catalog --> catalog_query
-    catalog_query --> catalog_query_read
+    catalog_query --> query_object
 
     query_object --> catalog_query_read
 

@@ -9,7 +9,7 @@ pip install blue-geo
 ```mermaid
 graph LR
     catalog_browse["@catalog<br>browse<br>&lt;catalog-name&gt;<br>&lt;resource&gt;"]
-    catalog_get["@catalog<br>get<br>&lt;thing&gt;<br>--catalog &lt;catalog&gt;"]
+    catalog_get["@catalog<br>get &lt;thing&gt;<br>--catalog &lt;catalog&gt;"]
     catalog_list_catalogs["@catalog<br>list<br>catalogs"]
     catalog_list["@catalog<br>list<br>collections|datacube_classes<br>--catalog &lt;catalog&gt;"]
     catalog_query["@catalog<br>query<br>&lt;catalog-name&gt;<br>&lt;collection-name&gt;<br>scope=&lt;scope&gt;<br>&lt;query-object-name&gt;"]
@@ -32,7 +32,7 @@ graph LR
     catalog_list --> UI
 
     catalog --> catalog_query
-    catalog_query --> catalog_query_read
+    catalog_query --> query_object
 
     query_object --> catalog_query_read
 
@@ -55,4 +55,4 @@ graph LR
 
 [![pylint](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/blue-geo)](https://pypistats.org/packages/blue-geo)
 
-built by 🌀 [`blue_options-4.189.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.925.1`](https://github.com/kamangir/blue-geo).
+built by 🌀 [`blue_options-4.189.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.926.1`](https://github.com/kamangir/blue-geo).

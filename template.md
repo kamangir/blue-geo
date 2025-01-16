@@ -22,8 +22,9 @@ graph LR
 
     catalog["🌐 catalog"]:::folder
     datacube_id["🧊 datacube_id"]:::folder
+    datacube["📂 datacube"]:::folder
     UI["🖥️ UI"]:::folder
-    query_object["query object"]:::folder
+    query_object["📂 query object"]:::folder
     target["🎯 target"]:::folder
 
     catalog --> catalog_browse
@@ -45,12 +46,13 @@ graph LR
 
     datacube_id --> datacube_crop
     target --> datacube_crop
-    datacube_crop --> datacube_id
+    datacube_crop --> datacube
 
     datacube_id --> datacube_get
     datacube_get --> UI
 
     datacube_id --> datacube_ingest
+    datacube_ingest --> datacube
 
     datacube_id --> datacube_list
     datacube_list --> UI

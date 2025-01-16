@@ -20,10 +20,13 @@ graph LR
     datacube_ingest["@datacube ingest scope=<scope> <datacube-id>"]
     datacube_list["@datacube list <datacube-id> --scope~<scope>"]
 
+    geo_watch["@geo~watch batch <query-object-name>|target=<target>~- to=<runner>~-~- <object-name>"]
+
     catalog["🌐 catalog"]:::folder
     datacube["🧊 datacube"]:::folder
     UI["🖥️ UI"]:::folder
     query_object["📂 query object"]:::folder
+    object["📂 object"]:::folder
     target["🎯 target"]:::folder
 
     catalog --> catalog_browse
@@ -55,6 +58,10 @@ graph LR
 
     datacube --> datacube_list
     datacube_list --> UI
+
+    query_object --> geo_watch
+    target --> get_watch
+    get_watch --> object
 
     classDef folder fill:#999,stroke:#333,stroke-width:2px;
 ```

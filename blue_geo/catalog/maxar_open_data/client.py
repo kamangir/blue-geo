@@ -261,7 +261,7 @@ class MaxarOpenDataClient:
                 continue
 
             if any(
-                [suffixed_filename.endswith(suffix) for suffix in raster_suffix]
+                suffixed_filename.endswith(suffix) for suffix in raster_suffix
             ) and not log_geoimage(
                 filename=suffixed_filename,
                 object_name=datacube_id,

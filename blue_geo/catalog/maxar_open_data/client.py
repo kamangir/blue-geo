@@ -303,7 +303,11 @@ class MaxarOpenDataClient:
             for item in child.get_items():
                 item_date = datetime.datetime.strptime(
                     item.properties["datetime"],
-                    "%Y-%m-%d %H:%M:%SZ",
+                    (
+                        "%Y-%m-%dT%H:%M:%SZ"
+                        if "T" in item.properties["datetime"]
+                        else "%Y-%m-%d %H:%M:%SZ"
+                    ),
                 )
                 if start_date > item_date or item_date > end_date:
                     continue

@@ -29,13 +29,13 @@ graph LR
     object["📂 object"]:::folder
     target["🎯 target"]:::folder
 
+    catalog_list_catalogs --> UI
+
     catalog --> catalog_browse
     catalog_browse --> UI
 
     catalog --> catalog_get
     catalog_get --> UI
-
-    catalog_list_catalogs --> UI
 
     catalog --> catalog_list
     catalog_list --> UI

@@ -10,8 +10,8 @@ pip install blue-geo
 graph LR
     catalog_browse["@catalog browse <catalog-name> <resource>"]
     catalog_get["@catalog get~<thing> --catalog~<catalog>"]
-    catalog_list_catalogs["@catalog list catalogs"]
-    catalog_list["@catalog list collections|datacube_classes --catalog~<catalog>"]
+    catalog_list_catalogs["@catalog list~catalogs"]
+    catalog_list["@catalog list~collections|datacube_classes --catalog~<catalog>"]
     catalog_query["@catalog query <catalog-name> <collection-name> scope=<scope> <query-object-name>"]
     catalog_query_read["@catalog query read~- <query-object-name>"]
 

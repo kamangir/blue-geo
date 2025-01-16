@@ -19,7 +19,7 @@ The `maxar_open_data` catalog covers [Maxar's Open Data program](https://www.max
 	[--end_date <yyyy-mm-dd>] \
 	[--lat <51.83>] \
 	[--lon <-122.78>] \
-	[--radius <0.1>] \
+	[--radius <0.01>] \
 	[--start_date <yyyy-mm-dd>]
  . maxar_open_data/collection -query-> <object-name>.
    scope: @datacube ingest help.

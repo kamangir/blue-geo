@@ -32,8 +32,8 @@ class MaxarOpenDataDatacube(GenericDatacube):
         },
         "radius": {
             "type": float,
-            "default": 0.1,
-            "help": "<0.1>",
+            "default": env.MAXAR_OPEN_DATA_CLIENT_QUERY_RADIUS,
+            "help": f"<{env.MAXAR_OPEN_DATA_CLIENT_QUERY_RADIUS}>",
         },
         "start_date": {
             "default": (datetime.datetime.now() - datetime.timedelta(days=14)).strftime(
@@ -123,7 +123,7 @@ class MaxarOpenDataDatacube(GenericDatacube):
         end_date: str,
         lat: float = -1,
         lon: float = -1,
-        radius: float = 0.1,
+        radius: float = env.MAXAR_OPEN_DATA_CLIENT_QUERY_RADIUS,
         count: int = -1,
     ) -> bool:
         logger.info(f"🔎 {cls.__name__}.query -> {object_name}")

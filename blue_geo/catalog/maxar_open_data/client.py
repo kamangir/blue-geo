@@ -7,6 +7,7 @@ from shapely.geometry import Point, Polygon
 
 from blue_objects import objects, file
 
+from blue_geo import env
 from blue_geo.logger.geoimage import log_geoimage
 from blue_geo.logger import logger
 
@@ -262,7 +263,7 @@ class MaxarOpenDataClient:
         end_date: datetime.datetime,
         lat: float = -1,
         lon: float = -1,
-        radius: float = 0.1,
+        radius: float = env.MAXAR_OPEN_DATA_CLIENT_QUERY_RADIUS,
         count: int = -1,
         log: bool = False,
         verbose: bool = False,

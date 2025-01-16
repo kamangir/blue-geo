@@ -41,3 +41,5 @@ def test_blue_geo_env():
     assert env.SKYFOX_CLIENT_SECRET
 
     assert env.BLUE_GEO_WATCH_ALGO_DIFF_MAP_DYNAMIC_RANGE
+
+    assert env.MAXAR_OPEN_DATA_CLIENT_QUERY_RADIUS != 0.0

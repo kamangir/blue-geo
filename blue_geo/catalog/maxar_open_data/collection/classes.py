@@ -65,13 +65,20 @@ class MaxarOpenDataDatacube(GenericDatacube):
             return success, output
 
         return (
-            self.catalog.client.ingest(datacube_id=self.datacube_id),
+            self.catalog.client.ingest(
+                datacube_id=self.datacube_id,
+                list_of_assets=self.list_of_files(
+                    scope=DatacubeScope(scope),
+                    return_asset_names=True,
+                ),
+            ),
             {},
         )
 
     def list_of_files(
         self,
         scope: DatacubeScope = DatacubeScope("all"),
+        return_asset_names: bool = False,
         verbose: bool = False,
     ) -> List[str]:
         success, item = self.catalog.client.get_item(
@@ -81,20 +88,32 @@ class MaxarOpenDataDatacube(GenericDatacube):
         if not success:
             return []
 
-        return scope.filter(
-            [
-                {
-                    "filename": self.catalog.client.get_filename(
-                        item=item,
-                        filename=asset.href,
-                    ),
-                }
-                for asset in item.assets.values()
-            ],
+        list_of_assets = [
+            {
+                "filename": self.catalog.client.get_filename(
+                    item=item,
+                    filename=asset.href,
+                ),
+                "asset_name": asset_name,
+            }
+            for asset_name, asset in item.assets.items()
+        ]
+
+        output = scope.filter(
+            list_of_assets,
             needed_for_rgb=lambda filename: filename.endswith("-visual.tif"),
             is_rgb=lambda filename: filename.endswith("-visual.tif"),
             verbose=verbose,
         )
+
+        if return_asset_names:
+            output = [
+                asset["asset_name"]
+                for asset in list_of_assets
+                if asset["filename"] in output
+            ]
+
+        return output
 
     @classmethod
     def parse_datacube_id(cls, datacube_id: str) -> Tuple[

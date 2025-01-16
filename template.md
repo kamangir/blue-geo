@@ -60,8 +60,8 @@ graph LR
     datacube_list --> UI
 
     query_object --> geo_watch
-    target --> get_watch
-    get_watch --> object
+    target --> geo_watch
+    geo_watch --> object
 
     classDef folder fill:#999,stroke:#333,stroke-width:2px;
 ```

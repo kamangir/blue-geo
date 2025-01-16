@@ -60,8 +60,8 @@ graph LR
     datacube_list --> UI
 
     query_object --> geo_watch
-    target --> get_watch
-    get_watch --> object
+    target --> geo_watch
+    geo_watch --> object
 
     classDef folder fill:#999,stroke:#333,stroke-width:2px;
 ```
@@ -82,4 +82,4 @@ graph LR
 
 [![pylint](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/blue-geo)](https://pypistats.org/packages/blue-geo)
 
-built by 🌀 [`blue_options-4.189.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.932.1`](https://github.com/kamangir/blue-geo).
+built by 🌀 [`blue_options-4.189.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.933.1`](https://github.com/kamangir/blue-geo).

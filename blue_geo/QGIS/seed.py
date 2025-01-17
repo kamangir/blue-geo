@@ -33,6 +33,7 @@ def generate_seed(
                 "console/layer",
                 "console/file",
                 "console/file_load",
+                "console/file_save",
                 "console/graphics",
                 "console/objects",
                 "console/path",
@@ -41,7 +42,6 @@ def generate_seed(
                 "console/seed",
                 "console/help",
                 "console/QGIS",
-                "console/alias",
             ]
         ]
         + sorted(glob(f"{apps_path}/*.py"))

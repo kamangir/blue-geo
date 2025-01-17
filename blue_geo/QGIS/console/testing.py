@@ -40,7 +40,3 @@ def Q_test():
         Q_hr()
 
     Q_log(f"ran {description}.", icon="✅")
-
-
-def Q_testing_help():
-    Q_log("Q.test", f"test Q.")

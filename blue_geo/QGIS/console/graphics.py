@@ -17,9 +17,7 @@ def Q_refresh(deep=False):
         iface.mapCanvas().refresh()
 
 
-def Q_screenshot(
-    filename="",
-):
+def Q_screenshot(filename=""):
     filename = Q_file_path_in_object(
         filename=filename if filename else f"{Q_timestamp()}.png",
         object_name=Q_project.name,
@@ -28,7 +26,3 @@ def Q_screenshot(
     qgis.utils.iface.mapCanvas().saveAsImage(filename)
 
     Q_log(filename, icon="🖼️")
-
-
-def Q_graphics_help():
-    Q_log("Q_screenshot([filename],[object_name])", "screenshot.")

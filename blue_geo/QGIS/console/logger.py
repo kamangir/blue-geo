@@ -8,7 +8,7 @@ if not QGIS_is_live:
     from .mock import iface
 
 
-def Q_clear():
+def Q_clear(log: bool = True):
     # https://gis.stackexchange.com/a/480025/250728
     from qgis.PyQt.QtWidgets import QDockWidget
 
@@ -17,7 +17,7 @@ def Q_clear():
 
     QGIS.intro()
 
-    Q_seed("clear")
+    Q_seed("clear", log=log)
 
 
 def Q_hr(length: int = 3):

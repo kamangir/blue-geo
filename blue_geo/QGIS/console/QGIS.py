@@ -5,11 +5,14 @@ import yaml
 
 
 if not QGIS_is_live:
+    from dependency import list_of_dependencies
     from .application import BLUE_GEO_QGIS_APPLICATION
     from .help import Q_help
+    from .graphics import Q_screenshot
     from .logger import Q_log, Q_verbose, Q_clear
-    from dependency import list_of_dependencies
     from .mock import QgsSettings
+    from .objects import Q_get_thing_path, Q_upload
+    from .path import Q_open_path
     from .testing import Q_test
 
     ABCLI_OBJECT_ROOT = ""
@@ -50,10 +53,6 @@ def Q_list_recent_projects() -> str:
     return ",".join(output)
 
 
-def Q_QGIS_help():
-    Q_log("Q_list_recent_projects()", "list recent projects.")
-
-
 class ABCLI_QGIS:
     def __init__(self):
         self.app_list: List[BLUE_GEO_QGIS_APPLICATION] = []
@@ -61,8 +60,13 @@ class ABCLI_QGIS:
     def add_app(self, app: BLUE_GEO_QGIS_APPLICATION):
         self.app_list += [app]
 
-    def help(log):
+    def help_(self):
         Q_log("Q.clear", "clear Python Console.")
+        Q_log("Q.list_recent_projects", "list recent projects.")
+        Q_log('Q.open(" | <object-name> | layer | project")', "open.")
+        Q_log("Q.screenshot([filename],[object_name])", "screenshot.")
+        Q_log("Q.test", "test Q.")
+        Q_log('Q.upload(" | <object-name> | layer | project | qgz")', "upload.")
 
     def intro(self):
         Q_log(self.version)
@@ -89,9 +93,27 @@ class ABCLI_QGIS:
     def help(self):
         Q_help(clear=True)
 
+    def list_recent_projects(self):
+        Q_list_recent_projects()
+
+    def open(thing="object"):
+        Q_open_path(Q_get_thing_path(thing))
+
     @property
     def test(self):
         Q_test()
 
+    def upload(
+        self,
+        thing: str = "",
+        dryrun: bool = False,
+    ):
+        Q_upload(
+            thing=thing,
+            dryrun=dryrun,
+        )
+
 
 QGIS = ABCLI_QGIS()
+
+Q = QGIS

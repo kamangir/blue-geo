@@ -4,7 +4,8 @@ import os
 import random
 
 if not QGIS_is_live:
-    from logger import Q_log
+    from .file_save import Q_save_text
+    from .logger import Q_log
 
 blue_geo_QGIS_path_server = os.path.join(
     os.getenv("HOME", ""),
@@ -17,6 +18,7 @@ os.makedirs(blue_geo_QGIS_path_server, exist_ok=True)
 def Q_seed(
     command: Union[str, List[str]],
     dryrun: bool = False,
+    log: bool = True,
 ):
     if isinstance(command, list):
         command = " ".join(command)
@@ -27,13 +29,14 @@ def Q_seed(
     )
 
     if not dryrun:
-        with open(
-            os.path.join(
+        Q_save_text(
+            filename=os.path.join(
                 blue_geo_QGIS_path_server,
                 f"{command_name}.command",
             ),
-            "w",
-        ) as f:
-            f.write(command)
+            text=[command],
+            log=log,
+        )
 
-    Q_log(command_name, command, icon="🌱")
+    if log:
+        Q_log(command_name, command, icon="🌱")

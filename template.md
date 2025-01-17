@@ -9,18 +9,18 @@ pip install blue-geo
 ```mermaid
 graph LR
     catalog_browse["@catalog browse <catalog-name> <resource>"]
-    catalog_get["@catalog get~<thing> --catalog~<catalog>"]
-    catalog_list_catalogs["@catalog list~catalogs"]
-    catalog_list["@catalog list~collections|datacube_classes --catalog~<catalog>"]
+    catalog_get["@catalog get~~<thing> --catalog~~<catalog>"]
+    catalog_list_catalogs["@catalog list~~catalogs"]
+    catalog_list["@catalog list~~collections|datacube_classes --catalog~~<catalog>"]
     catalog_query["@catalog query <catalog-name> <collection-name> scope=<scope> <query-object-name>"]
-    catalog_query_read["@catalog query read~- <query-object-name>"]
+    catalog_query_read["@catalog query read~~- <query-object-name>"]
 
-    datacube_crop["@datacube crop~- <object-name> <datacube-id>"]
+    datacube_crop["@datacube crop~~- <object-name> <datacube-id>"]
     datacube_get["@datacube get catalog <datacube-id>"]
     datacube_ingest["@datacube ingest scope=<scope> <datacube-id>"]
-    datacube_list["@datacube list <datacube-id> --scope~<scope>"]
+    datacube_list["@datacube list <datacube-id> --scope~~<scope>"]
 
-    geo_watch["@geo~watch batch <query-object-name>|target=<target>~- to=<runner>~-~- <object-name>"]
+    geo_watch["@geo~watch batch <query-object-name>|target=<target>~~- to=<runner>~~-~~- <object-name>"]
 
     catalog["🌐 catalog"]:::folder
     datacube["🧊 datacube"]:::folder

@@ -14,12 +14,12 @@ function blue_geo_catalog_query_ingest() {
 
     local list_of_datacubes
     if [[ -z "$index" ]]; then
-        list_of_datacubes =$(blue_geo_catalog_query_read all \
+        list_of_datacubes=$(blue_geo_catalog_query_read all \
             $query_object_name \
             --log 0 \
             --delim +)
     else
-        list_of_datacubes =$(blue_geo_catalog_query_read - \
+        list_of_datacubes=$(blue_geo_catalog_query_read - \
             $query_object_name \
             --log 0 \
             --offset $index \

@@ -10,6 +10,8 @@ function test_blue_geo_catalog_query_ingest() {
         scope=rgb
     [[ $? -ne 0 ]] && return 1
 
+    abcli_hr
+
     abcli_eval ,$options \
         blue_geo_catalog_query_ingest \
         download \

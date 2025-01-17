@@ -31,12 +31,11 @@ def help_ingest(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = ingest_options(mono)
-
     return show_usage(
         [
-            "@datacube ingest",
-            f"[{options}]",
+            "@datacube",
+            "ingest",
+            f"[{ingest_options(mono)}]",
             "[.|<datacube-id>]",
             "[<args>]",
         ],

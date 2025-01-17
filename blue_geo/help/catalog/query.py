@@ -1,12 +1,14 @@
 from typing import List
 
-from blue_options.terminal import show_usage
+from blue_options.terminal import show_usage, xtra
 
 from blue_geo.help.datacube.ingest import ingest_options
 from blue_geo.catalog.functions import get_datacube_class_in_catalog
 from blue_geo.catalog.default import as_list_of_args
 from blue_geo.catalog.classes import list_of_catalogs
 from blue_geo.catalog.functions import get_list_of_datacube_classes
+from blue_geo.help.datacube import ingest_options as datacube_ingest_options
+from blue_geo.help.datacube import scope_details
 
 
 def help_query(
@@ -15,8 +17,14 @@ def help_query(
 ) -> str:
     if not tokens:
         return "\n".join(
-            [help_query([token], mono) for token in ["read"] + list_of_catalogs]
+            [
+                help_query([token], mono)
+                for token in ["ingest", "read"] + list_of_catalogs
+            ]
         )
+
+    if tokens[0] == "ingest":
+        return help_query_ingest(tokens[1:], mono=mono)
 
     if tokens[0] == "read":
         return help_query_read(tokens[1:], mono=mono)
@@ -60,11 +68,33 @@ def help_query(
     )
 
 
+def help_query_ingest(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = xtra("download,index=<index>", mono=mono)
+
+    return show_usage(
+        [
+            "@catalog",
+            "query",
+            "ingest",
+            f"[{options}]",
+            "[.|<query-object-name>]",
+            f"[{datacube_ingest_options(mono)}]",
+        ],
+        "ingest the datacubes in the query.",
+        scope_details,
+        mono=mono,
+    )
+
+
 def help_query_read(
     tokens: List[str],
     mono: bool,
 ) -> str:
     options = "all,download,len"
+
     args = [
         "[--count <count>]",
         "[--delim <delim>]",
@@ -79,9 +109,9 @@ def help_query_read(
         [
             "@catalog query read",
             f"[{options}]",
-            "[.|<object-name>]",
+            "[.|<query-object-name>]",
         ]
         + args,
-        "read query results in <object-name>.",
+        "read the query.",
         mono=mono,
     )

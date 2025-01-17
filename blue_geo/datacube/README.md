@@ -14,7 +14,8 @@ run `@datacube ingest`  or use [`@catalog query <catalog> <collection> ingest`](
 @datacube ingest help
 ```
 ```bash
-@datacube ingest \
+@datacube \
+	ingest \
 	[~copy_template,dryrun,overwrite,scope=<scope>,upload] \
 	[.|<datacube-id>] \
 	[<args>]

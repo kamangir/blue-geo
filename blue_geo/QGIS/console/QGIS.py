@@ -12,12 +12,12 @@ if not QGIS_is_live:
 
 
 class ABCLI_QGIS(object):
-    def Q_help(self, clear=False):
+    def help(self):
         Q_log("Q.list_of_projects()", "list recent projects.")
 
     # https://qgis.org/pyqgis/master/core/QgsSettings.html#qgis.core.QgsSettings.allKeys
     # https://docs.qgis.org/3.28/en/docs/pyqgis_developer_cookbook/settings.html
-    def list_of_projects(self):
+    def list_of_projects(self) -> str:
         settings = QgsSettings()
 
         list_of_filenames = [

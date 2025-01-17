@@ -10,7 +10,7 @@ if not QGIS_is_live:
 
 
 def Q_get_thing_name_or_path(thing, property: str) -> str:
-    assert property in ["name", "path"]
+    assert property in ["name", "path"], f"invalid property: {property}"
 
     return_project: bool = True
     if thing in ["project", "qgz", Q_project, "object", object]:

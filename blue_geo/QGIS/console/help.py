@@ -12,15 +12,11 @@ def Q_help(clear=False):
 
     Q_log("clear()", "clear Python Console.")
 
-    Q_layer.help()
-
     Q_log("Q_screenshot([filename],[object_name])", "screenshot.")
 
     Q_log("Q.load(filename,layer_name,template_name)", "load a layer.")
 
     Q_log('Q.open(" | <object-name> | layer | project")', "open.")
-
-    Q_project.help()
 
     Q_log("Q_refresh()", "refresh.")
     Q_log("Q.reload()", "reload all layers.")
@@ -33,6 +29,9 @@ def Q_help(clear=False):
 
     Q_log("Q_verbose  = True|False", "set Q's verbose state.")
 
-    Q_app_list.help()
-
-    QGIS.help()
+    for thing in [
+        Q_layer,
+        Q_project,
+        QGIS,
+    ] + Q_app_list.app_list:
+        thing.help()

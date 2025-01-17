@@ -25,9 +25,5 @@ class BLUE_GEO_QGIS_APPLICATION_List:
     def add(self, app):
         self.app_list += [app]
 
-    def help(self):
-        for app in self.app_list.app_list:
-            app.help()
-
 
 Q_app_list = BLUE_GEO_QGIS_APPLICATION_List()

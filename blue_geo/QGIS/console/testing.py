@@ -4,14 +4,21 @@ if not QGIS_is_live:
     from tests.alias import test_aliases
     from tests.application import test_template_application
     from tests.graphics import test_graphics_screenshot
+    from tests.help import test_help
     from tests.logger import test_logging
+    from tests.objects import test_objects_get_name_or_path, test_objects_upload
+    from tests.QGIS import test_QGIS_list_of_projects
     from tests.string import test_timestamp
 
 
 list_of_tests = [
     test_aliases,
     test_graphics_screenshot,
+    test_help,
     test_logging,
+    test_objects_get_name_or_path,
+    test_objects_upload,
+    test_QGIS_list_of_projects,
     test_template_application,
     test_timestamp,
 ]

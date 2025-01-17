@@ -21,7 +21,7 @@ class DatacubeScope:
         "rgbx",
     ]
 
-    help = "+".join(
+    help = " + ".join(
         sorted(special_options) + [f"<{suffix}>" for suffix in raster_suffix]
     )
 

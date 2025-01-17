@@ -84,3 +84,21 @@ def test_target_list_save(
             object_name=object_name,
         )
     )
+
+
+@pytest.mark.parametrize(
+    ["catalog_name"],
+    [
+        [""],
+        ["maxar_open_data"],
+    ],
+)
+def test_target_list_for_catalog(
+    catalog_name: str,
+):
+    target_list = TargetList(
+        catalog=catalog_name,
+        download=True,
+    )
+
+    assert len(target_list.list_of_targets) > 0

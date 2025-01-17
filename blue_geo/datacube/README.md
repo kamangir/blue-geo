@@ -19,7 +19,7 @@ run `@datacube ingest`  or use [`@catalog query <catalog> <collection> ingest`](
 	[.|<datacube-id>] \
 	[<args>]
  . ingest <datacube-id>/<scope>.
-   scope=all+metadata+raster+rgb+rgbx+<.jp2>+<.tif>+<.tiff>
+   scope: all + metadata + raster + rgb + rgbx + <.jp2> + <.tif> + <.tiff>
       all: ALL files.
       metadata (default): any < 1 MB.
       raster: all raster.

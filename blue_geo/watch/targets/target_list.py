@@ -17,11 +17,19 @@ class TargetList:
         self,
         load: bool = True,
         download: bool = False,
+        catalog: str = "",
     ) -> None:
         self.list_of_targets: Dict[str, Target] = {}
 
         if load:
             assert self.load(download)
+
+        if catalog:
+            self.list_of_targets = {
+                target_name: target
+                for target_name, target in self.list_of_targets.items()
+                if target.catalog == catalog
+            }
 
     def download(self) -> bool:
         return objects.download(

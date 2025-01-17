@@ -21,6 +21,7 @@ function test_@geo_help() {
         "@geo datacube generate" \
         "@geo datacube get" \
         "@geo datacube ingest" \
+        "@geo datacube label" \
         "@geo datacube list" \
         \
         "@geo gdal" \

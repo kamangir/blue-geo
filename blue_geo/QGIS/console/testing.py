@@ -31,4 +31,4 @@ def Q_test(deep: bool = False):
         test_function(deep=deep)
         Q_hr()
 
-    Q_log(f"ran {description}.")
+    Q_log(f"ran {description}.", icon="✅")

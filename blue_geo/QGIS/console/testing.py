@@ -2,6 +2,7 @@ if not QGIS_is_live:
     from logger import log, hr
 
     from tests.alias import test_aliases
+    from tests.application import test_template_application
 
     # from tests.layer import test_layer...
     from tests.logger import test_logging
@@ -17,6 +18,7 @@ if not QGIS_is_live:
 list_of_tests = [
     test_aliases,
     test_logging,
+    test_template_application,
     test_QGIS_get_property,
     test_QGIS_logging,
     test_QGIS_open,

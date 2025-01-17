@@ -9,7 +9,7 @@ def help_label(
 ) -> str:
     options = "".join(
         [
-            xtra("dryrun,~QGIS,~rasterize,", mono=mono),
+            xtra("dryrun,~QGIS,~rasterize,~sync,", mono=mono),
             "upload",
         ]
     )

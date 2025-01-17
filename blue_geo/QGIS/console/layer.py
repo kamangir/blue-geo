@@ -3,6 +3,8 @@ import os
 if not QGIS_is_live:
     from .graphics import Q_refresh
     from .logger import Q_log_error, Q_log
+    from .project import Q_project
+
     from .mock import (
         QgsRasterLayer,
         QgsProject,
@@ -48,7 +50,7 @@ class ABCLI_QGIS_Layer(object):
             layer_.triggerRepaint()
 
         if template_name:
-            template_layer = self.get_layer(template_name)
+            template_layer = Q_project.get_layer(template_name)
             if not len(template_layer):
                 Q_log_error(f"template not found: {template_name}.")
                 return False
@@ -67,23 +69,6 @@ class ABCLI_QGIS_Layer(object):
 
         if refresh:
             Q_refresh()
-
-    def exists(
-        self,
-        layer_name: str,
-        verbose: bool = True,
-    ) -> bool:
-        list_of_layers = self.get_layer(layer_name=layer_name)
-
-        if len(list_of_layers) > 0:
-            if verbose:
-                Q_log(layer_name, icon="✅")
-            return True
-
-        return False
-
-    def get_layer(self, layer_name):
-        return QgsProject.instance().mapLayersByName(layer_name)
 
     def help(self):
         pass
@@ -121,4 +106,4 @@ class ABCLI_QGIS_Layer(object):
         return os.path.dirname(self.filename)
 
 
-layer = ABCLI_QGIS_Layer()
+Q_layer = ABCLI_QGIS_Layer()

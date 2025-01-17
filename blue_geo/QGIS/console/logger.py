@@ -3,7 +3,7 @@ Q_verbose = False
 QGIS_is_live = True
 
 if not QGIS_is_live:
-    from .QGIS import QGIS
+    from .application import Q_app_list
     from .seed import Q_seed
     from .mock import iface
 
@@ -33,16 +33,13 @@ def Q_intro():
         "{}-{}: {}".format(
             NAME,
             BLUE_GEO_VERSION,
-            ", ".join([f"{app.name} {app.icon}" for app in QGIS.app_list]),
+            ", ".join([f"{app.name} {app.icon}" for app in Q_app_list.app_list]),
         )
     )
-    Q_log(
-        'Type in "{}.help()" for help.'.format(
-            "|".join(
-                ["Q"] + [app.name for app in QGIS.app_list if app.name != "template"]
-            )
-        )
-    )
+    Q_log('Type in "Q_help()" for help.')
+
+    for app in [app for app in Q_app_list.app_list if app.name != "template"]:
+        Q_log(f'Type in "{app.name}_help()" for help about {app.icon} {app.name}.')
 
 
 def Q_log(message, note="", icon="🌐"):

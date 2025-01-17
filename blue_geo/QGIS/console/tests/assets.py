@@ -1,19 +1,19 @@
 from typing import List
 
 if not QGIS_is_live:
-    from ..layer import layer
-    from ..project import project
+    from ..layer import Q_layer
+    from ..project import Q_project
 
 
 def Q_test_assets_object_references(
     deep: bool = False,
 ) -> List[str]:
     output = [
-        project,
+        Q_project,
         "project",
         "qgz",
         #
-        layer,
+        Q_layer,
         "layer",
         #
         "object",

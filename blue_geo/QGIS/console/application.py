@@ -1,8 +1,10 @@
+from typing import List
+
 if not QGIS_is_live:
     from logger import Q_log
 
 
-class BLUE_GEO_QGIS_APPLICATION(object):
+class BLUE_GEO_QGIS_APPLICATION:
     def __init__(self, name, icon):
         self.name = name
         self.icon = icon
@@ -14,3 +16,18 @@ class BLUE_GEO_QGIS_APPLICATION(object):
 
     def log(self, message, note=""):
         Q_log(message, note, icon=self.icon)
+
+
+class BLUE_GEO_QGIS_APPLICATION_List:
+    def __init__(self):
+        self.app_list = []
+
+    def add(self, app):
+        self.app_list += [app]
+
+    def help(self):
+        for app in self.app_list.app_list:
+            app.help()
+
+
+Q_app_list = BLUE_GEO_QGIS_APPLICATION_List()

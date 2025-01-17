@@ -1,9 +1,9 @@
 import os
 
 if not QGIS_is_live:
-    from .layer import layer
+    from .layer import Q_layer
     from .path import Q_open_path
-    from .project import project
+    from .project import Q_project
     from .seed import Q_seed
 
     ABCLI_OBJECT_ROOT = ""
@@ -13,17 +13,17 @@ def Q_get_thing_name_or_path(thing, property: str) -> str:
     assert property in ["name", "path"]
 
     return_project: bool = True
-    if thing in ["project", "qgz", project, "object", object]:
+    if thing in ["project", "qgz", Q_project, "object", object]:
         pass
-    elif thing in ["layer", layer]:
+    elif thing in ["layer", Q_layer]:
         return_project = False
     elif isinstance(thing, str) and thing:
         return thing
 
     if return_project:
-        return project.name if property == "name" else project.path
+        return Q_project.name if property == "name" else Q_project.path
 
-    return layer.object_name if property == "name" else layer.path
+    return Q_layer.object_name if property == "name" else Q_layer.path
 
 
 def Q_get_thing_name(thing) -> str:
@@ -77,7 +77,7 @@ def Q_upload(
     Q_seed(
         command=[
             "abcli_upload",
-            f"filename={project.name}.qgz" if thing == "qgz" else "-",
+            f"filename={Q_project.name}.qgz" if thing == "qgz" else "-",
             Q_get_thing_name(thing),
         ],
         dryrun=dryrun,

@@ -1,8 +1,9 @@
 if not QGIS_is_live:
     from .logger import Q_log
     from .objects import Q_file_path_in_object
+    from .project import Q_project
     from .string import Q_timestamp
-    from .project import project
+
     from .mock import iface, qgis
 
 
@@ -21,7 +22,7 @@ def Q_screenshot(
 ):
     filename = Q_file_path_in_object(
         filename=filename if filename else f"{Q_timestamp()}.png",
-        object_name=project.name,
+        object_name=Q_project.name,
     )
 
     qgis.utils.iface.mapCanvas().saveAsImage(filename)

@@ -31,6 +31,7 @@ def generate_seed() -> str:
                 "console/string",
                 "console/application",
                 "console/seed",
+                "console/help",
                 "console/QGIS",
                 "console/alias",
             ]

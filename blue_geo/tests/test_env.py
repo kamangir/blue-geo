@@ -44,3 +44,7 @@ def test_blue_geo_env():
 
     assert env.MAXAR_OPEN_DATA_CLIENT_QUERY_RADIUS != 0.0
     assert isinstance(env.MAXAR_OPEN_DATA_CLIENT_CACHE_ITEMS, bool)
+
+    assert env.BLUE_GEO_PALISADES_TEST_DATACUBE
+
+    assert env.BLUE_GEO_TEST_QUERY_OBJECT_PALISADES_MAXAR_TEST

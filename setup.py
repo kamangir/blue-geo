@@ -28,9 +28,13 @@ setup(
         f"{NAME}.catalog.ukraine_timemap.ukraine_timemap",
         #
         f"{NAME}.doc",
+        #
         f"{NAME}.datacube",
+        f"{NAME}.datacube.label",
         #
         f"{NAME}.help",
+        f"{NAME}.help.catalog",
+        f"{NAME}.help.datacube",
         f"{NAME}.help.watch",
         f"{NAME}.help.QGIS",
         #

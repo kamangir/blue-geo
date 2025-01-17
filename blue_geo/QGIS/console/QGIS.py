@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 
 if not QGIS_is_live:
-    from log import log, log_error, verbose
+    from log import log, log_error, verbose, hr
     from layer import layer
     from project import project
     from seed import seed
@@ -31,20 +31,15 @@ class ABCLI_QGIS(object):
             "{}-{}: {}".format(
                 NAME,
                 BLUE_GEO_VERSION,
-                ", ".join(
-                    [
-                        "{} {}".format(
-                            app.name,
-                            app.icon,
-                        )
-                        for app in self.app_list
-                    ]
-                ),
+                ", ".join([f"{app.name} {app.icon}" for app in self.app_list]),
             )
         )
         log(
             'Type in "{}.help()" for help.'.format(
-                "|".join(["Q"] + [app.name for app in self.app_list])
+                "|".join(
+                    ["Q"]
+                    + [app.name for app in self.app_list if app.name != "template"]
+                )
             )
         )
 
@@ -58,16 +53,6 @@ class ABCLI_QGIS(object):
         self.intro()
 
         seed("clear")
-
-    def create_video(self, filename="QGIS", object_name=""):
-        seed(
-            [
-                "abcli",
-                "create_video",
-                f"png,fps=2,filename={filename},gif",
-                object_name if object_name else project.name,
-            ]
-        )
 
     def export(self, filename="", object_name=""):
         filename = self.file_path(
@@ -89,25 +74,50 @@ class ABCLI_QGIS(object):
 
         return candidate_layers[0] if len(candidate_layers) else None
 
+    def get_property(self, what, property: str) -> str:
+        assert property in ["object_name", "path"]
+
+        return_project: bool = True
+        if what in ["project", "qgz", project, "object", object]:
+            pass
+        elif what in ["layer", layer]:
+            return_project = False
+        elif isinstance(what, str) and what:
+            return what
+
+        if return_project:
+            return project.name if property == "object_name" else project.path
+
+        return layer.object_name if property == "object_name" else layer.path
+
     def help(self, clear=False):
         if clear:
             self.clear()
 
-        log("Q.clear()", "clear Python Console.")
-        log("Q.create_video()", "create a video.")
+        log("Q.clear() | clear()", "clear Python Console.")
+
         layer.help()
+
+        log("Q.export([filename],[object_name])", "export.")
+
         if verbose:
-            log("Q.export([filename],[object_name])", "export.")
             log("Q.list_of_layers()", "list of layers.")
             log("Q.load(filename,layer_name,template_name)", "load a layer.")
-        log('Q.open("|<object-name>|layer|object|project")', "open.")
+
+        log('Q.open(" | <object-name> | layer | project")', "open.")
+
         project.help()
+
         if verbose:
             log("Q.refresh()", "refresh.")
             log("Q.reload()", "reload all layers.")
+
+        log("test(deep=True)", "run the test suite.")
+
         if verbose:
             log("Q.unload(layer_name)", "unload layer_name.")
-        log('Q.upload("|<object-name>|layer|project|qgz")', "upload.")
+
+        log('Q.upload(" | <object-name> | layer | project | qgz")', "upload.")
         log("verbose=True|False", "set verbose state.")
 
         for app in self.app_list:
@@ -204,11 +214,7 @@ class ABCLI_QGIS(object):
         return output
 
     def open(self, what="object"):
-        self.open_folder(
-            layer.path
-            if what in "layer"
-            else self.object_path() if what == "object" else project.path
-        )
+        self.open_folder(self.get_property(what, "path"))
 
     def open_folder(self, path):
         if not path:
@@ -287,24 +293,12 @@ class ABCLI_QGIS(object):
         if refresh:
             self.refresh()
 
-    def upload(self, object_name=""):
+    def upload(self, what="object"):
         seed(
             [
                 "abcli_upload",
-                f"filename={project.name}.qgz" if object_name == "qgz" else "-",
-                (
-                    project.name
-                    if object_name in ["project", "qgz", project]
-                    else (
-                        layer.object_name
-                        if object_name in ["layer", layer]
-                        else (
-                            object_name
-                            if (isinstance(object_name, str) and object_name)
-                            else project.name
-                        )
-                    )
-                ),
+                f"filename={project.name}.qgz" if what == "qgz" else "-",
+                self.get_property(what, "object_name"),
             ]
         )
 

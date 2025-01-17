@@ -15,12 +15,15 @@ function test_@geo_help() {
         "@geo catalog get" \
         "@geo catalog list" \
         "@geo catalog query" \
+        "@geo catalog query ingest" \
+        "@geo catalog query read" \
         \
         "@geo datacube" \
         "@geo datacube crop" \
         "@geo datacube generate" \
         "@geo datacube get" \
         "@geo datacube ingest" \
+        "@geo datacube label" \
         "@geo datacube list" \
         \
         "@geo gdal" \

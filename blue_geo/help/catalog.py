@@ -3,7 +3,7 @@ from typing import List
 from blue_options.terminal import show_usage
 
 from blue_geo.catalog import get_catalog
-from blue_geo.help.datacube import ingest_options
+from blue_geo.help.datacube.ingest import ingest_options
 from blue_geo.catalog.functions import get_datacube_class_in_catalog
 from blue_geo.catalog.default import as_list_of_args
 from blue_geo.catalog.classes import list_of_catalogs

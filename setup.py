@@ -31,6 +31,7 @@ setup(
         f"{NAME}.datacube",
         #
         f"{NAME}.help",
+        f"{NAME}.help.datacube",
         f"{NAME}.help.watch",
         f"{NAME}.help.QGIS",
         #

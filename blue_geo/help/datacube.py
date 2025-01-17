@@ -17,6 +17,18 @@ def ingest_options(mono: bool) -> str:
     )
 
 
+scope_details = {
+    f"scope: {DatacubeScope.help}": [
+        "all: ALL files.",
+        "metadata (default): any < 1 MB.",
+        "raster: all raster.",
+        "rgb: rgb.",
+        "rgbx: rgb and what is needed to build rgb.",
+        "<suffix>: any *<suffix>.",
+    ]
+}
+
+
 def help_crop(
     tokens: List[str],
     mono: bool,
@@ -88,16 +100,7 @@ def help_ingest(
             "[<args>]",
         ],
         "ingest <datacube-id>/<scope>.",
-        {
-            f"scope={DatacubeScope.help}": [
-                "all: ALL files.",
-                "metadata (default): any < 1 MB.",
-                "raster: all raster.",
-                "rgb: rgb.",
-                "rgbx: rgb and what is needed to build rgb.",
-                "<suffix>: any *<suffix>.",
-            ]
-        },
+        scope_details,
         mono=mono,
     )
 
@@ -111,7 +114,7 @@ def help_list(
         "[--delim +]",
         "[--exists 1]",
         "[--log 0]",
-        f"[--scope {DatacubeScope.help}]",
+        f"[--scope <scope>]",
     ]
 
     return show_usage(
@@ -121,6 +124,7 @@ def help_list(
         ]
         + args,
         "list datacube files.",
+        scope_details,
         mono=mono,
     )
 

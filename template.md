@@ -9,11 +9,18 @@ pip install blue-geo
 ```mermaid
 graph LR
     catalog_browse["@catalog browse <catalog-name> <resource>"]
+
     catalog_get["@catalog get~~<thing> --catalog~~<catalog>"]
+
     catalog_list_catalogs["@catalog list~~catalogs"]
+
     catalog_list["@catalog list~~collections|datacube_classes --catalog~~<catalog>"]
+
     catalog_query["@catalog query <catalog-name> <collection-name> scope=<scope> <query-object-name>"]
+
     catalog_query_read["@catalog query read~~- <query-object-name>"]
+
+    catalog_query_ingest["@catalog query ingest~~- <query-object-name> scope=<scope>"]
 
     datacube_crop["@datacube crop~~- <object-name> <datacube-id>"]
     datacube_get["@datacube get catalog <datacube-id>"]
@@ -45,6 +52,9 @@ graph LR
 
     query_object --> catalog_query_read
     catalog_query_read --> datacube
+
+    query_object --> catalog_query_ingest
+    catalog_query_ingest --> datacube
 
     datacube --> datacube_crop
     target --> datacube_crop

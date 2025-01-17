@@ -9,11 +9,18 @@ pip install blue-geo
 ```mermaid
 graph LR
     catalog_browse["@catalog<br>browse<br>&lt;catalog-name&gt;<br>&lt;resource&gt;"]
+
     catalog_get["@catalog<br>get &lt;thing&gt;<br>--catalog &lt;catalog&gt;"]
+
     catalog_list_catalogs["@catalog<br>list catalogs"]
+
     catalog_list["@catalog<br>list collections|datacube_classes<br>--catalog &lt;catalog&gt;"]
+
     catalog_query["@catalog<br>query<br>&lt;catalog-name&gt;<br>&lt;collection-name&gt;<br>scope=&lt;scope&gt;<br>&lt;query-object-name&gt;"]
+
     catalog_query_read["@catalog<br>query<br>read -<br>&lt;query-object-name&gt;"]
+
+    catalog_query_ingest["@catalog<br>query<br>ingest -<br>&lt;query-object-name&gt;<br>scope=&lt;scope&gt;"]
 
     datacube_crop["@datacube<br>crop -<br>&lt;object-name&gt;<br>&lt;datacube-id&gt;"]
     datacube_get["@datacube<br>get<br>catalog<br>&lt;datacube-id&gt;"]
@@ -45,6 +52,9 @@ graph LR
 
     query_object --> catalog_query_read
     catalog_query_read --> datacube
+
+    query_object --> catalog_query_ingest
+    catalog_query_ingest --> datacube
 
     datacube --> datacube_crop
     target --> datacube_crop
@@ -82,4 +92,4 @@ graph LR
 
 [![pylint](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/blue-geo)](https://pypistats.org/packages/blue-geo)
 
-built by 🌀 [`blue_options-4.190.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.956.1`](https://github.com/kamangir/blue-geo).
+built by 🌀 [`blue_options-4.190.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.957.1`](https://github.com/kamangir/blue-geo).

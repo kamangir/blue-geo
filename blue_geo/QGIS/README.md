@@ -31,7 +31,7 @@ QGIS \
    https://docs.qgis.org/3.34/en/docs/user_manual/expressions
 QGIS \
 	seed \
-	[screen]
+	[init_script=QGIS.test+QGIS.help,screen]
  . seed 🌱 QGIS.
 QGIS \
 	server \

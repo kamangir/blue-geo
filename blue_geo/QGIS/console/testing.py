@@ -7,7 +7,7 @@ if not QGIS_is_live:
     from tests.help import test_help
     from tests.logger import test_logging
     from tests.objects import test_objects_get_name_or_path, test_objects_upload
-    from tests.QGIS import test_QGIS_list_of_projects
+    from tests.QGIS import test_QGIS, test_QGIS_list_recent_projects
     from tests.string import test_timestamp
 
 
@@ -18,13 +18,14 @@ list_of_tests = [
     test_logging,
     test_objects_get_name_or_path,
     test_objects_upload,
-    test_QGIS_list_of_projects,
+    test_QGIS,
+    test_QGIS_list_recent_projects,
     test_template_application,
     test_timestamp,
 ]
 
 
-def Q_test(deep: bool = False):
+def Q_test():
     description: str = "{} test(s): {}".format(
         len(list_of_tests),
         ", ".join([test_function.__name__ for test_function in list_of_tests]),
@@ -35,7 +36,11 @@ def Q_test(deep: bool = False):
 
     for test_function in list_of_tests:
         Q_log(f"testing {test_function} ...")
-        test_function(deep=deep)
+        test_function()
         Q_hr()
 
     Q_log(f"ran {description}.", icon="✅")
+
+
+def Q_testing_help():
+    Q_log("Q.test", f"test Q.")

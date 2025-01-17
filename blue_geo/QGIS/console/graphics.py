@@ -28,3 +28,7 @@ def Q_screenshot(
     qgis.utils.iface.mapCanvas().saveAsImage(filename)
 
     Q_log(filename, icon="🖼️")
+
+
+def Q_graphics_help():
+    Q_log("Q_screenshot([filename],[object_name])", "screenshot.")

@@ -1,6 +1,7 @@
 import os
 
 if not QGIS_is_live:
+    from .logger import Q_log
     from .layer import Q_layer
     from .path import Q_open_path
     from .project import Q_project
@@ -82,3 +83,7 @@ def Q_upload(
         ],
         dryrun=dryrun,
     )
+
+
+def Q_objects_help():
+    Q_log('Q_open(" | <object-name> | layer | project")', "open.")

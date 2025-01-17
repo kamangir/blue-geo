@@ -3,13 +3,9 @@ Q_verbose = False
 QGIS_is_live = True
 
 if not QGIS_is_live:
-    from .application import Q_app_list
+    from .QGIS import QGIS
     from .seed import Q_seed
     from .mock import iface
-
-    BLUE_GEO_VERSION = "1.1.1"
-
-NAME = "Q"
 
 
 def Q_clear():
@@ -19,27 +15,13 @@ def Q_clear():
     consoleWidget = iface.mainWindow().findChild(QDockWidget, "PythonConsole")
     consoleWidget.widget().console.clearButton.trigger()
 
-    Q_intro()
+    QGIS.intro()
 
     Q_seed("clear")
 
 
 def Q_hr(length: int = 3):
     print(length * ". .. ... .. ")
-
-
-def Q_intro():
-    Q_log(
-        "{}-{}: {}".format(
-            NAME,
-            BLUE_GEO_VERSION,
-            ", ".join([f"{app.name} {app.icon}" for app in Q_app_list.app_list]),
-        )
-    )
-    Q_log('Type in "Q_help()" for help.')
-
-    for app in [app for app in Q_app_list.app_list if app.name != "template"]:
-        Q_log(f'Type in "{app.name}_help()" for help about {app.icon} {app.name}.')
 
 
 def Q_log(message, note="", icon="🌐"):

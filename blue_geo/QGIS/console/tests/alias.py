@@ -1,11 +1,6 @@
 if not QGIS_is_live:
-    from ..alias import Q, clear, upload
-    from ..QGIS import ABCLI_QGIS
+    from ..alias import upload
 
 
-def test_aliases(deep: bool = False):
-    assert isinstance(Q, ABCLI_QGIS)
-
-    clear()
-
+def test_aliases():
     upload(dryrun=True)

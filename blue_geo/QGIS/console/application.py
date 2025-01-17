@@ -16,14 +16,3 @@ class BLUE_GEO_QGIS_APPLICATION:
 
     def log(self, message, note=""):
         Q_log(message, note, icon=self.icon)
-
-
-class BLUE_GEO_QGIS_APPLICATION_List:
-    def __init__(self):
-        self.app_list = []
-
-    def add(self, app):
-        self.app_list += [app]
-
-
-Q_app_list = BLUE_GEO_QGIS_APPLICATION_List()

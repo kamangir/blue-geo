@@ -5,7 +5,7 @@ from blueness.argparse.generic import sys_exit
 from blue_objects.env import ABCLI_OBJECT_ROOT
 
 from blue_geo import NAME
-from blue_geo.QGIS.seed import generate_seed
+from blue_geo.QGIS.seed import generate_seed, default_init_script
 from blue_geo.QGIS.dependency import list_of_dependencies
 from blue_geo.logger import logger
 
@@ -34,13 +34,23 @@ parser.add_argument(
     default="0",
     help="0|1",
 )
+parser.add_argument(
+    "--init_script",
+    type=str,
+    default="+".join(default_init_script),
+    help=" + ".join(default_init_script),
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
 
 success = args.task in list_of_tasks.split("|")
 if args.task == "generate_seed":
-    print(generate_seed())
+    print(
+        generate_seed(
+            init_script=args.init_script.split("+"),
+        )
+    )
 elif args.task == "list_dependencies":
     output = list_of_dependencies(
         filename=args.filename,

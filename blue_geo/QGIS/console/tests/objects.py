@@ -9,8 +9,8 @@ if not QGIS_is_live:
     from ..logger import Q_log
 
 
-def test_objects_get_name_or_path(deep: bool = False):
-    for what in Q_test_assets_object_references(deep=True):
+def test_objects_get_name_or_path():
+    for what in Q_test_assets_object_references:
         for property in ["name", "path"]:
             Q_log(f"testing {what}.{property}...")
 
@@ -26,6 +26,6 @@ def test_objects_get_name_or_path(deep: bool = False):
         assert output
 
 
-def test_objects_upload(deep: bool = False):
-    for what in Q_test_assets_object_references(deep=True):
+def test_objects_upload():
+    for what in Q_test_assets_object_references:
         Q_upload(what, dryrun=True)

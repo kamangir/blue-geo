@@ -1,5 +1,5 @@
 if not QGIS_is_live:
-    from application import BLUE_GEO_QGIS_APPLICATION, Q_app_list
+    from application import BLUE_GEO_QGIS_APPLICATION
     from QGIS import QGIS
 
 
@@ -18,4 +18,4 @@ class BLUE_GEO_QGIS_APPLICATION_TEMPLATE(BLUE_GEO_QGIS_APPLICATION):
 
 
 template = BLUE_GEO_QGIS_APPLICATION_TEMPLATE()
-Q_app_list.add(template)
+QGIS.add_app(template)

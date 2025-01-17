@@ -19,6 +19,7 @@ function blue_geo_datacube_label() {
         abcli_open QGIS $datacube_id
 
         abcli_wait "ready to save the labels?"
+        [[ $? -ne 0 ]] && return 1
     fi
 
     if [[ "$do_rasterize" == 1 ]]; then

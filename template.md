@@ -20,7 +20,7 @@ graph LR
     datacube_ingest["@datacube ingest scope=<scope> <datacube-id>"]
     datacube_list["@datacube list <datacube-id> --scope~~<scope>"]
 
-    geo_watch["@geo~watch batch <query-object-name>|target=<target>~~- to=<runner>~~-~~- <object-name>"]
+    geo_watch["@geo~~watch batch <query-object-name>|target=<target>~~- to=<runner>~~-~~- <object-name>"]
 
     catalog["🌐 catalog"]:::folder
     datacube["🧊 datacube"]:::folder

@@ -1,5 +1,5 @@
 if not QGIS_is_live:
-    from QGIS import QGIS
+    from .logger import Q_intro
 
 
-QGIS.intro()
+Q_intro()

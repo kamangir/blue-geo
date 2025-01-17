@@ -2,33 +2,7 @@ import os
 import shutil
 
 if not QGIS_is_live:
-    from logger import log_error, log
-
-
-def Q_copy_file(
-    source_filename: str,
-    destination_filename: str,
-) -> bool:
-    try:
-        # https://stackoverflow.com/a/8858026
-        # better choice: copy2
-        shutil.copyfile(source_filename, destination_filename)
-    except:
-        log_error(
-            "Q_copy_file({},{}): failed.".format(
-                source_filename,
-                destination_filename,
-            )
-        )
-        return False
-
-    log(
-        "{} -> {}".format(
-            source_filename,
-            destination_filename,
-        )
-    )
-    return True
+    from logger import Q_log_error, Q_log
 
 
 def Q_add_extension(filename: str, extension: str) -> str:
@@ -51,5 +25,21 @@ def Q_get_file_name_and_extension(filename: str) -> str:
     return os.path.basename(filename)
 
 
-def file_path(filename: str) -> str:
+def Q_get_file_path(filename: str) -> str:
     return os.path.split(filename)[0]
+
+
+def Q_copy_file(
+    source_filename: str,
+    destination_filename: str,
+) -> bool:
+    try:
+        # https://stackoverflow.com/a/8858026
+        # better choice: copy2
+        shutil.copyfile(source_filename, destination_filename)
+    except Exception as e:
+        Q_log_error(e)
+        return False
+
+    Q_log(f"{source_filename} -> {destination_filename}")
+    return True

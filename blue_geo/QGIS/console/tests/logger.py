@@ -1,17 +1,29 @@
 if not QGIS_is_live:
-    from ..logger import hr, log, log_error, log_warning, verbose
+    from ..logger import (
+        Q_clear,
+        Q_hr,
+        Q_intro,
+        Q_log,
+        Q_log_error,
+        Q_log_warning,
+        Q_verbose,
+    )
 
 
 def test_logging(deep: bool = False):
-    hr()
-    hr(length=5)
+    Q_clear()
 
-    log("some message")
-    log("some message", "some note")
-    log("some message", "some note", "🔍")
+    Q_hr()
+    Q_hr(length=5)
 
-    log_error("this is a test, don't panic! 😁")
+    Q_intro()
 
-    log_warning("this is a test, don't panic! 😁")
+    Q_log("some message")
+    Q_log("some message", "some note")
+    Q_log("some message", "some note", "🔍")
 
-    assert isinstance(verbose, bool)
+    Q_log_error("this is a test, don't panic! 😁")
+
+    Q_log_warning("this is a test, don't panic! 😁")
+
+    assert isinstance(Q_verbose, bool)

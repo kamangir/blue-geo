@@ -1,5 +1,5 @@
 if not QGIS_is_live:
-    from logger import log
+    from logger import Q_log
 
 
 class BLUE_GEO_QGIS_APPLICATION(object):
@@ -7,10 +7,10 @@ class BLUE_GEO_QGIS_APPLICATION(object):
         self.name = name
         self.icon = icon
 
-        log(self.name, "", icon=self.icon)
+        self.log(self.name)
 
     def help(self):
         pass
 
     def log(self, message, note=""):
-        log(message, note, icon=self.icon)
+        Q_log(message, note, icon=self.icon)

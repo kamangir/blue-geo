@@ -5,8 +5,7 @@ if not QGIS_is_live:
 
 def test_aliases(deep: bool = False):
     assert isinstance(Q, ABCLI_QGIS)
-    Q.clear()
 
     clear()
 
-    upload()
+    upload(dryrun=True)

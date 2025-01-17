@@ -7,16 +7,15 @@ from tqdm import tqdm
 
 
 if not QGIS_is_live:
-    from logger import log, log_error, verbose, hr
+    from logger import Q_clear, Q_hr, Q_log, Q_log_error, Q_verbose
     from layer import layer
     from project import project
-    from seed import seed
+    from seed import Q_seed
     from dependency import list_of_dependencies
+    from .graphics import Q_refresh
+    from .mock import QgsProject, QgsSettings
 
-    BLUE_GEO_VERSION = "1.1.1"
     ABCLI_OBJECT_ROOT = ""
-
-NAME = "Q"
 
 
 class ABCLI_QGIS(object):
@@ -26,106 +25,38 @@ class ABCLI_QGIS(object):
     def add_application(self, app):
         self.app_list += [app]
 
-    def intro(self):
-        log(
-            "{}-{}: {}".format(
-                NAME,
-                BLUE_GEO_VERSION,
-                ", ".join([f"{app.name} {app.icon}" for app in self.app_list]),
-            )
-        )
-        log(
-            'Type in "{}.help()" for help.'.format(
-                "|".join(
-                    ["Q"]
-                    + [app.name for app in self.app_list if app.name != "template"]
-                )
-            )
-        )
-
-    def clear(self):
-        # https://gis.stackexchange.com/a/480025/250728
-        from qgis.PyQt.QtWidgets import QDockWidget
-
-        consoleWidget = iface.mainWindow().findChild(QDockWidget, "PythonConsole")
-        consoleWidget.widget().console.clearButton.trigger()
-
-        self.intro()
-
-        seed("clear")
-
-    def screenshot(
-        self,
-        filename="",
-        object_name="",
-    ):
-        filename = self.file_path(
-            filename=filename if filename else "{}.png".format(self.timestamp()),
-            object_name=object_name,
-        )
-
-        qgis.utils.iface.mapCanvas().saveAsImage(filename)
-        log(filename, icon="🖼️")
-
-    def file_path(self, filename, object_name=""):
-        return os.path.join(self.object_path(object_name), filename)
-
-    def find_layer(self, layer_name):
-        return QgsProject.instance().mapLayersByName(layer_name)
-
     def get_layer(self, layer_name: str):
         candidate_layers = QgsProject.instance().mapLayersByName(layer_name)
 
         return candidate_layers[0] if len(candidate_layers) else None
 
-    def get_property(self, what, property: str) -> str:
-        assert property in ["object_name", "path"]
-
-        return_project: bool = True
-        if what in ["project", "qgz", project, "object", object]:
-            pass
-        elif what in ["layer", layer]:
-            return_project = False
-        elif isinstance(what, str) and what:
-            return what
-
-        if return_project:
-            return project.name if property == "object_name" else project.path
-
-        return layer.object_name if property == "object_name" else layer.path
-
     def help(self, clear=False):
         if clear:
-            self.clear()
+            Q_clear()
 
-        log("Q.clear()", "clear Python Console.")
+        Q_log("clear()", "clear Python Console.")
 
         layer.help()
 
-        log("Q.screenshot([filename],[object_name])", "screenshot.")
+        Q_log("Q_screenshot([filename],[object_name])", "screenshot.")
 
-        if verbose:
-            log("Q.list_of_layers()", "list of layers.")
-            log("Q.load(filename,layer_name,template_name)", "load a layer.")
+        Q_log("Q.list_of_layers()", "list of layers.")
+        Q_log("Q.load(filename,layer_name,template_name)", "load a layer.")
 
-        log('Q.open(" | <object-name> | layer | project")', "open.")
+        Q_log('Q.open(" | <object-name> | layer | project")', "open.")
 
         project.help()
 
-        if verbose:
-            log("Q.refresh()", "refresh.")
-            log("Q.reload()", "reload all layers.")
+        Q_log("Q_refresh()", "refresh.")
+        Q_log("Q.reload()", "reload all layers.")
 
-        if verbose:
-            log("Q.unload(layer_name)", "unload layer_name.")
+        Q_log("Q.unload(layer_name)", "unload layer_name.")
 
-        log('Q.upload(" | <object-name> | layer | project | qgz")', "upload.")
+        Q_log('upload(" | <object-name> | layer | project | qgz")', "upload.")
 
-        log("Q_test(deep=True)", f"test Q.")
+        Q_log("Q_test(deep=True)", f"test Q.")
 
-        log("verbose  = True|False", "set verbose state.")
-        log("clear()  = Q.clear()")
-        log("upload() = Q.upload()")
+        Q_log("Q_verbose  = True|False", "set Q's verbose state.")
 
         for app in self.app_list:
             app.help()
@@ -138,9 +69,9 @@ class ABCLI_QGIS(object):
         for layer_name_ in project.list_of_layers:
             if layer_name_.startswith(layer_name):
                 if do_log:
-                    log(
+                    Q_log(
                         layer_name,
-                        layer_name_ if verbose else "",
+                        layer_name_ if Q_verbose else "",
                         icon="✅",
                     )
                 return True
@@ -157,79 +88,14 @@ class ABCLI_QGIS(object):
                 if not layer_name.startswith("Google")
                 and not layer_name.startswith("template")
             ]
-        log(
+        Q_log(
             "{} layer(s){}".format(
                 len(output),
-                ": {}".format(", ".join(output)) if verbose else "",
+                ": {}".format(", ".join(output)) if Q_verbose else "",
             ),
             icon="🔎",
         )
         return output
-
-    def load(
-        self,
-        filename,
-        layer_name,
-        template_name="",
-        refresh=True,
-    ):
-        if len(self.find_layer(layer_name)) > 0:
-            print(f"✅ {layer_name}")
-            return True
-
-        if filename.endswith(".geojson"):
-            layer_ = QgsVectorLayer(filename, layer_name, "ogr")
-        elif filename.endswith(".tif"):
-            layer_ = QgsRasterLayer(filename, layer_name)
-        else:
-            log_error(f"cannot load {filename}.")
-            return False
-
-        if not layer_.isValid():
-            log_error(f"invalid layer: {filename}.")
-            return False
-
-        QgsProject.instance().addMapLayer(layer_)
-
-        if template_name:
-            template_layer = self.find_layer(template_name)
-            if not len(template_layer):
-                log_error(f"template not found: {template_name}.")
-                return False
-
-            # https://gis.stackexchange.com/a/357206/210095
-            source_style = QgsMapLayerStyle()
-            source_style.readFromLayer(template_layer[0])
-            source_style.writeToLayer(layer_)
-            layer_.triggerRepaint()
-
-        log(
-            layer_name,
-            template_name,
-            icon="🎨",
-        )
-
-        if refresh:
-            self.refresh()
-
-    def object_path(self, object_name=""):
-        output = os.path.join(
-            ABCLI_OBJECT_ROOT,
-            object_name if object_name else project.name,
-        )
-        os.makedirs(output, exist_ok=True)
-        return output
-
-    def open(self, what="object"):
-        self.open_folder(self.get_property(what, "path"))
-
-    def open_folder(self, path):
-        if not path:
-            log_error("path not found.")
-            return
-
-        log(path)
-        os.system(f"open {path}")
 
     # https://qgis.org/pyqgis/master/core/QgsSettings.html#qgis.core.QgsSettings.allKeys
     # https://docs.qgis.org/3.28/en/docs/pyqgis_developer_cookbook/settings.html
@@ -249,24 +115,16 @@ class ABCLI_QGIS(object):
         ]
 
         for filename in list_of_filenames:
-            output += list_of_dependencies(filename, ABCLI_OBJECT_ROOT, verbose)
+            output += list_of_dependencies(filename, ABCLI_OBJECT_ROOT, Q_verbose)
 
         output = list(set(output))
 
         filename = os.path.join(ABCLI_OBJECT_ROOT, "QGIS-recent.yaml")
         with open(filename, "w") as file:
             yaml.dump(output, file)
-        log(f"-> {filename}")
+        Q_log(f"-> {filename}")
 
         return ",".join(output)
-
-    def refresh(self, deep=False):
-        log("{}refresh.".format("deep" if deep else ""))
-        if deep:
-            # https://api.qgis.org/api/classQgsMapCanvas.html
-            iface.mapCanvas().redrawAllLayers()
-        else:
-            iface.mapCanvas().refresh()
 
     def reload(self):
         # https://gis.stackexchange.com/a/449101/210095
@@ -280,34 +138,23 @@ class ABCLI_QGIS(object):
     ):
         for layer_ in QgsProject.instance().mapLayersByName(layer_name):
             QgsProject.instance().removeMapLayer(layer_.id())
-            log(layer_name, icon="➖")
+            Q_log(layer_name, icon="➖")
 
         if refresh:
-            self.refresh()
+            Q_refresh()
 
-    def timestamp(self):
-        return time.strftime(
-            f"%Y-%m-%d-%H-%M-%S-{random.randrange(100000):05d}",
-            time.localtime(time.time()),
-        )
+    def unload(
+        self,
+        layer_name: str,
+        refresh: bool = True,
+    ):
+        Q_log(layer_name, icon="🗑️")
 
-    def unload(self, layer_name, refresh=True):
-        log(layer_name, icon="🗑️")
-
-        for layer_ in self.find_layer(layer_name):
+        for layer_ in self.get_layer(layer_name):
             QgsProject.instance().removeMapLayer(layer_.id())
 
         if refresh:
-            self.refresh()
-
-    def upload(self, what="object"):
-        seed(
-            [
-                "abcli_upload",
-                f"filename={project.name}.qgz" if what == "qgz" else "-",
-                self.get_property(what, "object_name"),
-            ]
-        )
+            Q_refresh()
 
 
 QGIS = ABCLI_QGIS()

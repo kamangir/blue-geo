@@ -1,8 +1,9 @@
 import os
 
 if not QGIS_is_live:
-    from logger import verbose, log
-    from file import Q_load_yaml
+    from .logger import Q_verbose, Q_log
+    from .file_load import Q_load_yaml
+    from .mock import QgsProject
 
 
 class ABCLI_QGIS_Project(object):
@@ -16,10 +17,10 @@ class ABCLI_QGIS_Project(object):
     @property
     def list_of_layers(self):
         output = [layer.name() for layer in QgsProject.instance().mapLayers().values()]
-        if verbose:
-            log(
+        if Q_verbose:
+            Q_log(
                 f"{len(output)} layer(s)",
-                ", ".join(output) if verbose else "",
+                ", ".join(output),
                 icon="🔎",
             )
         return output

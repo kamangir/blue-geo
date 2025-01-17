@@ -15,6 +15,7 @@ function test_@geo_help() {
         "@geo catalog get" \
         "@geo catalog list" \
         "@geo catalog query" \
+        "@geo catalog query read" \
         \
         "@geo datacube" \
         "@geo datacube crop" \

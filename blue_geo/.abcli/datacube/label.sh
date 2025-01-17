@@ -3,6 +3,7 @@
 function blue_geo_datacube_label() {
     local options=$1
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
+    local do_download=$(abcli_option_int "$options" download $(abcli_not $do_dryrun))
     local do_open_QGIS=$(abcli_option_int "$options" QGIS 1)
     local do_rasterize=$(abcli_option_int "$options" rasterize 1)
     local do_sync=$(abcli_option_int "$options" sync 1)
@@ -11,6 +12,17 @@ function blue_geo_datacube_label() {
     local datacube_id=$(abcli_clarify_object $2 .)
 
     if [[ "$do_sync" == 1 ]]; then
+        if [[ "$do_download" == 1 ]]; then
+            local template_path=$ABCLI_OBJECT_ROOT/$datacube_id/template
+            mkdir -pv $template_path
+
+            aws s3 sync \
+                "$ABCLI_S3_OBJECT_PREFIX/$datacube_id/template" \
+                "$template_path" \
+                --exact-timestamps
+            [[ $? -ne 0 ]] && return 1
+        fi
+
         abcli_eval dryrun=$do_dryrun \
             python3 -m blue_geo.datacube.label \
             sync \

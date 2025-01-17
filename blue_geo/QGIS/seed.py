@@ -31,7 +31,14 @@ def generate_seed() -> str:
             ]
         ]
         + sorted(glob(f"{apps_path}/*.py"))
-        + [os.path.join(path, "console/main.py")]
+        + sorted(glob(os.path.join(path, "console/tests/*.py")))
+        + [
+            os.path.join(path, f"console/{module}.py")
+            for module in [
+                "main",
+                "testing",
+            ]
+        ]
     )
 
     seed = "; ".join(

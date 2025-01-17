@@ -114,7 +114,7 @@ def help_list(
         "[--delim +]",
         "[--exists 1]",
         "[--log 0]",
-        f"[--scope <scope>]",
+        "[--scope <scope>]",
     ]
 
     return show_usage(

@@ -1,5 +1,5 @@
 if not QGIS_is_live:
-    from log import log
+    from logger import log
 
 
 class BLUE_GEO_QGIS_APPLICATION(object):

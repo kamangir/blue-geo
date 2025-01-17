@@ -3,8 +3,8 @@ verbose = False
 QGIS_is_live = True
 
 
-def hr():
-    print(3 * ". .. ... .. ")
+def hr(length: int = 3):
+    print(length * ". .. ... .. ")
 
 
 def log(message, note="", icon="🌐"):

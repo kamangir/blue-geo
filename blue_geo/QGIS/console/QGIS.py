@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 
 if not QGIS_is_live:
-    from log import log, log_error, verbose, hr
+    from logger import log, log_error, verbose, hr
     from layer import layer
     from project import project
     from seed import seed
@@ -16,7 +16,7 @@ if not QGIS_is_live:
     BLUE_GEO_VERSION = "1.1.1"
     ABCLI_OBJECT_ROOT = ""
 
-NAME = "blue_geo.QGIS"
+NAME = "Q"
 
 
 class ABCLI_QGIS(object):
@@ -54,7 +54,11 @@ class ABCLI_QGIS(object):
 
         seed("clear")
 
-    def export(self, filename="", object_name=""):
+    def screenshot(
+        self,
+        filename="",
+        object_name="",
+    ):
         filename = self.file_path(
             filename=filename if filename else "{}.png".format(self.timestamp()),
             object_name=object_name,
@@ -94,11 +98,11 @@ class ABCLI_QGIS(object):
         if clear:
             self.clear()
 
-        log("Q.clear() | clear()", "clear Python Console.")
+        log("Q.clear()", "clear Python Console.")
 
         layer.help()
 
-        log("Q.export([filename],[object_name])", "export.")
+        log("Q.screenshot([filename],[object_name])", "screenshot.")
 
         if verbose:
             log("Q.list_of_layers()", "list of layers.")
@@ -112,13 +116,16 @@ class ABCLI_QGIS(object):
             log("Q.refresh()", "refresh.")
             log("Q.reload()", "reload all layers.")
 
-        log("test(deep=True)", "run the test suite.")
-
         if verbose:
             log("Q.unload(layer_name)", "unload layer_name.")
 
         log('Q.upload(" | <object-name> | layer | project | qgz")', "upload.")
-        log("verbose=True|False", "set verbose state.")
+
+        log("Q_test(deep=True)", f"test Q.")
+
+        log("verbose  = True|False", "set verbose state.")
+        log("clear()  = Q.clear()")
+        log("upload() = Q.upload()")
 
         for app in self.app_list:
             app.help()
@@ -304,14 +311,3 @@ class ABCLI_QGIS(object):
 
 
 QGIS = ABCLI_QGIS()
-
-
-def clear():
-    QGIS.clear()
-
-
-def upload(self, object_name=""):
-    QGIS.upload(object_name)
-
-
-Q = QGIS

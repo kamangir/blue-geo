@@ -1,10 +1,12 @@
 if not QGIS_is_live:
     from QGIS import QGIS
 
+Q = QGIS
+
 
 def clear():
     QGIS.clear()
 
 
-def upload(object_name=""):
-    QGIS.upload(object_name)
+def upload(what=""):
+    QGIS.upload(what)

@@ -20,10 +20,11 @@ def generate_seed() -> str:
             os.path.join(path, f"{module}.py")
             for module in [
                 "dependency",
-                "console/log",
+                "console/logger",
                 "console/project",
                 "console/layer",
-                "console/fileio",
+                "console/file",
+                "console/file_load",
                 "console/application",
                 "console/seed",
                 "console/QGIS",

@@ -4,7 +4,7 @@ import os
 import random
 
 if not QGIS_is_live:
-    from log import log
+    from logger import log
 
 blue_geo_QGIS_path_server = os.path.join(
     os.getenv("HOME", ""),

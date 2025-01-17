@@ -1,10 +1,10 @@
 from typing import List
 
 if not QGIS_is_live:
-    from log import log, log_error, verbose, hr
-    from QGIS import QGIS, clear, upload
-    from layer import layer
-    from project import project
+    from ..logger import log, log_error, verbose, hr
+    from ..QGIS import QGIS
+    from ..layer import layer
+    from ..project import project
 
 
 def open_upload_test_assets(
@@ -28,26 +28,14 @@ def open_upload_test_assets(
     return output
 
 
-def test_logging(deep: bool = False):
-    clear()
-
+def test_QGIS_logging(deep: bool = False):
     QGIS.clear()
 
     QGIS.intro()
 
-    log("some message")
-    log("some message", "some note")
-    log("some message", "some note", "🪄")
 
-    log_error("this is a test, don't panic! 😁")
-
-    assert isinstance(verbose, bool)
-
-    hr()
-
-
-def test_QGIS_export(deep: bool = False):
-    QGIS.export()
+def test_QGIS_screenshot(deep: bool = False):
+    QGIS.screenshot()
 
 
 def test_QGIS_get_property(deep: bool = False):

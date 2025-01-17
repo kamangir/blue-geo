@@ -1,8 +1,8 @@
 import os
 
 if not QGIS_is_live:
-    from log import verbose, log
-    from fileio import load_yaml
+    from logger import verbose, log
+    from file import Q_load_yaml
 
 
 class ABCLI_QGIS_Project(object):
@@ -31,7 +31,7 @@ class ABCLI_QGIS_Project(object):
         if not os.path.exists(filename):
             return {"error": f"{filename}: file not found."}
 
-        return load_yaml(filename)
+        return Q_load_yaml(filename)
 
     @property
     def name(self):

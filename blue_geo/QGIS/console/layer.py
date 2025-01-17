@@ -1,7 +1,7 @@
 import os
 
 if not QGIS_is_live:
-    from log import log_error
+    from logger import log_error
 
     ABCLI_OBJECT_ROOT = ""
 

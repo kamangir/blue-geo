@@ -11,6 +11,10 @@ def Q_add_extension(filename: str, extension: str) -> str:
     return f"{filename}.{extension}"
 
 
+def Q_file_exists(filename: str) -> bool:
+    return os.path.isfile(filename)
+
+
 def Q_get_file_extension(filename: str) -> str:
     return os.path.splitext(filename)[1][1:]
 

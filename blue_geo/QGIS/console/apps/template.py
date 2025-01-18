@@ -8,7 +8,7 @@ class BLUE_GEO_QGIS_APPLICATION_TEMPLATE(BLUE_GEO_QGIS_APPLICATION):
     def __init__(self):
         super().__init__("template", "🌀")
 
-    def help(self):
+    def help_(self):
         Q_log(
             "template.func(var)",
             "func.",
@@ -17,6 +17,12 @@ class BLUE_GEO_QGIS_APPLICATION_TEMPLATE(BLUE_GEO_QGIS_APPLICATION):
 
     def func(self, var: str = "🪄"):
         self.log(var)
+
+    # aliases
+
+    @property
+    def help(self):
+        self.help_()
 
 
 template = BLUE_GEO_QGIS_APPLICATION_TEMPLATE()

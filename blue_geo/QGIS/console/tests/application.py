@@ -5,6 +5,6 @@ if not QGIS_is_live:
 def test_template_application():
     template.log("some message")
 
-    template.help()
+    template.help_()
 
     template.func(var="testing...")

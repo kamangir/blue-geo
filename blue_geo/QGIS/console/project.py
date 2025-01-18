@@ -9,9 +9,6 @@ if not QGIS_is_live:
 
 
 class ABCLI_QGIS_Project(object):
-    def help(self):
-        pass
-
     def exists(
         self,
         layer_name: str,

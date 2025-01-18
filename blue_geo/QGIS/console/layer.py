@@ -69,9 +69,6 @@ class ABCLI_QGIS_Layer(object):
         if refresh:
             Q_refresh()
 
-    def help(self):
-        pass
-
     @property
     def filename(self):
         try:

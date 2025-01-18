@@ -10,7 +10,7 @@ if not QGIS_is_live:
 
 def Q_clear(
     log: bool = True,
-    dryrun: bool = True,
+    dryrun: bool = False,
 ):
     if not dryrun:
         # https://gis.stackexchange.com/a/480025/250728

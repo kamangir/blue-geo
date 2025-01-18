@@ -77,10 +77,11 @@ class ABCLI_QGIS:
 
     def intro(self):
         Q_log(self.version)
-        Q_log('Type in "Q.help" for help.')
 
         for app in [app for app in self.app_list if app.name != "template"]:
             Q_log(f"{app.icon} {app.name}")
+
+        Q_log('Type in "Q.help" for help.')
 
     @property
     def version(self) -> str:
@@ -94,7 +95,7 @@ class ABCLI_QGIS:
 
     @property
     def clear(self):
-        Q_clear()
+        Q_clear(log=False)
 
     @property
     def help(self):

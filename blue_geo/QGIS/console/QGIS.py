@@ -12,8 +12,9 @@ if not QGIS_is_live:
     from .graphics import Q_screenshot
     from .logger import Q_log, Q_verbose, Q_clear
     from .mock import QgsSettings
-    from .objects import Q_get_thing_path, Q_upload
+    from .objects import Q_get_thing_path, Q_upload, Q_open
     from .path import Q_open_path
+    from .project import Q_project
     from .testing import Q_test
 
     ABCLI_OBJECT_ROOT = ""
@@ -70,10 +71,10 @@ class ABCLI_QGIS:
     def help_(self):
         Q_log("Q.clear", "clear Python Console.")
         Q_log("Q.list_recent_projects", "list recent projects.")
-        Q_log('Q.open(" | <object-name> | layer | project")', "open.")
-        Q_log("Q.screenshot([filename],[object_name])", "screenshot.")
+        Q_log("Q.open", "open project in Finder.")
+        Q_log("Q.screenshot", "screenshot.")
         Q_log("Q.test", "test Q.")
-        Q_log('Q.upload(" | <object-name> | layer | project | qgz")', "upload.")
+        Q_log("Q.upload", "upload project.")
 
     def intro(self):
         Q_log(self.version)
@@ -105,14 +106,9 @@ class ABCLI_QGIS:
     def list_recent_projects(self):
         Q_list_recent_projects()
 
-    def open(
-        thing="object",
-        dryrun: bool = False,
-    ):
-        Q_open_path(
-            Q_get_thing_path(thing=thing),
-            dryrun=dryrun,
-        )
+    @property
+    def open(self):
+        Q_open(thing=Q_project)
 
     @property
     def screenshot(self):
@@ -122,15 +118,9 @@ class ABCLI_QGIS:
     def test(self):
         Q_test()
 
-    def upload(
-        self,
-        thing: str = "",
-        dryrun: bool = False,
-    ):
-        Q_upload(
-            thing=thing,
-            dryrun=dryrun,
-        )
+    @property
+    def upload(self):
+        Q_upload(thing=Q_project)
 
 
 QGIS = ABCLI_QGIS()

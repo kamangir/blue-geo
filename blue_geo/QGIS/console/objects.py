@@ -3,6 +3,7 @@ import os
 if not QGIS_is_live:
     from .logger import Q_log
     from .layer import Q_layer
+    from .path import Q_open_path
     from .project import Q_project
     from .seed import Q_seed
 
@@ -63,6 +64,16 @@ def Q_file_path_in_object(
             create=create,
         ),
         filename,
+    )
+
+
+def Q_open(
+    thing="object",
+    dryrun: bool = False,
+):
+    Q_open_path(
+        Q_get_thing_path(thing=thing),
+        dryrun=dryrun,
     )
 
 

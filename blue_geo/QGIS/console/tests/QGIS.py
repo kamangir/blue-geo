@@ -7,22 +7,13 @@ if not QGIS_is_live:
 def test_QGIS():
     QGIS.intro()
 
-    QGIS.clear
-
 
 def test_QGIS_aliases():
-    # to help with debugging
-    # QGIS.clear
-
     QGIS.help
 
     QGIS.list_recent_projects
 
-    QGIS.open(dryrun=True)
-
     QGIS.screenshot
-
-    QGIS.upload(dryrun=True)
 
 
 def test_QGIS_list_recent_projects():

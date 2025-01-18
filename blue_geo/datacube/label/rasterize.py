@@ -111,7 +111,7 @@ def rasterize_the_label(
 
     return post_to_object(
         datacube_id,
-        f"{NAME}.rasterize_the_label",
+        "rasterize",
         {
             "counts": class_pixel_count,
             "label_count": len(label_polygons),

@@ -8,6 +8,7 @@ if not QGIS_is_live:
     from dependency import list_of_dependencies
     from .application import BLUE_GEO_QGIS_APPLICATION
     from .help import Q_help
+    from .file_save import Q_save_yaml
     from .graphics import Q_screenshot
     from .logger import Q_log, Q_verbose, Q_clear
     from .mock import QgsSettings
@@ -34,23 +35,29 @@ def Q_list_recent_projects() -> str:
         if re.match(r"UI/recentProjects/(\d+)/path", key)
     ]
 
-    output = [
+    list_of_projects = [
         filename.split(f"{ABCLI_OBJECT_ROOT}/", 1)[1].split("/")[0]
         for filename in list_of_filenames
         if ABCLI_OBJECT_ROOT in filename
     ]
 
     for filename in list_of_filenames:
-        output += list_of_dependencies(filename, ABCLI_OBJECT_ROOT, Q_verbose)
+        list_of_projects += list_of_dependencies(
+            filename=filename,
+            ABCLI_OBJECT_ROOT=ABCLI_OBJECT_ROOT,
+            verbose=Q_verbose,
+        )
 
-    output = list(set(output))
+    list_of_projects = list(set(list_of_projects))
 
-    filename = os.path.join(ABCLI_OBJECT_ROOT, "QGIS-recent.yaml")
-    with open(filename, "w") as file:
-        yaml.dump(output, file)
-    Q_log(f"-> {filename}")
+    Q_save_yaml(
+        os.path.join(ABCLI_OBJECT_ROOT, "QGIS-recent.yaml"),
+        list_of_projects,
+    )
 
-    return ",".join(output)
+    Q_log(f"{len(list_of_projects)} recent project(s).")
+
+    return ",".join(list_of_projects)
 
 
 class ABCLI_QGIS:
@@ -73,7 +80,7 @@ class ABCLI_QGIS:
         Q_log('Type in "Q.help" for help.')
 
         for app in [app for app in self.app_list if app.name != "template"]:
-            Q_log(f'Type in "{app.name}_help()" for help about {app.icon} {app.name}.')
+            Q_log(f"{app.icon} {app.name}")
 
     @property
     def version(self) -> str:
@@ -93,11 +100,22 @@ class ABCLI_QGIS:
     def help(self):
         Q_help(clear=True)
 
+    @property
     def list_recent_projects(self):
         Q_list_recent_projects()
 
-    def open(thing="object"):
-        Q_open_path(Q_get_thing_path(thing))
+    def open(
+        thing="object",
+        dryrun: bool = False,
+    ):
+        Q_open_path(
+            Q_get_thing_path(thing=thing),
+            dryrun=dryrun,
+        )
+
+    @property
+    def screenshot(self):
+        Q_screenshot()
 
     @property
     def test(self):

@@ -39,4 +39,4 @@ def Q_seed(
         )
 
     if log:
-        Q_log(command_name, command, icon="🌱")
+        Q_log(f"{command} -> {command_name}", icon="🌱")

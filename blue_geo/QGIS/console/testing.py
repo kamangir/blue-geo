@@ -7,7 +7,7 @@ if not QGIS_is_live:
     from tests.help import test_help
     from tests.logger import test_logging
     from tests.objects import test_objects_get_name_or_path, test_objects_upload
-    from tests.QGIS import test_QGIS, test_QGIS_list_recent_projects
+    from tests.QGIS import test_QGIS, test_QGIS_aliases, test_QGIS_list_recent_projects
     from tests.string import test_timestamp
 
 
@@ -19,6 +19,7 @@ list_of_tests = [
     test_objects_get_name_or_path,
     test_objects_upload,
     test_QGIS,
+    test_QGIS_aliases,
     test_QGIS_list_recent_projects,
     test_template_application,
     test_timestamp,

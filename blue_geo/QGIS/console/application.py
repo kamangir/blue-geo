@@ -14,5 +14,5 @@ class BLUE_GEO_QGIS_APPLICATION:
     def help(self):
         pass
 
-    def log(self, message, note=""):
-        Q_log(message, note, icon=self.icon)
+    def log(self, message):
+        Q_log(message, icon=self.icon)

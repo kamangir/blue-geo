@@ -1,4 +1,5 @@
-from typing import List
+import yaml
+from typing import List, Any
 
 if not QGIS_is_live:
     from .logger import Q_log
@@ -19,3 +20,14 @@ def Q_save_text(
                 filename,
             )
         )
+
+
+def Q_save_yaml(
+    filename: str,
+    data: Any,
+    log=True,
+):
+    with open(filename, "w") as file:
+        yaml.dump(data, file)
+
+    Q_log(f"-> {filename}")

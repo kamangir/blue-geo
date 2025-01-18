@@ -62,8 +62,7 @@ class ABCLI_QGIS_Layer(object):
             layer_.triggerRepaint()
 
         Q_log(
-            layer_name,
-            template_name,
+            f"{layer_name} += {template_name}",
             icon="🎨",
         )
 

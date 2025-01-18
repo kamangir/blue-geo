@@ -24,15 +24,15 @@ graph LR
 
     catalog_query_ingest["@catalog query ingest~~- <query-object-name> scope=<scope>"]
 
-    datacube_crop["@datacube_1 crop~~- <object-name> <datacube_1-id>"]
+    datacube_crop["@datacube crop~~- <object-name> <datacube_1-id>"]
 
-    datacube_get["@datacube_1 get catalog <datacube_1-id>"]
+    datacube_get["@datacube get catalog <datacube_1-id>"]
 
-    datacube_ingest["@datacube_1 ingest scope=<scope> <datacube_1-id>"]
+    datacube_ingest["@datacube ingest scope=<scope> <datacube_1-id>"]
 
-    datacube_label["@datacube_1 label~~- <datacube_1-id>"]
+    datacube_label["@datacube label~~- <datacube_1-id>"]
 
-    datacube_list["@datacube_1 list <datacube_1-id> --scope~~<scope>"]
+    datacube_list["@datacube list <datacube_1-id> --scope~~<scope>"]
 
     geo_watch["@geo~~watch batch <query-object-name>|target=<target>~~- to=<runner>~~-~~- <object-name>"]
 

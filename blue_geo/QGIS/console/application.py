@@ -1,16 +1,24 @@
+from typing import List
+
 if not QGIS_is_live:
-    from log import log
+    from logger import Q_log
 
 
-class BLUE_GEO_QGIS_APPLICATION(object):
+class BLUE_GEO_QGIS_APPLICATION:
     def __init__(self, name, icon):
         self.name = name
         self.icon = icon
 
-        log(self.name, "", icon=self.icon)
+        self.log(self.name)
 
-    def help(self):
+    def help_(self):
         pass
 
-    def log(self, message, note=""):
-        log(message, note, icon=self.icon)
+    def log(self, message):
+        Q_log(message, icon=self.icon)
+
+    # aliases
+
+    @property
+    def help(self):
+        self.help_()

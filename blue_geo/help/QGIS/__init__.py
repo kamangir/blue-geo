@@ -4,6 +4,7 @@ from blue_options.terminal import show_usage, xtra
 
 from blue_geo.help.QGIS.expressions import help_functions as help_expressions
 from blue_geo.help.QGIS.templates import help_functions as help_templates
+from blue_geo.QGIS.seed import default_init_script
 
 
 def help_download(
@@ -33,11 +34,18 @@ def help_seed(
     tokens: List[str],
     mono: bool,
 ) -> str:
+    options = xtra(
+        "init_script={},screen".format(
+            "+".join(default_init_script),
+        ),
+        mono=mono,
+    )
+
     return show_usage(
         [
             "QGIS",
             "seed",
-            "[screen]",
+            f"[{options}]",
         ],
         "seed 🌱 QGIS.",
         mono=mono,

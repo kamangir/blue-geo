@@ -11,6 +11,10 @@ function blue_geo_datacube_label() {
 
     local datacube_id=$(abcli_clarify_object $2 .)
 
+    abcli_mlflow_tags_set \
+        $datacube_id \
+        labelled
+
     if [[ "$do_sync" == 1 ]]; then
         if [[ "$do_download" == 1 ]]; then
             local template_path=$ABCLI_OBJECT_ROOT/$datacube_id/template

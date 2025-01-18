@@ -70,6 +70,7 @@ function test_@geo_help() {
         "QGIS expressions" \
         "QGIS expressions pull" \
         "QGIS expressions push" \
+        "QGIS seed" \
         "QGIS server" \
         "QGIS templates" \
         "QGIS templates download" \

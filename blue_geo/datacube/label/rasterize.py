@@ -85,7 +85,7 @@ def rasterize_the_label(
                 dtype=np.uint8,
             )
 
-            pixel_count = np.sum(polygon_mask != 0)
+            pixel_count = int(np.sum(polygon_mask != 0))
             class_pixel_count[class_name] += pixel_count
             if verbose:
                 logger.info(
@@ -114,6 +114,9 @@ def rasterize_the_label(
         f"{NAME}.rasterize_the_label",
         {
             "counts": class_pixel_count,
+            "label_count": len(label_polygons),
+            "label_filename": file.name_and_extension(label_filename),
             "list_of_classes": list_of_classes,
+            "reference_filename": reference_filename,
         },
     )

@@ -16,7 +16,9 @@ graph LR
 
     catalog_list["@catalog list~~collections|datacube_classes --catalog~~<catalog>"]
 
-    catalog_query["@catalog query <catalog-name> <collection-name> scope=<scope> <query-object-name>"]
+    catalog_query["@catalog query <catalog-name> <collection-name>~~- <query-object-name>"]
+
+    catalog_query_ingest["@catalog query <catalog-name> <collection-name> ingest,scope=<scope> <query-object-name>"]
 
     catalog_query_read["@catalog query read~~- <query-object-name>"]
 
@@ -55,6 +57,10 @@ graph LR
 
     catalog --> catalog_query
     catalog_query --> query_object
+
+    catalog --> catalog_query_ingest
+    catalog_query_ingest --> query_object
+    catalog_query_ingest --> datacube
 
     query_object --> catalog_query_read
     catalog_query_read --> datacube

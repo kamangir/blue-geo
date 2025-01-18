@@ -16,7 +16,9 @@ graph LR
 
     catalog_list["@catalog<br>list collections|datacube_classes<br>--catalog &lt;catalog&gt;"]
 
-    catalog_query["@catalog<br>query<br>&lt;catalog-name&gt;<br>&lt;collection-name&gt;<br>scope=&lt;scope&gt;<br>&lt;query-object-name&gt;"]
+    catalog_query["@catalog<br>query<br>&lt;catalog-name&gt;<br>&lt;collection-name&gt; -<br>&lt;query-object-name&gt;"]
+
+    catalog_query_ingest["@catalog<br>query<br>&lt;catalog-name&gt;<br>&lt;collection-name&gt;<br>ingest,scope=&lt;scope&gt;<br>&lt;query-object-name&gt;"]
 
     catalog_query_read["@catalog<br>query<br>read -<br>&lt;query-object-name&gt;"]
 
@@ -55,6 +57,10 @@ graph LR
 
     catalog --> catalog_query
     catalog_query --> query_object
+
+    catalog --> catalog_query_ingest
+    catalog_query_ingest --> query_object
+    catalog_query_ingest --> datacube
 
     query_object --> catalog_query_read
     catalog_query_read --> datacube
@@ -102,4 +108,4 @@ graph LR
 
 [![pylint](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/blue-geo)](https://pypistats.org/packages/blue-geo)
 
-built by 🌀 [`blue_options-4.190.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.977.1`](https://github.com/kamangir/blue-geo).
+built by 🌀 [`blue_options-4.190.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.978.1`](https://github.com/kamangir/blue-geo).

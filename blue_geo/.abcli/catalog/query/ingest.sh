@@ -3,7 +3,6 @@
 function blue_geo_catalog_query_ingest() {
     local options=$1
     local do_download=$(abcli_option_int "$options" download 0)
-    local index=$(abcli_option "$options" index)
 
     local query_object_name=$(abcli_clarify_object $2 .)
 
@@ -12,20 +11,10 @@ function blue_geo_catalog_query_ingest() {
     [[ "$do_download" == 1 ]] &&
         abcli_download - $query_object_name
 
-    local list_of_datacubes
-    if [[ -z "$index" ]]; then
-        list_of_datacubes=$(blue_geo_catalog_query_read all \
-            $query_object_name \
-            --log 0 \
-            --delim +)
-    else
-        list_of_datacubes=$(blue_geo_catalog_query_read - \
-            $query_object_name \
-            --log 0 \
-            --offset $index \
-            --count 1 \
-            --delim +)
-    fi
+    local list_of_datacubes=$(blue_geo_catalog_query_read all \
+        $query_object_name \
+        --log 0 \
+        --delim +)
 
     @log_list "$list_of_datacubes" \
         --before ingesting \
@@ -37,6 +26,7 @@ function blue_geo_catalog_query_ingest() {
         blue_geo_datacube_ingest \
             ,$datacube_ingest_options \
             $datacube_id
+        [[ $? -ne 0 ]] && return 1
     done
 
     return 0

@@ -93,7 +93,7 @@ def help_query_read(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "all,download,len"
+    options = "all,len"
 
     args = [
         "[--count <count>]",

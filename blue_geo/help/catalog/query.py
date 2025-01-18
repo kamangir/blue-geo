@@ -72,7 +72,7 @@ def help_query_ingest(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = xtra("download,index=<index>", mono=mono)
+    options = xtra("download", mono=mono)
 
     return show_usage(
         [

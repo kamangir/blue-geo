@@ -11,8 +11,14 @@ class BLUE_GEO_QGIS_APPLICATION:
 
         self.log(self.name)
 
-    def help(self):
+    def help_(self):
         pass
 
     def log(self, message):
         Q_log(message, icon=self.icon)
+
+    # aliases
+
+    @property
+    def help(self):
+        self.help_()

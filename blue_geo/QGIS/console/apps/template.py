@@ -18,12 +18,6 @@ class BLUE_GEO_QGIS_APPLICATION_TEMPLATE(BLUE_GEO_QGIS_APPLICATION):
     def func(self, var: str = "🪄"):
         self.log(var)
 
-    # aliases
-
-    @property
-    def help(self):
-        self.help_()
-
 
 template = BLUE_GEO_QGIS_APPLICATION_TEMPLATE()
 QGIS.add_app(template)

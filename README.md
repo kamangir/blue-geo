@@ -18,26 +18,28 @@ graph LR
 
     catalog_query["@catalog<br>query<br>&lt;catalog-name&gt;<br>&lt;collection-name&gt; -<br>&lt;query-object-name&gt;"]
 
-    catalog_query_ingest["@catalog<br>query<br>&lt;catalog-name&gt;<br>&lt;collection-name&gt;<br>ingest,scope=&lt;scope&gt;<br>&lt;query-object-name&gt;"]
+    catalog_query_and_ingest["@catalog<br>query<br>&lt;catalog-name&gt;<br>&lt;collection-name&gt;<br>ingest,scope=&lt;scope&gt;<br>&lt;query-object-name&gt;"]
 
     catalog_query_read["@catalog<br>query<br>read -<br>&lt;query-object-name&gt;"]
 
     catalog_query_ingest["@catalog<br>query<br>ingest -<br>&lt;query-object-name&gt;<br>scope=&lt;scope&gt;"]
 
-    datacube_crop["@datacube<br>crop -<br>&lt;object-name&gt;<br>&lt;datacube-id&gt;"]
+    datacube_crop["@datacube_1<br>crop -<br>&lt;object-name&gt;<br>&lt;datacube_1-id&gt;"]
 
-    datacube_get["@datacube<br>get<br>catalog<br>&lt;datacube-id&gt;"]
+    datacube_get["@datacube_1<br>get<br>catalog<br>&lt;datacube_1-id&gt;"]
 
-    datacube_ingest["@datacube<br>ingest<br>scope=&lt;scope&gt;<br>&lt;datacube-id&gt;"]
+    datacube_ingest["@datacube_1<br>ingest<br>scope=&lt;scope&gt;<br>&lt;datacube_1-id&gt;"]
 
-    datacube_label["@datacube<br>label -<br>&lt;datacube-id&gt;"]
+    datacube_label["@datacube_1<br>label -<br>&lt;datacube_1-id&gt;"]
 
-    datacube_list["@datacube<br>list<br>&lt;datacube-id&gt;<br>--scope &lt;scope&gt;"]
+    datacube_list["@datacube_1<br>list<br>&lt;datacube_1-id&gt;<br>--scope &lt;scope&gt;"]
 
     geo_watch["@geo watch<br>batch<br>&lt;query-object-name&gt;|target=&lt;target&gt; -<br>to=&lt;runner&gt; - -<br>&lt;object-name&gt;"]
 
     catalog["🌐 catalog"]:::folder
-    datacube["🧊 datacube"]:::folder
+    datacube_1["🧊 datacube"]:::folder
+    datacube_2["🧊 datacube"]:::folder
+    datacube_3["🧊 datacube"]:::folder
     terminal["💻 terminal"]:::folder
     QGIS["🖼️ QGIS"]:::folder
     query_object["📂 query object"]:::folder
@@ -58,32 +60,34 @@ graph LR
     catalog --> catalog_query
     catalog_query --> query_object
 
-    catalog --> catalog_query_ingest
-    catalog_query_ingest --> query_object
-    catalog_query_ingest --> datacube
+    catalog --> catalog_query_and_ingest
+    catalog_query_and_ingest --> query_object
+    catalog_query_and_ingest --> datacube_1
 
     query_object --> catalog_query_read
-    catalog_query_read --> datacube
+    catalog_query_read --> datacube_1
 
     query_object --> catalog_query_ingest
-    catalog_query_ingest --> datacube
+    catalog_query_ingest --> datacube_1
+    catalog_query_ingest --> datacube_2
+    catalog_query_ingest --> datacube_3
 
-    datacube --> datacube_crop
+    datacube_1 --> datacube_crop
     target --> datacube_crop
-    datacube_crop --> datacube
+    datacube_crop --> datacube_1
 
-    datacube --> datacube_get
+    datacube_1 --> datacube_get
     datacube_get --> terminal
 
-    datacube --> datacube_ingest
-    datacube_ingest --> datacube
+    datacube_1 --> datacube_ingest
+    datacube_ingest --> datacube_1
 
-    datacube --> datacube_list
+    datacube_1 --> datacube_list
     datacube_list --> terminal
 
-    datacube --> datacube_label
+    datacube_1 --> datacube_label
     datacube_label --> QGIS
-    datacube_label --> datacube
+    datacube_label --> datacube_1
 
     query_object --> geo_watch
     target --> geo_watch
@@ -108,4 +112,4 @@ graph LR
 
 [![pylint](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/blue-geo/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blue-geo.svg)](https://pypi.org/project/blue-geo/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/blue-geo)](https://pypistats.org/packages/blue-geo)
 
-built by 🌀 [`blue_options-4.190.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.978.1`](https://github.com/kamangir/blue-geo).
+built by 🌀 [`blue_options-4.190.1`](https://github.com/kamangir/awesome-bash-cli), based on 🌐 [`blue_geo-4.979.1`](https://github.com/kamangir/blue-geo).

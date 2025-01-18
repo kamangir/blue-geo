@@ -18,26 +18,28 @@ graph LR
 
     catalog_query["@catalog query <catalog-name> <collection-name>~~- <query-object-name>"]
 
-    catalog_query_ingest["@catalog query <catalog-name> <collection-name> ingest,scope=<scope> <query-object-name>"]
+    catalog_query_and_ingest["@catalog query <catalog-name> <collection-name> ingest,scope=<scope> <query-object-name>"]
 
     catalog_query_read["@catalog query read~~- <query-object-name>"]
 
     catalog_query_ingest["@catalog query ingest~~- <query-object-name> scope=<scope>"]
 
-    datacube_crop["@datacube crop~~- <object-name> <datacube-id>"]
+    datacube_crop["@datacube_1 crop~~- <object-name> <datacube_1-id>"]
 
-    datacube_get["@datacube get catalog <datacube-id>"]
+    datacube_get["@datacube_1 get catalog <datacube_1-id>"]
 
-    datacube_ingest["@datacube ingest scope=<scope> <datacube-id>"]
+    datacube_ingest["@datacube_1 ingest scope=<scope> <datacube_1-id>"]
 
-    datacube_label["@datacube label~~- <datacube-id>"]
+    datacube_label["@datacube_1 label~~- <datacube_1-id>"]
 
-    datacube_list["@datacube list <datacube-id> --scope~~<scope>"]
+    datacube_list["@datacube_1 list <datacube_1-id> --scope~~<scope>"]
 
     geo_watch["@geo~~watch batch <query-object-name>|target=<target>~~- to=<runner>~~-~~- <object-name>"]
 
     catalog["🌐 catalog"]:::folder
-    datacube["🧊 datacube"]:::folder
+    datacube_1["🧊 datacube"]:::folder
+    datacube_2["🧊 datacube"]:::folder
+    datacube_3["🧊 datacube"]:::folder
     terminal["💻 terminal"]:::folder
     QGIS["🖼️ QGIS"]:::folder
     query_object["📂 query object"]:::folder
@@ -58,32 +60,34 @@ graph LR
     catalog --> catalog_query
     catalog_query --> query_object
 
-    catalog --> catalog_query_ingest
-    catalog_query_ingest --> query_object
-    catalog_query_ingest --> datacube
+    catalog --> catalog_query_and_ingest
+    catalog_query_and_ingest --> query_object
+    catalog_query_and_ingest --> datacube_1
 
     query_object --> catalog_query_read
-    catalog_query_read --> datacube
+    catalog_query_read --> datacube_1
 
     query_object --> catalog_query_ingest
-    catalog_query_ingest --> datacube
+    catalog_query_ingest --> datacube_1
+    catalog_query_ingest --> datacube_2
+    catalog_query_ingest --> datacube_3
 
-    datacube --> datacube_crop
+    datacube_1 --> datacube_crop
     target --> datacube_crop
-    datacube_crop --> datacube
+    datacube_crop --> datacube_1
 
-    datacube --> datacube_get
+    datacube_1 --> datacube_get
     datacube_get --> terminal
 
-    datacube --> datacube_ingest
-    datacube_ingest --> datacube
+    datacube_1 --> datacube_ingest
+    datacube_ingest --> datacube_1
 
-    datacube --> datacube_list
+    datacube_1 --> datacube_list
     datacube_list --> terminal
 
-    datacube --> datacube_label
+    datacube_1 --> datacube_label
     datacube_label --> QGIS
-    datacube_label --> datacube
+    datacube_label --> datacube_1
 
     query_object --> geo_watch
     target --> geo_watch

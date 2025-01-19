@@ -53,11 +53,19 @@ function blue_geo_catalog_query() {
     abcli_log "$log_suffix query: $catalog/$datacube_class -> $object_name ..."
 
     abcli_eval dryrun=$do_dryrun \
+        python3 -m blue_geo.catalog \
+        prep_dataset \
+        --module_name $module_name \
+        --query_object_name $object_name
+    [[ $? -ne 0 ]] && return 1
+
+    abcli_eval dryrun=$do_dryrun \
         python3 -m $module_name \
         query \
         --object_name $object_name \
         $extra_args \
         "${@:5}"
+    [[ $? -ne 0 ]] && return 1
 
     [[ "$do_upload" == 1 ]] &&
         abcli_upload - $object_name

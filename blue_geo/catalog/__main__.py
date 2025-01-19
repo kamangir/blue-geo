@@ -14,11 +14,12 @@ from blue_geo.catalog.functions import (
 from blue_geo.catalog.classes import list_of_catalogs
 from blue_geo.catalog.default import as_list_of_args
 from blue_geo.catalog.generic.stac.classes import STACCatalog
+from blue_geo.catalog.dataset import prep_dataset
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
 
-list_of_tasks = "get|list"
+list_of_tasks = "get | list | prep_dataset"
 
 
 parser = argparse.ArgumentParser(NAME)
@@ -57,6 +58,14 @@ parser.add_argument(
 )
 parser.add_argument(
     "--datacube_class",
+    type=str,
+)
+parser.add_argument(
+    "--module_name",
+    type=str,
+)
+parser.add_argument(
+    "--query_object_name",
     type=str,
 )
 args = parser.parse_args()
@@ -122,6 +131,11 @@ elif args.task == "list":
             )
         else:
             print(delim.join(output))
+elif args.task == "prep_dataset":
+    success = prep_dataset(
+        module_name=args.module_name,
+        query_object_name=args.query_object_name,
+    )
 else:
     success = None
 

@@ -39,15 +39,15 @@ function blue_geo_watch_query() {
     abcli_log "🎯 $target: $catalog/$collection: $query_args -> $object_name"
 
     abcli_eval dryrun=$do_dryrun \
-        blue_geo_catalog query $catalog \
+        blue_geo_catalog_query $catalog \
         $collection \
         - \
         $object_name \
         --count -1 \
         $query_args
-    local status="$?"
+    [[ $? -ne 0 ]] && return 1
 
-    blue_geo_watch_targets save \
+    blue_geo_watch_targets_save \
         target=$target \
         $object_name
     [[ $? -ne 0 ]] && return 1
@@ -55,5 +55,5 @@ function blue_geo_watch_query() {
     [[ "$do_upload" == 1 ]] &&
         abcli_upload - $object_name
 
-    return "$status"
+    return 0
 }

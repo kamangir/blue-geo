@@ -19,7 +19,6 @@ parser.add_argument(
 parser.add_argument(
     "--datacube_id",
     type=str,
-    default="",
 )
 parser.add_argument(
     "--verbose",

@@ -20,7 +20,7 @@ def rasterize_the_label(
     datacube_id: str,
     verbose: bool = False,
 ) -> bool:
-    logger.info(f"{NAME}.rasterize_the_label({datacube_id})")
+    logger.info(f"{NAME}.rasterize_the_label: {datacube_id}")
 
     datacube = get_datacube(datacube_id)
 
@@ -36,9 +36,6 @@ def rasterize_the_label(
         filename="label.shp",
         object_name=datacube_id,
     )
-    if not file.exists(label_filename):
-        logger.error(f"label not found: {label_filename}")
-        return False
     success, label_polygons = file.load_geodataframe(label_filename)
     if not success:
         return success
@@ -49,9 +46,24 @@ def rasterize_the_label(
         )
     )
 
-    list_of_classes = sorted(list(set(label_polygons["class"].tolist())))
+    success, label_template_polygons = file.load_geodataframe(
+        objects.path_of(
+            filename="template/label.shp",
+            object_name=datacube_id,
+        )
+    )
+    if not success:
+        return success
+    list_of_classes = sorted(list(set(label_template_polygons["class"].tolist())))
+    if "background" in list_of_classes:
+        list_of_classes = ["background"] + [
+            class_name for class_name in list_of_classes if class_name != "background"
+        ]
     logger.info(
-        "{} class(es): {}".format(len(list_of_classes), ", ".join(list_of_classes))
+        "{} class(es): {}".format(
+            len(list_of_classes),
+            ", ".join(list_of_classes),
+        )
     )
 
     class_pixel_count: Dict[str, int] = {
@@ -74,7 +86,7 @@ def rasterize_the_label(
         for _, row in tqdm(label_polygons.iterrows()):
             class_name = row["class"]
 
-            class_index = list_of_classes.index(class_name) + 1
+            class_index = list_of_classes.index(class_name)
 
             polygon_mask = rasterize(
                 [(row.geometry, class_index)],

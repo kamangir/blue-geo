@@ -16,7 +16,7 @@ function blue_geo_catalog_query_ingest() {
         --log 0 \
         --delim +)
 
-    @log_list "$list_of_datacubes" \
+    abcli_log_list "$list_of_datacubes" \
         --before ingesting \
         --after "datacube(s)" \
         --delim +

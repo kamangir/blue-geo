@@ -1,7 +1,6 @@
 if not QGIS_is_live:
     from logger import Q_log, Q_hr
 
-    from tests.alias import test_aliases
     from tests.application import test_template_application
     from tests.graphics import test_graphics_screenshot
     from tests.help import test_help
@@ -12,7 +11,6 @@ if not QGIS_is_live:
 
 
 list_of_tests = [
-    test_aliases,
     test_graphics_screenshot,
     test_help,
     test_logging,

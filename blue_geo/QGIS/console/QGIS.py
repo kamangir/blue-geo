@@ -15,6 +15,7 @@ if not QGIS_is_live:
     from .objects import Q_get_thing_path, Q_upload, Q_open
     from .path import Q_open_path
     from .project import Q_project
+    from .project import Q_layer
     from .testing import Q_test
 
     ABCLI_OBJECT_ROOT = ""
@@ -103,12 +104,20 @@ class ABCLI_QGIS:
         Q_help(clear=True)
 
     @property
+    def layer(self):
+        return Q_layer
+
+    @property
     def list_recent_projects(self):
         Q_list_recent_projects()
 
     @property
     def open(self):
         Q_open(thing=Q_project)
+
+    @property
+    def project(self):
+        return Q_project
 
     @property
     def screenshot(self):

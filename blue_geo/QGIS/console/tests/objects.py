@@ -15,15 +15,15 @@ def test_objects_get_name_or_path():
             Q_log(f"testing {what}.{property}...")
 
             output = Q_get_thing_name_or_path(what, property)
-            assert output
+            assert isinstance(output, str)
 
         Q_log(f"{what}.path...")
         output = Q_get_thing_name(what)
-        assert output
+        assert isinstance(output, str)
 
         Q_log(f"{what}.name...")
         output = Q_get_thing_path(what)
-        assert output
+        assert isinstance(output, str)
 
 
 def test_objects_upload():

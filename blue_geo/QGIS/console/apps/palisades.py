@@ -1,8 +1,10 @@
+import glob
+
 if not QGIS_is_live:
     from ..logger import Q_log
     from ..application import BLUE_GEO_QGIS_APPLICATION
     from ..QGIS import QGIS
-    from ..objects import Q_file_path_in_object
+    from ..objects import Q_file_path_in_object, Q_file_name
     from ..project import Q_project
     from ..logger import Q_log_error, Q_verbose
 
@@ -49,6 +51,21 @@ class BLUE_GEO_QGIS_APPLICATION_PALISADES(BLUE_GEO_QGIS_APPLICATION):
             template_name="prediction-template",
         ):
             return
+
+        building_footprint_filename_list = glob.glob(
+            Q_file_path_in_object(
+                filename="*.gpkg",
+                object_name=Q_project.name,
+            )
+        )
+        if building_footprint_filename_list:
+            filename = building_footprint_filename_list[0]
+            if not Q_project.add_layer(
+                filename=filename,
+                layer_name=Q_file_name(filename),
+                template_name=f"{Q_file_name(filename)}-template",
+            ):
+                return
 
 
 palisades = BLUE_GEO_QGIS_APPLICATION_PALISADES()

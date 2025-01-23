@@ -53,6 +53,12 @@ def Q_object_path(
     return output
 
 
+def Q_file_name(filename: str) -> str:
+    _, filename = os.path.split(filename)
+
+    return filename if "." not in filename else ".".join(filename.split(".")[:-1])
+
+
 def Q_file_path_in_object(
     filename,
     object_name="",

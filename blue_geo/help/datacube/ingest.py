@@ -9,8 +9,7 @@ def ingest_options(mono: bool) -> str:
     return "".join(
         [
             xtra("~copy_template,dryrun,overwrite,", mono),
-            "scope=<scope>",
-            xtra(",upload", mono),
+            "scope=<scope>,upload",
         ]
     )
 

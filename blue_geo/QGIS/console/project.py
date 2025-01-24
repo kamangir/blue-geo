@@ -30,7 +30,7 @@ class ABCLI_QGIS_Project(object):
         if self.exists(layer_name, verbose=verbose):
             return True
 
-        if Q_get_file_extension(filename) in ["geojson", "shp"]:
+        if Q_get_file_extension(filename) in ["geojson", "shp", "gpkg"]:
             layer_ = QgsVectorLayer(filename, layer_name, "ogr")
         elif filename.endswith(".tif"):
             layer_ = QgsRasterLayer(filename, layer_name)

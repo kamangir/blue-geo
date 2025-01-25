@@ -2,6 +2,7 @@ from typing import List
 
 from blue_options.terminal import show_usage, xtra
 from blueflow.workflow.runners import list_of_runners
+from blueflow.help.workflow import submit_options as workflow_submit_options
 
 from blue_geo.datacube.modalities import options as modality_options
 from blue_geo.watch.targets.target_list import TargetList
@@ -34,8 +35,11 @@ def help_(
 
     workflow_options = "".join(
         [
-            xtra("dryrun,~submit,", mono),
-            "to=<runner>",
+            xtra("~submit | ", mono=mono),
+            workflow_submit_options(
+                mono=mono,
+                cascade=True,
+            ),
         ]
     )
 

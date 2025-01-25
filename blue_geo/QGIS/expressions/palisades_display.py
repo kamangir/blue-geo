@@ -14,7 +14,7 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.9.1"
+    version = "5.10.1"
 
     area = row["area"]
     damage = row["damage"]
@@ -34,7 +34,7 @@ def palisades_display(layer_filename, row, feature, parent):
             "<hr/>",
             '<img src="file://{}" width=500 >'.format(thumbnail),
             "<hr/>",
-            '<p style="color: white;">{}</p>'.format(
+            '<p style="color: white; width: 500px">{}</p>'.format(
                 " | ".join(
                     [
                         object_name,

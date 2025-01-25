@@ -8,6 +8,7 @@ if not QGIS_is_live:
     from ..objects import Q_file_path_in_object
     from ..project import Q_project
     from ..logger import Q_log_error, Q_verbose
+    from ..seed import Q_seed
 
 
 class BLUE_GEO_QGIS_APPLICATION_PALISADES(BLUE_GEO_QGIS_APPLICATION):
@@ -33,11 +34,22 @@ class BLUE_GEO_QGIS_APPLICATION_PALISADES(BLUE_GEO_QGIS_APPLICATION):
 
         reference_filename = metadata["predict"]["reference_filename"]
         datacube_id = metadata["predict"]["datacube_id"]
+        filename = Q_file_path_in_object(
+            filename=reference_filename,
+            object_name=datacube_id,
+        )
+        if not Q_file_exists(filename):
+            Q_seed(
+                [
+                    "blue_geo_datacube_ingest",
+                    "scope=rgb",
+                    datacube_id,
+                ]
+            )
+            return
+
         if not Q_project.add_layer(
-            filename=Q_file_path_in_object(
-                filename=reference_filename,
-                object_name=datacube_id,
-            ),
+            filename=filename,
             layer_name=f"input-{reference_filename}",
         ):
             return

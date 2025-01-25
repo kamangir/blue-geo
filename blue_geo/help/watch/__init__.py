@@ -3,6 +3,7 @@ from typing import List
 from blue_options.terminal import show_usage, xtra
 from blueflow.workflow.runners import list_of_runners
 from blueflow.help.workflow import submit_options as workflow_submit_options
+from blueflow.help.workflow import runner_details
 
 from blue_geo.datacube.modalities import options as modality_options
 from blue_geo.watch.targets.target_list import TargetList
@@ -78,7 +79,7 @@ def help_(
                 "modality: modality=<modality>",
             ],
             "modality: {}".format(" | ".join(modality_options)): [],
-            "runner: {}".format(" | ".join(list_of_runners())): [],
+            **runner_details,
             "target: {}".format(" | ".join(target_list.get_list())): [],
         },
         mono=mono,

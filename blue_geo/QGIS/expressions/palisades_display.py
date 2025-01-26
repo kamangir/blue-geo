@@ -14,15 +14,23 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.10.1"
+    version = "5.23.1"
 
     area = row["area"]
     damage = row["damage"]
 
-    layer_path = os.path.split(layer_filename)[0]
-    thumbnail = os.path.join(layer_path, row["thumbnail"])
-
+    layer_path, layer_filename = os.path.split(layer_filename)
     object_name = layer_path.split(os.sep)[-1]
+    object_root = os.sep.join(layer_path.split(os.sep)[:-1])
+    is_analytics = "analytics.geojson" in layer_filename
+
+    thumbnail_object_name = row["thumbnail_object"] if is_analytics else object_name
+
+    thumbnail_filename = os.path.join(
+        object_root,
+        thumbnail_object_name,
+        row["thumbnail"],
+    )
 
     return "\n".join(
         [
@@ -32,13 +40,14 @@ def palisades_display(layer_filename, row, feature, parent):
                 damage * 100,
             ),
             "<hr/>",
-            '<img src="file://{}" width=500 >'.format(thumbnail),
+            '<img src="file://{}" width=500 >'.format(thumbnail_filename),
             "<hr/>",
             '<p style="color: white; width: 500px">{}</p>'.format(
                 " | ".join(
-                    [
+                    (["analytics"] if is_analytics else [""])
+                    + [
                         object_name,
-                        f"template version {version}",
+                        f"template-{version}",
                     ]
                 )
             ),

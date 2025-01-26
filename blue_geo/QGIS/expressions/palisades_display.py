@@ -14,7 +14,7 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.28.1"
+    version = "5.29.1"
 
     area = row["area"]
     damage = row["damage"]

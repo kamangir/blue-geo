@@ -14,7 +14,7 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.23.1"
+    version = "5.28.1"
 
     area = row["area"]
     damage = row["damage"]
@@ -42,9 +42,35 @@ def palisades_display(layer_filename, row, feature, parent):
             "<hr/>",
             '<img src="file://{}" width=500 >'.format(thumbnail_filename),
             "<hr/>",
+        ]
+        + (
+            [
+                '    <label for="seed">🌱</label>',
+                '<input type="text" value="{}" id="seed" style="background-color: white; color: black; width: 100%;">'.format(
+                    " ".join(
+                        [
+                            "palisades analytics render",
+                            "building={},~download".format(row["building_id"]),
+                            object_name,
+                        ]
+                    )
+                ),
+                "<hr/>",
+            ]
+            if is_analytics
+            else []
+        )
+        + [
             '<p style="color: white; width: 500px">{}</p>'.format(
                 " | ".join(
-                    (["analytics"] if is_analytics else [""])
+                    (
+                        [
+                            "analytics",
+                            row["building_id"],
+                        ]
+                        if is_analytics
+                        else [""]
+                    )
                     + [
                         object_name,
                         f"template-{version}",

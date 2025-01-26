@@ -18,14 +18,14 @@ QGIS \
 QGIS \
 	expressions \
 	push
- . push QGIS expressions.
+ . push QGIS expressions: QGIS -> git
    from: $BLUE_GEO_QGIS_PATH_EXPRESSIONS
    to: $BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT
    https://docs.qgis.org/3.34/en/docs/user_manual/expressions
 QGIS \
 	expressions \
 	pull
- . pull QGIS expressions.
+ . pull QGIS expressions: git -> QGIS
    from: $BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT
    to: $BLUE_GEO_QGIS_PATH_EXPRESSIONS
    https://docs.qgis.org/3.34/en/docs/user_manual/expressions

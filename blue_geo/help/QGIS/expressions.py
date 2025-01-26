@@ -13,7 +13,7 @@ def help_pull(
             "expressions",
             "pull",
         ],
-        "pull QGIS expressions.",
+        "pull QGIS expressions: git -> QGIS",
         {
             "from: $BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT": "",
             "to: $BLUE_GEO_QGIS_PATH_EXPRESSIONS": "",
@@ -33,7 +33,7 @@ def help_push(
             "expressions",
             "push",
         ],
-        "push QGIS expressions.",
+        "push QGIS expressions: QGIS -> git",
         {
             "from: $BLUE_GEO_QGIS_PATH_EXPRESSIONS": "",
             "to: $BLUE_GEO_QGIS_PATH_EXPRESSIONS_GIT": "",

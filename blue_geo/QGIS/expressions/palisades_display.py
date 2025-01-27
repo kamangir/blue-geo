@@ -1,4 +1,5 @@
 import os
+from typing import List
 
 from qgis.core import *
 from qgis.gui import *
@@ -14,10 +15,18 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.29.1"
+    version = "5.32.1"
 
     area = row["area"]
     damage = row["damage"]
+
+    def seed(command: List[str]) -> List[str]:
+        return [
+            '<label for="seed">🌱</label>',
+            '<input type="text" value="{}" id="seed" style="background-color: white; color: black; width: 100%;">'.format(
+                " ".join(command)
+            ),
+        ]
 
     layer_path, layer_filename = os.path.split(layer_filename)
     object_name = layer_path.split(os.sep)[-1]
@@ -26,10 +35,11 @@ def palisades_display(layer_filename, row, feature, parent):
 
     thumbnail_object_name = row["thumbnail_object"] if is_analytics else object_name
 
-    thumbnail_filename = os.path.join(
+    thumbnail_filename = row["thumbnail"]
+    thumbnail_full_filename = os.path.join(
         object_root,
         thumbnail_object_name,
-        row["thumbnail"],
+        thumbnail_filename,
     )
 
     return "\n".join(
@@ -56,27 +66,32 @@ def palisades_display(layer_filename, row, feature, parent):
                 ),
             ),
             "<hr/>",
-            '<img src="file://{}" width=500 >'.format(thumbnail_filename),
-            "<hr/>",
         ]
         + (
-            [
-                '    <label for="seed">🌱</label>',
-                '<input type="text" value="{}" id="seed" style="background-color: white; color: black; width: 100%;">'.format(
-                    " ".join(
-                        [
-                            "palisades analytics render",
-                            "building={},~download".format(row["building_id"]),
-                            object_name,
-                        ]
-                    )
-                ),
-                "<hr/>",
-            ]
+            ['<img src="file://{}" width=500 >'.format(thumbnail_full_filename)]
+            if os.path.exists(thumbnail_full_filename)
+            else seed(
+                [
+                    "abcli download",
+                    f"filename={thumbnail_filename}",
+                    thumbnail_object_name,
+                ]
+            )
+        )
+        + ["<hr/>"]
+        + (
+            seed(
+                [
+                    "palisades analytics render",
+                    "building={},~download".format(row["building_id"]),
+                    object_name,
+                ]
+            )
             if is_analytics
             else []
         )
         + [
+            "<hr/>",
             '<p style="color: white; width: 500px">{}</p>'.format(
                 " | ".join(
                     (
@@ -85,7 +100,7 @@ def palisades_display(layer_filename, row, feature, parent):
                             row["building_id"],
                         ]
                         if is_analytics
-                        else [""]
+                        else []
                     )
                     + [
                         object_name,
@@ -93,5 +108,5 @@ def palisades_display(layer_filename, row, feature, parent):
                     ]
                 )
             ),
-        ]
+        ],
     )

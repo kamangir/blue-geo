@@ -14,7 +14,7 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.28.1"
+    version = "5.29.1"
 
     area = row["area"]
     damage = row["damage"]
@@ -34,10 +34,26 @@ def palisades_display(layer_filename, row, feature, parent):
 
     return "\n".join(
         [
-            '<p style="color: {};">area: {:,.0f} sq. m, damage: {:.1f}%'.format(
+            '<p style="color: {};">{}</p>'.format(
                 "green" if damage == 0 else "yellow" if damage < 0.1 else "red",
-                area,
-                damage * 100,
+                " | ".join(
+                    [
+                        "area: {:,.0f} sq. m".format(area),
+                        "damage: {:.1f}%{}".format(
+                            100 * damage,
+                            (
+                                " +- {:.1f}%".format(100 * row["damage_std"])
+                                if is_analytics
+                                else ""
+                            ),
+                        ),
+                    ]
+                    + (
+                        ["{} observation(s)".format(row["observation_count"])]
+                        if is_analytics
+                        else []
+                    )
+                ),
             ),
             "<hr/>",
             '<img src="file://{}" width=500 >'.format(thumbnail_filename),
@@ -79,4 +95,3 @@ def palisades_display(layer_filename, row, feature, parent):
             ),
         ]
     )
-

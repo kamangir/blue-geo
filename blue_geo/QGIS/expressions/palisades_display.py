@@ -15,7 +15,7 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.32.1"
+    version = "5.33.1"
 
     area = row["area"]
     damage = row["damage"]
@@ -82,7 +82,7 @@ def palisades_display(layer_filename, row, feature, parent):
         + (
             seed(
                 [
-                    "palisades analytics render",
+                    "palisades analytics ingest_building",
                     "building={},~download".format(row["building_id"]),
                     object_name,
                 ]

@@ -15,10 +15,10 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.33.1"
+    version = "5.35.1"
 
     area = row["area"]
-    damage = row["damage"]
+    damage = float(row["damage"])
 
     def seed(command: List[str]) -> List[str]:
         return [

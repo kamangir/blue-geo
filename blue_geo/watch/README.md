@@ -26,7 +26,7 @@ watch the planet's story unfold.
       modality: modality=<modality>
    modality: rgb[@<keyword>]
    runner: aws_batch | generic | local
-   target: Brown-Mountain-Truck-Trail | Brown-Mountain-Truck-Trail-all | Brown-Mountain-Truck-Trail-test | Cache-Creek | Cache-Creek-2x-wider | Cache-Creek-test | DrugSuperLab | DrugSuperLab-200 | DrugSuperLab-test | Fagradalsfjall | Hurricane-Idalia-2023 | Jasper | Leonardo | Leonardo-test | Leonardo-test-focus | Mount-Etna | Palisades-Maxar | Palisades-Maxar-test | Palisades-Sentinel-2 | Palisades-Sentinel-2-test | Sheerness | Sheerness-10x | Sheerness-20x | Sheerness-test | Silver-Peak | Silver-Peak-test | bellingcat-2024-09-27-nagorno-karabakh | bellingcat-2024-09-27-nagorno-karabakh-2X | bellingcat-2024-09-27-nagorno-karabakh-6X | bellingcat-2024-09-27-nagorno-karabakh-6X-test | bellingcat-2024-09-27-nagorno-karabakh-test | burning-man-2024 | chilcotin-river-landslide | chilcotin-river-landslide-test | elkhema | elkhema-2024
+   target: Altadena | Altadena-test | Brown-Mountain-Truck-Trail | Brown-Mountain-Truck-Trail-all | Brown-Mountain-Truck-Trail-test | Cache-Creek | Cache-Creek-2x-wider | Cache-Creek-test | DrugSuperLab | DrugSuperLab-200 | DrugSuperLab-test | Fagradalsfjall | Hurricane-Idalia-2023 | Jasper | Leonardo | Leonardo-test | Leonardo-test-focus | Mount-Etna | Palisades-Maxar | Palisades-Maxar-test | Palisades-Sentinel-2 | Palisades-Sentinel-2-test | Sheerness | Sheerness-10x | Sheerness-20x | Sheerness-test | Silver-Peak | Silver-Peak-test | bellingcat-2024-09-27-nagorno-karabakh | bellingcat-2024-09-27-nagorno-karabakh-2X | bellingcat-2024-09-27-nagorno-karabakh-6X | bellingcat-2024-09-27-nagorno-karabakh-6X-test | bellingcat-2024-09-27-nagorno-karabakh-test | burning-man-2024 | chilcotin-river-landslide | chilcotin-river-landslide-test | elkhema | elkhema-2024
 @geo \
 	watch \
 	batch,dryrun,name=<job-name> \
@@ -43,7 +43,7 @@ watch the planet's story unfold.
       modality: modality=<modality>
    modality: rgb[@<keyword>]
    runner: aws_batch | generic | local
-   target: Brown-Mountain-Truck-Trail | Brown-Mountain-Truck-Trail-all | Brown-Mountain-Truck-Trail-test | Cache-Creek | Cache-Creek-2x-wider | Cache-Creek-test | DrugSuperLab | DrugSuperLab-200 | DrugSuperLab-test | Fagradalsfjall | Hurricane-Idalia-2023 | Jasper | Leonardo | Leonardo-test | Leonardo-test-focus | Mount-Etna | Palisades-Maxar | Palisades-Maxar-test | Palisades-Sentinel-2 | Palisades-Sentinel-2-test | Sheerness | Sheerness-10x | Sheerness-20x | Sheerness-test | Silver-Peak | Silver-Peak-test | bellingcat-2024-09-27-nagorno-karabakh | bellingcat-2024-09-27-nagorno-karabakh-2X | bellingcat-2024-09-27-nagorno-karabakh-6X | bellingcat-2024-09-27-nagorno-karabakh-6X-test | bellingcat-2024-09-27-nagorno-karabakh-test | burning-man-2024 | chilcotin-river-landslide | chilcotin-river-landslide-test | elkhema | elkhema-2024
+   target: Altadena | Altadena-test | Brown-Mountain-Truck-Trail | Brown-Mountain-Truck-Trail-all | Brown-Mountain-Truck-Trail-test | Cache-Creek | Cache-Creek-2x-wider | Cache-Creek-test | DrugSuperLab | DrugSuperLab-200 | DrugSuperLab-test | Fagradalsfjall | Hurricane-Idalia-2023 | Jasper | Leonardo | Leonardo-test | Leonardo-test-focus | Mount-Etna | Palisades-Maxar | Palisades-Maxar-test | Palisades-Sentinel-2 | Palisades-Sentinel-2-test | Sheerness | Sheerness-10x | Sheerness-20x | Sheerness-test | Silver-Peak | Silver-Peak-test | bellingcat-2024-09-27-nagorno-karabakh | bellingcat-2024-09-27-nagorno-karabakh-2X | bellingcat-2024-09-27-nagorno-karabakh-6X | bellingcat-2024-09-27-nagorno-karabakh-6X-test | bellingcat-2024-09-27-nagorno-karabakh-test | burning-man-2024 | chilcotin-river-landslide | chilcotin-river-landslide-test | elkhema | elkhema-2024
 @geo \
 	watch \
 	map \
@@ -143,7 +143,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Cache-Creek-2x-wider-2024-11-05/geo-watch-Cache-Creek-2x-wider-2024-11-05-4X.gif?raw=true&random=dlwkok6e5m0wkw6z)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Cache-Creek-2x-wider-2024-11-05/geo-watch-Cache-Creek-2x-wider-2024-11-05.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Cache-Creek-2x-wider-2024-11-05/geo-watch-Cache-Creek-2x-wider-2024-11-05-4X.gif?raw=true&random=fc3nuzjd2xeb0z2n)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Cache-Creek-2x-wider-2024-11-05/geo-watch-Cache-Creek-2x-wider-2024-11-05.gif)
 
 </details>
 
@@ -159,7 +159,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/DrugSuperLab-2024-12-09-ZnmC5L/DrugSuperLab-2024-12-09-ZnmC5L-4X.gif?raw=true&random=a5srr05t6y8n5fp3)](https://kamangir-public.s3.ca-central-1.amazonaws.com/DrugSuperLab-2024-12-09-ZnmC5L/DrugSuperLab-2024-12-09-ZnmC5L.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/DrugSuperLab-2024-12-09-ZnmC5L/DrugSuperLab-2024-12-09-ZnmC5L-4X.gif?raw=true&random=lvd1nfjsanvc0xun)](https://kamangir-public.s3.ca-central-1.amazonaws.com/DrugSuperLab-2024-12-09-ZnmC5L/DrugSuperLab-2024-12-09-ZnmC5L.gif)
 
 </details>
 
@@ -176,7 +176,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Fagradalsfjall-a/geo-watch-2024-09-04-Fagradalsfjall-a-2X.gif?raw=true&random=clpd44pqh6dnj1kt)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Fagradalsfjall-a/geo-watch-2024-09-04-Fagradalsfjall-a.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Fagradalsfjall-a/geo-watch-2024-09-04-Fagradalsfjall-a-2X.gif?raw=true&random=clw0y78rpocq126i)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Fagradalsfjall-a/geo-watch-2024-09-04-Fagradalsfjall-a.gif)
 
 </details>
 
@@ -189,7 +189,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Jasper-2024-11-03/geo-watch-Jasper-2024-11-03-2X.gif?raw=true&random=m7yx95o5hmy0rj7d)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Jasper-2024-11-03/geo-watch-Jasper-2024-11-03.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Jasper-2024-11-03/geo-watch-Jasper-2024-11-03-2X.gif?raw=true&random=xzcpjnyy0a80mgsn)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Jasper-2024-11-03/geo-watch-Jasper-2024-11-03.gif)
 
 </details>
 
@@ -204,7 +204,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-10-27-16-17-36-12059/geo-watch-2024-10-27-16-17-36-12059-4X.gif?raw=true&random=3tjo2ykf1pywwdsd)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-10-27-16-17-36-12059/geo-watch-2024-10-27-16-17-36-12059.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-10-27-16-17-36-12059/geo-watch-2024-10-27-16-17-36-12059-4X.gif?raw=true&random=smczctf42v8qs5hl)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-10-27-16-17-36-12059/geo-watch-2024-10-27-16-17-36-12059.gif)
 
 </details>
 
@@ -222,7 +222,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Mount-Etna-a/geo-watch-2024-09-04-Mount-Etna-a-2X.gif?raw=true&random=o7t09fmqleoowvlu)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Mount-Etna-a/geo-watch-2024-09-04-Mount-Etna-a.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Mount-Etna-a/geo-watch-2024-09-04-Mount-Etna-a-2X.gif?raw=true&random=te1jjxu0i9885ut0)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-Mount-Etna-a/geo-watch-2024-09-04-Mount-Etna-a.gif)
 
 </details>
 
@@ -235,7 +235,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/Palisades-Sentinel-2-2025-01-15-16-50-38-vyjxu8/Palisades-Sentinel-2-2025-01-15-16-50-38-vyjxu8-2X.gif?raw=true&random=644b8skrvxa1ocxb)](https://kamangir-public.s3.ca-central-1.amazonaws.com/Palisades-Sentinel-2-2025-01-15-16-50-38-vyjxu8/Palisades-Sentinel-2-2025-01-15-16-50-38-vyjxu8.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/Palisades-Sentinel-2-2025-01-15-16-50-38-vyjxu8/Palisades-Sentinel-2-2025-01-15-16-50-38-vyjxu8-2X.gif?raw=true&random=bcvgrocaw3kvvma7)](https://kamangir-public.s3.ca-central-1.amazonaws.com/Palisades-Sentinel-2-2025-01-15-16-50-38-vyjxu8/Palisades-Sentinel-2-2025-01-15-16-50-38-vyjxu8.gif)
 
 </details>
 
@@ -249,7 +249,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/Sheerness-20x-2024-12-14-EDkXl0/Sheerness-20x-2024-12-14-EDkXl0-4X.gif?raw=true&random=dbpnmzqxb8xdzfy9)](https://kamangir-public.s3.ca-central-1.amazonaws.com/Sheerness-20x-2024-12-14-EDkXl0/Sheerness-20x-2024-12-14-EDkXl0.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/Sheerness-20x-2024-12-14-EDkXl0/Sheerness-20x-2024-12-14-EDkXl0-4X.gif?raw=true&random=td6ms6sv2gd3pr0p)](https://kamangir-public.s3.ca-central-1.amazonaws.com/Sheerness-20x-2024-12-14-EDkXl0/Sheerness-20x-2024-12-14-EDkXl0.gif)
 
 </details>
 
@@ -262,7 +262,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Silver-Peak-2024-10-12-a/geo-watch-Silver-Peak-2024-10-12-a-4X.gif?raw=true&random=ppyv1drloiuq26ke)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Silver-Peak-2024-10-12-a/geo-watch-Silver-Peak-2024-10-12-a.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Silver-Peak-2024-10-12-a/geo-watch-Silver-Peak-2024-10-12-a-4X.gif?raw=true&random=rxym6a6e8rwvbc85)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Silver-Peak-2024-10-12-a/geo-watch-Silver-Peak-2024-10-12-a.gif)
 
 </details>
 
@@ -276,7 +276,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/bellingcat-2024-09-27-nagorno-karabakh-6X-2024-12-14-EUUpS1/bellingcat-2024-09-27-nagorno-karabakh-6X-2024-12-14-EUUpS1-4X.gif?raw=true&random=hmpf627mrqhx20d5)](https://kamangir-public.s3.ca-central-1.amazonaws.com/bellingcat-2024-09-27-nagorno-karabakh-6X-2024-12-14-EUUpS1/bellingcat-2024-09-27-nagorno-karabakh-6X-2024-12-14-EUUpS1.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/bellingcat-2024-09-27-nagorno-karabakh-6X-2024-12-14-EUUpS1/bellingcat-2024-09-27-nagorno-karabakh-6X-2024-12-14-EUUpS1-4X.gif?raw=true&random=1lrqzvsotr1eig4o)](https://kamangir-public.s3.ca-central-1.amazonaws.com/bellingcat-2024-09-27-nagorno-karabakh-6X-2024-12-14-EUUpS1/bellingcat-2024-09-27-nagorno-karabakh-6X-2024-12-14-EUUpS1.gif)
 
 </details>
 
@@ -293,7 +293,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-burning-man-2024-a/geo-watch-2024-09-04-burning-man-2024-a-2X.gif?raw=true&random=f6u5s6bbkglknik9)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-burning-man-2024-a/geo-watch-2024-09-04-burning-man-2024-a.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-burning-man-2024-a/geo-watch-2024-09-04-burning-man-2024-a-2X.gif?raw=true&random=36t1joaih9d4i47u)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-2024-09-04-burning-man-2024-a/geo-watch-2024-09-04-burning-man-2024-a.gif)
 
 </details>
 
@@ -305,7 +305,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Chilcotin-2024-11-03/geo-watch-Chilcotin-2024-11-03-4X.gif?raw=true&random=6141as18d9p9czai)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Chilcotin-2024-11-03/geo-watch-Chilcotin-2024-11-03.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Chilcotin-2024-11-03/geo-watch-Chilcotin-2024-11-03-4X.gif?raw=true&random=jl0ixtggfoood0us)](https://kamangir-public.s3.ca-central-1.amazonaws.com/geo-watch-Chilcotin-2024-11-03/geo-watch-Chilcotin-2024-11-03.gif)
 
 </details>
 
@@ -325,7 +325,7 @@ watch the planet's story unfold.
 <details>
 <summary>🌐</summary>
 
-[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/elkhema-2024-12-15-8EqPXl/elkhema-2024-12-15-8EqPXl-4X.gif?raw=true&random=cyocjikoa1ttp9k8)](https://kamangir-public.s3.ca-central-1.amazonaws.com/elkhema-2024-12-15-8EqPXl/elkhema-2024-12-15-8EqPXl.gif)
+[![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/elkhema-2024-12-15-8EqPXl/elkhema-2024-12-15-8EqPXl-4X.gif?raw=true&random=al0i56mgmx4wff2l)](https://kamangir-public.s3.ca-central-1.amazonaws.com/elkhema-2024-12-15-8EqPXl/elkhema-2024-12-15-8EqPXl.gif)
 
 </details>
 

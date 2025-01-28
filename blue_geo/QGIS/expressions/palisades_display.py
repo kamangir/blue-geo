@@ -15,7 +15,7 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.35.1"
+    version = "5.38.1"
 
     area = row["area"]
     damage = float(row["damage"])
@@ -72,7 +72,8 @@ def palisades_display(layer_filename, row, feature, parent):
             if os.path.exists(thumbnail_full_filename)
             else seed(
                 [
-                    "abcli download",
+                    "abcli",
+                    "download",
                     f"filename={thumbnail_filename}",
                     thumbnail_object_name,
                 ]
@@ -82,8 +83,15 @@ def palisades_display(layer_filename, row, feature, parent):
         + (
             seed(
                 [
-                    "palisades analytics ingest_building",
+                    "palisades",
+                    "analytics",
+                    "ingest_building",
                     "building={},~download".format(row["building_id"]),
+                    object_name,
+                    ";",
+                    "abcli",
+                    "open",
+                    "QGIS",
                     object_name,
                 ]
             )

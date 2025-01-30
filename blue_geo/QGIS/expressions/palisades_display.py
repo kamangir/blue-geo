@@ -1,5 +1,7 @@
 import os
-from typing import List
+from typing import List, Union
+import time
+import random
 
 from qgis.core import *
 from qgis.gui import *
@@ -15,18 +17,52 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.38.1"
+    version = "5.52.1"
 
-    area = row["area"]
-    damage = float(row["damage"])
+    def save_text(
+        filename: str,
+        text: List[str],
+    ):
+        with open(filename, "w") as fp:
+            fp.writelines([string + "\n" for string in text])
 
-    def seed(command: List[str]) -> List[str]:
+    def seed(
+        command: Union[str, List[str]],
+        submit: bool = True,
+    ):
+        if isinstance(command, list):
+            command = " ".join(command)
+
+        if submit:
+            command_name = "{}-{:05d}".format(
+                time.strftime(
+                    "QGIS-command-%Y-%m-%d-%H-%M-%S", time.localtime(time.time())
+                ),
+                random.randrange(100000),
+            )
+
+            blue_geo_QGIS_path_server = os.path.join(
+                os.getenv("HOME", ""),
+                "Downloads/QGIS/server",
+            )
+
+            save_text(
+                filename=os.path.join(
+                    blue_geo_QGIS_path_server,
+                    f"{command_name}.command",
+                ),
+                text=[command],
+            )
+
         return [
             '<label for="seed">🌱</label>',
             '<input type="text" value="{}" id="seed" style="background-color: white; color: black; width: 100%;">'.format(
                 " ".join(command)
             ),
         ]
+
+    area = row["area"]
+    damage = float(row["damage"])
 
     layer_path, layer_filename = os.path.split(layer_filename)
     object_name = layer_path.split(os.sep)[-1]
@@ -93,7 +129,8 @@ def palisades_display(layer_filename, row, feature, parent):
                     "open",
                     "QGIS",
                     object_name,
-                ]
+                ],
+                submit=False,
             )
             if is_analytics
             else []

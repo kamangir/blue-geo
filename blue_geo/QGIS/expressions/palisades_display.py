@@ -17,7 +17,7 @@ def palisades_display(layer_filename, row, feature, parent):
         attributes($currentfeature)
     )
     """
-    version = "5.52.1"
+    version = "5.53.1"
 
     def save_text(
         filename: str,
@@ -56,9 +56,7 @@ def palisades_display(layer_filename, row, feature, parent):
 
         return [
             '<label for="seed">🌱</label>',
-            '<input type="text" value="{}" id="seed" style="background-color: white; color: black; width: 100%;">'.format(
-                " ".join(command)
-            ),
+            f'<input type="text" value="{command}" id="seed" style="background-color: white; color: black; width: 100%;">',
         ]
 
     area = row["area"]

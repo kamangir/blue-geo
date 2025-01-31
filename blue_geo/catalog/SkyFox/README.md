@@ -2,7 +2,16 @@
 
 the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.io/EDA-Documentation/). see [datacube](../) for usage instructions.
 
- - [keyword](url)
+ - [account](https://console.earthdaily.com/account)
+ - [api use example](https://github.com/earthdaily/EDA-Documentation/blob/gh-pages/API/APIUsage/earthplatform_stac_api_examples.py)
+ - [api](https://api.earthdaily.com/platform/v1/stac)
+ - [doc](https://earthdaily.github.io/EDA-Documentation/)
+ - [platform](https://console.earthdaily.com/platform)
+ - [signin](https://console.earthdaily.com/mosaics/signin)
+ - [venus bands](https://un-regard-sur-la-terre.org/2017/08/les-premieres-images-du-satellite-ven-s-sont-arrivees.html)
+ - [venus mission](https://www.eoportal.org/satellite-missions/venus)
+ - [venus on aws open data](https://registry.opendata.aws/venus-l2a-cogs/)
+ - [venus wikipedia](https://en.wikipedia.org/wiki/VEN%CE%BCS)
 
 ## query
 
@@ -14,7 +23,13 @@ the `SkyFox` catalog covers [EDS (Earth Data Store)](https://earthdaily.github.i
 	[dryrun,Venus,select,upload] \
 	[ingest,~copy_template,dryrun,overwrite,scope=<scope>,upload] \
 	[-|<object-name>] \
-	[--arg <value>]
+	[--bbox <-122.88,51.73,-122.68,51.93>] \
+	[--count <10>, -1: all] \
+	[--datetime <2024-07-30/2024-08-09>, more: https://documentation.dataspace.copernicus.eu/APIs/STAC.html#search-items-by-datetime] \
+	[--keyword <keyword>] \
+	[--lat <51.83>] \
+	[--lon <-122.78>] \
+	[--radius <0.1>]
  . SkyFox/Venus -query-> <object-name>.
    scope: @datacube ingest help.
 ```

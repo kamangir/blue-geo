@@ -36,11 +36,9 @@ def test_query():
     [
         [
             [
-                [
-                    [datacube_id]
-                    for datacube_id, datacube_class in assets.datacubes.items()
-                    if datacube_class == SkyFoxVenusDatacube
-                ]
+                [datacube_id]
+                for datacube_id, datacube_class in assets.datacubes.items()
+                if datacube_class == SkyFoxVenusDatacube
             ]
         ][-1]
     ],

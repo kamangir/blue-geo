@@ -29,7 +29,7 @@ datacubes = {
     #
     env.BLUE_GEO_TEST_DATACUBE_MAXAR_OPEN_DATA: MaxarOpenDataDatacube,
     #
-    # env.BLUE_GEO_TEST_DATACUBE_SKYFOX_VENUS: SkyFoxVenusDatacube,
+    env.BLUE_GEO_TEST_DATACUBE_SKYFOX_VENUS: SkyFoxVenusDatacube,
     #
     "datacube-ukraine": VoidDatacube,
     env.BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP: UkraineTimemapDatacube,

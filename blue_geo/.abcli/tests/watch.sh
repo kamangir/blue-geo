@@ -3,7 +3,7 @@
 function test_blue_geo_watch() {
     local options=$1
 
-    local list_of_targets=$(abcli_option "$options" target chilcotin-river-landslide-test+Leonardo-test)
+    local list_of_targets=$(abcli_option "$options" target chilcotin-river-landslide-test)
     local do_publish=$(abcli_option_int "$options" publish 1)
     local list_of_algo=$(abcli_option "$options" algo modality+diff)
 

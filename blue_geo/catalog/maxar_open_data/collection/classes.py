@@ -162,11 +162,8 @@ class MaxarOpenDataDatacube(GenericDatacube):
         )
 
         if list_of_items:
-            list_of_bboxes = []
-            for item in list_of_items:
-                list_of_bboxes.append(box(*item.bbox))
             bbox_gdf = gpd.GeoDataFrame(
-                geometry=list_of_bboxes,
+                geometry=[box(*item.bbox) for item in list_of_items],
                 crs="EPSG:4326",
             )
             if not file.save_geojson(

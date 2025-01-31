@@ -40,7 +40,6 @@ def test_query():
                 for datacube_id, datacube_class in assets.datacubes.items()
                 if datacube_class == SkyFoxVenusDatacube
             ]
-            + [["void"]]
         )[-1]
     ],
 )

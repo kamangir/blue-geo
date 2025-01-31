@@ -34,13 +34,13 @@ def test_query():
 @pytest.mark.parametrize(
     ["datacube_id"],
     [
-        (
+        [
             [
                 [datacube_id]
                 for datacube_id, datacube_class in assets.datacubes.items()
                 if datacube_class == SkyFoxVenusDatacube
             ]
-        )[-1]
+        ][-1]
     ],
 )
 def test_datacube_from_datacube_id(datacube_id: str):

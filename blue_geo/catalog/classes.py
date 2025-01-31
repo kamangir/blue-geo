@@ -28,7 +28,7 @@ list_of_catalog_classes: List[Type[GenericCatalog]] = [
     EarthSearchCatalog,
     FirmsCatalog,
     MaxarOpenDataCatalog,
-    # SkyFoxCatalog,
+    SkyFoxCatalog,
     UkraineTimemapCatalog,
 ]
 
@@ -49,5 +49,5 @@ list_of_datacube_classes: List[Type[GenericDatacube]] = [
     CopernicusSentinel2Datacube,
     EarthSearchSentinel2L1CDatacube,
     MaxarOpenDataDatacube,
-    # SkyFoxVenusDatacube,
+    SkyFoxVenusDatacube,
 ]

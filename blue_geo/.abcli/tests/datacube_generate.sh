@@ -4,9 +4,6 @@ function test_blue_geo_datacube_generate() {
     local options=$1
     local list_of_product=$(abcli_option "$options" product FRE+SRE)
 
-    # TODO: remove after the SkyFox fix.
-    return 0
-
     local datacube_id=$BLUE_GEO_TEST_DATACUBE_SKYFOX_VENUS
 
     local product

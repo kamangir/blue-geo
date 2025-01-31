@@ -17,6 +17,7 @@ function test_blue_geo_datacube_list() {
         $BLUE_GEO_TEST_DATACUBE_EARTHSEARCH_SENTINEL2_L1C \
         $BLUE_GEO_TEST_DATACUBE_FIRMS_AREA \
         $BLUE_GEO_TEST_DATACUBE_MAXAR_OPEN_DATA \
+        $BLUE_GEO_TEST_DATACUBE_SKYFOX_VENUS \
         $BLUE_GEO_TEST_DATACUBE_UKRAINE_TIMEMAP; do
         abcli_assert \
             $(blue_geo_datacube_list $datacube_id --log 0) \

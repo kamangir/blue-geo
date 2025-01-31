@@ -18,7 +18,6 @@ def test_get_list_of_collections():
     assert catalog.get_list_of_collections()
 
 
-@pytest.mark.skip(reason="SkyFox issue expected.")
 def test_query():
     object_name = unique_object()
 
@@ -32,7 +31,6 @@ def test_query():
     assert success
 
 
-@pytest.mark.skip(reason="SkyFox issue expected.")
 @pytest.mark.parametrize(
     ["datacube_id"],
     [

@@ -3,7 +3,7 @@
 function test_blue_geo_watch_query() {
     local options=$1
 
-    local list_of_targets=$(abcli_option "$options" target chilcotin-river-landslide-test)
+    local list_of_targets=$(abcli_option "$options" target chilcotin-river-landslide-test+Leonardo-test)
 
     local target
     for target in $(echo $list_of_targets | tr + " "); do

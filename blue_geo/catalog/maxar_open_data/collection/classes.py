@@ -1,7 +1,10 @@
 from typing import Tuple, Dict, Any, List
 import datetime
+from shapely.geometry import box
+import geopandas as gpd
 
 from blue_objects.metadata import post_to_object
+from blue_objects import file, objects
 
 from blue_geo.catalog.maxar_open_data.classes import MaxarOpenDataCatalog
 from blue_geo.catalog.generic import GenericDatacube
@@ -157,6 +160,21 @@ class MaxarOpenDataDatacube(GenericDatacube):
             count=count,
             log=True,
         )
+
+        if list_of_items:
+            bbox_gdf = gpd.GeoDataFrame(
+                geometry=[box(*item.bbox) for item in list_of_items],
+                crs="EPSG:4326",
+            )
+            if not file.save_geojson(
+                objects.path_of(
+                    "coverage.geojson",
+                    object_name,
+                ),
+                bbox_gdf,
+                log=True,
+            ):
+                return False
 
         list_of_datacube_ids: List[str] = [
             cls.catalog.client.get_datacube_id(

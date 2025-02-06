@@ -1,55 +1,59 @@
 import pytest
-from typing import Tuple
-import numpy as np
+from typing import Callable, Union, List
 
+from blue_options import string
+from blue_objects import file, objects
 
-from blue_objects import objects
-
-from blue_geo import env
-from blue_geo.file.load import load_geoimage
+from blue_geo.file.load import (
+    load_geodataframe,
+    load_geojson,
+)
+from blue_geo.file.save import (
+    save_geojson,
+)
 
 
 @pytest.mark.parametrize(
     [
-        "object_name",
+        "load_func",
         "filename",
-        "expected_success",
-        "expected_shape",
+        "save_func",
     ],
     [
         [
-            env.BLUE_GEO_FILE_LOAD_GEOIMAGE_TEST_OBJECT,
-            env.BLUE_GEO_FILE_LOAD_GEOIMAGE_TEST_FILENAME,
-            True,
-            (4, 1150, 1274),
+            load_geodataframe,
+            "vancouver.geojson",
+            save_geojson,
         ],
         [
-            env.BLUE_GEO_FILE_LOAD_GEOIMAGE_TEST_OBJECT,
-            "void",
-            False,
-            (),
+            load_geojson,
+            "vancouver.geojson",
+            None,
         ],
     ],
 )
-def test_file_load_geoimage(
-    object_name: str,
+def test_file_load_save(
+    test_object,
+    load_func: Callable,
     filename: str,
-    expected_success: bool,
-    expected_shape: Tuple[int],
-) -> None:
-    if expected_success:
-        assert objects.download(object_name, filename)
-
-    success, image, metadata = load_geoimage(
+    save_func: Union[Callable, None],
+):
+    success, thing = load_func(
         objects.path_of(
-            filename,
-            object_name,
+            object_name=test_object,
+            filename=filename,
         )
     )
-    assert success == expected_success
+    assert success
 
-    if success:
-        assert isinstance(image, np.ndarray)
-        assert image.shape == expected_shape, image.shape
-        assert "crs" in metadata
-        assert "pixel_size" in metadata
+    if not save_func is None:
+        assert save_func(
+            file.add_suffix(
+                objects.path_of(
+                    object_name=test_object,
+                    filename=filename,
+                ),
+                string.random(),
+            ),
+            thing,
+        )

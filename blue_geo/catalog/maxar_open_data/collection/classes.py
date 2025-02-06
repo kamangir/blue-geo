@@ -10,6 +10,7 @@ from blue_geo.catalog.maxar_open_data.classes import MaxarOpenDataCatalog
 from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo import env
+from blue_geo.file.save import save_geojson
 from blue_geo.logger import logger
 
 
@@ -166,7 +167,7 @@ class MaxarOpenDataDatacube(GenericDatacube):
                 geometry=[box(*item.bbox) for item in list_of_items],
                 crs="EPSG:4326",
             )
-            if not file.save_geojson(
+            if not save_geojson(
                 objects.path_of(
                     "coverage.geojson",
                     object_name,

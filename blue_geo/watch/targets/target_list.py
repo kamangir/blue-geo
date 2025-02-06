@@ -6,6 +6,7 @@ from tqdm import tqdm
 from blue_objects import file, objects
 
 from blue_geo.env import BLUE_GEO_WATCH_TARGET_LIST
+from blue_geo.file.save import save_geojson
 from blue_geo.watch.targets.target import Target
 from blue_geo.logger import logger
 
@@ -142,7 +143,7 @@ class TargetList:
             crs="EPSG:4326",
         )
 
-        return file.save_geojson(
+        return save_geojson(
             objects.path_of("target/shape.geojson", object_name),
             gdf,
             log=True,

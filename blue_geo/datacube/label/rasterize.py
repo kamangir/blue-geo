@@ -9,6 +9,7 @@ from blue_objects import objects, file
 from blue_objects.metadata import post_to_object
 
 from blue_geo import NAME
+from blue_geo.file.load import load_geodataframe
 from blue_geo.catalog import get_datacube
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
@@ -36,7 +37,7 @@ def rasterize_the_label(
         filename="label.shp",
         object_name=datacube_id,
     )
-    success, label_polygons = file.load_geodataframe(label_filename)
+    success, label_polygons = load_geodataframe(label_filename)
     if not success:
         return success
     logger.info(
@@ -46,7 +47,7 @@ def rasterize_the_label(
         )
     )
 
-    success, label_template_polygons = file.load_geodataframe(
+    success, label_template_polygons = load_geodataframe(
         objects.path_of(
             filename="template/label.shp",
             object_name=datacube_id,

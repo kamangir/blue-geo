@@ -10,6 +10,7 @@ from blue_objects.logger.matrix import log_matrix_hist
 from blue_objects.env import ABCLI_OBJECT_ROOT
 
 from blue_geo import NAME
+from blue_geo.file.load import load_geoimage
 from blue_geo.catalog.generic.classes import GenericCatalog, VoidCatalog
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.logger import logger
@@ -119,7 +120,7 @@ class GenericDatacube:
         ignore_error: bool = False,
         log: bool = False,
     ) -> Tuple[bool, np.ndarray, Dict[str, Any]]:
-        success, frame, frame_file_metadata = file.load_geoimage(
+        success, frame, frame_file_metadata = load_geoimage(
             filename,
             ignore_error=ignore_error,
             log=log,

@@ -32,6 +32,8 @@ setup(
         f"{NAME}.datacube",
         f"{NAME}.datacube.label",
         #
+        f"{NAME}.file",
+        #
         f"{NAME}.help",
         f"{NAME}.help.catalog",
         f"{NAME}.help.datacube",

@@ -3,8 +3,10 @@ blueflow
 
 opencv-python
 
-folium
+# https://github.com/shapely/shapely/issues/2208
+shapely!=2.0.7
 
+folium
 geojson
 geopandas
 rasterio

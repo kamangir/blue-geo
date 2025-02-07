@@ -9,7 +9,7 @@ from blue_objects.logger.matrix import log_matrix
 from blueflow import fullname as blueflow_fullname
 
 from blue_geo import fullname
-
+from blue_geo.file.load import load_geoimage
 from blue_geo import NAME
 
 NAME = module.name(__file__, NAME)
@@ -30,7 +30,7 @@ def log_geoimage(
         object_name=object_name,
     )
 
-    success, matrix, metadata = file.load_geoimage(
+    success, matrix, metadata = load_geoimage(
         full_filename,
         log=log,
     )

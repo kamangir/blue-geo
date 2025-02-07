@@ -5,6 +5,7 @@ from shapely.geometry import Polygon
 
 from blue_objects import file, objects
 
+from blue_geo.file.save import save_geojson
 from blue_geo.logger import logger
 
 
@@ -190,7 +191,7 @@ class Target:
             crs="EPSG:4326",
         )
 
-        return file.save_geojson(
+        return save_geojson(
             objects.path_of("target/shape.geojson", object_name),
             gdf,
             log=True,

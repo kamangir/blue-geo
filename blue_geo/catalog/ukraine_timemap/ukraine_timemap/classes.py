@@ -15,6 +15,7 @@ from blue_geo.catalog.generic import GenericDatacube
 from blue_geo.catalog.ukraine_timemap.classes import UkraineTimemapCatalog
 from blue_geo.catalog.generic.generic.scope import DatacubeScope
 from blue_geo.host import signature
+from blue_geo.file.save import save_geojson
 from blue_geo.logger import logger
 
 API_URL = "https://bellingcat-embeds.ams3.cdn.digitaloceanspaces.com/production/ukr/timemap/api.json"
@@ -166,7 +167,7 @@ class UkraineTimemapDatacube(GenericDatacube):
         gdf = gdf.drop(columns=["date_obj"])
 
         if do_save and not gdf.empty:
-            if not file.save_geojson(
+            if not save_geojson(
                 objects.path_of("ukraine_timemap.geojson", self.datacube_id),
                 gdf,
                 log=log,

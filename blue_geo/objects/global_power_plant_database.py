@@ -8,6 +8,7 @@ from blueness import module
 from blue_objects import host
 from blue_objects import metadata, file, objects
 from blue_geo import NAME
+from blue_geo.file.save import save_geojson
 from blue_geo.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -99,7 +100,7 @@ def ingest(
         crs="EPSG:4326",
     )
 
-    if not file.save_geojson(
+    if not save_geojson(
         objects.path_of(
             "global_power_plant_database.geojson",
             full_object_name,

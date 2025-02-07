@@ -1,18 +1,13 @@
-blueness
 abcli
 blueflow
-boto3
+
+opencv-python
+
+# https://github.com/shapely/shapely/issues/2208
+shapely!=2.0.7
+
 folium
 geojson
 geopandas
-matplotlib
-numpy
-opencv-python
-pymysql
-pyyaml
-pylint
+rasterio
 pystac-client
-pytest
-python-dotenv[cli]
-shapely==2.0.6
-tqdm

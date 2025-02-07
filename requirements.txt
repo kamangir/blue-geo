@@ -1,6 +1,7 @@
-blueness
 abcli
+blue-objects
 blueflow
+
 boto3
 folium
 geojson

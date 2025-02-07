@@ -1,6 +1,8 @@
 abcli
 blueflow
 
+opencv-python
+
 folium
 
 geojson

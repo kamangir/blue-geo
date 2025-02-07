@@ -1,20 +1,9 @@
 abcli
-blue-objects
 blueflow
 
-boto3
 folium
+
 geojson
 geopandas
-matplotlib
-numpy
-opencv-python
-pymysql
-pyyaml
-pylint
-pystac-client
-pytest
-python-dotenv[cli]
 rasterio
-shapely==2.0.6
-tqdm
+pystac-client

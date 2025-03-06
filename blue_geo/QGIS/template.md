@@ -11,7 +11,7 @@ QGIS help
 ```
 --help-- blue_geo QGIS
 
-to terraform QGIS, generate the seed 🌱,
+to terraform QGIS, generate the seed 🌱 ,
 
 ```bash
 QGIS seed

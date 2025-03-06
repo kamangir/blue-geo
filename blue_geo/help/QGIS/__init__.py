@@ -47,7 +47,7 @@ def help_seed(
             "seed",
             f"[{options}]",
         ],
-        "seed 🌱 QGIS.",
+        "seed 🌱  QGIS.",
         mono=mono,
     )
 

@@ -87,12 +87,6 @@ items = README.Items(
             "marquee": default_MARQUEE,
             "url": "https://github.com/kamangir/blue-geo/tree/main/blue_geo/datacube",
         },
-        {
-            "name": "template",
-            "description": "",
-            "marquee": default_MARQUEE,
-            "url": "",
-        },
     ]
 )
 

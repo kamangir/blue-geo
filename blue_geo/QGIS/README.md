@@ -32,7 +32,7 @@ QGIS \
 QGIS \
 	seed \
 	[init_script=QGIS.test+QGIS.help,screen]
- . seed 🌱 QGIS.
+ . seed 🌱  QGIS.
 QGIS \
 	server \
 	[start]
@@ -55,7 +55,7 @@ QGIS \
  . upload object and its QGIS dependencies.
 ```
 
-to terraform QGIS, generate the seed 🌱,
+to terraform QGIS, generate the seed 🌱 ,
 
 ```bash
 QGIS seed

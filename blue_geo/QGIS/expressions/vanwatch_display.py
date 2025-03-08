@@ -14,7 +14,7 @@ def vanwatch_display(layer_path, cameras, feature, parent):
         "cameras"
     )
     """
-    version = "5.1.1"
+    version = "5.5.1"
 
     object_name = layer_path.split(os.sep)[-2]
 
@@ -44,14 +44,16 @@ def vanwatch_display(layer_path, cameras, feature, parent):
         + [
             "    </tr>",
             "</table>",
-            object_name,
         ]
         + [
-            " | ".join(
-                [
-                    object_name,
-                    f"template version {version}",
-                ]
+            '<p style="color: white; width: 500px">{}</p>'.format(
+                " | ".join(
+                    [
+                        object_name,
+                        "🌈 Vancouver Watching",
+                        f"template-{version}",
+                    ]
+                )
             )
         ]
     )
